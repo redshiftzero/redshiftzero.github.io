@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+        <title>Redshiftzero</title>
+        <description>Redshiftzero - Jen Redshiftzero</description>
+        <link>http://redshiftzero.github.io</link>
+        <link>http://redshiftzero.github.io</link>
+        <lastBuildDate>2014-09-19T21:32:44+00:00</lastBuildDate>
+        <pubDate>2014-09-19T21:32:44+00:00</pubDate>
+        <ttl>1800</ttl>
+
+
+        <item>
+                <title>Redshiftzero Introduction</title>
+                <description>
+&lt;p&gt;Hey! I&amp;#8217;m Jen (redshiftzero). I&amp;#8217;m interesed in astrophysics, security and
+data, and here are some links where you can find out more about myself
+and my projects:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/redshiftzero&quot;&gt;Github&lt;/a&gt; - My codes/slides&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.kaggle.com/users/107418/cespanar&quot;&gt;Kaggle&lt;/a&gt; - Machine Learning
+Competitions&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can contact me by email: jen at redshiftzero dot com or on twitter
+&lt;a href=&quot;https://twitter.com/redshiftzero&quot;&gt;@redshiftzero&lt;/a&gt;.&lt;/p&gt;
+</description>
+                <link>http://redshiftzero.github.io/introduction/2014/09/19/redshiftzero-introduction</link>
+                <guid>http://redshiftzero.github.io/introduction/2014/09/19/redshiftzero-introduction</guid>
+                <pubDate>2014-09-19T00:00:00+00:00</pubDate>
+        </item>
+
+
+</channel>
+</rss>
