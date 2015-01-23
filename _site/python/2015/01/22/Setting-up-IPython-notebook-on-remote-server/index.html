@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>
       
-        Redshiftzero Introduction - 
+        Setting Up Ipython Notebook On Remote Server - 
       
       Redshiftzero
     </title>
@@ -144,9 +144,9 @@
           
 <div class="page-header">
   <h1>
-    Redshiftzero Introduction 
+    Setting Up Ipython Notebook On Remote Server 
     
-      <small>stuff about redshiftzero</small>
+      <small>Setting up IPython notebook on a remote server</small>
     
   </h1>
 </div>
@@ -154,31 +154,108 @@
 <div class="row">
   <div class="span8">
     
-<p>Hey! I&#8217;m Jen (redshiftzero). I&#8217;m interesed in astrophysics, security and
-data, and here are some links where you can find out more about myself
-and my projects:</p>
+<p>If you do data analysis in Python and you aren&#8217;t using IPython notebooks,
+ you really should be. Using notebooks allows for easier collaboration as 
+well as being a much more convienient way to store notes, code, and plots 
+associated with a given dataset. If you&#8217;re using a cloud-based workflow 
+like I do, 
+you might want to setup an IPython notebook server: this enables you to work
+on your notebook on your from your local browser. Here I&#8217;ll describe how to 
+go from a server that opens a browser (running on the server) when you 
+type <code>$ ipython notebook</code> to 
+one that will enable you to use a browser on your local machine (your laptop). 
+Everything here was done on Debian Linux, but it should work similarly on 
+other platforms. </p>
 
-<ul>
-  <li>
-    <p><a href="https://github.com/redshiftzero">Github</a> - My codes/slides</p>
-  </li>
-  <li>
-    <p><a href="http://www.kaggle.com/users/107418/cespanar">Kaggle</a> - Machine Learning
-Competitions</p>
-  </li>
-</ul>
+<h2 id="create-a-new-profile">Create a new profile</h2>
 
-<p>You can contact me by email: jen at redshiftzero dot com or on twitter
-<a href="https://twitter.com/redshiftzero">@redshiftzero</a>.</p>
+<p>First start IPython, and create a profile that you are going to use for your notebook server: </p>
+
+<pre><code>In [1]: !ipython profile create default
+[ProfileCreate] Generating default config file: u'/home/exampleuser/.config/ipython/profile_default/ipython_config.py'
+[ProfileCreate] Generating default config file: u'/home/exampleuser/.config/ipython/profile_default/ipython_notebook_config.py'
+</code></pre>
+
+<p>Very important note: You&#8217;re setting up an application that is going to allow 
+whoever has access to remotely execute arbitary code. Be certain that you do the next
+two steps - setting up a strong password, and enabling SSL/TLS - before you 
+start the server.</p>
+
+<h2 id="set-a-password">Set a password</h2>
+
+<p>Start IPython and generate the hash of the password you&#8217;d like to use:</p>
+
+<pre><code>In [1]: from IPython.lib import passwd
+
+In [2]: passwd()
+Enter password: 
+Verify password: 
+Out[2]: 'sha1:879e46b9cfec:13307bf7f989dd64151302b806f5c9f977966b9d'
+</code></pre>
+
+<p>Now add the following line to <code>/home/exampleuser/.config/ipython/profile_def     ault/ipython_notebook_config.py</code> under <code>c=get_config()</code>:</p>
+
+<pre><code>c.NotebookApp.password = u'sha1:879e46b9cfec:13307bf7f989dd64151302b806f5c9f977966b9d'
+</code></pre>
+
+<h2 id="enable-https">Enable HTTPS</h2>
+
+<p>Now you&#8217;ll want to generate an SSL/TLS certificate that you will use
+to encrypt the connection between you and the remote server:</p>
+
+<pre><code>$ openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout nbcert.key -out nbcert.crt
+Generating a 4096 bit RSA private key
+....................................................++
+................................................................................................................................................................................................++
+writing new private key to 'nbcert.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) []:US
+State or Province Name (full name) [Some-State]:RealstateUSA
+Locality Name (eg, city) []:RealcityUSA
+Organization Name (eg, company) []:Example LLC
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:example
+Email Address []:example@example.com
+</code></pre>
+
+<p>Then add the locations of the cert and keyfile to <code>/home/exampleuser/.config/ipython/profile_def     ault/ipython_notebook_config.py</code>:</p>
+
+<pre><code>c.NotebookApp.certfile = u'/home/exampleuser/.config/ipython/profile_default/nbcert.crt'
+c.NotebookApp.keyfile = u'/home/exampleuser/.config/ipython/profile_default/nbcert.key'
+</code></pre>
+
+<h2 id="theres-room-for-a-little-more">There&#8217;s room for a little more</h2>
+
+<p>A few other things that you&#8217;ll want to setup for this profile (By adding to <code>/home/exampleuser/.config/ipython/profile_def          ault/ipython_notebook_config.py</code>):</p>
+
+<pre><code>c.IPKernelApp.pylab = 'inline'  # Have plots appear in the notebook 
+c.NotebookApp.open_browser = False  # Don't automatically start browser 
+c.NotebookApp.port = 9998  # Port that you'll connect to
+c.NotebookApp.ip = '*'  # Set IPs you allow to connect, * if all
+</code></pre>
+
+<h2 id="it-is-time">It is time</h2>
+
+<p>Now you can start your new shiny notebook server with <code>$ ipython notebook --profile=default</code>.
+Leave this application running on your remote machine (e.g. with <a href="http://tmux.sourceforge.net">tmux</a>) 
+and in a browser on your laptop type: https://myserverip:9998 and login!</p>
+
 
     <hr>
     <div class="pagination btn-group">
       
-        <a class="btn disabled prev">&larr; Previous</a>
+        <a class="btn prev" href="/introduction/2014/09/19/redshiftzero-introduction" title="Redshiftzero Introduction">&larr; Previous</a>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next" href="/python/2015/01/22/Setting-up-IPython-notebook-on-remote-server" title="Setting Up Ipython Notebook On Remote Server">Next &rarr;</a>
+        <a class="btn next disabled">Next &rarr;</a>
       
     </div>
     <hr>
@@ -208,13 +285,13 @@ Competitions</p>
   <div class="span4">
     <section>
       <h4>Published</h4>
-      <div class="date"><span>19 September 2014</span></div>
+      <div class="date"><span>22 January 2015</span></div>
     </section>
     
       <section>
         <h4>Category</h4>
         <span class="category">
-          introduction
+          python
         </span>
       </section>
          
@@ -228,7 +305,7 @@ Competitions</p>
 
   
      
-    	<li><a href="/tags.html#intro-ref">intro <span>1</span></a></li>
+    	<li><a href="/tags.html#python-ref">python <span>1</span></a></li>
     
   
 

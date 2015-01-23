@@ -8,4 +8,5 @@ http://redshiftzero.github.io/rss.xml
 http://redshiftzero.github.io/sitemap.txt
 http://redshiftzero.github.io/tags.html
 
+http://redshiftzero.github.io/python/2015/01/22/Setting-up-IPython-notebook-on-remote-server
 http://redshiftzero.github.io/introduction/2014/09/19/redshiftzero-introduction

@@ -4,13 +4,115 @@
  <title>Redshiftzero</title>
  <link href="http://redshiftzero.github.io/" rel="self"/>
  <link href="http://redshiftzero.github.io"/>
- <updated>2014-09-19T21:32:44+00:00</updated>
+ <updated>2015-01-23T01:05:49+00:00</updated>
  <id>http://redshiftzero.github.io</id>
  <author>
    <name>Jen Redshiftzero</name>
    <email>jen@redshiftzero.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Setting Up Ipython Notebook On Remote Server</title>
+   <link href="http://redshiftzero.github.io/python/2015/01/22/Setting-up-IPython-notebook-on-remote-server"/>
+   <updated>2015-01-22T00:00:00+00:00</updated>
+   <id>http://redshiftzero.github.io/python/2015/01/22/Setting-up-IPython-notebook-on-remote-server</id>
+   <content type="html">
+&lt;p&gt;If you do data analysis in Python and you aren&amp;#8217;t using IPython notebooks,
+ you really should be. Using notebooks allows for easier collaboration as 
+well as being a much more convienient way to store notes, code, and plots 
+associated with a given dataset. If you&amp;#8217;re using a cloud-based workflow 
+like I do, 
+you might want to setup an IPython notebook server: this enables you to work
+on your notebook on your from your local browser. Here I&amp;#8217;ll describe how to 
+go from a server that opens a browser (running on the server) when you 
+type &lt;code&gt;$ ipython notebook&lt;/code&gt; to 
+one that will enable you to use a browser on your local machine (your laptop). 
+Everything here was done on Debian Linux, but it should work similarly on 
+other platforms. &lt;/p&gt;
+
+&lt;h2 id=&quot;create-a-new-profile&quot;&gt;Create a new profile&lt;/h2&gt;
+
+&lt;p&gt;First start IPython, and create a profile that you are going to use for your notebook server: &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;In [1]: !ipython profile create default
+[ProfileCreate] Generating default config file: u'/home/exampleuser/.config/ipython/profile_default/ipython_config.py'
+[ProfileCreate] Generating default config file: u'/home/exampleuser/.config/ipython/profile_default/ipython_notebook_config.py'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Very important note: You&amp;#8217;re setting up an application that is going to allow 
+whoever has access to remotely execute arbitary code. Be certain that you do the next
+two steps - setting up a strong password, and enabling SSL/TLS - before you 
+start the server.&lt;/p&gt;
+
+&lt;h2 id=&quot;set-a-password&quot;&gt;Set a password&lt;/h2&gt;
+
+&lt;p&gt;Start IPython and generate the hash of the password you&amp;#8217;d like to use:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;In [1]: from IPython.lib import passwd
+
+In [2]: passwd()
+Enter password: 
+Verify password: 
+Out[2]: 'sha1:879e46b9cfec:13307bf7f989dd64151302b806f5c9f977966b9d'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now add the following line to &lt;code&gt;/home/exampleuser/.config/ipython/profile_def     ault/ipython_notebook_config.py&lt;/code&gt; under &lt;code&gt;c=get_config()&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;c.NotebookApp.password = u'sha1:879e46b9cfec:13307bf7f989dd64151302b806f5c9f977966b9d'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;enable-https&quot;&gt;Enable HTTPS&lt;/h2&gt;
+
+&lt;p&gt;Now you&amp;#8217;ll want to generate an SSL/TLS certificate that you will use
+to encrypt the connection between you and the remote server:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout nbcert.key -out nbcert.crt
+Generating a 4096 bit RSA private key
+....................................................++
+................................................................................................................................................................................................++
+writing new private key to 'nbcert.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) []:US
+State or Province Name (full name) [Some-State]:RealstateUSA
+Locality Name (eg, city) []:RealcityUSA
+Organization Name (eg, company) []:Example LLC
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:example
+Email Address []:example@example.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then add the locations of the cert and keyfile to &lt;code&gt;/home/exampleuser/.config/ipython/profile_def     ault/ipython_notebook_config.py&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;c.NotebookApp.certfile = u'/home/exampleuser/.config/ipython/profile_default/nbcert.crt'
+c.NotebookApp.keyfile = u'/home/exampleuser/.config/ipython/profile_default/nbcert.key'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;theres-room-for-a-little-more&quot;&gt;There&amp;#8217;s room for a little more&lt;/h2&gt;
+
+&lt;p&gt;A few other things that you&amp;#8217;ll want to setup for this profile (By adding to &lt;code&gt;/home/exampleuser/.config/ipython/profile_def          ault/ipython_notebook_config.py&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;c.IPKernelApp.pylab = 'inline'  # Have plots appear in the notebook 
+c.NotebookApp.open_browser = False  # Don't automatically start browser 
+c.NotebookApp.port = 9998  # Port that you'll connect to
+c.NotebookApp.ip = '*'  # Set IPs you allow to connect, * if all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;it-is-time&quot;&gt;It is time&lt;/h2&gt;
+
+&lt;p&gt;Now you can start your new shiny notebook server with &lt;code&gt;$ ipython notebook --profile=default&lt;/code&gt;.
+Leave this application running on your remote machine (e.g. with &lt;a href=&quot;http://tmux.sourceforge.net&quot;&gt;tmux&lt;/a&gt;) 
+and in a browser on your laptop type: https://myserverip:9998 and login!&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Redshiftzero Introduction</title>
