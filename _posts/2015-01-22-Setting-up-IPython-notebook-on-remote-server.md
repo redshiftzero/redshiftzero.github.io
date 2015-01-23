@@ -12,7 +12,7 @@ well as the fact it's a much more convienient way to store notes, code, and plot
 associated with a given dataset. If you use a cloud-based workflow 
 like I do, 
 you might want to setup an IPython notebook server: this enables you to work
-on your notebook on your from your local browser. Here I'll describe how to 
+on your notebook from your local browser. Here I'll describe how to 
 go from a setup that opens a browser (running on the server) when you 
 type `ipython notebook` to 
 one that will enable you to safely use a browser on your local machine (your laptop). 
