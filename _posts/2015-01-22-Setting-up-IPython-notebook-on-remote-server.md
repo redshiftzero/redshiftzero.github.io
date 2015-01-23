@@ -1,7 +1,7 @@
 ---
 layout: post
 category : python 
-tagline: "Setting up IPython notebook on a remote server"
+tagline: "because it's awesome"
 tags : [python]
 ---
 {% include JB/setup %}
@@ -9,7 +9,7 @@ tags : [python]
 If you do data analysis in Python and you aren't using IPython notebooks,
  you really should be. Using notebooks allows for easier collaboration as 
 well as the fact it's a much more convienient way to store notes, code, and plots 
-associated with a given dataset. If using a cloud-based workflow 
+associated with a given dataset. If you use a cloud-based workflow 
 like I do, 
 you might want to setup an IPython notebook server: this enables you to work
 on your notebook on your from your local browser. Here I'll describe how to 
@@ -28,7 +28,7 @@ First start IPython, and create a profile that you are going to use for your not
     [ProfileCreate] Generating default config file: u'/home/exampleuser/.config/ipython/profile_default/ipython_config.py'
     [ProfileCreate] Generating default config file: u'/home/exampleuser/.config/ipython/profile_default/ipython_notebook_config.py'
 
-Very important note: You're setting up an application that is going to allow 
+_Very important note_: You're setting up an application that is going to allow 
 whoever has access to remotely execute arbitary code. Be certain that you do the next
 two steps - setting up a strong password, and enabling SSL/TLS - before you 
 start the server.
