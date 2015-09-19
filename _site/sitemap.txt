@@ -1,12 +1,13 @@
 
-http://redshiftzero.github.io/archive.html
-http://redshiftzero.github.io/atom.xml
-http://redshiftzero.github.io/categories.html
-http://redshiftzero.github.io/index.html
-http://redshiftzero.github.io/pages.html
-http://redshiftzero.github.io/rss.xml
-http://redshiftzero.github.io/sitemap.txt
-http://redshiftzero.github.io/tags.html
+/archive.html
+/atom.xml
+/categories.html
+/feed.xml
+/index.html
+/css/main.css
+/pages.html
+/rss.xml
+/sitemap.txt
+/tags.html
 
-http://redshiftzero.github.io/python/2015/01/22/Setting-up-IPython-notebook-on-remote-server
-http://redshiftzero.github.io/introduction/2014/09/19/redshiftzero-introduction
+/2015/08/29/Manipulation-and-Machine-Learning/

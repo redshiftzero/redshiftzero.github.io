@@ -1,0 +1,9 @@
+---
+layout: {{ layout }}
+title: "{{ title }}"
+date: {{ date }}
+author: redshiftzero
+keywords: ""
+description: ""
+---
+<!--more-->

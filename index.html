@@ -1,0 +1,41 @@
+---
+layout: default
+---
+      <div class="space"></div>
+      <div class="home">
+        <div class="content-col-wrapper">
+          <div class="content-col">
+            <div class="dummy">
+              My interests are data analysis methods, machine learning, privacy and security.<br>
+              I'm currently a postdoctoral scholar at the <a href="http://dsapp.org">Center for Data Science and Public Policy</a> <br> at the <a href="https://www.ci.uchicago.edu/">Computation Institute</a> and the <a href="http://harris.uchicago.edu/">Harris School for Public Policy</a> at the University of Chicago. <br>
+              Previously I was a <a href="http://dssg.io">2015 Data Science for Social Good Fellow</a> and an astrophysicist <br> at the <a href="http://kicp.uchicago.edu">Kavli Institute for Cosmological Physics</a>.<br>
+              Drop me a line at <a href="mailto:jen@redshiftzero.com">jen@redshiftzero.com</a> or on twitter <a href="https://www.twitter.com/redshiftzero">@redshiftzero</a>. <br><br><br>
+              Projects: <br>
+
+              <div class="photos">
+                <a href="http://dssg.uchicago.edu/2015/08/20/cincy-blight-prevention.html" class="p1 photo" target="_blank"><img alt="Predictive risk modeling for building code issues in Cincinnati" src="images/cincy_model.png"></a>
+                <a href="http://arxiv.org/find/all/1/all:+Helsby/0/1/0/all/0/1" class="p2 photo" target="_blank"><img alt="Academic publications in astrophysics" src="images/hdf_snippet.png"></a>
+                <div class="caption c1">Predictive modeling to estimate risk of building code issues in Cincinnati</div>
+                <div class="caption c2">Academic publications in astrophysics</div>
+              </div><br>
+
+              <div class="dummy blogpost">
+                Blog posts:
+              </div>
+            </div><p></p><p></p>
+              <ul class="post-list">{% for post in paginator.posts %}
+                <div class="titlepost">
+                  <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                </div>
+                <div class="datepost">
+                  <span class="post-meta">{{ post.date | date: "%-d %b %Y" }}</span>
+                </div>{% endfor %}
+              </ul>
+          </div>
+        </div>
+        <div class="pagination">{% if paginator.previous_page %}
+          <a href="{{ paginator.previous_page_path }}" class="previous"><b>Balik Lagi</b></a>{% else %}{% endif %}{% if paginator.next_page %}
+          <a href="{{ paginator.next_page_path }}" class="next"><b>Lanjut</b></a>{% else %}{% endif %}
+        </div>
+      </div>
+      <div class="space"></div>
