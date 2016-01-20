@@ -55,7 +55,14 @@
   &.p1:hover ~ .c1,
   &.p2:hover ~ .c2,
   &.p3:hover ~ .c3,
-  &.p4:hover ~ .c4 {
+  &.p4:hover ~ .c4,
+  &.p5:hover ~ .c5,
+  &.p6:hover ~ .c6,
+  &.p7:hover ~ .c7,
+  &.p8:hover ~ .c8,
+  &.p9:hover ~ .c9,
+  &.p10:hover ~ .c10,
+  &.p11:hover ~ .c11 {
     display: block;
   }
 }
