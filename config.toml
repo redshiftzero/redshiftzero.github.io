@@ -32,7 +32,7 @@ theme = "hugo-creative-portfolio-theme"
 
   [[params.navlinks]]
   name = "About"
-  url = "about/"
+  url = "/about/"
 
   [params.social]
   email         = "jen@redshiftzero.com"
