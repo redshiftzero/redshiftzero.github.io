@@ -1,4 +1,4 @@
-baseURL = "https://redshiftzero.github.io"
+baseURL = "https://redshiftzero.github.io/"
 languageCode = "en-us"
 title = "redshiftzero"
 theme = "hugo-creative-portfolio-theme"
