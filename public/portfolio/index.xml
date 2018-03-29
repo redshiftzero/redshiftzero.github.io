@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Portfolios on redshiftzero</title>
+    <link>https://redshiftzero.github.io/portfolio/</link>
+    <description>Recent content in Portfolios on redshiftzero</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 05 Nov 2016 18:25:22 +0530</lastBuildDate>
+    
+	<atom:link href="https://redshiftzero.github.io/portfolio/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>OpenOversight</title>
+      <link>https://redshiftzero.github.io/portfolio/work1/</link>
+      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
+      
+      <guid>https://redshiftzero.github.io/portfolio/work1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Predicting police misconduct</title>
+      <link>https://redshiftzero.github.io/portfolio/work3/</link>
+      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
+      
+      <guid>https://redshiftzero.github.io/portfolio/work3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SecureDrop Anonymous Whistleblowing</title>
+      <link>https://redshiftzero.github.io/portfolio/work2/</link>
+      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
+      
+      <guid>https://redshiftzero.github.io/portfolio/work2/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
