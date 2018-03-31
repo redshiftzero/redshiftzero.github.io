@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on Redshiftzero</title>
+    <link>https://redshiftzero.github.io/page/</link>
+    <description>Recent content in Pages on Redshiftzero</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 09 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://redshiftzero.github.io/page/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>https://redshiftzero.github.io/about/</link>
+      <pubDate>Fri, 09 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/about/</guid>
+      <description>Hi, I&amp;rsquo;m redshiftzero. I&amp;rsquo;m interested in security, data analysis, and machine learning.
+Professional Experience Freedom of the Press Foundation SecureDrop Lead Developer, July 2017 - present Ford-Mozilla Open Web Fellow, September 2016 - June 2017
+Center for Data Science and Public Policy Postdoctoral Researcher, September 2015 - September 2016 Data Science for Social Good Technical Mentor, June 2016 - August 2016 Data Science for Social Good Fellow, June 2015 - August 2015</description>
+    </item>
+    
+    <item>
+      <title>Site notice</title>
+      <link>https://redshiftzero.github.io/site-notice/</link>
+      <pubDate>Fri, 09 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/site-notice/</guid>
+      <description>If you&amp;rsquo;d like to contact me, you can use jen@redshiftzero.com.</description>
+    </item>
+    
+  </channel>
+</rss>

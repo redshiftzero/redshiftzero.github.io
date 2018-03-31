@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on redshiftzero</title>
+    <title>Tags on Redshiftzero</title>
     <link>https://redshiftzero.github.io/tags/</link>
-    <description>Recent content in Tags on redshiftzero</description>
+    <description>Recent content in Tags on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Fri, 30 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Astrophysics</title>
+      <link>https://redshiftzero.github.io/tags/astrophysics/</link>
+      <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/tags/astrophysics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cosmology</title>
+      <link>https://redshiftzero.github.io/tags/cosmology/</link>
+      <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/tags/cosmology/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>D3.js</title>
+      <link>https://redshiftzero.github.io/tags/d3.js/</link>
+      <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/tags/d3.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visualization</title>
+      <link>https://redshiftzero.github.io/tags/visualization/</link>
+      <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/tags/visualization/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

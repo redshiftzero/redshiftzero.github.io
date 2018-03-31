@@ -1,40 +1,41 @@
-baseURL = "https://redshiftzero.github.io/"
+baseurl = "https://redshiftzero.github.io"
 languageCode = "en-us"
-title = "redshiftzero"
-theme = "hugo-creative-portfolio-theme"
+title = "Redshiftzero"
+theme = "hugo-natrium-theme"
+preserveTaxonomyNames = true
+rssLimit = 10
+paginate = 10
+pygmentsCodefences = true
+pygmentsStyle = "native"
+
+[taxonomies]
+    category = "categories"
+    tag = "tags"
+
+[permalinks]
+    post = "/:slug/"
+    page = "/:slug/"
+
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = -110
+
+[[menu.main]]
+    name = "Tags"
+    url = "/tags"
+    weight = -120
+
+[[menu.main]]
+    name = "Categories"
+    url = "/categories"
+    weight = -130
 
 [params]
-  # Style options: default (pink), blue, green, pink, red, sea, violet
-  # Use custom.css for your custom styling
-  style = "green"
-  description = "redshiftzerooooo"
-  sidebarAbout = [
-    "Security, data, and nerdery. To the right are some projects I've worked on.",
-  ]
-  # Contact page
-     # Since this template is static, the contact form uses www.formspree.io as a
-     # proxy. The form makes a POST request to their servers to send the actual
-     # email. Visitors can send up to a 1000 emails each month for free.
-     #
-     # What you need to do for the setup?
-     #
-     # - set your email address under 'email' below
-     # - upload the generated site to your server
-     # - send a dummy email yourself to confirm your account
-     # - click the confirm link in the email from www.formspree.io
-     # - you're done. Happy mailing!
-  email = "jen@redshiftzero.com"
+    description = "redshiftzero"
 
-  # Nav links in the side bar
-  [[params.navlinks]]
-  name = "Home"
-  url = ""
-
-  [[params.navlinks]]
-  name = "About"
-  url = "/about/"
-
-  [params.social]
-  email         = "jen@redshiftzero.com"
-  twitter       = "https://twitter.com/redshiftzero"
-  github        = "https://github.com/redshiftzero"
+    [params.logo]
+    url = "logo.png"
+    width = 50
+    height = 50
+    alt = "Logo"

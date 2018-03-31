@@ -1,42 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>redshiftzero</title>
+    <title>Redshiftzero</title>
     <link>https://redshiftzero.github.io/</link>
-    <description>Recent content on redshiftzero</description>
+    <description>Recent content on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 05 Nov 2016 18:25:22 +0530</lastBuildDate>
+    <lastBuildDate>Fri, 30 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://redshiftzero.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://redshiftzero.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
-    <item>
-      <title>OpenOversight</title>
-      <link>https://redshiftzero.github.io/portfolio/work1/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
-      
-      <guid>https://redshiftzero.github.io/portfolio/work1/</guid>
-      <description></description>
-    </item>
     
     <item>
-      <title>Predicting police misconduct</title>
-      <link>https://redshiftzero.github.io/portfolio/work3/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
+      <title>Visualizing Cosmological Power Spectra with d3.js</title>
+      <link>https://redshiftzero.github.io/visualizing-cosmological-power-spectra/</link>
+      <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://redshiftzero.github.io/portfolio/work3/</guid>
-      <description></description>
+      <guid>https://redshiftzero.github.io/visualizing-cosmological-power-spectra/</guid>
+      <description>Cosmologists make observations of galaxies and radiation in the universe to constrain parameters of the Lambda CDM model , which is the model that best describes our current understanding of the universe. These cosmological parameters include quantities like &amp;Omega;m and &amp;Omega;&amp;Lambda;, which describe the matter and dark energy content of the universe respectively.
+Two key observables that constrain these parameters are the matter power spectrum and the angular power spectrum of the Cosmic Microwave Background (CMB) radiation.</description>
     </item>
     
-    <item>
-      <title>SecureDrop Anonymous Whistleblowing</title>
-      <link>https://redshiftzero.github.io/portfolio/work2/</link>
-      <pubDate>Sat, 05 Nov 2016 18:25:22 +0530</pubDate>
-      
-      <guid>https://redshiftzero.github.io/portfolio/work2/</guid>
-      <description></description>
-    </item>
+    
+    
+    
+    
     
   </channel>
 </rss>
