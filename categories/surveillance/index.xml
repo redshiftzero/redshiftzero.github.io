@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Surveillance on Redshiftzero</title>
+    <link>https://redshiftzero.github.io/categories/surveillance/</link>
+    <description>Recent content in Surveillance on Redshiftzero</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Jan 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://redshiftzero.github.io/categories/surveillance/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Primer on Police Surveillance</title>
+      <link>https://redshiftzero.github.io/police-surveillance-primer/</link>
+      <pubDate>Tue, 19 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/police-surveillance-primer/</guid>
+      <description>I wrote a short primer describing and visualizing police surveillance technology. This project was also posted on the website of the Lucy Parsons Labs.
+
+Cameras, automatic license plate readers, cell site simulators and many other surveillance devices are currently used in the city by the Chicago Police Department and its sister agencies. However, many citizens are unaware of the scope of the surveillance systems, their huge cost, and the privacy implications of their use.</description>
+    </item>
+    
+  </channel>
+</rss>

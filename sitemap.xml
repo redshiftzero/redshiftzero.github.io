@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>https://redshiftzero.github.io/police-surveillance-primer/</loc>
+    <lastmod>2016-01-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://redshiftzero.github.io/tags/astrophysics/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -29,25 +34,25 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/tags/cosmology/</loc>
-    <lastmod>2018-03-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://redshiftzero.github.io/categories/cosmology/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/tags/d3.js/</loc>
+    <loc>https://redshiftzero.github.io/tags/cosmology/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://redshiftzero.github.io/categories/d3.js/</loc>
+    <lastmod>2018-03-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/tags/d3.js/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -61,6 +66,18 @@
   <url>
     <loc>https://redshiftzero.github.io/page/</loc>
     <lastmod>2018-02-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/categories/police/</loc>
+    <lastmod>2016-01-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/tags/police/</loc>
+    <lastmod>2016-01-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -79,6 +96,18 @@
   <url>
     <loc>https://redshiftzero.github.io/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/categories/surveillance/</loc>
+    <lastmod>2016-01-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/tags/surveillance/</loc>
+    <lastmod>2016-01-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

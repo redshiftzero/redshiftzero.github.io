@@ -21,5 +21,16 @@
 Two key observables that constrain these parameters are the matter power spectrum and the angular power spectrum of the Cosmic Microwave Background (CMB) radiation.</description>
     </item>
     
+    <item>
+      <title>Primer on Police Surveillance</title>
+      <link>https://redshiftzero.github.io/police-surveillance-primer/</link>
+      <pubDate>Tue, 19 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/police-surveillance-primer/</guid>
+      <description>I wrote a short primer describing and visualizing police surveillance technology. This project was also posted on the website of the Lucy Parsons Labs.
+
+Cameras, automatic license plate readers, cell site simulators and many other surveillance devices are currently used in the city by the Chicago Police Department and its sister agencies. However, many citizens are unaware of the scope of the surveillance systems, their huge cost, and the privacy implications of their use.</description>
+    </item>
+    
   </channel>
 </rss>
