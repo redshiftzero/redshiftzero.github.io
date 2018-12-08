@@ -2,10 +2,12 @@
 
 Develop via `hugo serve`
 
-Prepare for prod in root dir via:
+Deploy via:
 
 ```
 hugo
-mv public/* .
-rm -rf public/
+cp -r public/* .
+rm -R public/
+git add -u
+# Then inspect new files and stage them also if needed
 ```
