@@ -14,6 +14,8 @@ Two key observables that constrain these parameters are the **matter power spect
 
 ## Matter Power Spectrum
 
+![Matter power spectrum](/img/p_k.png)
+
 The matter power spectrum - *P(k)* - describes the large scale structure of the universe - it tells us
 on which scales matter is distributed. *P(k)* is a function of _wavenumber_ *k* which *k* corresponds
 to inverse scale - so _increasing_ wavenumber means _decreasing_ scale.
@@ -23,6 +25,8 @@ increase the power at large wavenumber, which corresponds to smaller scales.
 This occurs due to enhanced structure formation as a result of the additional matter content.
 
 ## CMB Angular Power Spectrum
+
+![CMB](/img/cmb.png)
 
 The Cosmic Microwave Background (CMB) radiation was produced only ~100,000 years after the Big Bang, and gives us information about the universe at these early times. One observable from this radiation is the CMB angular power spectrum, which describes anisotropies in the temperature of the CMB radiation as a function of *angular scale*. Since this temperature anisotropy is defined over a sphere, the temperature anisotropy is separated out into angular scales using a multipole expansion (to read how this multipole expansion is done in detail, check out [these notes (PDF)](http://www.helsinki.fi/~hkurkisu/cpt/Cosmo12.pdf)). The spectrum *C<sub>ℓ</sub>* (plotted as *ℓ(ℓ+1)C<sub>ℓ</sub>*) is a function of multipole *ℓ*, so *_increasing_* multipole corresponds to *decreasing* angular scales.
 
