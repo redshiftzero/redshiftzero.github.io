@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Accountability</title>
+      <link>https://redshiftzero.github.io/tags/accountability/</link>
+      <pubDate>Thu, 21 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/tags/accountability/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Astrophysics</title>
@@ -17,6 +26,15 @@
       <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://redshiftzero.github.io/tags/astrophysics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Censorship</title>
+      <link>https://redshiftzero.github.io/tags/censorship/</link>
+      <pubDate>Thu, 21 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/tags/censorship/</guid>
       <description></description>
     </item>
     
@@ -48,11 +66,29 @@
     </item>
     
     <item>
+      <title>Public interest</title>
+      <link>https://redshiftzero.github.io/tags/public-interest/</link>
+      <pubDate>Thu, 21 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/tags/public-interest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Surveillance</title>
       <link>https://redshiftzero.github.io/tags/surveillance/</link>
       <pubDate>Tue, 19 Jan 2016 00:00:00 +0000</pubDate>
       
       <guid>https://redshiftzero.github.io/tags/surveillance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Transparency</title>
+      <link>https://redshiftzero.github.io/tags/transparency/</link>
+      <pubDate>Thu, 21 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/tags/transparency/</guid>
       <description></description>
     </item>
     
