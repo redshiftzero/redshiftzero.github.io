@@ -23,6 +23,11 @@
   </url>
   
   <url>
+    <loc>https://redshiftzero.github.io/cpd-asset-forfeiture/</loc>
+    <lastmod>2016-09-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://redshiftzero.github.io/police-surveillance-primer/</loc>
     <lastmod>2016-01-19T00:00:00+00:00</lastmod>
   </url>
@@ -30,6 +35,12 @@
   <url>
     <loc>https://redshiftzero.github.io/tags/accountability/</loc>
     <lastmod>2018-06-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/tags/asset-forfeiture/</loc>
+    <lastmod>2016-09-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -45,20 +56,20 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/tags/censorship/</loc>
-    <lastmod>2018-06-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://redshiftzero.github.io/categories/censorship/</loc>
     <lastmod>2018-06-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/tags/cosmology/</loc>
-    <lastmod>2018-03-30T00:00:00+00:00</lastmod>
+    <loc>https://redshiftzero.github.io/tags/censorship/</loc>
+    <lastmod>2018-06-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/categories/chicago/</loc>
+    <lastmod>2016-09-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -69,7 +80,7 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/tags/d3.js/</loc>
+    <loc>https://redshiftzero.github.io/tags/cosmology/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -81,8 +92,32 @@
   </url>
   
   <url>
+    <loc>https://redshiftzero.github.io/tags/d3.js/</loc>
+    <lastmod>2018-03-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/tags/data-analysis/</loc>
+    <lastmod>2016-09-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/tags/foia/</loc>
+    <lastmod>2016-09-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://redshiftzero.github.io/categories/javascript/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/categories/lpl/</loc>
+    <lastmod>2016-09-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -93,14 +128,14 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/tags/police/</loc>
-    <lastmod>2016-01-19T00:00:00+00:00</lastmod>
+    <loc>https://redshiftzero.github.io/categories/police/</loc>
+    <lastmod>2016-09-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/police/</loc>
-    <lastmod>2016-01-19T00:00:00+00:00</lastmod>
+    <loc>https://redshiftzero.github.io/tags/police/</loc>
+    <lastmod>2016-09-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -129,13 +164,13 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/tags/surveillance/</loc>
+    <loc>https://redshiftzero.github.io/categories/surveillance/</loc>
     <lastmod>2016-01-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/surveillance/</loc>
+    <loc>https://redshiftzero.github.io/tags/surveillance/</loc>
     <lastmod>2016-01-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -147,13 +182,13 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/tags/transparency/</loc>
+    <loc>https://redshiftzero.github.io/categories/transparency/</loc>
     <lastmod>2018-06-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/transparency/</loc>
+    <loc>https://redshiftzero.github.io/tags/transparency/</loc>
     <lastmod>2018-06-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
