@@ -47,6 +47,15 @@
     </item>
     
     <item>
+      <title>Ethics</title>
+      <link>https://redshiftzero.github.io/categories/ethics/</link>
+      <pubDate>Sat, 29 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/categories/ethics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>JavaScript</title>
       <link>https://redshiftzero.github.io/categories/javascript/</link>
       <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
@@ -65,6 +74,15 @@
     </item>
     
     <item>
+      <title>Machine learning</title>
+      <link>https://redshiftzero.github.io/categories/machine-learning/</link>
+      <pubDate>Sat, 29 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/categories/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Police</title>
       <link>https://redshiftzero.github.io/categories/police/</link>
       <pubDate>Thu, 29 Sep 2016 00:00:00 +0000</pubDate>
@@ -79,24 +97,6 @@
       <pubDate>Thu, 21 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>https://redshiftzero.github.io/categories/post/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>SecureDrop</title>
-      <link>https://redshiftzero.github.io/categories/securedrop/</link>
-      <pubDate>Fri, 31 Mar 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/categories/securedrop/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Surveillance</title>
-      <link>https://redshiftzero.github.io/categories/surveillance/</link>
-      <pubDate>Tue, 19 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/categories/surveillance/</guid>
       <description></description>
     </item>
     
