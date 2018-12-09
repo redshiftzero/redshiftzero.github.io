@@ -42,6 +42,17 @@ Two key observables that constrain these parameters are the matter power spectru
     
     
     <item>
+      <title>How SecureDrop Works 101</title>
+      <link>https://redshiftzero.github.io/securedrop-101/</link>
+      <pubDate>Fri, 31 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/securedrop-101/</guid>
+      <description>When people first learn of the SecureDrop architecture, it can seem quite complicated. When explaining SecureDrop to people for the first time, it&amp;rsquo;s useful to have a cartoon view providing a broad overview before digging into further technical details (in my experience this is true of any sufficiently technical concept/system). After noticing this confusion from users, I made this quick one-minute video to distill the most important points for the source and journalist workflows:</description>
+    </item>
+    
+    
+    
+    <item>
       <title>Inside the Chicago Police Department&#39;s Secret Budget</title>
       <link>https://redshiftzero.github.io/cpd-asset-forfeiture/</link>
       <pubDate>Thu, 29 Sep 2016 00:00:00 +0000</pubDate>

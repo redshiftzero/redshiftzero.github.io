@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Whistleblowing on Redshiftzero</title>
+    <link>https://redshiftzero.github.io/categories/whistleblowing/</link>
+    <description>Recent content in Whistleblowing on Redshiftzero</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 31 Mar 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://redshiftzero.github.io/categories/whistleblowing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How SecureDrop Works 101</title>
+      <link>https://redshiftzero.github.io/securedrop-101/</link>
+      <pubDate>Fri, 31 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/securedrop-101/</guid>
+      <description>When people first learn of the SecureDrop architecture, it can seem quite complicated. When explaining SecureDrop to people for the first time, it&amp;rsquo;s useful to have a cartoon view providing a broad overview before digging into further technical details (in my experience this is true of any sufficiently technical concept/system). After noticing this confusion from users, I made this quick one-minute video to distill the most important points for the source and journalist workflows:</description>
+    </item>
+    
+  </channel>
+</rss>
