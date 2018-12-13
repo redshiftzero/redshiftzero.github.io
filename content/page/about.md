@@ -58,7 +58,17 @@ Code: [GitHub repository](https://github.com/dssg/police-eis)
 Media: [Mother Jones](https://www.motherjones.com/politics/2016/07/data-prediction-police-misconduct-shootings/), [FiveThirtyEight](https://fivethirtyeight.com/features/we-now-have-algorithms-to-predict-police-misconduct/),
 [NPR](https://www.npr.org/sections/alltechconsidered/2016/07/19/486499835/can-big-data-help-head-off-police-misconduct), [wsoctv](https://www.wsoctv.com/news/local/charlotte-mecklenburg-police-using-technology-to-analyze-officers/719415686)
 
-Role: Primary data scientist while a postdoc (Sept 2015- Sept 2016), technical mentor to two teams of Data Science for Social Good fellows  working on the models (Summer 2016)
+Role: Primary data scientist while a postdoc (Sept 2015- Sept 2016), technical mentor to two teams of Data Science for Social Good fellows working on the models (Summer 2016)
+
+#### Predicting Building Code Issues
+
+As part of the Data Science for Social Good Fellowship in 2015, my team and I built  a machine learning model that [predicted](https://dssg.uchicago.edu/project/proactive-blight-reduction-and-neighborhood-revitalization/) which properties in the city of Cincinnati were likely to have building code violations, used for allocating limited city resources.
+
+Code: [GitHub repository](https://github.com/dssg/cincinnati2015-public)
+
+Media: [Wired/Backchannel](https://www.wired.com/2015/09/how-a-fiddler-and-an-astrophysicist-brought-predictive-analytics-to-cincinnati/)
+
+Role: Member of data science team
 
 ## Talks
 
