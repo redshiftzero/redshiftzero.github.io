@@ -46,13 +46,53 @@
   </ul>
 </nav>
 
+
       </header>
+
+      <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+            extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+      </script>
 
 
 <main class="content" role="main">
 
   <div class="list">
     <h2 class="list-title">Post</h2>
+    
+     
+        <nav class="list-item">
+      <a href="https://redshiftzero.github.io/birthday-attacks/">Collision attacks and the birthday paradox</a>
+      <span class="list-item-date">
+        2019-05-19
+      </span>
+    </nav>
+
+
     
      
         <nav class="list-item">

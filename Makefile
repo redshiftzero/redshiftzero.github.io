@@ -9,6 +9,7 @@ build: ## Build the site
 	hugo
 	cp -r public/* .
 	rm -R public/
+	cp img/* static/img
 	git add -u
 	@printf "NOTE: Now inspect new files and stage them also if needed"
 

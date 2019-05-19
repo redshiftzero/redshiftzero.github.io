@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cryptography on Redshiftzero</title>
+    <link>https://redshiftzero.github.io/categories/cryptography/</link>
+    <description>Recent content in Cryptography on Redshiftzero</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://redshiftzero.github.io/categories/cryptography/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Collision attacks and the birthday paradox</title>
+      <link>https://redshiftzero.github.io/birthday-attacks/</link>
+      <pubDate>Sun, 19 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/birthday-attacks/</guid>
+      <description>How many people do you need in a room before there is a 50% chance that least two of them share the same birthday? It&amp;rsquo;s only 23, though unless you have heard about this paradox before, you might expect it to be much larger. This is the well-known birthday paradox: it&amp;rsquo;s called a paradox only because collisions happen much faster than one naively expects. Collisions here means an event where two or more observed values are equal.</description>
+    </item>
+    
+  </channel>
+</rss>

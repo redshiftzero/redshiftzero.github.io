@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.37.1" />
+
+
+<title>Collision attacks and the birthday paradox - Redshiftzero</title>
+<meta property="og:title" content="Collision attacks and the birthday paradox - Redshiftzero">
+
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="https://redshiftzero.github.io/css/main.css" media="all">
+<link rel="stylesheet" href="https://redshiftzero.github.io/css/fonts.css">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="https://redshiftzero.github.io/" class="nav-logo">
+    <img src="https://redshiftzero.github.io/images/logo.png" 
+         width="50" 
+         height="50" 
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/categories">Categories</a></li>
+    
+    <li><a href="/tags">Tags</a></li>
+    
+    <li><a href="/about/">About</a></li>
+    
+  </ul>
+</nav>
+
+
+      </header>
+
+      <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+            extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+      </script>
+
+
+<main class="content" role="main">
+  <article class="article">
+    <h1 class="article-title">Collision attacks and the birthday paradox</h1>
+    
+    <span class="article-date">2019-05-19</span>
+    
+
+    <div class="article-content">
+      
+
+<p>How many people do you need in a room before there is a 50% chance that least two of them share the same birthday? It&rsquo;s only 23, though unless you have heard about this paradox before, you might expect it to be much larger. This is the well-known birthday paradox: it&rsquo;s called a paradox only because collisions happen much faster than one naively expects. Collisions here means an event where two or more observed values are equal. This paradox is important in cryptography as it&rsquo;s relevant for many topics like cryptographic hash functions, which are designed to be collision-resistant one-way functions.</p>
+
+<h3 id="the-probability-of-collision">The probability of collision</h3>
+
+<p>Let&rsquo;s see why this is true by first deriving analytically the probability that <em>no</em> collision occurs for a generic case where there are $m$ possible values, and we observe $n$ of them. The birthday paradox above is a special case where $m=365$ and $n=23$. We want to know: what is the probability that we don&rsquo;t see any collisions after $n$ observations?</p>
+
+<p>We first note that the first observation, $o_1$, trivially occurs with probability 1: $P(o_1) = 1$.</p>
+
+<p>Next we compute the probability that the second observation does not match the first, there are now $m-1$ possible options out of $m$:</p>
+
+<p>$P(o_2 \ne o_1) = \frac{m - 1}{m} = 1 - \frac{1}{m}$</p>
+
+<p>Now the third, which should not match either the first or the second:</p>
+
+<p>$P(o_3 \ne o_1 \ne o_2) = \frac{m - 2}{m} = 1 - \frac{2}{m}$</p>
+
+<p>And so on and so forth until the $n$th observation, which should not match any of
+the first $n-1$ observations:</p>
+
+<p>$P(o_n \ne o_1 \ne o_2 &hellip; \ne o_{n-1}) = \frac{m - (n - 1)}{m} = 1 - \frac{n-1}{m}$</p>
+
+<p>The probability of no collisions is just the joint probability of these events (assuming that they&rsquo;re independent):</p>
+
+<p>$ P(\mbox{No collision}) = \prod_{i=1}^{n} P(o_i) = \prod_{i=1}^{n-1} 1 - \frac{i}{m}$</p>
+
+<p>What is the probability that a collision <em>does</em> occur? Well, we know that the probability that a collision occurs is the complement of the probability that no collision occurs, i.e.:</p>
+
+<p>$ P(\mbox{Collision}) = 1 - P(\mbox{No collision}) = 1 - \prod_{i=1}^{n-1} 1 - \frac{i}{m}$</p>
+
+<p>That is the probability for any $n$ and $m$ that a collision occurs due to the birthday paradox ✨</p>
+
+<h3 id="collision-probability-as-a-function-of-n">Collision probability as a function of $n$</h3>
+
+<p>Armed with the above analytic expression, we can write a simple function that computes the probability of collision for any $n$ and $m$:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#6ab825;font-weight:bold">def</span> <span style="color:#447fcf">prob_of_collision</span>(n: <span style="color:#24909d">int</span>=<span style="color:#3677a9">23</span>, m: <span style="color:#24909d">int</span>=<span style="color:#3677a9">365</span>) -&gt; <span style="color:#24909d">int</span>:
+    probability_of_no_collision = <span style="color:#3677a9">1</span>
+    <span style="color:#6ab825;font-weight:bold">for</span> i <span style="color:#6ab825;font-weight:bold">in</span> <span style="color:#24909d">range</span>(<span style="color:#3677a9">1</span>, n - <span style="color:#3677a9">1</span>):
+        probability_of_no_collision *= <span style="color:#3677a9">1</span> - i/m
+    <span style="color:#6ab825;font-weight:bold">return</span> <span style="color:#3677a9">1</span> - probability_of_no_collision</code></pre></div>
+<p>Let&rsquo;s now use this function to make a few plots showing how the probability changes as a function of $n$.</p>
+
+<h4 id="birthday-case-m-365">Birthday case: m=365</h4>
+
+<p><img src="/img/birthday_attack_m_365.png" alt="Collision probability for m=365" /></p>
+
+<p>We can see that the probability reaches $50\%$ right around $n=23$, thus recovering what we stated in the introduction.</p>
+
+<h4 id="larger-case-m-100000">Larger case: m=100000</h4>
+
+<p><img src="/img/birthday_attack_m_100000.png" alt="Collision probability for m=365" /></p>
+
+<p>For larger numbers, we see that collisions happen <em>very</em> fast: in a space of 100000 possible values, we reach $50\%$ probability after less than 400 observations. This should underscore the importance of considering birthday attacks especially in the case even where the space of possible values is very large. We can see empirically from these couple of cases that the number of observations $n$ you need to get a probability of collision of 0.5 is approximately $\sqrt{m}$. You can prove that to yourself analytically by taking the equation we derived above for the probability of collision, setting the left hand side equal to 0.5, and rearranging to see the relationship between $n$ and $m$.</p>
+
+    </div>
+ 
+    <ul class="article-taxonomy">
+                  
+      <hr>
+      <li>
+        <i class="fa fa-category"></i><a href="/categories/post">Post</a><a href="/categories/cryptography">Cryptography</a><a href="/categories/statistics">Statistics</a>
+      </li>
+      
+    
+      
+      <li>
+        <i class="fa fa-tags"></i><a href="/tags/cryptography">cryptography</a><a href="/tags/101">101</a><a href="/tags/teaching">teaching</a><a href="/tags/statistics">statistics</a><a href="/tags/hash-functions">hash functions</a>
+      </li>
+      
+  </article>
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="https://redshiftzero.github.io/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS feed</a>
+          </li>
+          <li>
+            <a href="https://github.com/redshiftzero"><i class="fa fa-github"></i> GitHub</a>
+          </li>
+          <li>
+            <a href="https://redshiftzero.github.io/site-notice">Site notice</a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+
+  </body>
+</html>
+

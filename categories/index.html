@@ -46,7 +46,37 @@
   </ul>
 </nav>
 
+
       </header>
+
+      <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+            extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+      </script>
 
 
 <main class="content">
@@ -84,6 +114,15 @@
     
     <ul class="category-item">
       <li>
+        <a href="/categories/cryptography">Cryptography</a>
+        <span class="category-item-count">
+          <sup>(1)</sup>
+       </span>
+      </li>
+    </ul>   
+    
+    <ul class="category-item">
+      <li>
         <a href="/categories/javascript">JavaScript</a>
         <span class="category-item-count">
           <sup>(1)</sup>
@@ -113,7 +152,7 @@
       <li>
         <a href="/categories/post">Post</a>
         <span class="category-item-count">
-          <sup>(3)</sup>
+          <sup>(4)</sup>
        </span>
       </li>
     </ul>   
@@ -121,6 +160,15 @@
     <ul class="category-item">
       <li>
         <a href="/categories/securedrop">SecureDrop</a>
+        <span class="category-item-count">
+          <sup>(1)</sup>
+       </span>
+      </li>
+    </ul>   
+    
+    <ul class="category-item">
+      <li>
+        <a href="/categories/statistics">Statistics</a>
         <span class="category-item-count">
           <sup>(1)</sup>
        </span>

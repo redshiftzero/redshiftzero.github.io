@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 31 Mar 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 19 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>101</title>
       <link>https://redshiftzero.github.io/tags/101/</link>
-      <pubDate>Fri, 31 Mar 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 19 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://redshiftzero.github.io/tags/101/</guid>
       <description></description>
@@ -75,6 +75,15 @@
     </item>
     
     <item>
+      <title>Cryptography</title>
+      <link>https://redshiftzero.github.io/tags/cryptography/</link>
+      <pubDate>Sun, 19 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/tags/cryptography/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>D3.js</title>
       <link>https://redshiftzero.github.io/tags/d3.js/</link>
       <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
@@ -89,15 +98,6 @@
       <pubDate>Thu, 29 Sep 2016 00:00:00 +0000</pubDate>
       
       <guid>https://redshiftzero.github.io/tags/data-analysis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ethics</title>
-      <link>https://redshiftzero.github.io/tags/ethics/</link>
-      <pubDate>Sat, 29 Aug 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/tags/ethics/</guid>
       <description></description>
     </item>
     
