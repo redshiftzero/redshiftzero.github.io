@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.37.1" />
+
+
+<title>Strategies for handling flaky test suites - Redshiftzero</title>
+<meta property="og:title" content="Strategies for handling flaky test suites - Redshiftzero">
+
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="https://redshiftzero.github.io/css/main.css" media="all">
+<link rel="stylesheet" href="https://redshiftzero.github.io/css/fonts.css">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="https://redshiftzero.github.io/" class="nav-logo">
+    <img src="https://redshiftzero.github.io/images/logo.png" 
+         width="50" 
+         height="50" 
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/categories">Categories</a></li>
+    
+    <li><a href="/tags">Tags</a></li>
+    
+    <li><a href="/about/">About</a></li>
+    
+  </ul>
+</nav>
+
+
+      </header>
+
+      <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+            extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+      </script>
+
+
+<main class="content" role="main">
+  <article class="article">
+    <h1 class="article-title">Strategies for handling flaky test suites</h1>
+    
+    <span class="article-date">2019-07-19</span>
+    
+
+    <div class="article-content">
+      
+
+<p>Test flakes are tests that occasionally fail due to a variety of potential reasons including network instability (for tests making network calls that are not mocked) and other non-deterministic behavior. Test flakes are problematic as they reduce confidence in the results of test runs: they condition developers that the test suite cannot be relied on, and as such can result in legitimate bugs being ignored due to <a href="https://en.wikipedia.org/wiki/Alarm_fatigue">alert fatigue</a>.</p>
+
+<p>This post contains some strategies for identifying and handling flaky tests in Python.</p>
+
+<h3 id="identify-track-and-fix">Identify, track, and fix</h3>
+
+<p>One strategy is once a flake is identified to treat them like any other bug:</p>
+
+<ol>
+<li>File an issue to track it such that there is awareness of the flakey test.</li>
+<li>Reproduce the flake locally.</li>
+<li>Fix whatever underlying reason is causing the flaky behavior.</li>
+</ol>
+
+<p>A common problem is to skip step 2, and instead take a guess why the flake is happening, and then modify the behavior. To prevent unnecessary implementation/review time, it&rsquo;s worth resisting this urge and to at least try to understand the behavior prior to making changes. If it proves particularly troublesome to identify, <em>then</em> it may be reasonable to make some experimental fixes.</p>
+
+<p>One strategy to identify the underlying problem is to use a plugin like <code>pytest-repeat</code> (<code>pip install pytest-repeat</code>) to run a <em>single</em> test a large number of times:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pytest --count <span style="color:#3677a9">100</span> tests/test_app.py::test_my_flaky_behavior</code></pre></div>
+<p>You can do this on your main branch to reproduce the flake (adjusting the <code>count</code> as needed based on the failure rate of the test), and then run again once you have applied a fix to verify that it indeed resolves the issue.</p>
+
+<h3 id="automatically-re-run-flaky-tests">Automatically re-run flaky tests</h3>
+
+<p>Alternatively, a quick fix if you don&rsquo;t want to take the time to address the underlying issues in the test suite is a pytest plugin called <a href="https://github.com/box/flaky"><code>flaky</code></a> (<code>pip install flaky</code>). One can use this to re-run individual flaky tests or classes of flaky tests up to a configurable number of times, e.g.:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ffa500">@flaky</span>(max_runs=<span style="color:#3677a9">10</span>)
+<span style="color:#6ab825;font-weight:bold">def</span> <span style="color:#447fcf">test_my_flaky_behavior</span>():
+    expected_result = <span style="color:#ed9d13"></span><span style="color:#ed9d13">&#39;result&#39;</span>
+    actual_result = my_function(<span style="color:#ed9d13"></span><span style="color:#ed9d13">&#39;arg1&#39;</span>, <span style="color:#ed9d13"></span><span style="color:#ed9d13">&#39;arg2&#39;</span>)
+    <span style="color:#6ab825;font-weight:bold">assert</span> expected_result == actual_result</code></pre></div>
+<h3 id="flaky-test-dashboard">Flaky test dashboard</h3>
+
+<p>If you use a CI provider like Circle CI, you can see which tests are the most flaky (and use that to prioritize fixes) if you export test metadata:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pytest --junitxml=~/project/test-results/junit.xml</code></pre></div>
+<p>And then export them to Circle CI using their <code>store_test_results</code> and <code>store_artifacts</code> steps:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">-<span style="color:#666"> </span>store_test_results:<span style="color:#666">
+</span><span style="color:#666">    </span>path:<span style="color:#666"> </span>~/project/test-results<span style="color:#666">
+</span><span style="color:#666">
+</span><span style="color:#666"></span>-<span style="color:#666"> </span>store_artifacts:<span style="color:#666">
+</span><span style="color:#666">    </span>path:<span style="color:#666"> </span>~/project/test-results</code></pre></div>
+<p>These tests results, as CI jobs fail due to flakes, will populate a dashboard at <a href="https://circleci.com/build-insights">https://circleci.com/build-insights</a> which will contain the most often failed tests, along with other useful information like the longest running failed tests.</p>
+
+    </div>
+ 
+    <ul class="article-taxonomy">
+                  
+      <hr>
+      <li>
+        <i class="fa fa-category"></i><a href="/categories/post">Post</a><a href="/categories/testing">Testing</a><a href="/categories/software-development">Software Development</a>
+      </li>
+      
+    
+      
+      <li>
+        <i class="fa fa-tags"></i><a href="/tags/tests">tests</a><a href="/tags/flakes">flakes</a><a href="/tags/pytest">pytest</a><a href="/tags/circleci">circleci</a>
+      </li>
+      
+  </article>
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="https://redshiftzero.github.io/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS feed</a>
+          </li>
+          <li>
+            <a href="https://github.com/redshiftzero"><i class="fa fa-github"></i> GitHub</a>
+          </li>
+          <li>
+            <a href="https://redshiftzero.github.io/site-notice">Site notice</a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+
+  </body>
+</html>
+

@@ -6,9 +6,20 @@
     <description>Recent content on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jul 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://redshiftzero.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+    <item>
+      <title>Strategies for handling flaky test suites</title>
+      <link>https://redshiftzero.github.io/test-flakes/</link>
+      <pubDate>Fri, 19 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/test-flakes/</guid>
+      <description>Test flakes are tests that occasionally fail due to a variety of potential reasons including network instability (for tests making network calls that are not mocked) and other non-deterministic behavior. Test flakes are problematic as they reduce confidence in the results of test runs: they condition developers that the test suite cannot be relied on, and as such can result in legitimate bugs being ignored due to alert fatigue.</description>
+    </item>
     
     
     

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://redshiftzero.github.io/test-flakes/</loc>
+    <lastmod>2019-07-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://redshiftzero.github.io/birthday-attacks/</loc>
     <lastmod>2019-05-19T00:00:00+00:00</lastmod>
   </url>
@@ -83,13 +88,13 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/censorship/</loc>
+    <loc>https://redshiftzero.github.io/tags/censorship/</loc>
     <lastmod>2018-06-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/tags/censorship/</loc>
+    <loc>https://redshiftzero.github.io/categories/censorship/</loc>
     <lastmod>2018-06-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -101,8 +106,8 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/cosmology/</loc>
-    <lastmod>2018-03-30T00:00:00+00:00</lastmod>
+    <loc>https://redshiftzero.github.io/tags/circleci/</loc>
+    <lastmod>2019-07-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -113,8 +118,8 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/cryptography/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
+    <loc>https://redshiftzero.github.io/categories/cosmology/</loc>
+    <lastmod>2018-03-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -125,13 +130,19 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/d3.js/</loc>
-    <lastmod>2018-03-30T00:00:00+00:00</lastmod>
+    <loc>https://redshiftzero.github.io/categories/cryptography/</loc>
+    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://redshiftzero.github.io/tags/d3.js/</loc>
+    <lastmod>2018-03-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/categories/d3.js/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -143,13 +154,13 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/ethics/</loc>
+    <loc>https://redshiftzero.github.io/tags/ethics/</loc>
     <lastmod>2015-08-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/tags/ethics/</loc>
+    <loc>https://redshiftzero.github.io/categories/ethics/</loc>
     <lastmod>2015-08-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -163,6 +174,12 @@
   <url>
     <loc>https://redshiftzero.github.io/tags/fairness/</loc>
     <lastmod>2015-08-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/tags/flakes/</loc>
+    <lastmod>2019-07-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -185,13 +202,13 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/machine-learning/</loc>
+    <loc>https://redshiftzero.github.io/tags/machine-learning/</loc>
     <lastmod>2015-08-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/tags/machine-learning/</loc>
+    <loc>https://redshiftzero.github.io/categories/machine-learning/</loc>
     <lastmod>2015-08-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -203,26 +220,26 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/police/</loc>
-    <lastmod>2016-09-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://redshiftzero.github.io/tags/police/</loc>
     <lastmod>2016-09-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://redshiftzero.github.io/categories/police/</loc>
+    <lastmod>2016-09-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://redshiftzero.github.io/categories/post/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://redshiftzero.github.io/post/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
+    <lastmod>2019-07-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -233,14 +250,14 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
+    <loc>https://redshiftzero.github.io/tags/pytest/</loc>
+    <lastmod>2019-07-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/securedrop/</loc>
-    <lastmod>2017-03-31T00:00:00+00:00</lastmod>
+    <loc>https://redshiftzero.github.io/</loc>
+    <lastmod>2019-07-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -251,8 +268,14 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/statistics/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
+    <loc>https://redshiftzero.github.io/categories/securedrop/</loc>
+    <lastmod>2017-03-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/categories/software-development/</loc>
+    <lastmod>2019-07-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -263,13 +286,19 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/surveillance/</loc>
-    <lastmod>2016-01-19T00:00:00+00:00</lastmod>
+    <loc>https://redshiftzero.github.io/categories/statistics/</loc>
+    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://redshiftzero.github.io/tags/surveillance/</loc>
+    <lastmod>2016-01-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/categories/surveillance/</loc>
     <lastmod>2016-01-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -287,13 +316,25 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/transparency/</loc>
-    <lastmod>2018-06-21T00:00:00+00:00</lastmod>
+    <loc>https://redshiftzero.github.io/categories/testing/</loc>
+    <lastmod>2019-07-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/tags/tests/</loc>
+    <lastmod>2019-07-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://redshiftzero.github.io/tags/transparency/</loc>
+    <lastmod>2018-06-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/categories/transparency/</loc>
     <lastmod>2018-06-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -305,13 +346,13 @@
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/categories/whistleblowing/</loc>
+    <loc>https://redshiftzero.github.io/tags/whistleblowing/</loc>
     <lastmod>2017-03-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://redshiftzero.github.io/tags/whistleblowing/</loc>
+    <loc>https://redshiftzero.github.io/categories/whistleblowing/</loc>
     <lastmod>2017-03-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
