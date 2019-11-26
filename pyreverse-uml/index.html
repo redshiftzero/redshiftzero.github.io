@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.37.1" />
 
 
-<title>Tests - Redshiftzero</title>
-<meta property="og:title" content="Tests - Redshiftzero">
+<title>Using pyreverse to general UML class diagrams - Redshiftzero</title>
+<meta property="og:title" content="Using pyreverse to general UML class diagrams - Redshiftzero">
 
 
 
@@ -16,8 +16,6 @@
 
 
 
-
-<link href="https://redshiftzero.github.io/tags/tests/index.xml" rel="alternate" type="application/rss+xml" title="Redshiftzero" />
 
 
 <link rel="stylesheet" href="https://redshiftzero.github.io/css/main.css" media="all">
@@ -80,35 +78,43 @@
 
 
 <main class="content" role="main">
-
-  <div class="list">
-    <h2 class="list-title">Tests</h2>
+  <article class="article">
+    <h1 class="article-title">Using pyreverse to general UML class diagrams</h1>
     
-     
-        <nav class="list-item">
-      <a href="https://redshiftzero.github.io/pdb-debugging/">Debugging programs with pdb</a>
-      <span class="list-item-date">
-        2019-11-23
-      </span>
-    </nav>
-
-
+    <span class="article-date">2019-11-25</span>
     
-     
-        <nav class="list-item">
-      <a href="https://redshiftzero.github.io/test-flakes/">Strategies for handling flaky test suites</a>
-      <span class="list-item-date">
-        2019-07-19
-      </span>
-    </nav>
 
+    <div class="article-content">
+      <p>Recently I wanted to generate UML (Unified Modeling Language) diagrams of the structure of an existing codebase for the purpose of having an architecture discussion.</p>
 
+<p>I was wondering if there was a tool to generate UML diagrams in Python to save me some manual work.</p>
+
+<p>Enter <code>pyreverse</code>: it comes installed with <code>pylint</code> which is a very common development dependency in Python. <code>pyreverse</code> enables you to point to the code you want UML diagrams of, here in my example I was generating a diagram of a project called <code>securedrop-export</code>:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pyreverse securedrop_export/</code></pre></div>
+<p>This produces in the same directory a graphviz file called <code>classes.dot</code>.</p>
+
+<p>Then, provided you have graphviz (which provides the <code>dot</code> command) installed:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">dot -Tpng classes.dot -o securedrop_export.png</code></pre></div>
+<p>Which produces the following:</p>
+
+<p><img src="/img/securedrop_export.png" alt="securedrop-export" /></p>
+
+    </div>
+ 
+    <ul class="article-taxonomy">
+                  
+      <hr>
+      <li>
+        <i class="fa fa-category"></i><a href="/categories/post">Post</a><a href="/categories/software-development">Software Development</a>
+      </li>
+      
     
-   </div>
-
-  
-
-
+      
+      <li>
+        <i class="fa fa-tags"></i><a href="/tags/uml">UML</a><a href="/tags/object-oriented">object oriented</a><a href="/tags/python">python</a>
+      </li>
+      
+  </article>
 
 </main>
 

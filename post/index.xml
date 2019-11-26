@@ -6,10 +6,31 @@
     <description>Recent content in Posts on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using pyreverse to general UML class diagrams</title>
+      <link>https://redshiftzero.github.io/pyreverse-uml/</link>
+      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/pyreverse-uml/</guid>
+      <description>Recently I wanted to generate UML (Unified Modeling Language) diagrams of the structure of an existing codebase for the purpose of having an architecture discussion.
+I was wondering if there was a tool to generate UML diagrams in Python to save me some manual work.
+Enter pyreverse: it comes installed with pylint which is a very common development dependency in Python. pyreverse enables you to point to the code you want UML diagrams of, here in my example I was generating a diagram of a project called securedrop-export:</description>
+    </item>
+    
+    <item>
+      <title>Debugging programs with pdb</title>
+      <link>https://redshiftzero.github.io/pdb-debugging/</link>
+      <pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/pdb-debugging/</guid>
+      <description>I recently decided to try my hand at making YouTube videos. I&amp;rsquo;m planning on mostly making videos about topics I commonly find myself explaining to people, so here&amp;rsquo;s the first, on using pdb, the built-in debugger in the Python standard library.
+ </description>
+    </item>
     
     <item>
       <title>Strategies for handling flaky test suites</title>

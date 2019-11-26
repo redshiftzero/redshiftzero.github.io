@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>UML on Redshiftzero</title>
+    <link>https://redshiftzero.github.io/tags/uml/</link>
+    <description>Recent content in UML on Redshiftzero</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 25 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://redshiftzero.github.io/tags/uml/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using pyreverse to general UML class diagrams</title>
+      <link>https://redshiftzero.github.io/pyreverse-uml/</link>
+      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/pyreverse-uml/</guid>
+      <description>Recently I wanted to generate UML (Unified Modeling Language) diagrams of the structure of an existing codebase for the purpose of having an architecture discussion.
+I was wondering if there was a tool to generate UML diagrams in Python to save me some manual work.
+Enter pyreverse: it comes installed with pylint which is a very common development dependency in Python. pyreverse enables you to point to the code you want UML diagrams of, here in my example I was generating a diagram of a project called securedrop-export:</description>
+    </item>
+    
+  </channel>
+</rss>
