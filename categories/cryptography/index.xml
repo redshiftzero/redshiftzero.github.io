@@ -6,10 +6,20 @@
     <description>Recent content in Cryptography on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 29 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/categories/cryptography/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Implementing the CBC padding oracle attack</title>
+      <link>https://redshiftzero.github.io/cbc-padding/</link>
+      <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/cbc-padding/</guid>
+      <description>The CBC padding oracle attack demonstrates how what might initially seem like a small issue can balloon into a devastating attack that can result in total reconstruction of the plaintext by the attacker. It&amp;rsquo;s also one of the harder challenges in Set 3 of Cryptopals.
+The problem It goes like this: an attacker has access to an oracle that will take a ciphertext (i.e. what we need to decrypt) and return a boolean indicating whether or not the padding was valid.</description>
+    </item>
     
     <item>
       <title>Collision attacks and the birthday paradox</title>

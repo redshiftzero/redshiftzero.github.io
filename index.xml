@@ -6,14 +6,26 @@
     <description>Recent content on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 29 Nov 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://redshiftzero.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     
     <item>
-      <title>Using pyreverse to general UML class diagrams</title>
+      <title>Implementing the CBC padding oracle attack</title>
+      <link>https://redshiftzero.github.io/cbc-padding/</link>
+      <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/cbc-padding/</guid>
+      <description>The CBC padding oracle attack demonstrates how what might initially seem like a small issue can balloon into a devastating attack that can result in total reconstruction of the plaintext by the attacker. It&amp;rsquo;s also one of the harder challenges in Set 3 of Cryptopals.
+The problem It goes like this: an attacker has access to an oracle that will take a ciphertext (i.e. what we need to decrypt) and return a boolean indicating whether or not the padding was valid.</description>
+    </item>
+    
+    
+    
+    <item>
+      <title>Using pyreverse to generate UML class diagrams</title>
       <link>https://redshiftzero.github.io/pyreverse-uml/</link>
       <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
       
@@ -95,17 +107,6 @@ Two key observables that constrain these parameters are the matter power spectru
       
       <guid>https://redshiftzero.github.io/securedrop-101/</guid>
       <description>When people first learn of the SecureDrop architecture, it can seem quite complicated. When explaining SecureDrop to people for the first time, it&amp;rsquo;s useful to have a cartoon view providing a broad overview before digging into further technical details (in my experience this is true of any sufficiently technical concept/system). After noticing this confusion from users, I made this quick one-minute video to distill the most important points for the source and journalist workflows:</description>
-    </item>
-    
-    
-    
-    <item>
-      <title>Inside the Chicago Police Department&#39;s Secret Budget</title>
-      <link>https://redshiftzero.github.io/cpd-asset-forfeiture/</link>
-      <pubDate>Thu, 29 Sep 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/cpd-asset-forfeiture/</guid>
-      <description>Every year, police take millions of dollars from Chicagoans through civil asset forfeiture and spend it behind closed doors. In collaboration with Muckrock, my co-authors and I did an independent financial audit of this previously undocumented part of the police budget. We demonstrated these asset forfeiture funds are used to circumvent city council oversight and finance controversial surveillance devices. This investigation appeared as a front page feature in the September 29, 2016 issue of the Chicago Reader.</description>
     </item>
     
     

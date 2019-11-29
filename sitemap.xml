@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://redshiftzero.github.io/cbc-padding/</loc>
+    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://redshiftzero.github.io/pyreverse-uml/</loc>
     <lastmod>2019-11-25T00:00:00+00:00</lastmod>
   </url>
@@ -93,6 +98,12 @@
   </url>
   
   <url>
+    <loc>https://redshiftzero.github.io/tags/block-ciphers/</loc>
+    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://redshiftzero.github.io/categories/</loc>
     <priority>0</priority>
   </url>
@@ -135,13 +146,19 @@
   
   <url>
     <loc>https://redshiftzero.github.io/categories/cryptography/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
+    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://redshiftzero.github.io/tags/cryptography/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
+    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/tags/cryptopals/</loc>
+    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -255,13 +272,13 @@
   
   <url>
     <loc>https://redshiftzero.github.io/categories/post/</loc>
-    <lastmod>2019-11-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://redshiftzero.github.io/post/</loc>
-    <lastmod>2019-11-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -285,7 +302,7 @@
   
   <url>
     <loc>https://redshiftzero.github.io/</loc>
-    <lastmod>2019-11-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.37.1" />
+
+
+<title>Implementing the CBC padding oracle attack - Redshiftzero</title>
+<meta property="og:title" content="Implementing the CBC padding oracle attack - Redshiftzero">
+
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="https://redshiftzero.github.io/css/main.css" media="all">
+<link rel="stylesheet" href="https://redshiftzero.github.io/css/fonts.css">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="https://redshiftzero.github.io/" class="nav-logo">
+    <img src="https://redshiftzero.github.io/images/logo.png" 
+         width="50" 
+         height="50" 
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/categories">Categories</a></li>
+    
+    <li><a href="/tags">Tags</a></li>
+    
+    <li><a href="/about/">About</a></li>
+    
+  </ul>
+</nav>
+
+
+      </header>
+
+      <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+            extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+      </script>
+
+
+<main class="content" role="main">
+  <article class="article">
+    <h1 class="article-title">Implementing the CBC padding oracle attack</h1>
+    
+    <span class="article-date">2019-11-29</span>
+    
+
+    <div class="article-content">
+      
+
+<p>The CBC padding oracle attack demonstrates how what might initially seem like a small issue can balloon into a devastating attack that can result in total reconstruction of the plaintext by the attacker. It&rsquo;s also one of the harder challenges in <a href="https://cryptopals.com/sets/3/challenges/17">Set 3 of Cryptopals</a>.</p>
+
+<h2 id="the-problem">The problem</h2>
+
+<p>It goes like this: an attacker has access to an oracle that will take a ciphertext (i.e. what we need to decrypt) and return a boolean indicating whether or not the padding was valid. My padding oracle function looked like this:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#6ab825;font-weight:bold">def</span> <span style="color:#447fcf">cbc_padding_oracle</span>(key: <span style="color:#24909d">bytes</span>, ciphertext: <span style="color:#24909d">bytes</span>, iv: <span style="color:#24909d">bytes</span>) -&gt; <span style="color:#24909d">bool</span>:
+    <span style="color:#6ab825;font-weight:bold">try</span>:
+        aes_cbc_decrypt(key, ciphertext, iv, remove_padding=True)
+        <span style="color:#6ab825;font-weight:bold">return</span> True
+    <span style="color:#6ab825;font-weight:bold">except</span> BadPaddingValidation:
+        <span style="color:#6ab825;font-weight:bold">return</span> False</code></pre></div>
+<p>where <code>BadPaddingValidation</code> was a custom exception indicating that - you guessed it - the padding was invalid.</p>
+
+<p>The following (16-byte) block has valid padding:</p>
+
+<p><img src="/img/one_byte_of_padding.png" alt="One byte of valid padding" /></p>
+
+<p>and our oracle will tell us that. This means that we learn something about the plaintext.</p>
+
+<p>From this fact alone, we can decrypt the ciphertext.</p>
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>Looking at how CBC decryption works, we can figure out how to use this fact to get the plaintext:</p>
+
+<p><img src="/img/cbc_decrypt.png" alt="CBC Decryption" /></p>
+
+<p>Well, we don&rsquo;t know the IV so let&rsquo;s ignore that. We do have all the ciphertext blocks. And we can learn if the final N bytes of any given plaintext are valid via our oracle.</p>
+
+<p>Looking at the diagram we can see that:</p>
+
+<p>$c_{n-1} \oplus \mbox{decrypt}(c_n, k) = p_n$</p>
+
+<p>As the attacker, we&rsquo;ll copy $c_{n-1}$ to a test block we&rsquo;ll call $t$ and introduce a single bit change in the final byte:</p>
+
+<p>$t \oplus \mbox{decrypt}(c_n, k) = p_n$</p>
+
+<p>We&rsquo;ll keep introducing single bit changes in the final byte <em>until</em> we get a valid response from the oracle. Then we&rsquo;ve learned:</p>
+
+<p>$t[15] \oplus \mbox{decrypt}(c_n, k)[15] = 01$</p>
+
+<p>Rearranging:</p>
+
+<p>$\mbox{decrypt}(c_n, k)[15] = 01 \oplus t[15]$</p>
+
+<p>Meaning that we learned about the final byte of the block cipher decryption output which we can reuse now with $c_{n-1}$ and $c_n$ to get the real final byte of plaintext:</p>
+
+<p>$p_n[15] = c_{n-1}[15] \oplus \mbox{decrypt}(c_n, k)[15]$</p>
+
+<p>That&rsquo;s the first byte reconstructed.</p>
+
+<h2 id="let-s-go">Let&rsquo;s go</h2>
+
+<p>Starting at the rightmost block, we can move right to left decrypting each plaintext byte.</p>
+
+<p>For bytes that <em>aren&rsquo;t</em> the final byte in the block, we can use what we learned so far in the block to compute what the valid padding bytes would be for the bytes right of the target byte. For example, for the second-to-last byte, we are looking for padding that validates to:</p>
+
+<p><img src="/img/two_byte_of_padding.png" alt="Two bytes of valid padding" /></p>
+
+<p>We can compute the final byte of our test ciphertext such that it will equal our desired padding byte value <code>02</code>:</p>
+
+<p>$t[15] = \mbox{decrypt}(c_n, k)[15] \oplus 02$</p>
+
+<p>So as we decrypt each block we just need to keep track of the output of the block cipher prior to the xor so we can compute this.</p>
+
+<h2 id="one-gotcha">One gotcha</h2>
+
+<p>I got the above working pretty quickly, but realized my attack was not working reliably. Occasionally, I guessed the wrong answer early on in the plaintext reconstruction. Debugging I discovered the following case when reconstructing the first byte:</p>
+
+<p><img src="/img/degenerate_ciphertexts.png" alt="Degenerate ciphertexts" /></p>
+
+<p>There can be multiple &ldquo;correct&rdquo; answers for a given byte, i.e. there can be multiple ciphertexts that will have valid padding. Here in the example we have two valid ciphertexts when computing the last byte in the ciphertext: one with <code>01</code> in the final byte position (what we&rsquo;re looking for) and one where the second-to-last byte is <code>02</code> and produces a valid padding result (not what we&rsquo;re looking for).</p>
+
+<p>To handle this case, before settling on a given byte, I&rsquo;d first modify the byte <em>before</em> the target byte and check if the padding was still valid:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">byte_num_to_edit = self.block_size + byte_num - <span style="color:#3677a9">2</span>
+degeneracy_ciphertext = flip_nth_bit(
+    full_test_ciphertext, byte_num_to_edit - self.block_size
+)
+<span style="color:#6ab825;font-weight:bold">if</span> cbc_padding_oracle(self.key, degeneracy_ciphertext, self.iv):
+    <span style="color:#6ab825;font-weight:bold">pass</span>
+<span style="color:#6ab825;font-weight:bold">else</span>:
+    <span style="color:#6ab825;font-weight:bold">continue</span></code></pre></div>
+<p>This enabled me to distinguish between the two above cases, and ensure that there was only a single, correct answer for each byte.</p>
+
+<p>My solution is <a href="https://github.com/redshiftzero/cryptopals/commit/28ea3ebe1febafeac712af65fbfce141b8740e49">here</a>.</p>
+
+    </div>
+ 
+    <ul class="article-taxonomy">
+                  
+      <hr>
+      <li>
+        <i class="fa fa-category"></i><a href="/categories/post">Post</a><a href="/categories/cryptography">Cryptography</a>
+      </li>
+      
+    
+      
+      <li>
+        <i class="fa fa-tags"></i><a href="/tags/cryptography">cryptography</a><a href="/tags/cryptopals">cryptopals</a><a href="/tags/block-ciphers">block ciphers</a>
+      </li>
+      
+  </article>
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="https://redshiftzero.github.io/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS feed</a>
+          </li>
+          <li>
+            <a href="https://github.com/redshiftzero"><i class="fa fa-github"></i> GitHub</a>
+          </li>
+          <li>
+            <a href="https://redshiftzero.github.io/site-notice">Site notice</a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+
+  </body>
+</html>
+

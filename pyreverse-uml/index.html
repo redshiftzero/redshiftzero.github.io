@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.37.1" />
 
 
-<title>Using pyreverse to general UML class diagrams - Redshiftzero</title>
-<meta property="og:title" content="Using pyreverse to general UML class diagrams - Redshiftzero">
+<title>Using pyreverse to generate UML class diagrams - Redshiftzero</title>
+<meta property="og:title" content="Using pyreverse to generate UML class diagrams - Redshiftzero">
 
 
 
@@ -79,7 +79,7 @@
 
 <main class="content" role="main">
   <article class="article">
-    <h1 class="article-title">Using pyreverse to general UML class diagrams</h1>
+    <h1 class="article-title">Using pyreverse to generate UML class diagrams</h1>
     
     <span class="article-date">2019-11-25</span>
     
@@ -89,7 +89,7 @@
 
 <p>I was wondering if there was a tool to generate UML diagrams in Python to save me some manual work.</p>
 
-<p>Enter <code>pyreverse</code>: it comes installed with <code>pylint</code> which is a very common development dependency in Python. <code>pyreverse</code> enables you to point to the code you want UML diagrams of, here in my example I was generating a diagram of a project called <code>securedrop-export</code>:</p>
+<p>Enter <a href="https://pypi.org/project/pyreverse/"><code>pyreverse</code></a>: it comes installed with <code>pylint</code> which is a very common development dependency in Python. <code>pyreverse</code> enables you to point to the code you want UML diagrams of, here in my example I was generating a diagram of a project called <a href="https://github.com/freedomofpress/securedrop-export"><code>securedrop-export</code></a>:</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pyreverse securedrop_export/</code></pre></div>
 <p>This produces in the same directory a graphviz file called <code>classes.dot</code>.</p>
 
@@ -98,6 +98,8 @@
 <p>Which produces the following:</p>
 
 <p><img src="/img/securedrop_export.png" alt="securedrop-export" /></p>
+
+<p>Here <code>ExportStatus</code> is an <code>Enum</code> and <code>TimeoutException</code> is a custom exception (in red).</p>
 
     </div>
  
