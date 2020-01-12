@@ -6,9 +6,21 @@
     <description>Recent content on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://redshiftzero.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+    <item>
+      <title>A pytest fixture for image similarity</title>
+      <link>https://redshiftzero.github.io/pytest-image/</link>
+      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/pytest-image/</guid>
+      <description>When testing codepaths that generate images, one might want to ensure that the generated image is what is expected. Matplotlib has a nice decorator @image_comparison that can be applied for this purpose, but looking at the implementation, it&amp;rsquo;s pretty tied to the matplotlib Figure object. I wanted something generic to use with PNGs.
+I ended up writing a pytest fixture that would compare the image generated during the test with a baseline image (in tests/baseline_images as in the matplotlib implementatino).</description>
+    </item>
     
     
     
@@ -105,8 +117,6 @@ He made the dataset of all 1595 responsive profiles, which included names, title
       <description>Cosmologists make observations of galaxies and radiation in the universe to constrain parameters of the Lambda CDM model , which is the model that best describes our current understanding of the universe. These cosmological parameters include quantities like &amp;Omega;m and &amp;Omega;&amp;Lambda;, which describe the matter and dark energy content of the universe respectively.
 Two key observables that constrain these parameters are the matter power spectrum and the angular power spectrum of the Cosmic Microwave Background (CMB) radiation.</description>
     </item>
-    
-    
     
     
     

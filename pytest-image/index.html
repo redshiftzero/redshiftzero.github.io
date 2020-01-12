@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.37.1" />
+
+
+<title>A pytest fixture for image similarity - Redshiftzero</title>
+<meta property="og:title" content="A pytest fixture for image similarity - Redshiftzero">
+
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="https://redshiftzero.github.io/css/main.css" media="all">
+<link rel="stylesheet" href="https://redshiftzero.github.io/css/fonts.css">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="https://redshiftzero.github.io/" class="nav-logo">
+    <img src="https://redshiftzero.github.io/images/logo.png" 
+         width="50" 
+         height="50" 
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/categories">Categories</a></li>
+    
+    <li><a href="/tags">Tags</a></li>
+    
+    <li><a href="/about/">About</a></li>
+    
+  </ul>
+</nav>
+
+
+      </header>
+
+      <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+            extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+      </script>
+
+
+<main class="content" role="main">
+  <article class="article">
+    <h1 class="article-title">A pytest fixture for image similarity</h1>
+    
+    <span class="article-date">2020-01-12</span>
+    
+
+    <div class="article-content">
+      <p>When testing codepaths that generate images, one might want to ensure that the generated image is what is expected. <a href="https://matplotlib.org">Matplotlib</a> has a nice decorator <a href="https://matplotlib.org/devel/testing.html#writing-an-image-comparison-test"><code>@image_comparison</code></a> that can be applied for this purpose, but looking at <a href="https://github.com/matplotlib/matplotlib/blob/f653879c6317b191849c49511282cfff949ad336/lib/matplotlib/testing/decorators.py#L165">the implementation</a>, it&rsquo;s pretty tied to the <code>matplotlib</code> <code>Figure</code> object. I wanted something generic to use with PNGs.</p>
+
+<p>I ended up writing a pytest fixture that would compare the image generated during the test with a baseline image (in <code>tests/baseline_images</code> as in the matplotlib implementatino). Here are the contents of <code>conftest.py</code>, which contain the fixture and its related image similarity assert:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#6ab825;font-weight:bold">import</span> <span style="color:#447fcf">os</span>
+<span style="color:#6ab825;font-weight:bold">import</span> <span style="color:#447fcf">pytest</span>
+<span style="color:#6ab825;font-weight:bold">import</span> <span style="color:#447fcf">numpy</span> <span style="color:#6ab825;font-weight:bold">as</span> <span style="color:#447fcf">np</span>
+<span style="color:#6ab825;font-weight:bold">from</span> <span style="color:#447fcf">PIL</span> <span style="color:#6ab825;font-weight:bold">import</span> Image
+
+
+<span style="color:#6ab825;font-weight:bold">def</span> <span style="color:#447fcf">assert_images_equal</span>(image_1: <span style="color:#24909d">str</span>, image_2: <span style="color:#24909d">str</span>):
+    img1 = Image.<span style="color:#24909d">open</span>(image_1)
+    img2 = Image.<span style="color:#24909d">open</span>(image_2)
+
+    <span style="color:#999;font-style:italic"># Convert to same mode and size for comparison</span>
+    img2 = img2.convert(img1.mode)
+    img2 = img2.resize(img1.size)
+
+    sum_sq_diff = np.<span style="color:#24909d">sum</span>((np.asarray(img1).astype(<span style="color:#ed9d13"></span><span style="color:#ed9d13">&#39;float&#39;</span>) - np.asarray(img2).astype(<span style="color:#ed9d13"></span><span style="color:#ed9d13">&#39;float&#39;</span>))**<span style="color:#3677a9">2</span>)
+
+    <span style="color:#6ab825;font-weight:bold">if</span> sum_sq_diff == <span style="color:#3677a9">0</span>:
+        <span style="color:#999;font-style:italic"># Images are exactly the same</span>
+        <span style="color:#6ab825;font-weight:bold">pass</span>
+    <span style="color:#6ab825;font-weight:bold">else</span>:
+        normalized_sum_sq_diff = sum_sq_diff / np.sqrt(sum_sq_diff)
+        <span style="color:#6ab825;font-weight:bold">assert</span> normalized_sum_sq_diff &lt; <span style="color:#3677a9">0.001</span>
+
+
+<span style="color:#ffa500">@pytest.fixture</span>
+<span style="color:#6ab825;font-weight:bold">def</span> <span style="color:#447fcf">image_similarity</span>(request, tmpdir):
+    testname = request.node.name
+    filename = <span style="color:#ed9d13"></span><span style="color:#ed9d13">&#34;{}.png&#34;</span>.format(testname)
+    generated_file = os.path.join(<span style="color:#24909d">str</span>(tmpdir), <span style="color:#ed9d13"></span><span style="color:#ed9d13">&#34;{}.png&#34;</span>.format(testname))
+
+    <span style="color:#6ab825;font-weight:bold">yield</span> {<span style="color:#ed9d13"></span><span style="color:#ed9d13">&#39;filename&#39;</span>: generated_file}
+
+    assert_images_equal(<span style="color:#ed9d13"></span><span style="color:#ed9d13">&#34;tests/baseline_images/{}.png&#34;</span>.format(testname), generated_file)</code></pre></div>
+<p>The assert rescales the images to be the same size, as well as the same mode, and then computes the sum of the squared differences as an image similarity metric.</p>
+
+<p>You can use the above fixture in a test via:</p>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#6ab825;font-weight:bold">def</span> <span style="color:#447fcf">test_example</span>(image_similarity):
+    <span style="color:#999;font-style:italic"># test logic goes here and should generate an image in the</span>
+    <span style="color:#999;font-style:italic"># path given by image_similarity[&#39;filename&#39;]</span>
+    <span style="color:#6ab825;font-weight:bold">pass</span></code></pre></div>
+<p>When you add a new test, you need to add the expected image to <code>tests/baseline_images/&lt;testname&gt;.png</code>.</p>
+
+    </div>
+ 
+    <ul class="article-taxonomy">
+                  
+      <hr>
+      <li>
+        <i class="fa fa-category"></i><a href="/categories/post">Post</a><a href="/categories/software-development">Software Development</a>
+      </li>
+      
+    
+      
+      <li>
+        <i class="fa fa-tags"></i><a href="/tags/tests">tests</a><a href="/tags/image">image</a><a href="/tags/pytest">pytest</a><a href="/tags/python">python</a>
+      </li>
+      
+  </article>
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="https://redshiftzero.github.io/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS feed</a>
+          </li>
+          <li>
+            <a href="https://github.com/redshiftzero"><i class="fa fa-github"></i> GitHub</a>
+          </li>
+          <li>
+            <a href="https://redshiftzero.github.io/site-notice">Site notice</a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+
+  </body>
+</html>
+

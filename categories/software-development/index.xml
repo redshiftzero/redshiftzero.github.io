@@ -6,10 +6,20 @@
     <description>Recent content in Software Development on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/categories/software-development/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A pytest fixture for image similarity</title>
+      <link>https://redshiftzero.github.io/pytest-image/</link>
+      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/pytest-image/</guid>
+      <description>When testing codepaths that generate images, one might want to ensure that the generated image is what is expected. Matplotlib has a nice decorator @image_comparison that can be applied for this purpose, but looking at the implementation, it&amp;rsquo;s pretty tied to the matplotlib Figure object. I wanted something generic to use with PNGs.
+I ended up writing a pytest fixture that would compare the image generated during the test with a baseline image (in tests/baseline_images as in the matplotlib implementatino).</description>
+    </item>
     
     <item>
       <title>How to apply unittest.mock.patch</title>
