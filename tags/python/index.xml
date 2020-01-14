@@ -6,10 +6,21 @@
     <description>Recent content in Python on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Handling equal priority jobs using queue.PriorityQueue</title>
+      <link>https://redshiftzero.github.io/priority-queue/</link>
+      <pubDate>Mon, 13 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/priority-queue/</guid>
+      <description>A queue retrives items in FIFO (first in, first out) order. A priority queue retrieves item based on priority, higher priority items come first. Well, what happens if you submit items that have equal priorities? It depends on how the priority queue was implemented. Read on for how this is handled in the Python standard library&amp;rsquo;s queue.PriorityQueue.
+Let&amp;rsquo;s see queue.PriorityQueue in action in a simple case:
+&amp;gt;&amp;gt;&amp;gt; from queue import PriorityQueue &amp;gt;&amp;gt;&amp;gt; q = PriorityQueue() &amp;gt;&amp;gt;&amp;gt; q.</description>
+    </item>
     
     <item>
       <title>A pytest fixture for image similarity</title>

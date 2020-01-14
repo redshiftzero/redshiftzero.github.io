@@ -6,10 +6,21 @@
     <description>Recent content in Post on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/categories/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Handling equal priority jobs using queue.PriorityQueue</title>
+      <link>https://redshiftzero.github.io/priority-queue/</link>
+      <pubDate>Mon, 13 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/priority-queue/</guid>
+      <description>A queue retrives items in FIFO (first in, first out) order. A priority queue retrieves item based on priority, higher priority items come first. Well, what happens if you submit items that have equal priorities? It depends on how the priority queue was implemented. Read on for how this is handled in the Python standard library&amp;rsquo;s queue.PriorityQueue.
+Let&amp;rsquo;s see queue.PriorityQueue in action in a simple case:
+&amp;gt;&amp;gt;&amp;gt; from queue import PriorityQueue &amp;gt;&amp;gt;&amp;gt; q = PriorityQueue() &amp;gt;&amp;gt;&amp;gt; q.</description>
+    </item>
     
     <item>
       <title>A pytest fixture for image similarity</title>
@@ -99,17 +110,6 @@ He made the dataset of all 1595 responsive profiles, which included names, title
       <guid>https://redshiftzero.github.io/visualizing-cosmological-power-spectra/</guid>
       <description>Cosmologists make observations of galaxies and radiation in the universe to constrain parameters of the Lambda CDM model , which is the model that best describes our current understanding of the universe. These cosmological parameters include quantities like &amp;Omega;m and &amp;Omega;&amp;Lambda;, which describe the matter and dark energy content of the universe respectively.
 Two key observables that constrain these parameters are the matter power spectrum and the angular power spectrum of the Cosmic Microwave Background (CMB) radiation.</description>
-    </item>
-    
-    <item>
-      <title>Primer on Police Surveillance</title>
-      <link>https://redshiftzero.github.io/police-surveillance-primer/</link>
-      <pubDate>Tue, 19 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/police-surveillance-primer/</guid>
-      <description>I wrote a short primer describing and visualizing police surveillance technology. This project was also posted on the website of the Lucy Parsons Labs.
-
-Cameras, automatic license plate readers, cell site simulators and many other surveillance devices are currently used in the city by the Chicago Police Department and its sister agencies. However, many citizens are unaware of the scope of the surveillance systems, their huge cost, and the privacy implications of their use.</description>
     </item>
     
   </channel>
