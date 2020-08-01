@@ -21,7 +21,7 @@ Hello, I'm [redshiftzero](https://twitter.com/redshiftzero).
 
 ## Teaching
 
-**University of Chicago**, PPHA 30530: Computation for Public Policy, Winter 2016. Graduate-level course aimed at public policy students introducing themselves to data analysis (Python, SQL).
+**University of Chicago**, PPHA 30530: Computation for Public Policy, Winter 2016. Graduate-level introductory data analysis course (Python, SQL) aimed at public policy students.
 
 ## Education
 

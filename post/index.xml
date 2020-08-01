@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 31 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Tracking which wheels can be reproducibly built</title>
+      <link>https://redshiftzero.github.io/reproducible-wheels/</link>
+      <pubDate>Sat, 01 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/reproducible-wheels/</guid>
+      <description>Being able to reproducibly build binary artifacts means that users, developers, and others can agree that the shipped artifact was correctly built from the source code (that one can inspect), and no intentional or unintentional malicious code was introduced during the build process.
+One hiccup we&amp;rsquo;ve encountered in SecureDrop development is that not all Python wheels can be built reproducibly. We ship multiple (Python) projects in debian packages, with Python dependencies included in those packages as wheels.</description>
+    </item>
     
     <item>
       <title>Protecting journalists from malware using QubesOS</title>
@@ -101,15 +111,6 @@ Enter pyreverse: it comes installed with pylint which is a very common developme
       
       <guid>https://redshiftzero.github.io/test-flakes/</guid>
       <description>Test flakes are tests that occasionally fail due to a variety of potential reasons including network instability (for tests making network calls that are not mocked) and other non-deterministic behavior. Test flakes are problematic as they reduce confidence in the results of test runs: they condition developers that the test suite cannot be relied on, and as such can result in legitimate bugs being ignored due to alert fatigue.</description>
-    </item>
-    
-    <item>
-      <title>Collision attacks and the birthday paradox</title>
-      <link>https://redshiftzero.github.io/birthday-attacks/</link>
-      <pubDate>Sun, 19 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/birthday-attacks/</guid>
-      <description>How many people do you need in a room before there is a 50% chance that least two of them share the same birthday? It&amp;rsquo;s only 23, though unless you have heard about this paradox before, you might expect it to be much larger. This is the well-known birthday paradox: it&amp;rsquo;s called a paradox only because collisions happen much faster than one naively expects. Collisions here means an event where two or more observed values are equal.</description>
     </item>
     
   </channel>
