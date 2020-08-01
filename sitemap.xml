@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://redshiftzero.github.io/securedrop-httpse/</loc>
+    <lastmod>2020-07-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://redshiftzero.github.io/priority-queue/</loc>
     <lastmod>2020-01-13T00:00:00+00:00</lastmod>
   </url>
@@ -279,6 +284,12 @@
   </url>
   
   <url>
+    <loc>https://redshiftzero.github.io/tags/naming/</loc>
+    <lastmod>2020-07-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://redshiftzero.github.io/tags/object-oriented/</loc>
     <lastmod>2019-11-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -413,6 +424,12 @@
   <url>
     <loc>https://redshiftzero.github.io/tags/tests/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/tags/tor/</loc>
+    <lastmod>2020-07-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

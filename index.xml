@@ -26,6 +26,18 @@ The basic idea of the rearchitecture of the journalist experience is to replace 
     
     
     <item>
+      <title>Using HTTPS Everywhere rules for SecureDrop onion names</title>
+      <link>https://redshiftzero.github.io/securedrop-httpse/</link>
+      <pubDate>Fri, 31 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/securedrop-httpse/</guid>
+      <description>A fun small project I worked on earlier this year was creating an HTTPS Everywhere custom ruleset channel for the SecureDrop project. HTTPS Everywhere is a popular browser extension maintained by EFF that rewrites HTTP URLs to HTTPS when possible. A set of rules is used to determine how URLs should be rewritten. HTTPS Everywhere is included in Tor Browser to reduce the impact of malicious exit nodes.
+This is relevant for SecureDrop, because each news organization advertises an onion URL that corresponds to the web application (&amp;ldquo;source interface&amp;rdquo;) where a source should upload documents.</description>
+    </item>
+    
+    
+    
+    <item>
       <title>Handling equal priority jobs using queue.PriorityQueue</title>
       <link>https://redshiftzero.github.io/priority-queue/</link>
       <pubDate>Mon, 13 Jan 2020 00:00:00 +0000</pubDate>
@@ -117,19 +129,6 @@ Enter pyreverse: it comes installed with pylint which is a very common developme
       
       <guid>https://redshiftzero.github.io/birthday-attacks/</guid>
       <description>How many people do you need in a room before there is a 50% chance that least two of them share the same birthday? It&amp;rsquo;s only 23, though unless you have heard about this paradox before, you might expect it to be much larger. This is the well-known birthday paradox: it&amp;rsquo;s called a paradox only because collisions happen much faster than one naively expects. Collisions here means an event where two or more observed values are equal.</description>
-    </item>
-    
-    
-    
-    <item>
-      <title>Why Publishing Data on ICE Employees is in the Public Interest</title>
-      <link>https://redshiftzero.github.io/publishing-public-interest/</link>
-      <pubDate>Thu, 21 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/publishing-public-interest/</guid>
-      <description>This was written with Camille Fassett and first appeared on the website of the Lucy Parsons Labs.
-Motivated by the Trump administration’s policy of detaining and separating migrant children from their families at the border, artist and developer Sam Lavigne harvested profiles that list Immigration and Customs Enforcement (ICE) as an employer on social network LinkedIn.
-He made the dataset of all 1595 responsive profiles, which included names, titles, photographs and general locations, available to download on GitHub.</description>
     </item>
     
     
