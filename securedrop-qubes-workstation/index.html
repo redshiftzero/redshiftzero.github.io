@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.37.1" />
 
 
-<title>Post - Redshiftzero</title>
-<meta property="og:title" content="Post - Redshiftzero">
+<title>Protecting journalists from malware using QubesOS - Redshiftzero</title>
+<meta property="og:title" content="Protecting journalists from malware using QubesOS - Redshiftzero">
 
 
 
@@ -16,8 +16,6 @@
 
 
 
-
-<link href="https://redshiftzero.github.io/categories/post/index.xml" rel="alternate" type="application/rss+xml" title="Redshiftzero" />
 
 
 <link rel="stylesheet" href="https://redshiftzero.github.io/css/main.css" media="all">
@@ -80,76 +78,40 @@
 
 
 <main class="content" role="main">
-
-  <div class="list">
-    <h2 class="list-title">Post</h2>
+  <article class="article">
+    <h1 class="article-title">Protecting journalists from malware using QubesOS</h1>
     
-     
-        <nav class="list-item">
-      <a href="https://redshiftzero.github.io/visualizing-cosmological-power-spectra/">Visualizing Cosmological Power Spectra with d3.js</a>
-      <span class="list-item-date">
-        2018-03-30
-      </span>
-    </nav>
-
-
+    <span class="article-date">2020-07-31</span>
     
-     
-        <nav class="list-item">
-      <a href="https://redshiftzero.github.io/police-surveillance-primer/">Primer on Police Surveillance</a>
-      <span class="list-item-date">
-        2016-01-19
-      </span>
-    </nav>
 
+    <div class="article-content">
+      <p>Earlier this year at USENIX Enigma, I presented some recent work towards rearchitecting the SecureDrop journalist experience.</p>
 
-    
-   </div>
+<p>In SecureDrop we currently use an airgapped workstation for viewing documents to reduce the impact of malware present in malicious documents. This presents challenges in terms of maintenance, usability, and even security (i.e. airgaps don&rsquo;t receive automatic updates).</p>
+
+<p>The basic idea of the rearchitecture of the journalist experience is to replace SecureDrop&rsquo;s multi-machine airgap with a single machine using Qubes (Xen) for compartmentalization. This enables journalists to work with source materials in a secure environment, while still protecting them in the event of a system compromise. Check out the full talk here:</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Z7BkdhO8P2I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>After the talk, I decided to write up basically the above talk describing the design of the system in an expanded form in a whitepaper. <a href="https://securedrop.org/documents/13/SD_Qubes_Workstation_Whitepaper.pdf">Check out the full whitepaper here (PDF)</a>.</p>
+
+    </div>
  
-   
+    <ul class="article-taxonomy">
+                  
+      <hr>
+      <li>
+        <i class="fa fa-category"></i><a href="/categories/post">Post</a><a href="/categories/software-development">Software Development</a>
+      </li>
+      
+    
+      
+      <li>
+        <i class="fa fa-tags"></i><a href="/tags/securedrop">SecureDrop</a><a href="/tags/qubes">qubes</a><a href="/tags/whistleblowing">whistleblowing</a><a href="/tags/whitepaper">whitepaper</a>
+      </li>
+      
+  </article>
 
-
-<ul class="page-links">
-  <li 
-    >
-    <a href="/categories/post/" aria-label="Previous"><span aria-hidden="true">&lt;&#160;</span></a>
-  </li>
-  
-  
-  
-  
-  
-   
-    
-    
-  
-  
-    <li
-      ><a href="/categories/post/">1</a>
-    </li>
-    
-  
-  
-  
-  
-   
-    
-    
-  
-  
-    <li
-      class="page-links-active"><a href="/categories/post/page/2/">2</a>
-    </li>
-    
-  
-  <li
-    class="page-links-disabled">
-    <a href="" aria-label="Next"><span aria-hidden="true">&#160;&gt;</span></a>
-  </li>
-</ul>
-
-
-  
 </main>
 
       <footer class="footer">

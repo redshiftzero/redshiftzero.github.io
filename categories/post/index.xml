@@ -6,10 +6,21 @@
     <description>Recent content in Post on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 31 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/categories/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Protecting journalists from malware using QubesOS</title>
+      <link>https://redshiftzero.github.io/securedrop-qubes-workstation/</link>
+      <pubDate>Fri, 31 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/securedrop-qubes-workstation/</guid>
+      <description>Earlier this year at USENIX Enigma, I presented some recent work towards rearchitecting the SecureDrop journalist experience.
+In SecureDrop we currently use an airgapped workstation for viewing documents to reduce the impact of malware present in malicious documents. This presents challenges in terms of maintenance, usability, and even security (i.e. airgaps don&amp;rsquo;t receive automatic updates).
+The basic idea of the rearchitecture of the journalist experience is to replace SecureDrop&amp;rsquo;s multi-machine airgap with a single machine using Qubes (Xen) for compartmentalization.</description>
+    </item>
     
     <item>
       <title>Handling equal priority jobs using queue.PriorityQueue</title>
@@ -100,16 +111,6 @@ Enter pyreverse: it comes installed with pylint which is a very common developme
       <description>This was written with Camille Fassett and first appeared on the website of the Lucy Parsons Labs.
 Motivated by the Trump administration’s policy of detaining and separating migrant children from their families at the border, artist and developer Sam Lavigne harvested profiles that list Immigration and Customs Enforcement (ICE) as an employer on social network LinkedIn.
 He made the dataset of all 1595 responsive profiles, which included names, titles, photographs and general locations, available to download on GitHub.</description>
-    </item>
-    
-    <item>
-      <title>Visualizing Cosmological Power Spectra with d3.js</title>
-      <link>https://redshiftzero.github.io/visualizing-cosmological-power-spectra/</link>
-      <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/visualizing-cosmological-power-spectra/</guid>
-      <description>Cosmologists make observations of galaxies and radiation in the universe to constrain parameters of the Lambda CDM model , which is the model that best describes our current understanding of the universe. These cosmological parameters include quantities like &amp;Omega;m and &amp;Omega;&amp;Lambda;, which describe the matter and dark energy content of the universe respectively.
-Two key observables that constrain these parameters are the matter power spectrum and the angular power spectrum of the Cosmic Microwave Background (CMB) radiation.</description>
     </item>
     
   </channel>

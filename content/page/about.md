@@ -3,13 +3,14 @@ title = "About"
 date = "2018-02-09"
 +++
 
-Hi, I'm [redshiftzero](https://twitter.com/redshiftzero). I'm interested in security, data analysis, and machine learning.
+Hello, I'm [redshiftzero](https://twitter.com/redshiftzero).
 
 ## Professional Experience
 
 #### Freedom of the Press Foundation
 
-**SecureDrop Lead Developer**, July 2017 - present \\
+**Principal Research Engineer**, July 2020 - present \\
+**SecureDrop Lead Developer**, July 2017 - June 2020 \\
 **Ford-Mozilla Open Web Fellow**, September 2016 - June 2017
 
 #### Center for Data Science and Public Policy
@@ -20,7 +21,7 @@ Hi, I'm [redshiftzero](https://twitter.com/redshiftzero). I'm interested in secu
 
 ## Teaching
 
-**University of Chicago**, PPHA 30530: [Computation for Public Policy](https://computationforpolicy.github.io/), Winter 2016
+**University of Chicago**, PPHA 30530: Computation for Public Policy, Winter 2016. Graduate-level course aimed at public policy students introducing themselves to data analysis (Python, SQL).
 
 ## Education
 
@@ -34,7 +35,7 @@ SecureDrop is an anonymous whistleblowing platform for journalistic sources to u
 
 Code: [GitHub repository](https://github.com/freedomofpress/securedrop)
 
-Role: Maintainer (2016-present), lead developer (2017-present)
+Role: Maintainer (2016-present), lead developer (2017-2020)
 
 #### OpenOversight
 
