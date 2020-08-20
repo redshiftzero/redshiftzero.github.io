@@ -12,6 +12,8 @@ One hiccup we've encountered in SecureDrop development is that not all Python wh
 
 For our purposes, this has resulted in our building the wheels (once), saving those wheels on a pip mirror, and then using those wheels at debian package build time. A few times, we've asked "wait, which wheels can't be reproducibly built again?". So I made a little tracker on [https://reproduciblewheels.com/](https://reproduciblewheels.com/) for convenience.
 
+EDIT: As of August 19, 2020, passing a static `--build` directory to the `pip wheel` command below means that all currently tracked wheels are reproducible 🎉.
+
 ## How it works
 
 I first selected the 100 most popular packages on PyPI in the past year plus any dependencies that are on FPF's [pip mirror](https://pypi.securedrop.org/simple/)[^1].

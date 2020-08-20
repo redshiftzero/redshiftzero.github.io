@@ -6,61 +6,19 @@
     <description>Recent content in Python on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Handling equal priority jobs using queue.PriorityQueue</title>
-      <link>https://redshiftzero.github.io/priority-queue/</link>
-      <pubDate>Mon, 13 Jan 2020 00:00:00 +0000</pubDate>
+      <title>Tracking which wheels can be reproducibly built</title>
+      <link>https://redshiftzero.github.io/reproducible-wheels/</link>
+      <pubDate>Sat, 01 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://redshiftzero.github.io/priority-queue/</guid>
-      <description>A queue retrives items in FIFO (first in, first out) order. A priority queue retrieves item based on priority, higher priority items come first. Well, what happens if you submit items that have equal priorities? It depends on how the priority queue was implemented. Read on for how this is handled in the Python standard library&amp;rsquo;s queue.PriorityQueue.
-Let&amp;rsquo;s see queue.PriorityQueue in action in a simple case:
-&amp;gt;&amp;gt;&amp;gt; from queue import PriorityQueue &amp;gt;&amp;gt;&amp;gt; q = PriorityQueue() &amp;gt;&amp;gt;&amp;gt; q.</description>
-    </item>
-    
-    <item>
-      <title>A pytest fixture for image similarity</title>
-      <link>https://redshiftzero.github.io/pytest-image/</link>
-      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/pytest-image/</guid>
-      <description>When testing codepaths that generate images, one might want to ensure that the generated image is what is expected. Matplotlib has a nice decorator @image_comparison that can be applied for this purpose, but looking at the implementation, it&amp;rsquo;s pretty tied to the matplotlib Figure object. I wanted something generic to use with PNGs.
-I ended up writing a pytest fixture that would compare the image generated during the test with a baseline image (in tests/baseline_images as in the matplotlib implementatino).</description>
-    </item>
-    
-    <item>
-      <title>How to apply unittest.mock.patch</title>
-      <link>https://redshiftzero.github.io/unittest-mock-patch/</link>
-      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/unittest-mock-patch/</guid>
-      <description>I&amp;rsquo;ve noticed a common area of misunderstanding for people newer to Python testing is how to apply mock.patch and where to patch (i.e. what the target positional argument to unittest.mock.patch should be), so I made a video explaining:
- </description>
-    </item>
-    
-    <item>
-      <title>Using pyreverse to generate UML class diagrams</title>
-      <link>https://redshiftzero.github.io/pyreverse-uml/</link>
-      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/pyreverse-uml/</guid>
-      <description>Recently I wanted to generate UML (Unified Modeling Language) diagrams of the structure of an existing codebase for the purpose of having an architecture discussion.
-I was wondering if there was a tool to generate UML diagrams in Python to save me some manual work.
-Enter pyreverse: it comes installed with pylint which is a very common development dependency in Python. pyreverse enables you to point to the code you want UML diagrams of, here in my example I was generating a diagram of a project called securedrop-export:</description>
-    </item>
-    
-    <item>
-      <title>Debugging programs with pdb</title>
-      <link>https://redshiftzero.github.io/pdb-debugging/</link>
-      <pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/pdb-debugging/</guid>
-      <description>I recently decided to try my hand at making YouTube videos. I&amp;rsquo;m planning on mostly making videos about topics I commonly find myself explaining to people, so here&amp;rsquo;s the first, on using pdb, the built-in debugger in the Python standard library.
- </description>
+      <guid>https://redshiftzero.github.io/reproducible-wheels/</guid>
+      <description>Being able to reproducibly build binary artifacts means that users, developers, and others can agree that the shipped artifact was correctly built from the source code (that one can inspect), and no intentional or unintentional malicious code was introduced during the build process.
+One hiccup we&amp;rsquo;ve encountered in SecureDrop development is that not all Python wheels can be built reproducibly. We ship multiple (Python) projects in debian packages, with Python dependencies included in those packages as wheels.</description>
     </item>
     
   </channel>

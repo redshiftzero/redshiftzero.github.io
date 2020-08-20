@@ -93,6 +93,8 @@
 
 <p>For our purposes, this has resulted in our building the wheels (once), saving those wheels on a pip mirror, and then using those wheels at debian package build time. A few times, we&rsquo;ve asked &ldquo;wait, which wheels can&rsquo;t be reproducibly built again?&rdquo;. So I made a little tracker on <a href="https://reproduciblewheels.com/">https://reproduciblewheels.com/</a> for convenience.</p>
 
+<p>EDIT: As of August 19, 2020, passing a static <code>--build</code> directory to the <code>pip wheel</code> command below means that all currently tracked wheels are reproducible 🎉.</p>
+
 <h2 id="how-it-works">How it works</h2>
 
 <p>I first selected the 100 most popular packages on PyPI in the past year plus any dependencies that are on FPF&rsquo;s <a href="https://pypi.securedrop.org/simple/">pip mirror</a><sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>.</p>
