@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://redshiftzero.github.io/signal-protocol/</loc>
+    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/onion-available/</loc>
+    <lastmod>2020-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://redshiftzero.github.io/reproducible-wheels/</loc>
     <lastmod>2020-08-01T00:00:00+00:00</lastmod>
   </url>
@@ -182,7 +192,7 @@
   
   <url>
     <loc>https://redshiftzero.github.io/tags/cryptography/</loc>
-    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -301,6 +311,12 @@
   </url>
   
   <url>
+    <loc>https://redshiftzero.github.io/tags/onion-services/</loc>
+    <lastmod>2020-10-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://redshiftzero.github.io/page/</loc>
     <lastmod>2018-02-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -320,13 +336,19 @@
   
   <url>
     <loc>https://redshiftzero.github.io/categories/post/</loc>
-    <lastmod>2020-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://redshiftzero.github.io/post/</loc>
-    <lastmod>2020-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/tags/protocol/</loc>
+    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -368,7 +390,7 @@
   
   <url>
     <loc>https://redshiftzero.github.io/</loc>
-    <lastmod>2020-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -387,6 +409,24 @@
   <url>
     <loc>https://redshiftzero.github.io/tags/securedrop/</loc>
     <lastmod>2020-07-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/tags/security/</loc>
+    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/categories/signal/</loc>
+    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/tags/signal/</loc>
+    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -441,6 +481,12 @@
   <url>
     <loc>https://redshiftzero.github.io/tags/tests/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://redshiftzero.github.io/categories/tor/</loc>
+    <lastmod>2020-10-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

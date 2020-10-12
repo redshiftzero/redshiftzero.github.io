@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tor on Redshiftzero</title>
+    <link>https://redshiftzero.github.io/categories/tor/</link>
+    <description>Recent content in Tor on Redshiftzero</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 06 Oct 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://redshiftzero.github.io/categories/tor/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Scanning for onion service availability</title>
+      <link>https://redshiftzero.github.io/onion-available/</link>
+      <pubDate>Tue, 06 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/onion-available/</guid>
+      <description>Secure The News (STN) is a project by Freedom of the Press Foundation to track and advocate for security and privacy technologies in news organizations. I&amp;rsquo;ve been working a bit on expanding the scope of STN from its original goal, HTTPS adoption, to how news sites treat Tor users.
+The first expansion is to scan for onion service availability using the the Onion-Location header (or its presence in a &amp;lt;meta&amp;gt; tag in the site&amp;rsquo;s page content).</description>
+    </item>
+    
+  </channel>
+</rss>

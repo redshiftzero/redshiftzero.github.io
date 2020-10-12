@@ -6,9 +6,32 @@
     <description>Recent content on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 01 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 11 Oct 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://redshiftzero.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+    <item>
+      <title>Investigating the Signal Protocol, Part 1: Foundations</title>
+      <link>https://redshiftzero.github.io/signal-protocol/</link>
+      <pubDate>Sun, 11 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/signal-protocol/</guid>
+      <description>I&amp;rsquo;ve been investigating applications that use the Signal Protocol in order to determine if the Signal Protocol for asynchronous messaging might be appropriate for use for applying to SecureDrop messaging in the future. In this post are some notes from reading the Signal Protocol specifications, which I thought might be a useful reference and explanation for others. If you notice an error, or have other thoughts on anything here, feel free to drop me a note on Twitter or by email.</description>
+    </item>
+    
+    
+    
+    <item>
+      <title>Scanning for onion service availability</title>
+      <link>https://redshiftzero.github.io/onion-available/</link>
+      <pubDate>Tue, 06 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/onion-available/</guid>
+      <description>Secure The News (STN) is a project by Freedom of the Press Foundation to track and advocate for security and privacy technologies in news organizations. I&amp;rsquo;ve been working a bit on expanding the scope of STN from its original goal, HTTPS adoption, to how news sites treat Tor users.
+The first expansion is to scan for onion service availability using the the Onion-Location header (or its presence in a &amp;lt;meta&amp;gt; tag in the site&amp;rsquo;s page content).</description>
+    </item>
     
     
     
@@ -107,29 +130,6 @@ The problem It goes like this: an attacker has access to an oracle that will tak
       <description>Recently I wanted to generate UML (Unified Modeling Language) diagrams of the structure of an existing codebase for the purpose of having an architecture discussion.
 I was wondering if there was a tool to generate UML diagrams in Python to save me some manual work.
 Enter pyreverse: it comes installed with pylint which is a very common development dependency in Python. pyreverse enables you to point to the code you want UML diagrams of, here in my example I was generating a diagram of a project called securedrop-export:</description>
-    </item>
-    
-    
-    
-    <item>
-      <title>Debugging programs with pdb</title>
-      <link>https://redshiftzero.github.io/pdb-debugging/</link>
-      <pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/pdb-debugging/</guid>
-      <description>I recently decided to try my hand at making YouTube videos. I&amp;rsquo;m planning on mostly making videos about topics I commonly find myself explaining to people, so here&amp;rsquo;s the first, on using pdb, the built-in debugger in the Python standard library.
- </description>
-    </item>
-    
-    
-    
-    <item>
-      <title>Strategies for handling flaky test suites</title>
-      <link>https://redshiftzero.github.io/test-flakes/</link>
-      <pubDate>Fri, 19 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/test-flakes/</guid>
-      <description>Test flakes are tests that occasionally fail due to a variety of potential reasons including network instability (for tests making network calls that are not mocked) and other non-deterministic behavior. Test flakes are problematic as they reduce confidence in the results of test runs: they condition developers that the test suite cannot be relied on, and as such can result in legitimate bugs being ignored due to alert fatigue.</description>
     </item>
     
     
