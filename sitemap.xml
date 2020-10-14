@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://redshiftzero.github.io/signal-group-multidevice/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://redshiftzero.github.io/signal-protocol/</loc>
     <lastmod>2020-10-11T00:00:00+00:00</lastmod>
   </url>
@@ -336,19 +341,19 @@
   
   <url>
     <loc>https://redshiftzero.github.io/categories/post/</loc>
-    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://redshiftzero.github.io/post/</loc>
-    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://redshiftzero.github.io/tags/protocol/</loc>
-    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -366,13 +371,13 @@
   
   <url>
     <loc>https://redshiftzero.github.io/tags/python/</loc>
-    <lastmod>2020-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2020-08-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://redshiftzero.github.io/tags/python/</loc>
-    <lastmod>2020-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -390,7 +395,7 @@
   
   <url>
     <loc>https://redshiftzero.github.io/</loc>
-    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -414,19 +419,19 @@
   
   <url>
     <loc>https://redshiftzero.github.io/tags/security/</loc>
-    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://redshiftzero.github.io/categories/signal/</loc>
-    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://redshiftzero.github.io/tags/signal/</loc>
-    <lastmod>2020-10-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

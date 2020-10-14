@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.37.1" />
+
+
+<title>Investigating the Signal Protocol, Part 2: Groups, devices - Redshiftzero</title>
+<meta property="og:title" content="Investigating the Signal Protocol, Part 2: Groups, devices - Redshiftzero">
+
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="https://redshiftzero.github.io/css/main.css" media="all">
+<link rel="stylesheet" href="https://redshiftzero.github.io/css/fonts.css">
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="https://redshiftzero.github.io/" class="nav-logo">
+    <img src="https://redshiftzero.github.io/images/logo.png" 
+         width="50" 
+         height="50" 
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/categories">Categories</a></li>
+    
+    <li><a href="/tags">Tags</a></li>
+    
+    <li><a href="/about/">About</a></li>
+    
+  </ul>
+</nav>
+
+
+      </header>
+
+      <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+            extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+      </script>
+
+
+<main class="content" role="main">
+  <article class="article">
+    <h1 class="article-title">Investigating the Signal Protocol, Part 2: Groups, devices</h1>
+    
+    <span class="article-date">2020-10-14</span>
+    
+
+    <div class="article-content">
+      
+
+<p>Next in the series, I investigate how groups and multi-device support are handled. If you have thoughts on this or notice any errors, feel free to drop me a note on <a href="https://twitter.com/redshiftzero">Twitter</a> or by <a href="mailto:jen@redshiftzero.com">email</a>.</p>
+
+<h1 id="groups">Groups</h1>
+
+<p>Signal allows <a href="https://signal.org/blog/private-groups/">private groups</a> where the server doesn&rsquo;t have access to the group metadata, including the list of members in each group. Servers cannot even distinguish group from direct messages.</p>
+
+<p>Let&rsquo;s say a group contains two users, Alice👧🏼 and Bob👦🏽, and a third user Jen🧙 wants to send the group a message. Alice👧🏼 adds Jen🧙 to the group, and then Jen🧙 can send the group a message by sending messages individually to each user in the group: she encrypts her message $M$ to each group participant separately, encrypting using the next message key she has for Alice👧🏼 and Bob👦🏽. One caveat is that she uses separate ratchet state than her direct chats with Alice👧🏼 and Bob👦🏽.</p>
+
+<p>Group management messages are regular Signal (i.e. e2e encrypted) messages that only clients can decrypt and act on. The advantage of this approach is that the server stores nothing about groups, although the server can of course infer group participants through observing the timing and metadata of messages, but we&rsquo;ll put that aside for now.</p>
+
+<p>For example, if Alice👧🏼 chooses to leave a group:</p>
+
+<ol>
+<li>Alice👧🏼 sends a leave group management message to all other group members (along with the ID of the group).</li>
+<li>Clients process this and remove Alice👧🏼 from their locally stored list of users in that group.</li>
+</ol>
+
+<p>Similarly for other group information update tasks, any group participant can send a group management message adding (but not deleting) new users or updating the group information. This means that since users must remove <em>themselves</em> from groups using a leave message, if a group wants to remove a given user and the user does not leave, effectively users must create a new group without the participant they want to remove.</p>
+
+<p>The group system is under active development, see the preview version of the group management using anonymous credentials described <a href="https://signal.org/blog/signal-private-group-system/">here</a>. Note also that Whatsapp appears to handle groups differently from the Signal application.</p>
+
+<h1 id="multi-device">Multi-device</h1>
+
+<p><em>The full description is covered in <a href="https://signal.org/docs/specifications/sesame/">this specification</a>.</em></p>
+
+<p>For multi-device support, the main concepts we need to know about are:</p>
+
+<ul>
+<li>Users, which are identified by <code>UserID</code> and can have one or more devices.</li>
+<li>Devices, which are identified by <code>DeviceID</code>. Each device has its own keypair.</li>
+<li>Sessions, which are identified by <code>SessionID</code>. This is the ratchet state that can be used for processing incoming and outgoing messages.</li>
+</ul>
+
+<p>The server keeps track of the mapping of users (<code>UserID</code>) to devices (<code>DeviceID</code>). This is different than with groups, where the server doesn&rsquo;t need to keep track of users in groups.</p>
+
+<p>An <em>initiation message</em> begins a session. In this message, the sender includes their device public key, so the recipient knows which of the user&rsquo;s devices is active. Clients keep track locally of a mapping of users (<code>UserID</code>) to devices (<code>DeviceID</code>) and furthermore, which of the devices is active.</p>
+
+<p>When Bob👦🏽 sends Alice👧🏼 a message $m$, he encrypts $m$ for all of Alice👧🏼&rsquo;s devices using active sessions if available. This is the first batch of messages. Bob👦🏽 does the same action for himself: he encrypts the message $m$ to all of his own devices (a second batch of messages). For each batch he:</p>
+
+<ol>
+<li>Sends the batch of messages to the server.</li>
+<li>If Bob👦🏽&rsquo;s local view of the receiver device state was stale, the server rejects the messages and lets Bob👦🏽 know to update. Else, the servers puts the messages in the message delivery queues for those devices.</li>
+</ol>
+
+<p>By doing this Bob👦🏽&rsquo;s other devices will also have the message history of this conversation even if the device is not active.</p>
+
+<p>When Alice👧🏼 connects to the server to get her messages, she uses any initiation messages to update her local store of device and session state. Otherwise, she uses the existing session state as usual to process the message.</p>
+
+    </div>
+ 
+    <ul class="article-taxonomy">
+                  
+      <hr>
+      <li>
+        <i class="fa fa-category"></i><a href="/categories/post">Post</a><a href="/categories/signal">Signal</a>
+      </li>
+      
+    
+      
+      <li>
+        <i class="fa fa-tags"></i><a href="/tags/signal">Signal</a><a href="/tags/security">security</a><a href="/tags/protocol">protocol</a>
+      </li>
+      
+  </article>
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="https://redshiftzero.github.io/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS feed</a>
+          </li>
+          <li>
+            <a href="https://github.com/redshiftzero"><i class="fa fa-github"></i> GitHub</a>
+          </li>
+          <li>
+            <a href="https://redshiftzero.github.io/site-notice">Site notice</a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+
+  </body>
+</html>
+

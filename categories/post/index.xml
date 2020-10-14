@@ -6,10 +6,21 @@
     <description>Recent content in Post on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 11 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/categories/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Investigating the Signal Protocol, Part 2: Groups, devices</title>
+      <link>https://redshiftzero.github.io/signal-group-multidevice/</link>
+      <pubDate>Wed, 14 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/signal-group-multidevice/</guid>
+      <description>Next in the series, I investigate how groups and multi-device support are handled. If you have thoughts on this or notice any errors, feel free to drop me a note on Twitter or by email.
+Groups Signal allows private groups where the server doesn&amp;rsquo;t have access to the group metadata, including the list of members in each group. Servers cannot even distinguish group from direct messages.
+Let&amp;rsquo;s say a group contains two users, Alice👧🏼 and Bob👦🏽, and a third user Jen🧙 wants to send the group a message.</description>
+    </item>
     
     <item>
       <title>Investigating the Signal Protocol, Part 1: Foundations</title>
@@ -100,17 +111,6 @@ I ended up writing a pytest fixture that would compare the image generated durin
       <guid>https://redshiftzero.github.io/cbc-padding/</guid>
       <description>The CBC padding oracle attack demonstrates how what might initially seem like a small issue can balloon into a devastating attack that can result in total reconstruction of the plaintext by the attacker. It&amp;rsquo;s also one of the harder challenges in Set 3 of Cryptopals.
 The problem It goes like this: an attacker has access to an oracle that will take a ciphertext (i.e. what we need to decrypt) and return a boolean indicating whether or not the padding was valid.</description>
-    </item>
-    
-    <item>
-      <title>Using pyreverse to generate UML class diagrams</title>
-      <link>https://redshiftzero.github.io/pyreverse-uml/</link>
-      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/pyreverse-uml/</guid>
-      <description>Recently I wanted to generate UML (Unified Modeling Language) diagrams of the structure of an existing codebase for the purpose of having an architecture discussion.
-I was wondering if there was a tool to generate UML diagrams in Python to save me some manual work.
-Enter pyreverse: it comes installed with pylint which is a very common development dependency in Python. pyreverse enables you to point to the code you want UML diagrams of, here in my example I was generating a diagram of a project called securedrop-export:</description>
     </item>
     
   </channel>

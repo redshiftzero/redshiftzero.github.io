@@ -93,14 +93,14 @@ In subsequent messages, Alice👧🏼 (and Bob👦🏽) can advertise new public
 
 ## Signal Protocol
 
-Putting this together, Alice and Bob each have:
+Putting this together, Alice👧🏼 and Bob👦🏽 each have:
 
 0. a DH ratchet
 1. a root (symmetric-key) chain
 2. a sending (symmetric-key) chain
 3. a receiving (symmetric-key) chain
 
-Alice's sending chain and Bob's receiving chain are the same, similarly Alice's receiving chain and Bob's sending chain also are the same. The output keys in the sending and receiving chains are used for individual message encryption and decryption.
+Alice👧🏼's sending chain and Bob👦🏽's receiving chain are the same, similarly Alice👧🏼's receiving chain and Bob👦🏽's sending chain also are the same. The output keys in the sending and receiving chains are used for individual message encryption and decryption.
 
 Once a message key is used (i.e. for encryption or deletion), it is deleted by clients. If messages are delivered out of order, the receiver can just ratchet the chain forward to get the key material for the most recent delivered message, and store the message keys from the previous steps until they are delivered.
 

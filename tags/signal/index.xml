@@ -6,10 +6,21 @@
     <description>Recent content in Signal on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 11 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/tags/signal/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Investigating the Signal Protocol, Part 2: Groups, devices</title>
+      <link>https://redshiftzero.github.io/signal-group-multidevice/</link>
+      <pubDate>Wed, 14 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/signal-group-multidevice/</guid>
+      <description>Next in the series, I investigate how groups and multi-device support are handled. If you have thoughts on this or notice any errors, feel free to drop me a note on Twitter or by email.
+Groups Signal allows private groups where the server doesn&amp;rsquo;t have access to the group metadata, including the list of members in each group. Servers cannot even distinguish group from direct messages.
+Let&amp;rsquo;s say a group contains two users, Alice👧🏼 and Bob👦🏽, and a third user Jen🧙 wants to send the group a message.</description>
+    </item>
     
     <item>
       <title>Investigating the Signal Protocol, Part 1: Foundations</title>
