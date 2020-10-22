@@ -193,7 +193,7 @@
 <li>a receiving (symmetric-key) chain</li>
 </ol>
 
-<p>Alice👧🏼&rsquo;s sending chain and Bob👦🏽&rsquo;s receiving chain are the same, similarly Alice👧🏼&rsquo;s receiving chain and Bob👦🏽&rsquo;s sending chain also are the same. The output keys in the sending and receiving chains are used for individual message encryption and decryption.</p>
+<p>Alice👧🏼&rsquo;s sending chain and Bob👦🏽&rsquo;s receiving chain are the same, similarly Alice👧🏼&rsquo;s receiving chain and Bob👦🏽&rsquo;s sending chain also are the same. Output keys from the sending and receiving chains are used for individual message encryption and decryption.</p>
 
 <p>Once a message key is used (i.e. for encryption or deletion), it is deleted by clients. If messages are delivered out of order, the receiver can just ratchet the chain forward to get the key material for the most recent delivered message, and store the message keys from the previous steps until they are delivered.</p>
 

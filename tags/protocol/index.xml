@@ -6,10 +6,19 @@
     <description>Recent content in Protocol on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://redshiftzero.github.io/tags/protocol/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Investigating the Signal Protocol, Part 3: Web applications</title>
+      <link>https://redshiftzero.github.io/signal-webapps/</link>
+      <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/signal-webapps/</guid>
+      <description>Next in the series, I investigate current messaging applications that both provide web applications and are using the Signal Protocol (or a protocol very similar or derived from Signal), here specifically Wire and Whatsapp. I&amp;rsquo;m not looking into the voice and video aspects, just the messaging and file sharing capabilities as I&amp;rsquo;m investigating to see how a similar approach could be used for SecureDrop, where voice/video isn&amp;rsquo;t an option. As always, if you have thoughts on this or notice errors, feel free to drop me a note on Twitter or by email.</description>
+    </item>
     
     <item>
       <title>Investigating the Signal Protocol, Part 2: Groups, devices</title>

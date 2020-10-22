@@ -6,9 +6,20 @@
     <description>Recent content on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://redshiftzero.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+    <item>
+      <title>Investigating the Signal Protocol, Part 3: Web applications</title>
+      <link>https://redshiftzero.github.io/signal-webapps/</link>
+      <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/signal-webapps/</guid>
+      <description>Next in the series, I investigate current messaging applications that both provide web applications and are using the Signal Protocol (or a protocol very similar or derived from Signal), here specifically Wire and Whatsapp. I&amp;rsquo;m not looking into the voice and video aspects, just the messaging and file sharing capabilities as I&amp;rsquo;m investigating to see how a similar approach could be used for SecureDrop, where voice/video isn&amp;rsquo;t an option. As always, if you have thoughts on this or notice errors, feel free to drop me a note on Twitter or by email.</description>
+    </item>
     
     
     
@@ -118,18 +129,6 @@ I ended up writing a pytest fixture that would compare the image generated durin
       <guid>https://redshiftzero.github.io/unittest-mock-patch/</guid>
       <description>I&amp;rsquo;ve noticed a common area of misunderstanding for people newer to Python testing is how to apply mock.patch and where to patch (i.e. what the target positional argument to unittest.mock.patch should be), so I made a video explaining:
  </description>
-    </item>
-    
-    
-    
-    <item>
-      <title>Implementing the CBC padding oracle attack</title>
-      <link>https://redshiftzero.github.io/cbc-padding/</link>
-      <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://redshiftzero.github.io/cbc-padding/</guid>
-      <description>The CBC padding oracle attack demonstrates how what might initially seem like a small issue can balloon into a devastating attack that can result in total reconstruction of the plaintext by the attacker. It&amp;rsquo;s also one of the harder challenges in Set 3 of Cryptopals.
-The problem It goes like this: an attacker has access to an oracle that will take a ciphertext (i.e. what we need to decrypt) and return a boolean indicating whether or not the padding was valid.</description>
     </item>
     
     
