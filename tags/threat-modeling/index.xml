@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Threat modeling on Redshiftzero</title>
+    <link>https://redshiftzero.github.io/tags/threat-modeling/</link>
+    <description>Recent content in Threat modeling on Redshiftzero</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://redshiftzero.github.io/tags/threat-modeling/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Continuous threat modeling, Part 1: Tooling wish list</title>
+      <link>https://redshiftzero.github.io/continuous-threat-modeling/</link>
+      <pubDate>Tue, 10 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://redshiftzero.github.io/continuous-threat-modeling/</guid>
+      <description>Motivation When performing software-centric threat-modeling on an application1, one typically:
+ generates at least one Data Flow Diagram (DFD) or other diagrams that model the software, enumerates threats using the diagram(s) as an aid, and then determines which mitigations should be applied.  Automated tools can potentially aid the threat modeler in each of these stages. When the design of a system is modified, the threat modeling exercise may be performed again, resulting in needing to pass through the above steps again.</description>
+    </item>
+    
+  </channel>
+</rss>
