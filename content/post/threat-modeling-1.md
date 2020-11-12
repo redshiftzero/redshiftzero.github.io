@@ -36,11 +36,13 @@ The advantage of a ticketing system is that it's easy to crosslink with mitigati
 
 The downside of the spreadsheet approach is that it's a bit awkward to perform deeper analysis on, as well as follow one-to-many relationships. But, the spreadsheet has the advantage of being something that one can export as CSV and store in version control (although not in the most readable format, but one could then load the CSV in e.g. [pandas](https://pandas.pydata.org/) if one wants to perform further analysis).
 
-Some tools like [threagile](https://github.com/Threagile/threagile), [threat-modeling](https://github.com/freedomofpress/threat-modeling), and [pytm](https://github.com/izar/pytm) store the enumerated threats in YAML, JSON, and in the case of pytm a SQL dump. These all enable easy analysis using other tools as well as for YAML and JSON human-readable storage in version control.
+Some tools like [threagile](https://github.com/Threagile/threagile), [threat-modeling](https://github.com/freedomofpress/threat-modeling), and [pytm](https://github.com/izar/pytm) store the enumerated threats in YAML, JSON, and in the case of pytm, a SQL dump. These all enable easy analysis using other tools as well as for YAML and JSON human-readable storage in version control.
 
 ### How to determine which mitigations to apply?
 
 Once threats have been enumerated, next we need to decide how to make decisions about them. If we can mitigate all threats, then great. However, we might be unable to completely mitigate all threats, so we need to decide how to allocate the engineering effort we have in a rational manner to manage the risk. There are not a lot of tools that aid in this dimension (see the next section on Simulation-like question answering).
+
+*Edit 11/12/2020*: Another important aspect here is how best to store the mitigations - and their mapping to threats. It is highly useful to track which mitigations map to which threats such that developers can clearly see the purpose of the mitigation, and to enable one to evaluate the impact of removing a given security control (e.g. if debates arise on their importance due to maintenance burden or user impact). In [threat-modeling](https://github.com/freedomofpress/threat-modeling), the approach is to store the mitigations also in YAML, similar to the threats, with references to the threat IDs they apply to, to enable this sort of analysis[^2].
 
 # Ideas
 
@@ -77,11 +79,12 @@ The only tool I'm aware of in this direction is [the SPARTA tool](https://distri
 
 While the exercise of generating attack trees manually is a useful one for system designers (as is threat enumeration), one could also imagine at least partially automating the generation of attack trees.
 
-When an attacker is able to successfully realize a given threat as an attack, other threats become accessible, e.g. once one is able to get code execution in a VM, they can next attempt to exploit a bug in the hypervisor. One could annotate threats with these child-parent relationships to indicate which threats become accessible once the given threat is realized, and from that derive attack trees. This is the approach taken [here](https://github.com/freedomofpress/threat-modeling/blob/main/threat_modeling/threats.py#L185-L213) in the [threat-modeling](https://github.com/freedomofpress/threat-modeling) tool[^2].
+When an attacker is able to successfully realize a given threat as an attack, other threats become accessible, e.g. once one is able to get code execution in a VM, they can next attempt to exploit a bug in the hypervisor. One could annotate threats with these child-parent relationships to indicate which threats become accessible once the given threat is realized, and from that derive attack trees. This is the approach taken [here](https://github.com/freedomofpress/threat-modeling/blob/main/threat_modeling/threats.py#L185-L213) in the [threat-modeling](https://github.com/freedomofpress/threat-modeling) tool[^3].
 
 # Fin
 
 If you have thoughts on this or know of tools or approaches (especially if FLOSS 😇) that address the above concerns, feel free to drop me a note on [Twitter](https://twitter.com/redshiftzero) or by [email](mailto:jen@redshiftzero.com).
 
 [^1]: A lot has already been written on the benefits of doing threat modeling so I'm not going to espouse the benefits here.
-[^2]: One could also imagine various ways of removing the parent-child threat annotation requirement, e.g. perhaps one could have the system designer specify the likely entry-point threats on the attack surface of the system. At this point provided there is a mapping of threats to DFD elements, the rest of the process could be automated: the entry-point threats are root nodes, and then one follows the dataflows to grow the rest of the attack tree, adding a child node in the attack tree for every threat associated with the destination node.
+[^2]: Armed with this mitigations data, one could do a "resilience" sort of test here, where one could simulate the impact of the failure of a given countermeasure: pick a given countermeasure, disable it, what is the impact of disabling this mitigation? If it's significant, then this shows an area where one should focus additional effort to provide defense in depth.
+[^3]: One could also imagine various ways of removing the parent-child threat annotation requirement, e.g. perhaps one could have the system designer specify the likely entry-point threats on the attack surface of the system. At this point provided there is a mapping of threats to DFD elements, the rest of the process could be automated: the entry-point threats are root nodes, and then one follows the dataflows to grow the rest of the attack tree, adding a child node in the attack tree for every threat associated with the destination node.
