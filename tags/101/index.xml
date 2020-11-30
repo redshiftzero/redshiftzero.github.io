@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>101 on Redshiftzero</title>
-    <link>https://redshiftzero.github.io/tags/101/</link>
+    <link>https://www.redshiftzero.com/tags/101/</link>
     <description>Recent content in 101 on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 01 Dec 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://redshiftzero.github.io/tags/101/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.redshiftzero.com/tags/101/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>How to apply unittest.mock.patch</title>
-      <link>https://redshiftzero.github.io/unittest-mock-patch/</link>
+      <link>https://www.redshiftzero.com/unittest-mock-patch/</link>
       <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://redshiftzero.github.io/unittest-mock-patch/</guid>
+      <guid>https://www.redshiftzero.com/unittest-mock-patch/</guid>
       <description>I&amp;rsquo;ve noticed a common area of misunderstanding for people newer to Python testing is how to apply mock.patch and where to patch (i.e. what the target positional argument to unittest.mock.patch should be), so I made a video explaining:
  </description>
     </item>
     
     <item>
       <title>Collision attacks and the birthday paradox</title>
-      <link>https://redshiftzero.github.io/birthday-attacks/</link>
+      <link>https://www.redshiftzero.com/birthday-attacks/</link>
       <pubDate>Sun, 19 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://redshiftzero.github.io/birthday-attacks/</guid>
+      <guid>https://www.redshiftzero.com/birthday-attacks/</guid>
       <description>How many people do you need in a room before there is a 50% chance that least two of them share the same birthday? It&amp;rsquo;s only 23, though unless you have heard about this paradox before, you might expect it to be much larger. This is the well-known birthday paradox: it&amp;rsquo;s called a paradox only because collisions happen much faster than one naively expects. Collisions here means an event where two or more observed values are equal.</description>
     </item>
     
     <item>
       <title>How SecureDrop Works 101</title>
-      <link>https://redshiftzero.github.io/securedrop-101/</link>
+      <link>https://www.redshiftzero.com/securedrop-101/</link>
       <pubDate>Fri, 31 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://redshiftzero.github.io/securedrop-101/</guid>
+      <guid>https://www.redshiftzero.com/securedrop-101/</guid>
       <description>When people first learn of the SecureDrop architecture, it can seem quite complicated. When explaining SecureDrop to people for the first time, it&amp;rsquo;s useful to have a cartoon view providing a broad overview before digging into further technical details (in my experience this is true of any sufficiently technical concept/system). After noticing this confusion from users, I made this quick one-minute video to distill the most important points for the source and journalist workflows:</description>
     </item>
     

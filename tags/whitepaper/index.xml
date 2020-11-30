@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Whitepaper on Redshiftzero</title>
-    <link>https://redshiftzero.github.io/tags/whitepaper/</link>
+    <link>https://www.redshiftzero.com/tags/whitepaper/</link>
     <description>Recent content in Whitepaper on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 31 Jul 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://redshiftzero.github.io/tags/whitepaper/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.redshiftzero.com/tags/whitepaper/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Protecting journalists from malware using QubesOS</title>
-      <link>https://redshiftzero.github.io/securedrop-qubes-workstation/</link>
+      <link>https://www.redshiftzero.com/securedrop-qubes-workstation/</link>
       <pubDate>Fri, 31 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://redshiftzero.github.io/securedrop-qubes-workstation/</guid>
+      <guid>https://www.redshiftzero.com/securedrop-qubes-workstation/</guid>
       <description>Earlier this year at USENIX Enigma, I presented some recent work towards rearchitecting the SecureDrop journalist experience.
 In SecureDrop we currently use an airgapped workstation for viewing documents to reduce the impact of malware present in malicious documents. This presents challenges in terms of maintenance, usability, and even security (i.e. airgaps don&amp;rsquo;t receive automatic updates).
 The basic idea of the rearchitecture of the journalist experience is to replace SecureDrop&amp;rsquo;s multi-machine airgap with a single machine using Qubes (Xen) for compartmentalization.</description>

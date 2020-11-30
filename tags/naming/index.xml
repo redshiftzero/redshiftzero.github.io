@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Naming on Redshiftzero</title>
-    <link>https://redshiftzero.github.io/tags/naming/</link>
+    <link>https://www.redshiftzero.com/tags/naming/</link>
     <description>Recent content in Naming on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 31 Jul 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://redshiftzero.github.io/tags/naming/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.redshiftzero.com/tags/naming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Using HTTPS Everywhere rules for SecureDrop onion names</title>
-      <link>https://redshiftzero.github.io/securedrop-httpse/</link>
+      <link>https://www.redshiftzero.com/securedrop-httpse/</link>
       <pubDate>Fri, 31 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://redshiftzero.github.io/securedrop-httpse/</guid>
+      <guid>https://www.redshiftzero.com/securedrop-httpse/</guid>
       <description>A fun small project I worked on earlier this year was creating an HTTPS Everywhere custom ruleset channel for the SecureDrop project. HTTPS Everywhere is a popular browser extension maintained by EFF that rewrites HTTP URLs to HTTPS when possible. A set of rules is used to determine how URLs should be rewritten. HTTPS Everywhere is included in Tor Browser to reduce the impact of malicious exit nodes.
 This is relevant for SecureDrop, because each news organization advertises an onion URL that corresponds to the web application (&amp;ldquo;source interface&amp;rdquo;) where a source should upload documents.</description>
     </item>

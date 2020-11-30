@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Police on Redshiftzero</title>
-    <link>https://redshiftzero.github.io/tags/police/</link>
+    <link>https://www.redshiftzero.com/tags/police/</link>
     <description>Recent content in Police on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 29 Sep 2016 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://redshiftzero.github.io/tags/police/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.redshiftzero.com/tags/police/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Inside the Chicago Police Department&#39;s Secret Budget</title>
-      <link>https://redshiftzero.github.io/cpd-asset-forfeiture/</link>
+      <link>https://www.redshiftzero.com/cpd-asset-forfeiture/</link>
       <pubDate>Thu, 29 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://redshiftzero.github.io/cpd-asset-forfeiture/</guid>
+      <guid>https://www.redshiftzero.com/cpd-asset-forfeiture/</guid>
       <description>Every year, police take millions of dollars from Chicagoans through civil asset forfeiture and spend it behind closed doors. In collaboration with Muckrock, my co-authors and I did an independent financial audit of this previously undocumented part of the police budget. We demonstrated these asset forfeiture funds are used to circumvent city council oversight and finance controversial surveillance devices. This investigation appeared as a front page feature in the September 29, 2016 issue of the Chicago Reader.</description>
     </item>
     
     <item>
       <title>Primer on Police Surveillance</title>
-      <link>https://redshiftzero.github.io/police-surveillance-primer/</link>
+      <link>https://www.redshiftzero.com/police-surveillance-primer/</link>
       <pubDate>Tue, 19 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://redshiftzero.github.io/police-surveillance-primer/</guid>
+      <guid>https://www.redshiftzero.com/police-surveillance-primer/</guid>
       <description>I wrote a short primer describing and visualizing police surveillance technology. This project was also posted on the website of the Lucy Parsons Labs.
 
 Cameras, automatic license plate readers, cell site simulators and many other surveillance devices are currently used in the city by the Chicago Police Department and its sister agencies. However, many citizens are unaware of the scope of the surveillance systems, their huge cost, and the privacy implications of their use.</description>

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ethics on Redshiftzero</title>
-    <link>https://redshiftzero.github.io/tags/ethics/</link>
+    <link>https://www.redshiftzero.com/tags/ethics/</link>
     <description>Recent content in Ethics on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 29 Aug 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://redshiftzero.github.io/tags/ethics/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.redshiftzero.com/tags/ethics/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Manipulation and Machine Learning</title>
-      <link>https://redshiftzero.github.io/manipulation-ml/</link>
+      <link>https://www.redshiftzero.com/manipulation-ml/</link>
       <pubDate>Sat, 29 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://redshiftzero.github.io/manipulation-ml/</guid>
+      <guid>https://www.redshiftzero.com/manipulation-ml/</guid>
       <description>This is a writeup of a talk that I gave at Defcon 23&amp;rsquo;s Cryptography and Privacy Village back in August 2015. The presentation included a brief primer on machine learning as some in the audience were unfamiliar with the topic, so skip down to &amp;ldquo;Is there really a problem here?&amp;rdquo; if you are already familiar with ML. Thanks to all who attended and for the excellent questions and comments! References are embedded as links in the text.</description>
     </item>
     

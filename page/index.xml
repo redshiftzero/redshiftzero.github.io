@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on Redshiftzero</title>
-    <link>https://redshiftzero.github.io/page/</link>
+    <link>https://www.redshiftzero.com/page/</link>
     <description>Recent content in Pages on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 09 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://redshiftzero.github.io/page/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.redshiftzero.com/page/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>https://redshiftzero.github.io/about/</link>
+      <link>https://www.redshiftzero.com/about/</link>
       <pubDate>Fri, 09 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://redshiftzero.github.io/about/</guid>
+      <guid>https://www.redshiftzero.com/about/</guid>
       <description>Hello, I&amp;rsquo;m redshiftzero.
 Google Scholar Twitter GitHub Youtube Professional Experience Freedom of the Press Foundation Principal Research Engineer, July 2020 - present SecureDrop Lead Developer, July 2017 - June 2020 Ford-Mozilla Open Web Fellow, September 2016 - June 2017
 Center for Data Science and Public Policy Postdoctoral Researcher, September 2015 - September 2016 Data Science for Social Good Technical Mentor, June 2016 - August 2016 Data Science for Social Good Fellow, June 2015 - August 2015</description>
@@ -24,10 +24,10 @@ Center for Data Science and Public Policy Postdoctoral Researcher, September 201
     
     <item>
       <title>Site notice</title>
-      <link>https://redshiftzero.github.io/site-notice/</link>
+      <link>https://www.redshiftzero.com/site-notice/</link>
       <pubDate>Fri, 09 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://redshiftzero.github.io/site-notice/</guid>
+      <guid>https://www.redshiftzero.com/site-notice/</guid>
       <description>If you&amp;rsquo;d like to contact me, you can use jen@redshiftzero.com.</description>
     </item>
     

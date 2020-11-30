@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>D3.js on Redshiftzero</title>
-    <link>https://redshiftzero.github.io/categories/d3.js/</link>
+    <link>https://www.redshiftzero.com/categories/d3.js/</link>
     <description>Recent content in D3.js on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 30 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://redshiftzero.github.io/categories/d3.js/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.redshiftzero.com/categories/d3.js/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Visualizing Cosmological Power Spectra with d3.js</title>
-      <link>https://redshiftzero.github.io/visualizing-cosmological-power-spectra/</link>
+      <link>https://www.redshiftzero.com/visualizing-cosmological-power-spectra/</link>
       <pubDate>Fri, 30 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://redshiftzero.github.io/visualizing-cosmological-power-spectra/</guid>
+      <guid>https://www.redshiftzero.com/visualizing-cosmological-power-spectra/</guid>
       <description>Cosmologists make observations of galaxies and radiation in the universe to constrain parameters of the Lambda CDM model , which is the model that best describes our current understanding of the universe. These cosmological parameters include quantities like &amp;Omega;m and &amp;Omega;&amp;Lambda;, which describe the matter and dark energy content of the universe respectively.
 Two key observables that constrain these parameters are the matter power spectrum and the angular power spectrum of the Cosmic Microwave Background (CMB) radiation.</description>
     </item>
