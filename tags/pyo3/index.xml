@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pyo3 on Redshiftzero</title>
+    <link>https://www.redshiftzero.com/tags/pyo3/</link>
+    <description>Recent content in Pyo3 on Redshiftzero</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 Dec 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.redshiftzero.com/tags/pyo3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Creating Python extensions in Rust using PyO3</title>
+      <link>https://www.redshiftzero.com/pyo3/</link>
+      <pubDate>Sun, 06 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.redshiftzero.com/pyo3/</guid>
+      <description>This post describes how I approached writing a Python extension in Rust. The post covers:
+ why one would even want to do this 🙃 the approaches for calling Rust code from Python an overview of how to create a Python module in Rust using PyO3 some tricky parts, e.g. inheritance building and distributing wheels  Let&amp;rsquo;s get started.
+First, why do this at all? There are two main reasons:</description>
+    </item>
+    
+  </channel>
+</rss>

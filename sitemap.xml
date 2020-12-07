@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.redshiftzero.com/pyo3/</loc>
+    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.redshiftzero.com/continuous-threat-modeling/</loc>
     <lastmod>2020-11-10T00:00:00+00:00</lastmod>
   </url>
@@ -351,13 +356,13 @@
   
   <url>
     <loc>https://www.redshiftzero.com/categories/post/</loc>
-    <lastmod>2020-11-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.redshiftzero.com/post/</loc>
-    <lastmod>2020-11-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -370,6 +375,12 @@
   <url>
     <loc>https://www.redshiftzero.com/tags/public-interest/</loc>
     <lastmod>2018-06-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.redshiftzero.com/tags/pyo3/</loc>
+    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -405,13 +416,25 @@
   
   <url>
     <loc>https://www.redshiftzero.com/</loc>
-    <lastmod>2020-11-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.redshiftzero.com/tags/reproducible-builds/</loc>
     <lastmod>2020-08-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.redshiftzero.com/categories/rust/</loc>
+    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.redshiftzero.com/tags/rust/</loc>
+    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
