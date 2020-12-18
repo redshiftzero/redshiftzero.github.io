@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rust on Redshiftzero</title>
-    <link>https://www.redshiftzero.com/tags/rust/</link>
-    <description>Recent content in Rust on Redshiftzero</description>
+    <title>WebAssembly on Redshiftzero</title>
+    <link>https://www.redshiftzero.com/tags/webassembly/</link>
+    <description>Recent content in WebAssembly on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 17 Dec 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://www.redshiftzero.com/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.redshiftzero.com/tags/webassembly/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,17 +18,6 @@
       
       <guid>https://www.redshiftzero.com/webassembly/</guid>
       <description>In my last post I described how I implemented the signal-protocol Python library, which provides Python bindings using Pyo3 to an upstream maintained Rust cryptography crate implementing the Signal protocol. I created the the signal-protocol library in order to prototype end-to-end encrypted messaging between journalists and their sources through SecureDrop. In the SecureDrop ecosystem, journalists use a Python project, securedrop-client, hence the need for the Python bindings, and sources use Tor Browser.</description>
-    </item>
-    
-    <item>
-      <title>Creating Python extensions in Rust using PyO3</title>
-      <link>https://www.redshiftzero.com/pyo3/</link>
-      <pubDate>Sun, 06 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.redshiftzero.com/pyo3/</guid>
-      <description>This post describes how I approached writing a Python extension in Rust. The post covers:
- why one would even want to do this 🙃 the approaches for calling Rust code from Python an overview of how to create a Python module in Rust using PyO3 some tricky parts, e.g. inheritance building and distributing wheels  Let&amp;rsquo;s get started.
-First, why do this at all? There are two main reasons:</description>
     </item>
     
   </channel>

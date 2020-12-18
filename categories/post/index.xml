@@ -6,10 +6,19 @@
     <description>Recent content in Post on Redshiftzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 06 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Dec 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.redshiftzero.com/categories/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Getting started in Rust and WebAssembly</title>
+      <link>https://www.redshiftzero.com/webassembly/</link>
+      <pubDate>Thu, 17 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.redshiftzero.com/webassembly/</guid>
+      <description>In my last post I described how I implemented the signal-protocol Python library, which provides Python bindings using Pyo3 to an upstream maintained Rust cryptography crate implementing the Signal protocol. I created the the signal-protocol library in order to prototype end-to-end encrypted messaging between journalists and their sources through SecureDrop. In the SecureDrop ecosystem, journalists use a Python project, securedrop-client, hence the need for the Python bindings, and sources use Tor Browser.</description>
+    </item>
     
     <item>
       <title>Creating Python extensions in Rust using PyO3</title>
@@ -100,17 +109,6 @@ The basic idea of the rearchitecture of the journalist experience is to replace 
       <guid>https://www.redshiftzero.com/securedrop-httpse/</guid>
       <description>A fun small project I worked on earlier this year was creating an HTTPS Everywhere custom ruleset channel for the SecureDrop project. HTTPS Everywhere is a popular browser extension maintained by EFF that rewrites HTTP URLs to HTTPS when possible. A set of rules is used to determine how URLs should be rewritten. HTTPS Everywhere is included in Tor Browser to reduce the impact of malicious exit nodes.
 This is relevant for SecureDrop, because each news organization advertises an onion URL that corresponds to the web application (&amp;ldquo;source interface&amp;rdquo;) where a source should upload documents.</description>
-    </item>
-    
-    <item>
-      <title>Handling equal priority jobs using queue.PriorityQueue</title>
-      <link>https://www.redshiftzero.com/priority-queue/</link>
-      <pubDate>Mon, 13 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.redshiftzero.com/priority-queue/</guid>
-      <description>A queue retrives items in FIFO (first in, first out) order. A priority queue retrieves item based on priority, higher priority items come first. Well, what happens if you submit items that have equal priorities? It depends on how the priority queue was implemented. Read on for how this is handled in the Python standard library&amp;rsquo;s queue.PriorityQueue.
-Let&amp;rsquo;s see queue.PriorityQueue in action in a simple case:
-&amp;gt;&amp;gt;&amp;gt; from queue import PriorityQueue &amp;gt;&amp;gt;&amp;gt; q = PriorityQueue() &amp;gt;&amp;gt;&amp;gt; q.</description>
     </item>
     
   </channel>

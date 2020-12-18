@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.redshiftzero.com/webassembly/</loc>
+    <lastmod>2020-12-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.redshiftzero.com/pyo3/</loc>
     <lastmod>2020-12-06T00:00:00+00:00</lastmod>
   </url>
@@ -356,13 +361,13 @@
   
   <url>
     <loc>https://www.redshiftzero.com/categories/post/</loc>
-    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.redshiftzero.com/post/</loc>
-    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -416,7 +421,7 @@
   
   <url>
     <loc>https://www.redshiftzero.com/</loc>
-    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -428,13 +433,13 @@
   
   <url>
     <loc>https://www.redshiftzero.com/categories/rust/</loc>
-    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.redshiftzero.com/tags/rust/</loc>
-    <lastmod>2020-12-06T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -567,6 +572,12 @@
   <url>
     <loc>https://www.redshiftzero.com/tags/visualization/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.redshiftzero.com/tags/webassembly/</loc>
+    <lastmod>2020-12-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
