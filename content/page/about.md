@@ -32,13 +32,10 @@ Hello, I'm redshiftzero.
 
 **University of Chicago**, Ph.D. Astrophysics, completed [June 2015](http://kicp.uchicago.edu/news/archive_2015.html#_431)
 
-## Open Source Projects
-
-* [SecureDrop](https://github.com/freedomofpress/securedrop). I am a maintainer (from 2016-present) and previously was the project lead (from 2017-2020). This project is a whistleblowing platform used by news organizations to communicate with sources. The full list of sites using SecureDrop can be seen in the directory [here](https://securedrop.org/directory/).
-* [OpenOversight](https://github.com/lucyparsons/OpenOversight/). I started this project in 2016 and now help maintain it with volunteers. This project is a webapp that makes it easier for the public to identify police officers, including for the purpose of complaints. It relies on crowdsourced and public data to build a database of police officers in a city. It is currently [in use](https://openoversight.com/browse) on the Burlington VT, Chicago, Oakland, Berkeley, and UC Berkeley Police Departments. The codebase is also used by [Portland](https://cops.photo) and [Baltimore](https://bpdwatch.com).
-
 ## Previous Projects
 
+* [SecureDrop](https://github.com/freedomofpress/securedrop). I am a maintainer (from 2016-present) and previously was the project lead (from 2017-2020). This project is a whistleblowing platform used by news organizations to communicate with sources. The full list of sites using SecureDrop can be seen in the directory [here](https://securedrop.org/directory/).
+* [OpenOversight](https://github.com/lucyparsons/OpenOversight/). I started this project in 2016 and it's now maintained by LPL volunteers. This project is a webapp that makes it easier for the public to identify police officers, including for the purpose of complaints. It relies on crowdsourced and public data to build a database of police officers in a city. It is currently [in use](https://openoversight.com/browse) on the Burlington VT, Chicago, Oakland, Berkeley, and UC Berkeley Police Departments. The codebase is also used by [Portland](https://cops.photo) and [Baltimore](https://bpdwatch.com).
 * City of Cincinnati building code prediction (during 2015 Data Science for Social Good): [blog](https://dssg.uchicago.edu/project/proactive-blight-reduction-and-neighborhood-revitalization/) [GitHub repository](https://github.com/dssg/cincinnati2015-public)
 * Data-Driven Early Intervention System for police departments: [GitHub repository](https://github.com/dssg/police-eis). Currently developed by [CMU](http://www.datasciencepublicpolicy.org/) and [Benchmark Analytics](https://www.benchmarkanalytics.com/).
 
