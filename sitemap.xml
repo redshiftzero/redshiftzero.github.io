@@ -174,13 +174,13 @@
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/censorship/</loc>
+    <loc>https://www.redshiftzero.com/tags/censorship/</loc>
     <lastmod>2018-06-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/tags/censorship/</loc>
+    <loc>https://www.redshiftzero.com/categories/censorship/</loc>
     <lastmod>2018-06-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -198,20 +198,14 @@
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/cosmology/</loc>
-    <lastmod>2018-03-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://www.redshiftzero.com/tags/cosmology/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/cryptography/</loc>
-    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
+    <loc>https://www.redshiftzero.com/categories/cosmology/</loc>
+    <lastmod>2018-03-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -222,19 +216,25 @@
   </url>
   
   <url>
+    <loc>https://www.redshiftzero.com/categories/cryptography/</loc>
+    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.redshiftzero.com/tags/cryptopals/</loc>
     <lastmod>2019-11-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/d3.js/</loc>
+    <loc>https://www.redshiftzero.com/tags/d3.js/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/tags/d3.js/</loc>
+    <loc>https://www.redshiftzero.com/categories/d3.js/</loc>
     <lastmod>2018-03-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -258,13 +258,13 @@
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/ethics/</loc>
+    <loc>https://www.redshiftzero.com/tags/ethics/</loc>
     <lastmod>2015-08-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/tags/ethics/</loc>
+    <loc>https://www.redshiftzero.com/categories/ethics/</loc>
     <lastmod>2015-08-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -312,13 +312,13 @@
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/machine-learning/</loc>
+    <loc>https://www.redshiftzero.com/tags/machine-learning/</loc>
     <lastmod>2015-08-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/tags/machine-learning/</loc>
+    <loc>https://www.redshiftzero.com/categories/machine-learning/</loc>
     <lastmod>2015-08-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -348,13 +348,13 @@
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/police/</loc>
+    <loc>https://www.redshiftzero.com/tags/police/</loc>
     <lastmod>2016-09-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/tags/police/</loc>
+    <loc>https://www.redshiftzero.com/categories/police/</loc>
     <lastmod>2016-09-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -432,20 +432,14 @@
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/rust/</loc>
-    <lastmod>2020-12-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://www.redshiftzero.com/tags/rust/</loc>
     <lastmod>2020-12-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/securedrop/</loc>
-    <lastmod>2017-03-31T00:00:00+00:00</lastmod>
+    <loc>https://www.redshiftzero.com/categories/rust/</loc>
+    <lastmod>2020-12-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -456,19 +450,25 @@
   </url>
   
   <url>
+    <loc>https://www.redshiftzero.com/categories/securedrop/</loc>
+    <lastmod>2017-03-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://www.redshiftzero.com/tags/security/</loc>
     <lastmod>2020-11-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/signal/</loc>
+    <loc>https://www.redshiftzero.com/tags/signal/</loc>
     <lastmod>2020-10-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/tags/signal/</loc>
+    <loc>https://www.redshiftzero.com/categories/signal/</loc>
     <lastmod>2020-10-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -480,25 +480,25 @@
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/statistics/</loc>
-    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://www.redshiftzero.com/tags/statistics/</loc>
     <lastmod>2019-05-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/surveillance/</loc>
-    <lastmod>2016-01-19T00:00:00+00:00</lastmod>
+    <loc>https://www.redshiftzero.com/categories/statistics/</loc>
+    <lastmod>2019-05-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.redshiftzero.com/tags/surveillance/</loc>
+    <lastmod>2016-01-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.redshiftzero.com/categories/surveillance/</loc>
     <lastmod>2016-01-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -528,20 +528,14 @@
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/threat-modeling/</loc>
-    <lastmod>2020-11-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://www.redshiftzero.com/tags/threat-modeling/</loc>
     <lastmod>2020-11-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/tor/</loc>
-    <lastmod>2020-10-06T00:00:00+00:00</lastmod>
+    <loc>https://www.redshiftzero.com/categories/threat-modeling/</loc>
+    <lastmod>2020-11-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -552,13 +546,19 @@
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/transparency/</loc>
-    <lastmod>2018-06-21T00:00:00+00:00</lastmod>
+    <loc>https://www.redshiftzero.com/categories/tor/</loc>
+    <lastmod>2020-10-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.redshiftzero.com/tags/transparency/</loc>
+    <lastmod>2018-06-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.redshiftzero.com/categories/transparency/</loc>
     <lastmod>2018-06-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -588,14 +588,14 @@
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/categories/whistleblowing/</loc>
-    <lastmod>2017-03-31T00:00:00+00:00</lastmod>
+    <loc>https://www.redshiftzero.com/tags/whistleblowing/</loc>
+    <lastmod>2020-07-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.redshiftzero.com/tags/whistleblowing/</loc>
-    <lastmod>2020-07-31T00:00:00+00:00</lastmod>
+    <loc>https://www.redshiftzero.com/categories/whistleblowing/</loc>
+    <lastmod>2017-03-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

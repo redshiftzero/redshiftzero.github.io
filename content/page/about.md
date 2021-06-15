@@ -12,9 +12,13 @@ Hello, I'm redshiftzero.
 
 ## Professional Experience
 
+**Independent Consultant**, June 2021-present
+
+I'm currently not seeking full-time work, but am open to short-term or part-time contract work.
+
 #### Freedom of the Press Foundation
 
-**Principal Research Engineer**, July 2020 - present \\
+**Principal Research Engineer**, July 2020 - June 2021 \\
 **SecureDrop Lead Developer**, July 2017 - June 2020 \\
 **Ford-Mozilla Open Web Fellow**, September 2016 - June 2017
 
@@ -34,7 +38,7 @@ Hello, I'm redshiftzero.
 
 ## Previous Projects
 
-* [SecureDrop](https://github.com/freedomofpress/securedrop). I am a maintainer (from 2016-present) and previously was the project lead (from 2017-2020). This project is a whistleblowing platform used by news organizations to communicate with sources. The full list of sites using SecureDrop can be seen in the directory [here](https://securedrop.org/directory/).
+* [SecureDrop](https://github.com/freedomofpress/securedrop). I was a maintainer (from 2016-2021) and previously was the project lead (from 2017-2020). This project is a whistleblowing platform used by news organizations to communicate with sources. The full list of sites using SecureDrop can be seen in the directory [here](https://securedrop.org/directory/).
 * [OpenOversight](https://github.com/lucyparsons/OpenOversight/). I started this project in 2016 and it's now maintained by LPL volunteers. This project is a webapp that makes it easier for the public to identify police officers, including for the purpose of complaints. It relies on crowdsourced and public data to build a database of police officers in a city. It is currently [in use](https://openoversight.com/browse) on the Burlington VT, Chicago, Oakland, Berkeley, and UC Berkeley Police Departments. The codebase is also used by [Portland](https://cops.photo) and [Baltimore](https://bpdwatch.com).
 * City of Cincinnati building code prediction (during 2015 Data Science for Social Good): [blog](https://dssg.uchicago.edu/project/proactive-blight-reduction-and-neighborhood-revitalization/) [GitHub repository](https://github.com/dssg/cincinnati2015-public)
 * Data-Driven Early Intervention System for police departments: [GitHub repository](https://github.com/dssg/police-eis). Currently developed by [CMU](http://www.datasciencepublicpolicy.org/) and [Benchmark Analytics](https://www.benchmarkanalytics.com/).
