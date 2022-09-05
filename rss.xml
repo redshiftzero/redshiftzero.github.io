@@ -23,10 +23,116 @@
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright>
         
-        <lastBuildDate>Mon, 05 Sep 2022 18:40:31 -0400</lastBuildDate>
+        <lastBuildDate>Mon, 05 Sep 2022 19:03:58 -0400</lastBuildDate>
         
             <atom:link rel="self" type="application/rss&#43;xml" href="https://www.redshiftzero.com/rss.xml" />
         
+        
+            <item>
+                <title>Commitment Schemes 101</title>
+                <link>https://www.redshiftzero.com/post/commitments/</link>
+                <guid isPermaLink="true">https://www.redshiftzero.com/post/commitments/</guid>
+                <pubDate>Mon, 05 Sep 2022 18:50:23 -0400</pubDate>
+                
+                    <author>jen@redshiftzero.com (redshiftzero)</author>
+                
+                <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright>
+                
+                    <description>&lt;p&gt;This is a simple explanation of cryptographic &lt;em&gt;commitment schemes&lt;/em&gt;, requiring minimal math or
+cryptography background.&lt;/p&gt;
+&lt;h2 id=&#34;what-is-a-commitment-scheme&#34;&gt;What is a commitment scheme?&lt;/h2&gt;
+&lt;p&gt;A commitment scheme is effectively a cryptographic envelope. I can put a secret value in an envelope and then seal the envelope. We call this &lt;em&gt;committing&lt;/em&gt; to the secret value. And then
+I send the envelope to someone or put it somewhere I cannot tamper with it, to open
+and reveal the secret value I committed to at some later time.&lt;/p&gt;
+&lt;p&gt;The two important properties of this scheme are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Hiding&lt;/strong&gt;: No one can see inside the envelope until it is opened.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Binding&lt;/strong&gt;: Once I have commited to this secret value and sent it, I cannot
+change the value. The commitment has &lt;em&gt;bound&lt;/em&gt; me to a specific value.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is an imperfect analogy, but it gets across these two important
+properties of commitment schemes.&lt;/p&gt;
+&lt;h2 id=&#34;cryptographic-commitments&#34;&gt;Cryptographic Commitments&lt;/h2&gt;
+&lt;p&gt;For &lt;em&gt;cryptographic&lt;/em&gt; commitments, we&amp;rsquo;re going to need two algorithms: &lt;code&gt;Commit&lt;/code&gt; and &lt;code&gt;Verify&lt;/code&gt;. Let&amp;rsquo;s go through each one now.&lt;/p&gt;
+&lt;h3 id=&#34;commit&#34;&gt;&lt;code&gt;Commit&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;Commit&lt;/code&gt; algorithm lets us create commitments. Let&amp;rsquo;s call a commitment &lt;code&gt;com&lt;/code&gt;. To commit to a value &lt;code&gt;value&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;com = Commit(value, randomness)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;code&gt;randomness&lt;/code&gt; is another secret value, but one picked randomly, hence the name. The result &lt;code&gt;com&lt;/code&gt; is what we&amp;rsquo;ll send or broadcast, i.e. &lt;code&gt;com&lt;/code&gt; is our sealed envelope.&lt;/p&gt;
+&lt;h3 id=&#34;verify&#34;&gt;&lt;code&gt;Verify&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;When we&amp;rsquo;re ready to open the commitment, anyone can verify the commitment
+was opened correctly once they get the values for &lt;code&gt;value&lt;/code&gt; and &lt;code&gt;randomness&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Verify(value, com, randomness) = [accept, reject]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The result of the &lt;code&gt;Verify&lt;/code&gt; algorithm is either to accept or reject the opening as valid.&lt;/p&gt;
+&lt;h3 id=&#34;hiding-and-binding&#34;&gt;Hiding and Binding&lt;/h3&gt;
+&lt;p&gt;Remember that we wanted our commitment scheme to share the security properties
+as the toy example: hiding and binding. For this cryptographic scheme, what
+does this mean a bit more concretely?&lt;/p&gt;
+&lt;h4 id=&#34;hiding&#34;&gt;Hiding&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;com&lt;/code&gt; should not reveal &lt;em&gt;anything&lt;/em&gt; about the committed secret &lt;code&gt;value&lt;/code&gt;. You should not be able to see inside the envelope.&lt;/p&gt;
+&lt;h4 id=&#34;binding&#34;&gt;Binding&lt;/h4&gt;
+&lt;p&gt;Given a commitment &lt;code&gt;com = Commit(value_1, randomness_1)&lt;/code&gt; it should not be possible to find
+another valid opening, i.e. another &lt;code&gt;value_2&lt;/code&gt; and &lt;code&gt;randomness_2&lt;/code&gt; such that &lt;code&gt;com = Commit(value_2, randomness_2)&lt;/code&gt;, where we exclude the trivial &lt;code&gt;value_2 != value_1&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;hash-commitments&#34;&gt;Hash Commitments&lt;/h2&gt;
+&lt;p&gt;Now let&amp;rsquo;s turn to some ways to make real cryptographic commitment schemes.&lt;/p&gt;
+&lt;p&gt;We can make a commitment scheme from a collision-resistant hash function &lt;code&gt;H()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Our commitment will be generated by simply hashing our value and randomness:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;com = H(value, randomness)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;And then we can verify openings using:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;H(value, randomness) == com&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If H is collision-resistant, then the scheme is binding. Because if you can find
+a second valid opening, then you&amp;rsquo;ve found a collision in &lt;code&gt;H&lt;/code&gt; and it is not collision-resistant.&lt;/p&gt;
+&lt;p&gt;If H produces random outputs, then you learn nothing about &lt;code&gt;value&lt;/code&gt;, so the scheme is
+hiding.&lt;/p&gt;
+&lt;h2 id=&#34;pedersen-commitments&#34;&gt;Pedersen Commitments&lt;/h2&gt;
+&lt;p&gt;Given a finite cyclic group, such as an elliptic curve group, we can compute:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;com = Commit(value, randomness) = [value]G + [randomness]H&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;code&gt;G&lt;/code&gt; and &lt;code&gt;H&lt;/code&gt; are two points from the elliptic curve group, and &lt;code&gt;value&lt;/code&gt; and &lt;code&gt;randomness&lt;/code&gt; are scalars.&lt;/p&gt;
+&lt;p&gt;We get another elliptic curve point as a result.&lt;/p&gt;
+&lt;p&gt;We can then verify by checking:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;[value]G + [randomness]H == com&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;One handy feature about Pedersen commitments is that they are &lt;em&gt;homomorphically
+additive&lt;/em&gt;. This means when we add the commitments, we get the commitment of the sum of the values we committed to: all without knowing the secret values.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s show this. Given two commitments &lt;code&gt;com_1 = Commit(v_1, r_1)&lt;/code&gt; and &lt;code&gt;com_2 = Commit(v_2, r_2)&lt;/code&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;com_1 + com_2
+= [v_1]G + [r_1]H + [v_2]G + [r_2]H
+= [v_1 + v_2]G + [r_1 + r_2]H 
+= Commit(v_1 + v_2, r_1 + r_2)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We end up with the commitment to the sum of the input secret values.&lt;/p&gt;
+</description>
+                
+                
+                
+                
+                
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://www.redshiftzero.com/categories/cryptography/">Cryptography</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://www.redshiftzero.com/categories/commitment-schemes/">commitment schemes</category>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://www.redshiftzero.com/tags/cryptography/">cryptography</category>
+                                
+                            
+                        
+                    
+                
+            </item>
         
             <item>
                 <title>Getting started in Rust and WebAssembly</title>

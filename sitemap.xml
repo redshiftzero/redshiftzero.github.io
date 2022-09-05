@@ -3,7 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.redshiftzero.com/categories/</loc>
-    <lastmod>2022-09-05T18:11:09-04:00</lastmod>
+    <lastmod>2022-09-05T19:03:53-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/categories/commitment-schemes/</loc>
+    <lastmod>2022-09-05T19:03:53-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/post/commitments/</loc>
+    <lastmod>2022-09-05T19:03:53-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/tags/cryptography/</loc>
+    <lastmod>2022-09-05T19:03:53-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/categories/cryptography/</loc>
+    <lastmod>2022-09-05T19:03:53-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/post/</loc>
+    <lastmod>2022-09-05T19:03:53-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/</loc>
+    <lastmod>2022-09-05T19:03:53-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/tags/</loc>
+    <lastmod>2022-09-05T19:03:53-04:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/post/webassembly/</loc>
     <lastmod>2022-09-05T18:11:09-04:00</lastmod>
@@ -11,19 +32,10 @@
     <loc>https://www.redshiftzero.com/categories/post/</loc>
     <lastmod>2022-09-05T18:11:09-04:00</lastmod>
   </url><url>
-    <loc>https://www.redshiftzero.com/post/</loc>
-    <lastmod>2022-09-05T18:11:09-04:00</lastmod>
-  </url><url>
-    <loc>https://www.redshiftzero.com/</loc>
-    <lastmod>2022-09-05T18:33:46-04:00</lastmod>
-  </url><url>
     <loc>https://www.redshiftzero.com/tags/rust/</loc>
     <lastmod>2022-09-05T18:11:09-04:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/categories/rust/</loc>
-    <lastmod>2022-09-05T18:11:09-04:00</lastmod>
-  </url><url>
-    <loc>https://www.redshiftzero.com/tags/</loc>
     <lastmod>2022-09-05T18:11:09-04:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/tags/webassembly/</loc>
@@ -60,9 +72,6 @@
     <lastmod>2022-09-05T18:11:09-04:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/post/signal-group-multidevice/</loc>
-    <lastmod>2022-09-05T18:11:09-04:00</lastmod>
-  </url><url>
-    <loc>https://www.redshiftzero.com/tags/cryptography/</loc>
     <lastmod>2022-09-05T18:11:09-04:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/post/signal-protocol/</loc>
@@ -147,9 +156,6 @@
     <lastmod>2022-09-05T18:11:09-04:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/tags/block-ciphers/</loc>
-    <lastmod>2022-09-05T18:11:09-04:00</lastmod>
-  </url><url>
-    <loc>https://www.redshiftzero.com/categories/cryptography/</loc>
     <lastmod>2022-09-05T18:11:09-04:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/tags/cryptopals/</loc>
