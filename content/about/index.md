@@ -3,8 +3,7 @@ title = "About"
 date = "2018-02-09"
 +++
 
-Hello, I'm redshiftzero. I like physics and cryptography. Below is an incomplete list
-of some of my previous work.
+Hello, I'm redshiftzero. My interests span physics, cryptography, and civic technology. I currently work at Penumbra Labs on applied cryptography in Rust. Previously I've worked at Freedom of the Press Foundation as the lead developer of the SecureDrop project and a principal research engineer. Prior to that I was a postdoc researcher at the [Center for Data Science and Public Policy](http://www.datasciencepublicpolicy.org/) (now at Carnegie Mellon). I completed my Ph.D. in Astrophysics in 2015 at the University of Chicago's Kavli Institute of Cosmological Physics. 
 
 [Google Scholar](https://scholar.google.com/citations?user=OEcsdaQAAAAJ&hl=en)
 
@@ -14,56 +13,23 @@ of some of my previous work.
 
 [Youtube](https://youtube.com/redshiftzer0)
 
-## Professional Experience
-
-#### Penumbra Labs
-
-Core Engineer: September 2021-present
-
-#### Independent Consultant
-
-June-September 2021
-
-Consulting for private clients
-
-#### Freedom of the Press Foundation
-
-**Principal Research Engineer**, July 2020 - June 2021
-
-**SecureDrop Lead Developer**, July 2017 - June 2020
-
-**Ford-Mozilla Open Web Fellow**, September 2016 - June 2017
-
-#### Center for Data Science and Public Policy
-
-**Postdoctoral Researcher**, September 2015 - September 2016
-
-**Data Science for Social Good Technical Mentor**, June 2016 - August 2016
-
-**Data Science for Social Good Fellow**, June 2015 - August 2015
-
-## Teaching
-
-**University of Chicago**, PPHA 30530: Computation for Public Policy, Winter 2016. Graduate-level introductory data analysis course (Python, SQL) aimed at public policy students.
-
-## Education
-
-**University of Chicago**, Ph.D. Astrophysics, completed [June 2015](http://kicp.uchicago.edu/news/archive_2015.html#_431)
-
 ## Previous Projects
 
-* [SecureDrop](https://github.com/freedomofpress/securedrop). I was a maintainer (from 2016-2021) and previously was the project lead (from 2017-2020). This project is a whistleblowing platform used by news organizations to communicate with sources. The full list of sites using SecureDrop can be seen in the directory [here](https://securedrop.org/directory/).
-* [OpenOversight](https://github.com/lucyparsons/OpenOversight/). I started this project in 2016 and it's now maintained by LPL volunteers. This project is a webapp that makes it easier for the public to identify police officers, including for the purpose of complaints. It relies on crowdsourced and public data to build a database of police officers in a city. It is currently [in use](https://openoversight.com/browse) on the Burlington VT, Chicago, Oakland, Berkeley, and UC Berkeley Police Departments. The codebase is also used by [Portland](https://cops.photo) and [Baltimore](https://bpdwatch.com).
-* City of Cincinnati building code prediction (during 2015 Data Science for Social Good): [blog](https://dssg.uchicago.edu/project/proactive-blight-reduction-and-neighborhood-revitalization/) [GitHub repository](https://github.com/dssg/cincinnati2015-public)
+### Cryptography
+
+* [decaf377](https://github.com/penumbra-zone/decaf377): An elliptic-curve library in Rust - a prime-order group designed for use in SNARKs over BLS12-377. Work done while at Penumbra Labs.
+* [poseidon377](https://github.com/penumbra-zone/poseidon377): a suite of Rust crates for the Poseidon1 and Poseidon2 hash functions. Work done while at Penumbra Labs.
+
+### Astrophysics
+
+* [cosmocalc.rs](https://github.com/RustAstro/cosmocalc.rs): A library for computing cosmological distances in Rust.
+* [cosmowebapp](https://github.com/redshiftzero/cosmowebapp): A d3.js interactive visualization of cosmological (matter and CMB) power spectra. Joint with [Eric Baxter (Hawaii IfA)](https://ebaxter.github.io/). 
+
+###  Civic technology
+* [SecureDrop](https://github.com/freedomofpress/securedrop): A tool for news organizations to communicate with sources. The full list of organizations using SecureDrop can be seen in the directory [here](https://securedrop.org/directory/).
+* [OpenOversight](https://github.com/lucyparsons/OpenOversight/): A tool for police oversight [in use](https://openoversight.com/browse) on the Burlington VT, Chicago, Oakland, Berkeley, and UC Berkeley Police Departments, as well as in [Baltimore](https://bpdwatch.com).
+* City of Cincinnati building code prediction (during 2015 Data Science for Social Good): [blog](https://dssg.uchicago.edu/project/proactive-blight-reduction-and-neighborhood-revitalization/) [GitHub repository](https://github.com/dssg/cincinnati2015-public).
 * Data-Driven Early Intervention System for police departments: [GitHub repository](https://github.com/dssg/police-eis). Currently developed by [CMU](http://www.datasciencepublicpolicy.org/) and [Benchmark Analytics](https://www.benchmarkanalytics.com/).
-
-## Talks
-
-A subset of my talks, some others are on [Speakerdeck](https://speakerdeck.com/redshiftzero) and [Youtube](https://www.youtube.com/playlist?list=PLjngPlKikRFJHo2BBxLG-l0VC-cSlr7K8).
-
-[Next-Generation SecureDrop: Protecting Journalists from Malware](https://www.usenix.org/conference/enigma2020/program), USENIX Enigma 2020. [Video](https://www.youtube.com/watch?v=Z7BkdhO8P2I&list=PLjngPlKikRFJHo2BBxLG-l0VC-cSlr7K8&index=1).
-
-[Early Warning/Intervention Systems](https://academicworks.cuny.edu/cgi/viewcontent.cgi?article=1056&context=jj_pubs), National Association for Civilian Oversight of Law Enforcement (NACOLE) Symposium 2016 [Video](https://www.youtube.com/watch?v=PiIiIwBUj3U&list=PLjngPlKikRFJHo2BBxLG-l0VC-cSlr7K8&index=6).
 
 ## Papers
 
@@ -108,3 +74,15 @@ A subset of my talks, some others are on [Speakerdeck](https://speakerdeck.com/r
 * Coverage of predictive EIS: [Mother Jones](https://www.motherjones.com/politics/2016/07/data-prediction-police-misconduct-shootings/), [FiveThirtyEight](https://fivethirtyeight.com/features/we-now-have-algorithms-to-predict-police-misconduct/),
 [NPR](https://www.npr.org/sections/alltechconsidered/2016/07/19/486499835/can-big-data-help-head-off-police-misconduct), [wsoctv](https://www.wsoctv.com/news/local/charlotte-mecklenburg-police-using-technology-to-analyze-officers/719415686)
 * Coverage of Lucy Parsons Labs' OpenOversight: [Citylab](https://www.citylab.com/equity/2016/10/crowdsourcing-police-accountability/504650/), [Chicagoist](http://chicagoist.com/2016/10/26/from_new_oversight_agencies_to.php), [Washington Times](https://www.washingtontimes.com/news/2016/oct/20/openoversight-helps-public-identify-chicago-police/)
+
+## Teaching
+
+**University of Chicago**, PPHA 30530: Computation for Public Policy, Winter 2016. Graduate-level introductory data analysis course (Python, SQL) aimed at public policy students.
+
+## Talks
+
+A subset of my talks, some others are on [Speakerdeck](https://speakerdeck.com/redshiftzero) and [Youtube](https://www.youtube.com/playlist?list=PLjngPlKikRFJHo2BBxLG-l0VC-cSlr7K8).
+
+[Next-Generation SecureDrop: Protecting Journalists from Malware](https://www.usenix.org/conference/enigma2020/program), USENIX Enigma 2020. [Video](https://www.youtube.com/watch?v=Z7BkdhO8P2I&list=PLjngPlKikRFJHo2BBxLG-l0VC-cSlr7K8&index=1).
+
+[Early Warning/Intervention Systems](https://academicworks.cuny.edu/cgi/viewcontent.cgi?article=1056&context=jj_pubs), National Association for Civilian Oversight of Law Enforcement (NACOLE) Symposium 2016 [Video](https://www.youtube.com/watch?v=PiIiIwBUj3U&list=PLjngPlKikRFJHo2BBxLG-l0VC-cSlr7K8&index=6).
