@@ -3,7 +3,7 @@ title = "About"
 date = "2018-02-09"
 +++
 
-Hello, I'm redshiftzero. My interests span physics, cryptography, and civic technology. I currently work at Penumbra Labs on applied cryptography in Rust. Previously I've worked at Freedom of the Press Foundation as the lead developer of the SecureDrop project and a principal research engineer. Prior to that I was a postdoc researcher at the [Center for Data Science and Public Policy](http://www.datasciencepublicpolicy.org/) (now at Carnegie Mellon). I completed my Ph.D. in Astrophysics in 2015 at the University of Chicago's Kavli Institute of Cosmological Physics. 
+Hello, I'm redshiftzero. I'm an [independent researcher](https://relicveil.com) working on privacy and security projects. Previously I've worked at Penumbra Labs as a founding engineer working on the cryptography stack, and at Freedom of the Press Foundation as the lead developer of the SecureDrop project and then a principal research engineer. Prior to that I was a postdoc researcher at the [Center for Data Science and Public Policy](http://www.datasciencepublicpolicy.org/) (now at Carnegie Mellon). I completed my Ph.D. in Astrophysics in 2015 at the University of Chicago's Kavli Institute of Cosmological Physics.
 
 [Google Scholar](https://scholar.google.com/citations?user=OEcsdaQAAAAJ&hl=en)
 
@@ -23,13 +23,13 @@ Hello, I'm redshiftzero. My interests span physics, cryptography, and civic tech
 ### Astrophysics
 
 * [cosmocalc.rs](https://github.com/RustAstro/cosmocalc.rs): A library for computing cosmological distances in Rust.
-* [cosmowebapp](https://github.com/redshiftzero/cosmowebapp): A d3.js interactive visualization of cosmological (matter and CMB) power spectra. Joint with [Eric Baxter (Hawaii IfA)](https://ebaxter.github.io/). 
+* [cosmowebapp](https://github.com/redshiftzero/cosmowebapp): A d3.js interactive visualization of cosmological (matter and CMB) power spectra. Joint with [Eric Baxter (Hawaii IfA)](https://ebaxter.github.io/).
 
 ###  Civic technology
 * [SecureDrop](https://github.com/freedomofpress/securedrop): A tool for news organizations to communicate with sources. The full list of organizations using SecureDrop can be seen in the directory [here](https://securedrop.org/directory/).
 * [OpenOversight](https://github.com/lucyparsons/OpenOversight/): A tool for police oversight [in use](https://openoversight.com/browse) on the Burlington VT, Chicago, Oakland, Berkeley, and UC Berkeley Police Departments, as well as in [Baltimore](https://bpdwatch.com).
 * City of Cincinnati building code prediction (during 2015 Data Science for Social Good): [blog](https://dssg.uchicago.edu/project/proactive-blight-reduction-and-neighborhood-revitalization/) [GitHub repository](https://github.com/dssg/cincinnati2015-public).
-* Data-Driven Early Intervention System for police departments: [GitHub repository](https://github.com/dssg/police-eis). Currently developed by [CMU](http://www.datasciencepublicpolicy.org/) and [Benchmark Analytics](https://www.benchmarkanalytics.com/).
+* Data-Driven Early Intervention System for police departments: [GitHub repository](https://github.com/dssg/police-eis). Now developed by [CMU](http://www.datasciencepublicpolicy.org/) and commercialized by [Benchmark Analytics](https://www.benchmarkanalytics.com/).
 
 ## Papers
 
