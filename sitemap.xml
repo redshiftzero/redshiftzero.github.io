@@ -2,25 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://www.redshiftzero.com/post/zkproofs-intro/</loc>
-    <lastmod>2025-02-10T15:22:01-05:00</lastmod>
+    <loc>https://www.redshiftzero.com/post/utxo_privacy/</loc>
+    <lastmod>2025-03-09T11:04:37-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/tags/bitcoin/</loc>
+    <lastmod>2025-03-09T11:04:37-04:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/categories/</loc>
-    <lastmod>2025-02-10T15:22:01-05:00</lastmod>
+    <lastmod>2025-03-09T11:04:37-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/categories/cryptocurrency/</loc>
+    <lastmod>2025-03-09T11:04:37-04:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/tags/cryptography/</loc>
-    <lastmod>2025-02-10T15:22:01-05:00</lastmod>
+    <lastmod>2025-03-09T11:04:37-04:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/categories/cryptography/</loc>
-    <lastmod>2025-02-10T15:22:01-05:00</lastmod>
+    <lastmod>2025-03-09T11:04:37-04:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/post/</loc>
-    <lastmod>2025-02-10T15:22:01-05:00</lastmod>
+    <lastmod>2025-03-09T11:04:37-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/categories/post/</loc>
+    <lastmod>2025-03-09T11:04:37-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/tags/privacy/</loc>
+    <lastmod>2025-03-09T11:04:37-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/categories/privacy/</loc>
+    <lastmod>2025-03-09T11:04:37-04:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/</loc>
-    <lastmod>2025-02-10T15:26:13-05:00</lastmod>
+    <lastmod>2025-03-09T11:04:37-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/categories/security/</loc>
+    <lastmod>2025-03-09T11:04:37-04:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/tags/</loc>
+    <lastmod>2025-03-09T11:04:37-04:00</lastmod>
+  </url><url>
+    <loc>https://www.redshiftzero.com/post/zkproofs-intro/</loc>
     <lastmod>2025-02-10T15:22:01-05:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/categories/zero-knowledge-proofs/</loc>
@@ -39,9 +60,6 @@
     <lastmod>2025-02-10T15:22:01-05:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/post/webassembly/</loc>
-    <lastmod>2025-02-10T15:22:01-05:00</lastmod>
-  </url><url>
-    <loc>https://www.redshiftzero.com/categories/post/</loc>
     <lastmod>2025-02-10T15:22:01-05:00</lastmod>
   </url><url>
     <loc>https://www.redshiftzero.com/tags/rust/</loc>
