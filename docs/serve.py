@@ -12,7 +12,7 @@ from pathlib import Path
 def serve_site(port=8000):
     """Serve the static site on localhost"""
 
-    # Change to the static-site directory
+    # Change to the docs directory
     os.chdir(Path(__file__).parent)
 
     # Create server

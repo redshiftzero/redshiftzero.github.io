@@ -11,8 +11,7 @@ pip install python-frontmatter markdown
 ### Build Process
 
 1. **Run the build script**:
-   ```make
-   ```
+`make`
 
 2. **The script will**:
    - Copy all static assets (CSS, JS, images, etc.)
