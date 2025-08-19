@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>Visualizing Cosmological Power Spectra with d3.js | redshiftzero</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/modern.css" />
+
+    <!-- JavaScript -->
+    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" />
+    </noscript>
+
+    <!-- Meta tags -->
+    <meta name="author" content="" />
+    <meta name="description" content="Visualizing Cosmological Power Spectra with d3.js" />
+
+    <!-- Icons and manifest -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="redshiftzero" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="redshiftzero" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="/icons/mstile-150x150.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- RSS feeds -->
+    <link rel="alternate" type="application/atom+xml" href="https://www.redshiftzero.com/atom.xml"
+        title="redshiftzero" />
+    <link rel="alternate" type="application/rss+xml" href="https://www.redshiftzero.com/rss.xml" title="redshiftzero" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.redshiftzero.com/post/visualizing-cosmological-power-spectra/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Visualizing Cosmological Power Spectra with d3.js | redshiftzero" />
+    <meta property="og:description" content="Visualizing Cosmological Power Spectra with d3.js" />
+    <meta property="og:url" content="https://www.redshiftzero.com/post/visualizing-cosmological-power-spectra/" />
+    <meta property="og:site_name" content="redshiftzero" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:image" content="https://www.redshiftzero.com/icons/apple-touch-icon.png" />
+    <meta property="og:type" content="article" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@redshiftzero" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "datePublished": "2018-03-30T00:00:00",
+        "dateModified": "2018-03-30T00:00:00",
+        "url": "https://www.redshiftzero.com/post/visualizing-cosmological-power-spectra/",
+        "description": "Visualizing Cosmological Power Spectra with d3.js",
+        "image": "https://www.redshiftzero.com/icons/apple-touch-icon.png",
+        "author": {
+            "@type": "Person",
+            "url": "https://www.redshiftzero.com/"
+        },
+        "license": "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)",
+        "name": "Visualizing Cosmological Power Spectra with d3.js | redshiftzero"
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-wrapper">
+                <div class="header-inner single">
+                    <div class="site-brand">
+                        <a href="/" class="brand">redshiftzero</a>
+                    </div>
+
+                    <nav class="nav">
+                        <ul class="menu" id="menu">
+
+                            <li class="menu-item"><a href="/archive/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" class="icon archive">
+                                        <path
+                                            d="M32 32C14.3 32 0 46.3 0 64s14.3 32 32 32h32v32H32C14.3 128 0 142.3 0 160s14.3 32 32 32h32v32H32C14.3 224 0 238.3 0 256s14.3 32 32 32h32v32H32C14.3 320 0 334.3 0 352s14.3 32 32 32h32v32H32C14.3 416 0 430.3 0 448s14.3 32 32 32h448c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32V96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM96 96h320v320H96V96z" />
+                                    </svg><span class="menu-item-name">Archive</span></a></li>
+                            <li class="menu-item"><a href="/about/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 496 512" class="icon user-circle">
+                                        <path
+                                            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z" />
+                                    </svg><span class="menu-item-name">About</span></a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+            <label for="nav-toggle" class="nav-toggle"></label>
+            <label for="nav-toggle" class="nav-curtain"></label>
+        </header>
+
+        <!-- Main content -->
+        <main class="main single" id="main">
+            <div class="main-inner">
+                
+                <article class="content post h-entry">
+                    <h1 class="post-title p-name">Visualizing Cosmological Power Spectra with d3.js</h1>
+
+                    <div class="post-meta">
+                        <time datetime="2018-03-30T00:00:00" class="post-meta-item published dt-published">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon">
+                                <path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/>
+                            </svg> 2018.03.30
+                        </time>
+                    </div>
+
+                    <div class="post-body e-content">
+                        <p>Cosmologists make observations of galaxies and radiation in the universe to constrain parameters of the <a href="https://en.wikipedia.org/wiki/Lambda-CDM_model">Lambda CDM model </a>, which is the model that best describes our current understanding of the universe.
+These cosmological parameters include quantities like &Omega;<sub>m</sub> and &Omega;<sub>&Lambda;</sub>,
+which describe the matter and <a href="https://en.wikipedia.org/wiki/Dark_energy">dark energy</a> content of the universe respectively.</p>
+<p>Two key observables that constrain these parameters are the <strong>matter power spectrum</strong> and the <strong>angular power spectrum of the Cosmic Microwave Background</strong> (CMB) radiation. Let's briefly go over what each of these observables describes.</p>
+<h2 id="matter-power-spectrum">Matter Power Spectrum</h2>
+<p><img alt="Matter power spectrum" src="/img/p_k.png" /></p>
+<p>The matter power spectrum - <em>P(k)</em> - describes the large scale structure of the universe - it tells us
+on which scales matter is distributed. <em>P(k)</em> is a function of <em>wavenumber</em> <em>k</em> which <em>k</em> corresponds
+to inverse scale - so <em>increasing</em> wavenumber means <em>decreasing</em> scale.</p>
+<p>For example, using <a href="https://redshiftzero.github.io/cosmowebapp/">the visualization</a>, we can see that by increasing the matter content of the universe, we
+increase the power at large wavenumber, which corresponds to smaller scales.
+This occurs due to enhanced structure formation as a result of the additional matter content.</p>
+<h2 id="cmb-angular-power-spectrum">CMB Angular Power Spectrum</h2>
+<p><img alt="CMB" src="/img/cmb.png" /></p>
+<p>The Cosmic Microwave Background (CMB) radiation was produced only ~100,000 years after the Big Bang, and gives us information about the universe at these early times. One observable from this radiation is the CMB angular power spectrum, which describes anisotropies in the temperature of the CMB radiation as a function of <em>angular scale</em>. Since this temperature anisotropy is defined over a sphere, the temperature anisotropy is separated out into angular scales using a multipole expansion (to read how this multipole expansion is done in detail, check out <a href="http://www.helsinki.fi/~hkurkisu/cpt/Cosmo12.pdf">these notes (PDF)</a>). The spectrum <em>C<sub>ℓ</sub></em> (plotted as <em>ℓ(ℓ+1)C<sub>ℓ</sub></em>) is a function of multipole <em>ℓ</em>, so <em><em>increasing</em></em> multipole corresponds to <em>decreasing</em> angular scales.</p>
+<h2 id="visualizing-power-spectra">Visualizing Power Spectra</h2>
+<p><em>Note: This visualization was created in collaboration with <a href="https://ebaxter.github.io/">Eric Baxter</a>, astrophysics postdoc at UPenn.</em></p>
+<p>To visualize how these power spectra change as a function of cosmological parameters,
+we used <code>d3.js</code>, a popular JavaScript library for creating interactive visualizations.</p>
+<h2 id="launch-the-visualization-here"><center><a href="https://redshiftzero.github.io/cosmowebapp/">Launch the visualization here!</a></center></h2>
+<p>As the user moves a given slider, the spectra are updated by linearly interpolating between the nearest pre-computed spectra.
+To create the pre-computed spectra, we used <a href="https://camb.info/">CAMB</a>, a software package for computing power spectra based on input cosmological parameters to generate power and CMB spectra around a fiducial value. We selected a fiducial model from the <a href="https://arxiv.org/pdf/1502.01589.pdf">2015 results from the Planck Collaboration (PDF)</a>. The universe was kept spatially flat (i.e. &Omega;<sub>m</sub> + &Omega;<sub>&Lambda;</sub> = 1) both because it is a well established constraint and to reduce the amount of data that we needed to generate with CAMB.</p>
+<p>If you'd like to check out the code, it's available <a href="https://github.com/redshiftzero/cosmowebapp">here on GitHub</a>. If you'd like to learn more about the effect of cosmological parameters on the power spectra, check out <a href="http://background.uchicago.edu/~whu/intermediate/intermediate.html">this tutorial</a>.</p>
+                    </div>
+                </article>
+            
+            </div>
+        </main>
+
+        <!-- Back to top -->
+        <div id="back-to-top" class="back-to-top">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon arrow-up">
+                    <path
+                        d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z" />
+                </svg></a>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer" class="footer">
+            <div class="footer-inner">
+                <div class="site-info">© 2025 Jennifer Helsby</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MathJax -->
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    load: ['[tex]/mhchem']
+                },
+                tex: {
+                    inlineMath: { '[+]': [['$', '$']] },
+                    tags: 'ams',
+                    packages: { '[+]': ['mhchem'] }
+                }
+            };
+            (function () {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+
+    <!-- Medium Zoom -->
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+    <script>
+        let imgNodes = document.querySelectorAll('div.post-body img');
+        imgNodes = Array.from(imgNodes).filter(node => node.parentNode.tagName !== "A");
+
+        mediumZoom(imgNodes, {
+            background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+        })
+    </script>
+
+    <!-- Instant Page -->
+    <script src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js" type="module" defer></script>
+</body>
+
+</html>

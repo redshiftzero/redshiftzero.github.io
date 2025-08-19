@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>Bringing Zero-Knowledge Proofs to Penumbra | redshiftzero</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/modern.css" />
+
+    <!-- JavaScript -->
+    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" />
+    </noscript>
+
+    <!-- Meta tags -->
+    <meta name="author" content="" />
+    <meta name="description" content="Bringing Zero-Knowledge Proofs to Penumbra" />
+
+    <!-- Icons and manifest -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="redshiftzero" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="redshiftzero" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="/icons/mstile-150x150.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- RSS feeds -->
+    <link rel="alternate" type="application/atom+xml" href="https://www.redshiftzero.com/atom.xml"
+        title="redshiftzero" />
+    <link rel="alternate" type="application/rss+xml" href="https://www.redshiftzero.com/rss.xml" title="redshiftzero" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.redshiftzero.com/post/zkproofs-intro/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Bringing Zero-Knowledge Proofs to Penumbra | redshiftzero" />
+    <meta property="og:description" content="Bringing Zero-Knowledge Proofs to Penumbra" />
+    <meta property="og:url" content="https://www.redshiftzero.com/post/zkproofs-intro/" />
+    <meta property="og:site_name" content="redshiftzero" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:image" content="https://www.redshiftzero.com/icons/apple-touch-icon.png" />
+    <meta property="og:type" content="article" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@redshiftzero" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "datePublished": "2023-03-07T18:50:23",
+        "dateModified": "2023-03-07T18:50:23",
+        "url": "https://www.redshiftzero.com/post/zkproofs-intro/",
+        "description": "Bringing Zero-Knowledge Proofs to Penumbra",
+        "image": "https://www.redshiftzero.com/icons/apple-touch-icon.png",
+        "author": {
+            "@type": "Person",
+            "url": "https://www.redshiftzero.com/"
+        },
+        "license": "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)",
+        "name": "Bringing Zero-Knowledge Proofs to Penumbra | redshiftzero"
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-wrapper">
+                <div class="header-inner single">
+                    <div class="site-brand">
+                        <a href="/" class="brand">redshiftzero</a>
+                    </div>
+
+                    <nav class="nav">
+                        <ul class="menu" id="menu">
+
+                            <li class="menu-item"><a href="/archive/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" class="icon archive">
+                                        <path
+                                            d="M32 32C14.3 32 0 46.3 0 64s14.3 32 32 32h32v32H32C14.3 128 0 142.3 0 160s14.3 32 32 32h32v32H32C14.3 224 0 238.3 0 256s14.3 32 32 32h32v32H32C14.3 320 0 334.3 0 352s14.3 32 32 32h32v32H32C14.3 416 0 430.3 0 448s14.3 32 32 32h448c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32V96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM96 96h320v320H96V96z" />
+                                    </svg><span class="menu-item-name">Archive</span></a></li>
+                            <li class="menu-item"><a href="/about/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 496 512" class="icon user-circle">
+                                        <path
+                                            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z" />
+                                    </svg><span class="menu-item-name">About</span></a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+            <label for="nav-toggle" class="nav-toggle"></label>
+            <label for="nav-toggle" class="nav-curtain"></label>
+        </header>
+
+        <!-- Main content -->
+        <main class="main single" id="main">
+            <div class="main-inner">
+                
+                <article class="content post h-entry">
+                    <h1 class="post-title p-name">Bringing Zero-Knowledge Proofs to Penumbra</h1>
+
+                    <div class="post-meta">
+                        <time datetime="2023-03-07T18:50:23" class="post-meta-item published dt-published">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon">
+                                <path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/>
+                            </svg> 2023.03.07
+                        </time>
+                    </div>
+
+                    <div class="post-body e-content">
+                        <p>Shielded blockchains like Penumbra provide privacy through the use of zero-knowledge proofs (ZKPs): actions that change the public chain state can be verified <em>without</em> providing the underlying private data. </p>
+<p><em>Note: I wrote this blog for the Penumbra Labs site. Below is an abbreviated version. You can see the original post <a href="https://penumbra.zone/blog/zkproofs-intro/">here</a>.</em></p>
+<h3 id="transparent-proofs">Transparent "Proofs"</h3>
+<p><a href="https://penumbra.zone/blog/how-were-building-penumbra/">Our plan</a> for implementing Penumbra has been to use an approach which allows quick iterations on the design of the system without spending significant effort each iteration to update zero-knowledge circuits. To ensure that the design of the system was kept compatible with zero-knowledge proofs, each action had a “transparent proof”, for example for spending notes:</p>
+<pre class="codehilite"><code class="language-Rust">/// Transparent proof for spending existing notes.
+///
+/// This structure keeps track of the auxiliary (private) inputs.
+#[derive(Clone, Debug)]
+pub struct SpendProof {
+   // Inclusion proof for the note commitment.
+   pub state_commitment_proof: tct::Proof,
+   // The note being spent.
+   pub note: Note,
+   // The blinding factor used for generating the value commitment.
+   pub v_blinding: Fr,
+   // The randomizer used for generating the randomized spend auth key.
+   pub spend_auth_randomizer: Fr,
+   // The spend authorization key.
+   pub ak: VerificationKey&lt;SpendAuth&gt;,
+   // The nullifier deriving key.
+   pub nk: keys::NullifierKey,
+}
+
+
+impl SpendProof {
+   /// Called to verify the proof using the provided public inputs.
+   ///
+   /// The public inputs are:
+   /// * the merkle root of the state commitment tree,
+   /// * value commitment of the note to be spent,
+   /// * nullifier of the note to be spent,
+   /// * the randomized verification spend key,
+   pub fn verify(
+       &amp;self,
+       anchor: tct::Root,
+       balance_commitment: balance::Commitment,
+       nullifier: Nullifier,
+       rk: VerificationKey&lt;SpendAuth&gt;,
+   ) -&gt; anyhow::Result&lt;()&gt; {
+      // ...
+}
+</code></pre>
+
+<p>This <code>SpendProof</code> struct trivially stored the witnesses in cleartext. The prover created this struct, and sent it to the node, where a verification method was called using the public inputs provided in the transaction. The verification method did all the integrity checks the real proof would: verifying the Merkle path, checking the prover had an opening of the public commitment, and so on. This did <em>not</em> provide privacy, but it let us rapidly prototype the system while refining the protocol design, with assurance that when our requirements became stable, we could fill in the proofs.</p>
+<h3 id="zero-knowledge">Zero-Knowledge</h3>
+<p>As we approach mainnet and the system functionality becomes stable, we began migrating from transparent proofs to zero-knowledge proofs starting with <a href="https://github.com/penumbra-zone/penumbra/releases/tag/046-lysithea">testnet 46, codenamed Lysithea</a>, released on February 27th, 2023. Now that Penumbra’s multi-asset shielded pool is stable, that release migrated outputs (actions that create new notes) and spends (actions that consume existing notes) to use zero-knowledge proofs. Interaction with Penumbra’s DEX, governance, and staking systems will follow. </p>
+<p>One of Penumbra’s design goals is to create a usable privacy system. That means fast proving times: at mainnet we’re aiming for proving times below one second on end-user devices. We can do this by performing the proving for all actions concurrently and by using Groth16. For Penumbra’s initial ZKPs, we use the pairing-friendly BLS12-377 proving curve and the <a href="https://github.com/arkworks-rs/groth16">Arkworks implementation of the Groth16 proving system</a>. It has excellent out-of-the-box performance even before optimization: on an M1 macbook, transactions with three actions (one spend, two outputs) typically take under 1.3s to generate. We also get the benefits of very small proof size and using a mature system that has been in production for years.</p>
+<p>A disadvantage of Groth16 is that it requires a circuit-specific setup, meaning each time we change our proof statements, we need to re-run a decentralized setup procedure to generate new parameters for the prover and verifier. The requirement for this process is there is at least one honest participant in the setup, thus motivating a large setup process involving many participants. Stay tuned for more details on the setup procedure and how you can participate!</p>
+<p>Our Spend proof from above now looks like this:</p>
+<pre class="codehilite"><code class="language-Rust">pub struct SpendProof(Proof&lt;Bls12_377&gt;);
+
+
+impl SpendProof {
+   pub fn prove&lt;R: CryptoRng + Rng&gt;(
+       rng: &amp;mut R,
+       pk: &amp;ProvingKey&lt;Bls12_377&gt;,
+       state_commitment_proof: tct::Proof,
+       note: Note,
+       v_blinding: Fr,
+       spend_auth_randomizer: Fr,
+       ak: VerificationKey&lt;SpendAuth&gt;,
+       nk: NullifierKey,
+       anchor: tct::Root,
+       balance_commitment: balance::Commitment,
+       nullifier: Nullifier,
+       rk: VerificationKey&lt;SpendAuth&gt;,
+   ) -&gt; anyhow::Result&lt;Self&gt; {
+       let circuit = SpendCircuit {
+           state_commitment_proof,
+           note,
+           v_blinding,
+           spend_auth_randomizer,
+           ak,
+           nk,
+           anchor,
+           balance_commitment,
+           nullifier,
+           rk,
+       };
+       let proof = Groth16::prove(pk, circuit, rng).map_err(|err| anyhow::anyhow!(err))?;
+       Ok(Self(proof))
+   }
+
+
+   /// Called to verify the proof using the provided public inputs.
+   pub fn verify(
+       &amp;self,
+       vk: &amp;PreparedVerifyingKey&lt;Bls12_377&gt;,
+       anchor: tct::Root,
+       balance_commitment: balance::Commitment,
+       nullifier: Nullifier,
+       rk: VerificationKey&lt;SpendAuth&gt;,
+   ) -&gt; anyhow::Result&lt;()&gt; {
+      // ...
+   }
+}
+</code></pre>
+
+<p>Our ZK proofs are now just three group elements in size. The prover uses provided proving parameters (type <code>ProvingKey&lt;Bls12_377&gt;</code>), which we distribute via a <code>penumbra-proof-params</code> crate, to create the proof using their private witnesses and public inputs. The verifier uses the corresponding verifying key (type <code>PreparedVerifyingKey&lt;Bls12_377&gt;</code>) in order to verify the proofs on the node using the public inputs provided in the transaction. </p>
+<h3 id="circuit-programming">Circuit Programming</h3>
+<p>To generate the circuit for each action, we first need to represent the statements we want to prove - for example that the prover knows an opening of a specific public commitment - in a way that our proving system can understand. For Groth16 proofs, this means representing all statements to be proved in-circuit as a rank-1 constraint system (R1CS). We need to be able to write down elliptic curve operations, hash function evaluations and so on, as a number of constraint equations that are simple linear combinations of field element variables.</p>
+<p>Several of our dependencies now have this R1CS functionality: <a href="https://github.com/penumbra-zone/decaf377"><code>decaf377</code></a>, <a href="https://github.com/penumbra-zone/poseidon377"><code>poseidon377</code></a>, and <a href="https://github.com/penumbra-zone/penumbra/tree/main/tct/src"><code>penumbra-tct</code></a> all have an optional <code>r1cs</code> feature, while <code>penumbra-crypto</code> has R1CS functionality inline next to each type that needs to be represented in-circuit. This lets us do elliptic curve operations, SNARK-friendly hashing, and all other operations in-circuit. For example, here is the type that represents in-circuit which path a node in our <a href="https://penumbra.zone/blog/tiered-commitment-tree">tiered commitment tree</a> can take:</p>
+<pre class="codehilite"><code class="language-Rust">/// Represents the different paths a quadtree node can take.
+///
+/// A bundle of boolean R1CS constraints representing the path.
+pub struct WhichWayVar {
+    /// The node is the leftmost (0th) child.
+    pub is_leftmost: Boolean&lt;Fq&gt;,
+    /// The node is the left (1st) child.
+    pub is_left: Boolean&lt;Fq&gt;,
+    /// The node is the right (2nd) child.
+    pub is_right: Boolean&lt;Fq&gt;,
+    /// The node is the rightmost (3rd) child.
+    pub is_rightmost: Boolean&lt;Fq&gt;,
+}
+</code></pre>
+
+<p>We can see in-circuit the path of the node at a given height is represented by four boolean constraints. The <code>Fq</code> type here just represents the type of the field elements used by the proving system.</p>
+<p>These R1CS types are used during constraint synthesis. We write Rust code to define types that define bundles of constraints. We then use those types along with the Arkworks <code>ConstraintSystem&lt;Fq&gt;</code>, which internally keeps track of all the R1CS constraints we build up by:
+* allocating witness or input variables, 
+* defining constants, or 
+* performing an operation on defined variables or constants.  </p>
+<p>An upstream Arkworks trait called <code>ConstraintSynthesizer</code> is implemented for each of our circuit/actions. Here’s part of the implementation for our Spend circuit:</p>
+<pre class="codehilite"><code class="language-Rust">impl ConstraintSynthesizer&lt;Fq&gt; for SpendCircuit {
+  fn generate_constraints(self, cs: ConstraintSystemRef&lt;Fq&gt;) -&gt; ark_relations::r1cs::Result&lt;()&gt; {
+    // Witnesses
+    let note_var = note::NoteVar::new_witness(cs.clone(), || Ok(self.note.clone()))?;
+    …
+    let v_blinding_vars = UInt8::new_witness_vec(cs.clone(), self.v_blinding.to_bytes())?;
+
+    // Public inputs
+    let claimed_balance_commitment_var =
+    BalanceCommitmentVar::new_input(cs.clone(), || Ok(self.balance_commitment))?;
+      …
+
+    // Check integrity of balance commitment.
+    let balance_commitment = note_var.value().commit(v_blinding_vars)?;
+    balance_commitment
+    .enforce_equal(&amp;claimed_balance_commitment_var)?;
+
+    // ...
+
+    Ok(())
+  }
+}
+</code></pre>
+
+<p>In our abridged and slightly simplified constraint synthesis example here, we can see that we first witness a <code>NoteVar</code>, providing a reference to the underlying constraint system. This allocates a variable in-circuit, adding constraints as we go. </p>
+<p>Next, we define a public balance commitment, which represents a commitment to the value balance of this action. The public balance commitment we call <code>claimed_balance_commitment_var</code> as it represents the public value of the balance commitment: the verifier needs to certify that the balance commitment was computed correctly, using private variables it does not have access to on the <code>NoteVar</code>. The prover adds constraints to demonstrate that by calling <code>commit</code> on the value of the <code>NoteVar</code>, and adding constraints that the output of the <code>commit</code> method must be equal to the corresponding public input. </p>
+<p>In a similar fashion, we can build up all constraints in an ergonomic manner by writing regular Rust code. </p>
+                    </div>
+                </article>
+            
+            </div>
+        </main>
+
+        <!-- Back to top -->
+        <div id="back-to-top" class="back-to-top">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon arrow-up">
+                    <path
+                        d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z" />
+                </svg></a>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer" class="footer">
+            <div class="footer-inner">
+                <div class="site-info">© 2025 Jennifer Helsby</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MathJax -->
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    load: ['[tex]/mhchem']
+                },
+                tex: {
+                    inlineMath: { '[+]': [['$', '$']] },
+                    tags: 'ams',
+                    packages: { '[+]': ['mhchem'] }
+                }
+            };
+            (function () {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+
+    <!-- Medium Zoom -->
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+    <script>
+        let imgNodes = document.querySelectorAll('div.post-body img');
+        imgNodes = Array.from(imgNodes).filter(node => node.parentNode.tagName !== "A");
+
+        mediumZoom(imgNodes, {
+            background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+        })
+    </script>
+
+    <!-- Instant Page -->
+    <script src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js" type="module" defer></script>
+</body>
+
+</html>

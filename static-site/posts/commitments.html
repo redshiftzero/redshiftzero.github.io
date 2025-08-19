@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>Commitment Schemes 101 | redshiftzero</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/modern.css" />
+
+    <!-- JavaScript -->
+    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" />
+    </noscript>
+
+    <!-- Meta tags -->
+    <meta name="author" content="" />
+    <meta name="description" content="Commitment Schemes 101" />
+
+    <!-- Icons and manifest -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="redshiftzero" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="redshiftzero" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="/icons/mstile-150x150.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- RSS feeds -->
+    <link rel="alternate" type="application/atom+xml" href="https://www.redshiftzero.com/atom.xml"
+        title="redshiftzero" />
+    <link rel="alternate" type="application/rss+xml" href="https://www.redshiftzero.com/rss.xml" title="redshiftzero" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.redshiftzero.com/post/commitments/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Commitment Schemes 101 | redshiftzero" />
+    <meta property="og:description" content="Commitment Schemes 101" />
+    <meta property="og:url" content="https://www.redshiftzero.com/post/commitments/" />
+    <meta property="og:site_name" content="redshiftzero" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:image" content="https://www.redshiftzero.com/icons/apple-touch-icon.png" />
+    <meta property="og:type" content="article" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@redshiftzero" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "datePublished": "2022-09-05T18:50:23",
+        "dateModified": "2022-09-05T18:50:23",
+        "url": "https://www.redshiftzero.com/post/commitments/",
+        "description": "Commitment Schemes 101",
+        "image": "https://www.redshiftzero.com/icons/apple-touch-icon.png",
+        "author": {
+            "@type": "Person",
+            "url": "https://www.redshiftzero.com/"
+        },
+        "license": "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)",
+        "name": "Commitment Schemes 101 | redshiftzero"
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-wrapper">
+                <div class="header-inner single">
+                    <div class="site-brand">
+                        <a href="/" class="brand">redshiftzero</a>
+                    </div>
+
+                    <nav class="nav">
+                        <ul class="menu" id="menu">
+
+                            <li class="menu-item"><a href="/archive/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" class="icon archive">
+                                        <path
+                                            d="M32 32C14.3 32 0 46.3 0 64s14.3 32 32 32h32v32H32C14.3 128 0 142.3 0 160s14.3 32 32 32h32v32H32C14.3 224 0 238.3 0 256s14.3 32 32 32h32v32H32C14.3 320 0 334.3 0 352s14.3 32 32 32h32v32H32C14.3 416 0 430.3 0 448s14.3 32 32 32h448c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32V96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM96 96h320v320H96V96z" />
+                                    </svg><span class="menu-item-name">Archive</span></a></li>
+                            <li class="menu-item"><a href="/about/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 496 512" class="icon user-circle">
+                                        <path
+                                            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z" />
+                                    </svg><span class="menu-item-name">About</span></a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+            <label for="nav-toggle" class="nav-toggle"></label>
+            <label for="nav-toggle" class="nav-curtain"></label>
+        </header>
+
+        <!-- Main content -->
+        <main class="main single" id="main">
+            <div class="main-inner">
+                
+                <article class="content post h-entry">
+                    <h1 class="post-title p-name">Commitment Schemes 101</h1>
+
+                    <div class="post-meta">
+                        <time datetime="2022-09-05T18:50:23" class="post-meta-item published dt-published">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon">
+                                <path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/>
+                            </svg> 2022.09.05
+                        </time>
+                    </div>
+
+                    <div class="post-body e-content">
+                        <p>This is a simple explanation of cryptographic <em>commitment schemes</em>, requiring minimal math or
+cryptography background.</p>
+<h2 id="what-is-a-commitment-scheme">What is a commitment scheme?</h2>
+<p>A commitment scheme is effectively a cryptographic envelope. I can put a secret value in an envelope and then seal the envelope. We call this <em>committing</em> to the secret value. And then
+I send the envelope to someone or put it somewhere I cannot tamper with it, to open
+and reveal the secret value I committed to at some later time.</p>
+<p>The two important properties of this scheme are:</p>
+<ul>
+<li><strong>Hiding</strong>: No one can see inside the envelope until it is opened.</li>
+<li><strong>Binding</strong>: Once I have commited to this secret value and sent it, I cannot
+change the value. The commitment has <em>bound</em> me to a specific value.</li>
+</ul>
+<p>This is an imperfect analogy, but it gets across these two important
+properties of commitment schemes.</p>
+<h2 id="cryptographic-commitments">Cryptographic Commitments</h2>
+<p>For <em>cryptographic</em> commitments, we're going to need two algorithms: <code>Commit</code> and <code>Verify</code>. Let's go through each one now.</p>
+<h3 id="commit"><code>Commit</code></h3>
+<p>The <code>Commit</code> algorithm lets us create commitments. Let's call a commitment <code>com</code>. To commit to a value <code>value</code>:</p>
+<p><code>com = Commit(value, randomness)</code></p>
+<p>where <code>randomness</code> is another secret value, but one picked randomly, hence the name. The result <code>com</code> is what we'll send or broadcast, i.e. <code>com</code> is our sealed envelope.</p>
+<h3 id="verify"><code>Verify</code></h3>
+<p>When we're ready to open the commitment, anyone can verify the commitment
+was opened correctly once they get the values for <code>value</code> and <code>randomness</code>:</p>
+<p><code>Verify(value, com, randomness) = [accept, reject]</code></p>
+<p>The result of the <code>Verify</code> algorithm is either to accept or reject the opening as valid.</p>
+<h3 id="hiding-and-binding">Hiding and Binding</h3>
+<p>Remember that we wanted our commitment scheme to share the security properties
+as the toy example: hiding and binding. For this cryptographic scheme, what
+does this mean a bit more concretely?</p>
+<h4 id="hiding">Hiding</h4>
+<p><code>com</code> should not reveal <em>anything</em> about the committed secret <code>value</code>. You should not be able to see inside the envelope.</p>
+<h4 id="binding">Binding</h4>
+<p>Given a commitment <code>com = Commit(value_1, randomness_1)</code> it should not be possible to find
+another valid opening, i.e. another <code>value_2</code> and <code>randomness_2</code> such that <code>com = Commit(value_2, randomness_2)</code>, where we exclude the trivial <code>value_2 != value_1</code>.</p>
+<h2 id="hash-commitments">Hash Commitments</h2>
+<p>Now let's turn to some ways to make real cryptographic commitment schemes.</p>
+<p>We can make a commitment scheme from a collision-resistant hash function <code>H()</code>.</p>
+<p>Our commitment will be generated by simply hashing our value and randomness:</p>
+<p><code>com = H(value, randomness)</code></p>
+<p>And then we can verify openings using:</p>
+<p><code>H(value, randomness) == com</code></p>
+<p>If H is collision-resistant, then the scheme is binding. Because if you can find
+a second valid opening, then you've found a collision in <code>H</code> and it is not collision-resistant.</p>
+<p>If H produces random outputs, then you learn nothing about <code>value</code>, so the scheme is
+hiding.</p>
+<h2 id="pedersen-commitments">Pedersen Commitments</h2>
+<p>Given a finite cyclic group, such as an elliptic curve group, we can compute:</p>
+<p><code>com = Commit(value, randomness) = [value]G + [randomness]H</code></p>
+<p>where <code>G</code> and <code>H</code> are two points from the elliptic curve group, and <code>value</code> and <code>randomness</code> are scalars.</p>
+<p>We get another elliptic curve point as a result.</p>
+<p>We can then verify by checking:</p>
+<p><code>[value]G + [randomness]H == com</code></p>
+<p>One handy feature about Pedersen commitments is that they are <em>homomorphically
+additive</em>. This means when we add the commitments, we get the commitment of the sum of the values we committed to: all without knowing the secret values.</p>
+<p>Let's show this. Given two commitments <code>com_1 = Commit(v_1, r_1)</code> and <code>com_2 = Commit(v_2, r_2)</code>:</p>
+<pre class="codehilite"><code>com_1 + com_2
+= [v_1]G + [r_1]H + [v_2]G + [r_2]H
+= [v_1 + v_2]G + [r_1 + r_2]H 
+= Commit(v_1 + v_2, r_1 + r_2)
+</code></pre>
+
+<p>We end up with the commitment to the sum of the input secret values.</p>
+                    </div>
+                </article>
+            
+            </div>
+        </main>
+
+        <!-- Back to top -->
+        <div id="back-to-top" class="back-to-top">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon arrow-up">
+                    <path
+                        d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z" />
+                </svg></a>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer" class="footer">
+            <div class="footer-inner">
+                <div class="site-info">© 2025 Jennifer Helsby</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MathJax -->
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    load: ['[tex]/mhchem']
+                },
+                tex: {
+                    inlineMath: { '[+]': [['$', '$']] },
+                    tags: 'ams',
+                    packages: { '[+]': ['mhchem'] }
+                }
+            };
+            (function () {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+
+    <!-- Medium Zoom -->
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+    <script>
+        let imgNodes = document.querySelectorAll('div.post-body img');
+        imgNodes = Array.from(imgNodes).filter(node => node.parentNode.tagName !== "A");
+
+        mediumZoom(imgNodes, {
+            background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+        })
+    </script>
+
+    <!-- Instant Page -->
+    <script src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js" type="module" defer></script>
+</body>
+
+</html>

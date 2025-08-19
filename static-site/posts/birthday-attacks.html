@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>Collision attacks and the birthday paradox | redshiftzero</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/modern.css" />
+
+    <!-- JavaScript -->
+    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" />
+    </noscript>
+
+    <!-- Meta tags -->
+    <meta name="author" content="" />
+    <meta name="description" content="Collision attacks and the birthday paradox" />
+
+    <!-- Icons and manifest -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="redshiftzero" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="redshiftzero" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="/icons/mstile-150x150.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- RSS feeds -->
+    <link rel="alternate" type="application/atom+xml" href="https://www.redshiftzero.com/atom.xml"
+        title="redshiftzero" />
+    <link rel="alternate" type="application/rss+xml" href="https://www.redshiftzero.com/rss.xml" title="redshiftzero" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.redshiftzero.com/post/birthday-attacks/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Collision attacks and the birthday paradox | redshiftzero" />
+    <meta property="og:description" content="Collision attacks and the birthday paradox" />
+    <meta property="og:url" content="https://www.redshiftzero.com/post/birthday-attacks/" />
+    <meta property="og:site_name" content="redshiftzero" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:image" content="https://www.redshiftzero.com/icons/apple-touch-icon.png" />
+    <meta property="og:type" content="article" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@redshiftzero" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "datePublished": "2019-05-19T00:00:00",
+        "dateModified": "2019-05-19T00:00:00",
+        "url": "https://www.redshiftzero.com/post/birthday-attacks/",
+        "description": "Collision attacks and the birthday paradox",
+        "image": "https://www.redshiftzero.com/icons/apple-touch-icon.png",
+        "author": {
+            "@type": "Person",
+            "url": "https://www.redshiftzero.com/"
+        },
+        "license": "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)",
+        "name": "Collision attacks and the birthday paradox | redshiftzero"
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-wrapper">
+                <div class="header-inner single">
+                    <div class="site-brand">
+                        <a href="/" class="brand">redshiftzero</a>
+                    </div>
+
+                    <nav class="nav">
+                        <ul class="menu" id="menu">
+
+                            <li class="menu-item"><a href="/archive/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" class="icon archive">
+                                        <path
+                                            d="M32 32C14.3 32 0 46.3 0 64s14.3 32 32 32h32v32H32C14.3 128 0 142.3 0 160s14.3 32 32 32h32v32H32C14.3 224 0 238.3 0 256s14.3 32 32 32h32v32H32C14.3 320 0 334.3 0 352s14.3 32 32 32h32v32H32C14.3 416 0 430.3 0 448s14.3 32 32 32h448c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32V96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM96 96h320v320H96V96z" />
+                                    </svg><span class="menu-item-name">Archive</span></a></li>
+                            <li class="menu-item"><a href="/about/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 496 512" class="icon user-circle">
+                                        <path
+                                            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z" />
+                                    </svg><span class="menu-item-name">About</span></a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+            <label for="nav-toggle" class="nav-toggle"></label>
+            <label for="nav-toggle" class="nav-curtain"></label>
+        </header>
+
+        <!-- Main content -->
+        <main class="main single" id="main">
+            <div class="main-inner">
+                
+                <article class="content post h-entry">
+                    <h1 class="post-title p-name">Collision attacks and the birthday paradox</h1>
+
+                    <div class="post-meta">
+                        <time datetime="2019-05-19T00:00:00" class="post-meta-item published dt-published">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon">
+                                <path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/>
+                            </svg> 2019.05.19
+                        </time>
+                    </div>
+
+                    <div class="post-body e-content">
+                        <p>How many people do you need in a room before there is a 50% chance that least two of them share the same birthday? It's only 23, though unless you have heard about this paradox before, you might expect it to be much larger. This is the well-known birthday paradox: it's called a paradox only because collisions happen much faster than one naively expects. Collisions here means an event where two or more observed values are equal. This paradox is important in cryptography as it's relevant for many topics like cryptographic hash functions, which are designed to be collision-resistant one-way functions.</p>
+<h3 id="the-probability-of-collision">The probability of collision</h3>
+<p>Let's see why this is true by first deriving analytically the probability that <em>no</em> collision occurs for a generic case where there are $m$ possible values, and we observe $n$ of them. The birthday paradox above is a special case where $m=365$ and $n=23$. We want to know: what is the probability that we don't see any collisions after $n$ observations?</p>
+<p>We first note that the first observation, $o_1$, trivially occurs with probability 1: $P(o_1) = 1$.</p>
+<p>Next we compute the probability that the second observation does not match the first, there are now $m-1$ possible options out of $m$: </p>
+<p>$P(o_2 \ne o_1) = \frac{m - 1}{m} = 1 - \frac{1}{m}$</p>
+<p>Now the third, which should not match either the first or the second:</p>
+<p>$P(o_3 \ne o_1 \ne o_2) = \frac{m - 2}{m} = 1 - \frac{2}{m}$</p>
+<p>And so on and so forth until the $n$th observation, which should not match any of
+the first $n-1$ observations:</p>
+<p>$P(o_n \ne o_1 \ne o_2 ... \ne o_{n-1}) = \frac{m - (n - 1)}{m} = 1 - \frac{n-1}{m}$</p>
+<p>The probability of no collisions is just the joint probability of these events (assuming that they're independent):</p>
+<p>$ P(\mbox{No collision}) = \prod_{i=1}^{n} P(o_i) = \prod_{i=1}^{n-1} 1 - \frac{i}{m}$ </p>
+<p>What is the probability that a collision <em>does</em> occur? Well, we know that the probability that a collision occurs is the complement of the probability that no collision occurs, i.e.:</p>
+<p>$ P(\mbox{Collision}) = 1 - P(\mbox{No collision}) = 1 - \prod_{i=1}^{n-1} 1 - \frac{i}{m}$</p>
+<p>That is the probability for any $n$ and $m$ that a collision occurs due to the birthday paradox ✨</p>
+<h3 id="collision-probability-as-a-function-of-n">Collision probability as a function of $n$</h3>
+<p>Armed with the above analytic expression, we can write a simple function that computes the probability of collision for any $n$ and $m$:</p>
+<pre class="codehilite"><code class="language-python">def prob_of_collision(n: int=23, m: int=365) -&gt; int:
+    probability_of_no_collision = 1
+    for i in range(1, n - 1):
+        probability_of_no_collision *= 1 - i/m
+    return 1 - probability_of_no_collision
+</code></pre>
+
+<p>Let's now use this function to make a few plots showing how the probability changes as a function of $n$. </p>
+<h4 id="birthday-case-m365">Birthday case: m=365</h4>
+<p><img alt="Collision probability for m=365" src="/img/birthday_attack_m_365.png" /></p>
+<p>We can see that the probability reaches $50\%$ right around $n=23$, thus recovering what we stated in the introduction.</p>
+<h4 id="larger-case-m100000">Larger case: m=100000</h4>
+<p><img alt="Collision probability for m=365" src="/img/birthday_attack_m_100000.png" /></p>
+<p>For larger numbers, we see that collisions happen <em>very</em> fast: in a space of 100000 possible values, we reach $50\%$ probability after less than 400 observations. This should underscore the importance of considering birthday attacks especially in the case even where the space of possible values is very large. We can see empirically from these couple of cases that the number of observations $n$ you need to get a probability of collision of 0.5 is approximately $\sqrt{m}$. You can prove that to yourself analytically by taking the equation we derived above for the probability of collision, setting the left hand side equal to 0.5, and rearranging to see the relationship between $n$ and $m$.</p>
+                    </div>
+                </article>
+            
+            </div>
+        </main>
+
+        <!-- Back to top -->
+        <div id="back-to-top" class="back-to-top">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon arrow-up">
+                    <path
+                        d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z" />
+                </svg></a>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer" class="footer">
+            <div class="footer-inner">
+                <div class="site-info">© 2025 Jennifer Helsby</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MathJax -->
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    load: ['[tex]/mhchem']
+                },
+                tex: {
+                    inlineMath: { '[+]': [['$', '$']] },
+                    tags: 'ams',
+                    packages: { '[+]': ['mhchem'] }
+                }
+            };
+            (function () {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+
+    <!-- Medium Zoom -->
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+    <script>
+        let imgNodes = document.querySelectorAll('div.post-body img');
+        imgNodes = Array.from(imgNodes).filter(node => node.parentNode.tagName !== "A");
+
+        mediumZoom(imgNodes, {
+            background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+        })
+    </script>
+
+    <!-- Instant Page -->
+    <script src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js" type="module" defer></script>
+</body>
+
+</html>

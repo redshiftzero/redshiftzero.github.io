@@ -23,6 +23,7 @@ However, Bitcoin achieves these properties at the cost of privacy. Every Bitcoin
 While Bitcoin *is* pseudonymous - using public key hashes instead of real names -  this is not enough to provide privacy. This pseudonymity is easily broken: firms like Chainalysis and others make a business out of de-anonymizing bitcoin users, connecting pseudonymous bitcoin addresses to real-world identities.
 
 These firms make use of the fact that the Bitcoin blockchain provides:
+
 * the clear plaintext value of the transaction, e.g. 1 BTC
 * the pseudonymous recipient identity, i.e. the recipient is identified by a hash of their ECDSA public key
 
@@ -37,6 +38,7 @@ you'll be happy to hear that there are solutions!
 We want a cryptocurrency that is private, so ideally we want one in which a passive observer cannot learn *anything* about values, sender or recipient identities.
 
 But, we also need to enforce all the integrity properties that Bitcoin provides. We need to ensure properties like:
+
 1. You cannot spend coins that don't exist
 2. You cannot double-spend coins
 3. You cannot spend other people's coins
@@ -59,6 +61,7 @@ We have a list of $i$ inputs on the left, and $j$ outputs on the right.
 Let's start at the right, with the outputs.
 
 Each output has:
+
 * a value $v$ and
 * a recipient, identified by a public key $r$.
 
@@ -196,6 +199,7 @@ To validate transactions, we somehow need nodes to keep track of two data struct
 We need to do this in such a way that an observer (including the node) cannot map items in data structure 1 — all notes in the system — to items in data structure 2 — all notes that have been spent in the system. If nodes could do that, we've got the transaction graph of money flows again, and avoiding that was the whole point of this exercise!
 
 We are going to instead derive a quantity from each note that:
+
 * Binds us to the value $v$ and recipient $r$
 * Hides the value $v$ and recipient $r$
 
@@ -304,6 +308,7 @@ Here's what our circuit now looks like for our spend actions:
 ### Node state management
 
 We now have the two data structures that nodes will need to maintain:
+
 1. The incremental Merkle tree of all note commitments in the system.
 2. The nullifier set that corresponds to all spent notes in the system.
 

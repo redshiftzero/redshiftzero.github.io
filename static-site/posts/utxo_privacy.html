@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>A gentle introduction to shielded transactions | redshiftzero</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/modern.css" />
+
+    <!-- JavaScript -->
+    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" />
+    </noscript>
+
+    <!-- Meta tags -->
+    <meta name="author" content="" />
+    <meta name="description" content="A gentle introduction to shielded transactions" />
+
+    <!-- Icons and manifest -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="redshiftzero" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="redshiftzero" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="/icons/mstile-150x150.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- RSS feeds -->
+    <link rel="alternate" type="application/atom+xml" href="https://www.redshiftzero.com/atom.xml"
+        title="redshiftzero" />
+    <link rel="alternate" type="application/rss+xml" href="https://www.redshiftzero.com/rss.xml" title="redshiftzero" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.redshiftzero.com/post/utxo_privacy/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="A gentle introduction to shielded transactions | redshiftzero" />
+    <meta property="og:description" content="A gentle introduction to shielded transactions" />
+    <meta property="og:url" content="https://www.redshiftzero.com/post/utxo_privacy/" />
+    <meta property="og:site_name" content="redshiftzero" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:image" content="https://www.redshiftzero.com/icons/apple-touch-icon.png" />
+    <meta property="og:type" content="article" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@redshiftzero" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "datePublished": "2025-02-15T00:00:00",
+        "dateModified": "2025-02-15T00:00:00",
+        "url": "https://www.redshiftzero.com/post/utxo_privacy/",
+        "description": "A gentle introduction to shielded transactions",
+        "image": "https://www.redshiftzero.com/icons/apple-touch-icon.png",
+        "author": {
+            "@type": "Person",
+            "url": "https://www.redshiftzero.com/"
+        },
+        "license": "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)",
+        "name": "A gentle introduction to shielded transactions | redshiftzero"
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-wrapper">
+                <div class="header-inner single">
+                    <div class="site-brand">
+                        <a href="/" class="brand">redshiftzero</a>
+                    </div>
+
+                    <nav class="nav">
+                        <ul class="menu" id="menu">
+
+                            <li class="menu-item"><a href="/archive/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" class="icon archive">
+                                        <path
+                                            d="M32 32C14.3 32 0 46.3 0 64s14.3 32 32 32h32v32H32C14.3 128 0 142.3 0 160s14.3 32 32 32h32v32H32C14.3 224 0 238.3 0 256s14.3 32 32 32h32v32H32C14.3 320 0 334.3 0 352s14.3 32 32 32h32v32H32C14.3 416 0 430.3 0 448s14.3 32 32 32h448c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32V96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM96 96h320v320H96V96z" />
+                                    </svg><span class="menu-item-name">Archive</span></a></li>
+                            <li class="menu-item"><a href="/about/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 496 512" class="icon user-circle">
+                                        <path
+                                            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z" />
+                                    </svg><span class="menu-item-name">About</span></a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+            <label for="nav-toggle" class="nav-toggle"></label>
+            <label for="nav-toggle" class="nav-curtain"></label>
+        </header>
+
+        <!-- Main content -->
+        <main class="main single" id="main">
+            <div class="main-inner">
+                
+                <article class="content post h-entry">
+                    <h1 class="post-title p-name">A gentle introduction to shielded transactions</h1>
+
+                    <div class="post-meta">
+                        <time datetime="2025-02-15T00:00:00" class="post-meta-item published dt-published">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon">
+                                <path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/>
+                            </svg> 2025.02.15
+                        </time>
+                    </div>
+
+                    <div class="post-body e-content">
+                        <p>This post is a gentle introduction to shielded transactions, as used in private payment systems
+such as ZCash, Penumbra or on top of any Bitcoin-shaped (i.e. UTXO-based) protocol. At the end of this post, this figure will mean something
+to you:</p>
+<p><img alt="image showing a shielded transaction with i spends and j outputs" src="/img/utxo/utxo_privacy_transparent.001.png" /></p>
+<p>But there's a lot there, so let's break it down.</p>
+<h1 id="motivation-bitcoin-is-not-private">Motivation: Bitcoin is not private</h1>
+<p>As you probably know, Bitcoin is peer-to-peer electronic cash. It's <em>non-custodial</em>: I don't need to trust a third party to hold my keys or my money. It's <em>decentralized</em>, in that there is no single point of failure: I don't need to trust a small subset of nodes or a single node is behaving honestly. These are great properties, and we want to preserve them.</p>
+<p>However, Bitcoin achieves these properties at the cost of privacy. Every Bitcoin transaction is recorded on the blockchain, and is visible to everyone. It's <a href="https://x.com/matt_odell/status/1728441424130414512">"twitter for your bank account"</a>.</p>
+<p>While Bitcoin <em>is</em> pseudonymous - using public key hashes instead of real names -  this is not enough to provide privacy. This pseudonymity is easily broken: firms like Chainalysis and others make a business out of de-anonymizing bitcoin users, connecting pseudonymous bitcoin addresses to real-world identities.</p>
+<p>These firms make use of the fact that the Bitcoin blockchain provides:</p>
+<ul>
+<li>the clear plaintext value of the transaction, e.g. 1 BTC</li>
+<li>the pseudonymous recipient identity, i.e. the recipient is identified by a hash of their ECDSA public key</li>
+</ul>
+<p>A passive observer can use this information about
+the transaction graph of money flows to deanonymize users.</p>
+<p>If you believe that privacy in an open society requires anonymous transaction systems, then
+you'll be happy to hear that there are solutions!</p>
+<h1 id="what-do-we-want-privacy-with-integrity">What do we want? Privacy with integrity</h1>
+<p>We want a cryptocurrency that is private, so ideally we want one in which a passive observer cannot learn <em>anything</em> about values, sender or recipient identities.</p>
+<p>But, we also need to enforce all the integrity properties that Bitcoin provides. We need to ensure properties like:</p>
+<ol>
+<li>You cannot spend coins that don't exist</li>
+<li>You cannot double-spend coins</li>
+<li>You cannot spend other people's coins</li>
+<li>You cannot create or destroy value</li>
+</ol>
+<p>What's the problem? Why is this so hard? Let's take a step back and recall how Bitcoin does any of this.</p>
+<h1 id="recap-bitcoin-transaction-structure">Recap: Bitcoin transaction structure</h1>
+<p>How does a Bitcoin transaction work?</p>
+<p><img alt="image showing a shielded transaction with i spends and j outputs" src="/img/utxo/utxo_privacy_transparent.005.png" /></p>
+<p>Above is a simplified diagram of a Bitcoin transaction - at least the parts we need to care about.</p>
+<p>We have a list of $i$ inputs on the left, and $j$ outputs on the right.</p>
+<h3 id="outputs">Outputs</h3>
+<p>Let's start at the right, with the outputs.</p>
+<p>Each output has:</p>
+<ul>
+<li>a value $v$ and</li>
+<li>a recipient, identified by a public key $r$.</li>
+</ul>
+<p>Technically the recipient is a specification in Bitcoin script, but we'll ignore that as it's not important for our purposes. All we need to know, is that in the simple payments case, the specification is just saying: "hey, here's the public key of the recipient, and in the future, they need to present a valid signature $\sigma$ that is verified using this public key $r$ in order to spend this output".</p>
+<h3 id="inputs">Inputs</h3>
+<p>Now the inputs.</p>
+<p>The inputs each reference a previously Unspent Transaction Output (UTXO). Each UTXO
+has a certain value associated with it. Each inputs unlocks the value in that
+UTXO by presenting a signature $\sigma$ that can be verified using the public key of the
+recipient $r$ in the UTXO.</p>
+<h2 id="integrityintegrity-properties-bitcoin">Integrity{#integrity-properties-bitcoin}</h2>
+<p>Now, let's think back to our desired system properties. We already know Bitcoin doesn't
+provide privacy, but what about the integrity properties we enumerated above?
+How does Bitcoin achieve these integrity properties?</p>
+<h3 id="1-you-cannot-spend-coins-that-dont-exist">1. You cannot spend coins that don't exist</h3>
+<p>Every spend (input) references a UTXO. Nodes scan and check that the referenced
+UTXO exists, else they reject the transaction.</p>
+<h3 id="2-you-cannot-double-spend-coins">2. You cannot double-spend coins</h3>
+<p>When we reference a UTXO in an input, nodes will also scan and check that the referenced
+UTXO has not been spent before. Each UTXO can only be spent once. If a UTXO has been spent, the node
+will reject the transaction.</p>
+<h3 id="3-you-cannot-spend-other-peoples-coins">3. You cannot spend other people's coins</h3>
+<p>When we spend a coin, i.e. reference a UTXO in an input, we include a digital signature $\sigma$, signed
+with our private key. This signature is a bit of data that lets anyone in
+possession of our public key verify that this is my coin. Nodes are going
+to reject any attempt to spend a coin that you don't have authorization to spend.</p>
+<h3 id="4-you-cannot-create-or-destroy-value">4. You cannot create or destroy value</h3>
+<p>As we've established, the values in each transaction are in plaintext, so we can simply
+calculate that the sum of the inputs equals the sum of the outputs (modulo fees, which we'll ignore here). This ensures that no value is created out of thin air.</p>
+<h1 id="properties-of-a-private-cryptocurrency">Properties of a private cryptocurrency</h1>
+<p>Now, let's think about what needs to change to achieve privacy. We're going
+to continue to use a Bitcoin-shaped protocol, and we'll use the term "coins" and "UTXOs" interchangeably.</p>
+<h2 id="privacy">Privacy</h2>
+<p>We want to ensure that a passive observer cannot learn anything about the value, sender or recipient identities.</p>
+<p>We'll do that by simply encrypting all those fields. There are some details to work out, but we'll stick with the naive idea of encrypting all the data in the transaction.</p>
+<h2 id="integrityintegrity-properties-private">Integrity{#integrity-properties-private}</h2>
+<p>How does this impact the integrity properties we enumerated above?</p>
+<h3 id="1-you-cannot-spend-coins-that-dont-exist_1">1. You cannot spend coins that don't exist</h3>
+<p>Here we have a problem: we established that an observer such as a node won't have access to the transaction graph of money flows, so we can’t have nodes check references to UTXOs in the transaction graph. We need another way to check that the referenced UTXO exists.</p>
+<h3 id="2-you-cannot-double-spend-coins_1">2. You cannot double-spend coins</h3>
+<p>This is the same problem as for spending coins that don't exist: we can't check references to UTXOs in the transaction graph.</p>
+<h3 id="3-you-cannot-spend-other-peoples-coins_1">3. You cannot spend other people's coins</h3>
+<p>We definitely need a way to authorize the spending of coins, so we still need to use digital signatures. But we have a problem, because naively using digital signatures like Bitcoin introduces a privacy issue.</p>
+<p>If I want to find what my friend Jim is doing on the blockchain, well, I have his public key, because it’s public. So I can trial verify each signature on each spend of a UTXO, and if the signature verifies, I’ve identified Jim’s spends. That violates the privacy property. We’re not supposed to be able to learn anything about Jim’s behavior.</p>
+<p>So, we need to do something different.</p>
+<h3 id="4-you-cannot-create-or-destroy-value_1">4. You cannot create or destroy value</h3>
+<p>We can’t check the value balance in a transaction by naively summing up the values of the inputs and outputs, because the values are encrypted.</p>
+<h1 id="building-a-private-and-decentralized-utxo-based-protocol">Building a private and decentralized UTXO-based protocol</h1>
+<p>We need to find a way to encrypt the values, sender and recipient identities, while still being able to do the integrity checks we described above.</p>
+<p>This is a problem that researchers have been working on for over a decade. The first paper tackling this problem, <a href="https://ieeexplore.ieee.org/document/6547123">Zerocoin</a>, succeeded in creating a decentralized payments system unlinking transaction origin from sender. However, it does this with fixed size coins.</p>
+<p><a href="https://eprint.iacr.org/2014/349">Zerocash</a>, a followup paper, improved on this scheme. It introduced a decentralized anonymous payment scheme where sender, recipient and amount are hidden - and their scheme also allows for variable amounts. This ultimately evolved into Zcash, and we're going to roughly describe the <a href="https://zips.z.cash/protocol/sapling.pdf">ZCash sapling protocol design</a> in the rest of this post.</p>
+<p>What we're going to do is walk through each of the informal privacy and integrity properties we've been describing, and see how shielded transactions like those in Zcash (or Zcash-derived protocols) achieve them.</p>
+<h2 id="privacy_1">Privacy</h2>
+<p>We’re going to carry value in notes. A plaintext note consists of at least:</p>
+<ul>
+<li>a value $v$,</li>
+<li>a recipient $r$ (i.e. an address),</li>
+<li>a bit of randomness we'll call a "blinding factor" that we'll need later.</li>
+</ul>
+<p>Notes are going to be encrypted and then posted on chain as part of a transaction.</p>
+<p>Each note is going to be used only once. It gets minted, then it is spent, and then it is no longer valid. When you spend a note, you release the value of that note into the transaction which can then be used to mint other notes. This is very similar to the UTXO model of Bitcoin: each UTXO can only be spent once, and when it is spent, the value is released into the transaction.</p>
+<p><img alt="An encrypted note being posted to the chain" src="/img/utxo/utxo_privacy_transparent.024.png" /></p>
+<h3 id="key-hierarchy">Key Hierarchy</h3>
+<p>One interesting feature of ZCash-style cryptocurrencies is that there is a separation of capabilities in the key hierarchy.</p>
+<p>In general, we have a spending key $sk$, that lets us spend coins, and a full viewing key $fvk$, that lets us view our part of the transaction graph.</p>
+<p>When we sync the blockchain, we'll need to trial decrypt each note ciphertext with our viewing key to see if it decrypts to a valid note. If it does, it's a note intended for us, and one that we can spend using our spending key.</p>
+<h2 id="shielded-transaction-structure">Shielded Transaction Structure</h2>
+<p>Transactions consist of multiple <em>actions</em>.</p>
+<p>There are two types of actions we’re going to discuss in this post: inputs/spends and outputs. We'll call a Bitcoin-style input a <em>spend</em>, since that's a better name anyway.</p>
+<p>So far, our picture of a shielded transaction looks like this:</p>
+<p><img alt="Shielded transaction only with spends and outputs" src="/img/utxo/utxo_privacy_transparent.026.png" /></p>
+<p>We also know that our outputs are creating a new note, encrypting it to the recipient, and posting it to the chain as a <em>note ciphertext</em> $(\textbf{C}_j)$. Let's add that to our picture:</p>
+<p><img alt="Shielded transaction with note ciphertexts on each output" src="/img/utxo/utxo_privacy_transparent.032.png" /></p>
+<p>Great. Let's see what other pieces we need to add to our picture.</p>
+<h2 id="integrity">Integrity</h2>
+<h3 id="1-you-cannot-spend-coins-that-dont-exist_2">1. You cannot spend coins that don't exist</h3>
+<p>To validate transactions, we somehow need nodes to keep track of two data structures:
+1. All notes that exist in the system
+2. All notes that have been spent in the system</p>
+<p>We need to do this in such a way that an observer (including the node) cannot map items in data structure 1 — all notes in the system — to items in data structure 2 — all notes that have been spent in the system. If nodes could do that, we've got the transaction graph of money flows again, and avoiding that was the whole point of this exercise!</p>
+<p>We are going to instead derive a quantity from each note that:</p>
+<ul>
+<li>Binds us to the value $v$ and recipient $r$</li>
+<li>Hides the value $v$ and recipient $r$</li>
+</ul>
+<p>This is exactly what we get from the binding and hiding properties of a <a href="https://www.redshiftzero.com/post/commitments/">cryptographic commitment scheme</a>. This is also why we needed the blinding factor in our notes: it is used for generating the note commitment.</p>
+<p>Nodes are going to store in a special data structure a cryptographic commitment to every single note that has ever existed in the system. We'll discuss later what this data structure is.</p>
+<p>Thus far, we just had our outputs each with a note ciphertext $(\textbf{C}_j)$:</p>
+<p><img alt="Shielded transaction structure with note ciphertexts on each output" src="/img/utxo/utxo_privacy_transparent.032.png" /></p>
+<p>We'll also add a cryptographic commitment to each output $(\textbf{cm}_j)$. Now our picture of a shielded transaction looks like this:</p>
+<p><img alt="Shielded transaction structure now with note commitments" src="/img/utxo/utxo_privacy_transparent.033.png" /></p>
+<p>The commitment is <em>binding</em> us to the value and the recipient in the note, such that the recipient cannot later claim “oh hey my 1 BTC note? it was actually 100 BTC”.</p>
+<p>If a node validates a transaction, they then for each output are going to add the note commitment to a data structure that keeps track of every single note commitment in the system.</p>
+<p>At this point, we'll need to start using <a href="https://blog.cryptographyengineering.com/2014/11/27/zero-knowledge-proofs-illustrated-primer/">Zero Knowledge Proofs (ZKP)</a>. In brief, a ZKP demonstrates a particular statement is true, without revealing any information about the statement other than its veracity. In our setting, the party generating the proofs, the <em>prover</em>, will be the person preparing the transaction, and the person checking the proofs are valid, the <em>verifier</em>, will be the nodes validating the transaction. We'll be using ZKPs in various places in the protocol to make statements about private bits of data, that we'll call the "witness".</p>
+<p>For example, for each one of our outputs, we'll need a little ZKP. This output proof $\pi_j$ is going to demonstrate that the note commitment is well-formed. We'll witness the value $v_j$ and the recipient $r_j$ in the note, and the node will verify the proof to check that the public note commitment is derived correctly.</p>
+<p>Let's add that output proof, $\pi_j$, to our picture:</p>
+<p><img alt="Shielded transaction structure now with note commitments and ZKP" src="/img/utxo/utxo_privacy_transparent.034.png" /></p>
+<h3 id="output-circuit">Output Circuit</h3>
+<p>One of the tricky parts about ZKPs is that proof systems require the computation or statements to be represented in a way that the proof system can understand. Typically, this is done by representing the computation as an arithmetic circuit, where the gates in the circuit are arithmetic operations such as addition. We'll need to write down as a circuit the logic that we want to prove.</p>
+<p>Here's what our circuit will need to do at a high level (so far) for our output actions:</p>
+<p><img alt="Output ZKP" src="/img/utxo/utxo_privacy_transparent.035.png" /></p>
+<h4 id="nodes-keep-track-of-all-notes-in-the-system">Nodes keep track of all notes in the system</h4>
+<p>Let's go back to how nodes are going to go about storing the two data structures: one of all notes in the system, and one of all notes that have been spent.</p>
+<p>Well, we <em>could</em> just store a big list of all the notes in the system. But when we spend, we need a way to demonstrate that our note commitment is in this set. However, this is a pretty inefficient proof of size O(N) where N is the number of notes in the system. Maybe we can do better?</p>
+<p><img alt="Nodes keep track of all notes in the system" src="/img/utxo/utxo_privacy_transparent.036.png" /></p>
+<h4 id="nodes-maintain-an-incremental-merkle-tree-of-all-note-commitments">Nodes maintain an incremental Merkle tree of all note commitments</h4>
+<p>Instead, we're going to keep track of all the note commitments in the system using a Merkle tree.</p>
+<p>A Merkle tree is simply a tree in which each internal node is the hash of its children.</p>
+<p>We're also going to have it be append-only, and we're going to incrementally update the tree when we add notes by filling the next leaf node. Crucially, we will never delete from the tree, since that would leak information about activity on the network.</p>
+<p><img alt="Merkle tree" src="/img/utxo/utxo_privacy_transparent.037.png" /></p>
+<p>We'll have each leaf node contain a note commitment.</p>
+<p><img alt="Merkle tree" src="/img/utxo/utxo_privacy_transparent.038.png" /></p>
+<p>By using a Merkle tree, we can compress a large amount of data into a small, fixed-size value: the hash of the root of the tree, or the <em>anchor</em>.</p>
+<h4 id="merkle-proofs-let-us-demonstrate-our-note-is-in-the-system">Merkle proofs let us demonstrate our note is in the system</h4>
+<p>This lets us do proofs in a succinct way. We can prove set membership via a <em>Merkle proof</em>. We can construct a <em>Merkle authentication path</em> that consists of the siblings of each node on the path from our note commitment to the root of the tree. If the note is truly in the tree, when we hash together the note commitment with its siblings all the way up to the tree root, we should arrive at the public anchor.</p>
+<p>The depth of the tree is fixed and is a constant set by the network. So the proofs are going to be the fixed-size (depth of the tree multiplied by the number of siblings), and they’re going to be small.</p>
+<p><img alt="Merkle proof" src="/img/utxo/utxo_privacy_transparent.039.png" /></p>
+<h4 id="we-do-these-merkle-proofs-in-a-zkp">We do these Merkle proofs in a ZKP</h4>
+<p>But wait, we can't provide our Merkle authentication path to the node/verifier, because then the verifier can learn something about our note commitment.</p>
+<p>So, to make these proofs private, we need to do the Merkle proof inside a ZKP.</p>
+<p><img alt="ZKP" src="/img/utxo/utxo_privacy_transparent.040.png" /></p>
+<p>Great. That will prove to the verifier that the note commitment is in the tree meaning that it exists in the system. And we can add a little more to our picture of a shielded transaction: the spend ZKP $\pi_i$.</p>
+<p><img alt="Spend ZKP" src="/img/utxo/utxo_privacy_transparent.041.png" /></p>
+<h3 id="2-you-cannot-double-spend-coins_2">2. You cannot double-spend coins.</h3>
+<p>We've described our first node data structure, tracking all notes that ever existed in the system. What about the second data structure, the set of all notes that have been spent in the system?</p>
+<p>For each note, we're going to define a way of deriving a special value, called a <em>nullifier</em> $nf$. It's effectively a serial number for the note. Critically, there can only be one valid nullifier per note. If you find a trick that lets you derive another nullifier that will be considered valid for that note, that will constitute a way to double spend.</p>
+<p>Nodes are going to store in a second data structure the set of all <em>nullifiers</em> that have ever been revealed:</p>
+<p><img alt="Double spend" src="/img/utxo/utxo_privacy_transparent.043.png" /></p>
+<p>When we do a spend, we are going to reveal the nullifier associated with the note. Once revealed, we <em>cannot</em> spend the same note again.</p>
+<p>Nodes will check as part of transaction verification that the nullifier in a spend is <em>not</em> in the nullifier set. If it is, the transaction is rejected.</p>
+<p>So we're going to add the nullifier to our picture. For each spend, we reveal the nullifier $nf_i$.</p>
+<p><img alt="Spend with nullifier" src="/img/utxo/utxo_privacy_transparent.044.png" /></p>
+<h3 id="spend-circuit">Spend Circuit</h3>
+<p>We're also going to add to the spend ZKP a check that the nullifier has been derived correctly from the note being spent.</p>
+<p>Here's what our circuit now looks like for our spend actions:</p>
+<p><img alt="Spend ZKP" src="/img/utxo/utxo_privacy_transparent.045.png" /></p>
+<h3 id="node-state-management">Node state management</h3>
+<p>We now have the two data structures that nodes will need to maintain:</p>
+<ol>
+<li>The incremental Merkle tree of all note commitments in the system.</li>
+<li>The nullifier set that corresponds to all spent notes in the system.</li>
+</ol>
+<p><img alt="Node structure" src="/img/utxo/utxo_privacy_transparent.046.png" /></p>
+<h3 id="3-you-cannot-spend-other-peoples-coins_2">3. You cannot spend other people's coins</h3>
+<p>Recall from earlier in the post that we can't naively use regular signature schemes in privacy-preserving protocols because they leak information about the signer's identity. An observer can trivially link spends by doing trial verification using public keys of their targets.</p>
+<p>Instead we use a <em>re-randomizable signature scheme</em>.</p>
+<p>We derive a one-time use (“randomized”) key $rk$ from our real key $ak$, and use that:</p>
+<p>$rk = ak + [\alpha]B$</p>
+<p>We'll provide the one-time use verification key $rk_i$ on each spend:</p>
+<p><img alt="Spend ZKP with randomized key" src="/img/utxo/utxo_privacy_transparent.049.png" /></p>
+<h3 id="spend-circuit_1">Spend Circuit</h3>
+<p>We also need to demonstrate in our ZKP that the randomized key (public on the transaction) is a correct randomization given the witnessed real key $ak$ and randomizer $\alpha$.</p>
+<p>Here's what our circuit looks like so far for our spend actions:</p>
+<p><img alt="Spend ZKP with randomized key" src="/img/utxo/utxo_privacy_transparent.050.png" /></p>
+<h3 id="4-you-cannot-create-or-destroy-value_2">4. You cannot create or destroy value</h3>
+<p>Finally, we need to ensure that the sum of the values in the inputs equals the sum of the values in the outputs.</p>
+<p>Here we need to take a little detour into the properties of Pedersen commitments.</p>
+<p>Pedersen commitments are <em>additively homomorphic</em>.</p>
+<p>A homomorphism is just a function between two algebraic structures that preserves their operations, meaning it keeps the structure's properties intact when applied. An additive homomorphism is a type of homomorphism that specifically preserves addition. Let's see an example to make clear how this works and how it helps us:</p>
+<p>We have a Pedersen commitment scheme which generates a commitment $cm$ using an algorithm $\texttt{Commit}$ that takes a value $m$ and some randomness $r$ as follows:</p>
+<p>$cm = \texttt{Commit}(m, r) = [m]G + [r]H$</p>
+<p>G and H are going to be <a href="https://www.redshiftzero.com/post/commitments/#pedersen-commitments">constants</a> that we pick as part of the protocol.</p>
+<p>Given that definition, let's now assume we have two commitments $cm_1$ and $cm_2$. Using the definition above we have:</p>
+<p>$cm_1 = \texttt{Commit}(m_1, \texttt{randomness}_1) =  [m_1]G + [\texttt{randomness}_1]H$</p>
+<p>$cm_2 = \texttt{Commit}(m_2, \texttt{randomness}_2)  = [m_2]G + [\texttt{randomness}_2]H$</p>
+<p>If we add our two commitments together, $cm_1 + cm_2$, we get:</p>
+<p>$cm_1 + cm_2$</p>
+<p>$= [m_1]G + [\texttt{randomness}_1]H + [m_2]G + [\texttt{randomness}_2]H$</p>
+<p>Rearranging, we get:</p>
+<p>$cm_1 + cm_2 = [m_1 + m_2]G + [\texttt{randomness}_1 + \texttt{randomness}_2]H$</p>
+<p>And that is equivalent to:</p>
+<p>$cm_1 + cm_2= \texttt{Commit}(m_1 + m_2, \texttt{randomness}_1 + \texttt{randomness}_2)$</p>
+<p>What does this mean? It means that if we have two commitments, we can add them together to get a new commitment to the <em>sum of the values</em> being committed to. At no point in this did we learn anything about the individual values.</p>
+<h4 id="value-commitments">Value commitments</h4>
+<p>We're going to add a value commitment which we'll call $cv$ to every single action in the transaction.</p>
+<p>It'll be derived from the relevant note's value $v$ and a bit of randomness $\texttt{randomness}$:</p>
+<p>$cv = [v]G + [\texttt{randomness}]H$</p>
+<p>We'll adopt a convention where $v$ is the positive when we're doing a spend (releasing value into the transaction), and $v$ is negative when we're doing an output (consuming value from the transaction).</p>
+<p>Let's add those value commitments $cv_i$ and $cv_j$ to our picture of a shielded transaction:</p>
+<p><img alt="Shielded transcation with value commitments" src="/img/utxo/utxo_privacy_transparent.056.png" /></p>
+<p>Every single action has a value commitment. And we can sum all the value commitments. If the transactino balances, then the values should cancel out: the positive value should balance with the negative value. This is done by checking that the sum of the value commitments ($\sum_{i}\sum_{j}(cv_{i,j})$) is a commitment to <em>zero</em>.</p>
+<p>We'll also need to include in the transaction the sum of the blinding factors, such that we can check:</p>
+<p>$\sum_{i}\sum_{j}(cv_{i,j}) = \texttt{Commit}(0, \sum_{i}\sum_{j}(\texttt{randomness}_{i,j}))$</p>
+<p>And, we'll also need to include in each circuit a check that the value commitments are well-formed from the relevant note.</p>
+<h1 id="summary-how-shielded-transactions-work">Summary: How Shielded Transactions Work</h1>
+<p>Remember that figure from the beginning? Now we understand each component of it:</p>
+<p><img alt="image showing a shielded transaction with i spends and j outputs" src="/img/utxo/utxo_privacy_transparent.001.png" /></p>
+<p>In summary:</p>
+<ul>
+<li>All notes are <strong>encrypted</strong> on the blockchain: the chain never sees recipient, sender, or value.</li>
+<li>The <strong>note commitment tree</strong> is an incremental Merkle tree that is an append-only data store of all notes in the system.</li>
+<li>Spends of a note must demonstrate in a zero knowledge proof that the note commitment is in the commitment tree.</li>
+<li>Notes are nullified/deleted by revealing a <strong>nullifier</strong> (once, constituting double spend protection) that goes into the nullifier set. Observers cannot link nullifier to notes that were invalidated.</li>
+<li>Spends also must demonstrate control of the note via a <strong>randomized signature</strong>.</li>
+<li>Value conservation is provided through the additively homomorphic property of <strong>value commitments</strong>.</li>
+</ul>
+<p>As you might imagine, there's a lot of detail that I've glossed over here. If you're interested in learning more, I recommend checking out the <a href="https://zips.z.cash/protocol/sapling">ZCash protocol specification</a>.</p>
+                    </div>
+                </article>
+            
+            </div>
+        </main>
+
+        <!-- Back to top -->
+        <div id="back-to-top" class="back-to-top">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon arrow-up">
+                    <path
+                        d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z" />
+                </svg></a>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer" class="footer">
+            <div class="footer-inner">
+                <div class="site-info">© 2025 Jennifer Helsby</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MathJax -->
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    load: ['[tex]/mhchem']
+                },
+                tex: {
+                    inlineMath: { '[+]': [['$', '$']] },
+                    tags: 'ams',
+                    packages: { '[+]': ['mhchem'] }
+                }
+            };
+            (function () {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+
+    <!-- Medium Zoom -->
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+    <script>
+        let imgNodes = document.querySelectorAll('div.post-body img');
+        imgNodes = Array.from(imgNodes).filter(node => node.parentNode.tagName !== "A");
+
+        mediumZoom(imgNodes, {
+            background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+        })
+    </script>
+
+    <!-- Instant Page -->
+    <script src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js" type="module" defer></script>
+</body>
+
+</html>

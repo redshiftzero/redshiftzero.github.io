@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>Getting started in Rust and WebAssembly | redshiftzero</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/modern.css" />
+
+    <!-- JavaScript -->
+    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" />
+    </noscript>
+
+    <!-- Meta tags -->
+    <meta name="author" content="" />
+    <meta name="description" content="Getting started in Rust and WebAssembly" />
+
+    <!-- Icons and manifest -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="redshiftzero" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="redshiftzero" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="/icons/mstile-150x150.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- RSS feeds -->
+    <link rel="alternate" type="application/atom+xml" href="https://www.redshiftzero.com/atom.xml"
+        title="redshiftzero" />
+    <link rel="alternate" type="application/rss+xml" href="https://www.redshiftzero.com/rss.xml" title="redshiftzero" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.redshiftzero.com/post/webassembly/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Getting started in Rust and WebAssembly | redshiftzero" />
+    <meta property="og:description" content="Getting started in Rust and WebAssembly" />
+    <meta property="og:url" content="https://www.redshiftzero.com/post/webassembly/" />
+    <meta property="og:site_name" content="redshiftzero" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:image" content="https://www.redshiftzero.com/icons/apple-touch-icon.png" />
+    <meta property="og:type" content="article" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@redshiftzero" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "datePublished": "2020-12-17T00:00:00",
+        "dateModified": "2020-12-17T00:00:00",
+        "url": "https://www.redshiftzero.com/post/webassembly/",
+        "description": "Getting started in Rust and WebAssembly",
+        "image": "https://www.redshiftzero.com/icons/apple-touch-icon.png",
+        "author": {
+            "@type": "Person",
+            "url": "https://www.redshiftzero.com/"
+        },
+        "license": "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)",
+        "name": "Getting started in Rust and WebAssembly | redshiftzero"
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-wrapper">
+                <div class="header-inner single">
+                    <div class="site-brand">
+                        <a href="/" class="brand">redshiftzero</a>
+                    </div>
+
+                    <nav class="nav">
+                        <ul class="menu" id="menu">
+
+                            <li class="menu-item"><a href="/archive/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" class="icon archive">
+                                        <path
+                                            d="M32 32C14.3 32 0 46.3 0 64s14.3 32 32 32h32v32H32C14.3 128 0 142.3 0 160s14.3 32 32 32h32v32H32C14.3 224 0 238.3 0 256s14.3 32 32 32h32v32H32C14.3 320 0 334.3 0 352s14.3 32 32 32h32v32H32C14.3 416 0 430.3 0 448s14.3 32 32 32h448c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32V96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM96 96h320v320H96V96z" />
+                                    </svg><span class="menu-item-name">Archive</span></a></li>
+                            <li class="menu-item"><a href="/about/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 496 512" class="icon user-circle">
+                                        <path
+                                            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z" />
+                                    </svg><span class="menu-item-name">About</span></a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+            <label for="nav-toggle" class="nav-toggle"></label>
+            <label for="nav-toggle" class="nav-curtain"></label>
+        </header>
+
+        <!-- Main content -->
+        <main class="main single" id="main">
+            <div class="main-inner">
+                
+                <article class="content post h-entry">
+                    <h1 class="post-title p-name">Getting started in Rust and WebAssembly</h1>
+
+                    <div class="post-meta">
+                        <time datetime="2020-12-17T00:00:00" class="post-meta-item published dt-published">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon">
+                                <path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/>
+                            </svg> 2020.12.17
+                        </time>
+                    </div>
+
+                    <div class="post-body e-content">
+                        <p>In my last post I described how I implemented the <a href="https://github.com/freedomofpress/signal-protocol"><code>signal-protocol</code></a> Python library, which provides Python bindings using <a href="https://github.com/PyO3/PyO3">Pyo3</a> to an upstream maintained Rust cryptography crate implementing the Signal protocol. I created the the <a href="https://github.com/freedomofpress/signal-protocol"><code>signal-protocol</code></a> library in order to prototype end-to-end encrypted messaging between journalists and their sources through SecureDrop. In the SecureDrop ecosystem, journalists use a Python project, <a href="https://github.com/freedomofpress/securedrop-client"><code>securedrop-client</code></a>, hence the need for the Python bindings, and sources use <a href="http://torproject.org/">Tor Browser</a>.</p>
+<p>For the Tor Browser-based client for sources, I needed to either use another implementation of Signal in JavaScript (which does exist), or just write a crate that has the existing upstream cryptography crate as a dependency, and compile it all to WebAssembly. As you can probably tell from the title of this post, <a href="https://github.com/freedomofpress/securedrop-e2e/tree/main/securedrop-source">I went with the latter approach</a>. It's honestly pretty cool that I can use the same Rust crypto logic fairly easily for both endpoints, thanks to Pyo3 and WebAssembly.</p>
+<p>In this brief post we'll cover:</p>
+<ul>
+<li><a href="{{&lt; relref &quot;#wat&quot; &gt;}}">an intro to WebAssembly</a></li>
+<li><a href="{{&lt; relref &quot;#wasmbindgen&quot; &gt;}}">where <code>wasm-bindgen</code> and <code>wasm-pack</code> fit in</a></li>
+<li><a href="{{&lt; relref &quot;#useful&quot; &gt;}}">useful crates you should know of, including <code>js_sys</code> and <code>web_sys</code></a></li>
+<li><a href="{{&lt; relref &quot;#refs&quot; &gt;}}">helpful references to read more</a></li>
+</ul>
+<h1 id="webassembly-wat">WebAssembly? {#wat}</h1>
+<p>WebAssembly is a binary-code format that runs in a stack-based virtual machine. It's supported in all modern browsers, and can also be run in other runtimes (e.g. see <a href="https://wasi.dev/">WASI</a>) that are browser independent.</p>
+<p>Why use WebAssembly? Two of the most common reasons are portability and performance. For computationally intensive tasks that need to run in a Browser, you might rewrite the expensive parts in a language that compiles to WebAssembly, leaving the rest of your JavaScript unmodified (similar to C extensions and Python). In the case of Rust compiled to WebAssembly, we also get to benefit from all the safety guarantees that Rust provides at compile time.</p>
+<p>There are two main approaches to combining Rust and WebAssembly:</p>
+<ul>
+<li>writing a mix of JavaScript and Rust. Folks typically use <code>wasm-bindgen</code> and <code>wasm-pack</code> to make this easy and autogenerate a lot of the helper JavaScript code for your WebAssembly module. We'll cover this below.</li>
+<li>writing only Rust using a project like <a href="https://github.com/yewstack/yew">Yew</a>. Note that you're not sidestepping the use of JavaScript, it's just abstracted away from you so you don't need to write any JavaScript yourself. At the time of writing, using Web APIs (e.g. using <code>web-sys</code> to manipulate the DOM) does require JavaScript, although this may not always be the case<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. I haven't explored the Yew path myself, so we'll focus on the former path.</li>
+</ul>
+<h1 id="wasm-bindgen-and-wasm-pack-wasmbindgen"><code>wasm-bindgen</code> and <code>wasm-pack</code> {#wasmbindgen}</h1>
+<p><code>wasm-bindgen</code> is a handy tool wherein you can simply add the <code>#[wasm_bindgen]</code> attribute to structs and impl blocks to indicate that they should be exposed to JavaScript. For example, <code>SecureDropSourceSession</code> below is a Rust struct I wanted to make available as a JavaScript class:</p>
+<pre class="codehilite"><code class="language-Rust">#[wasm_bindgen]
+pub struct SecureDropSourceSession {
+    store: InMemSignalProtocolStore,
+    pub registration_id: u32,
+}
+</code></pre>
+
+<p>It encapsulates a private member <code>InMemSignalProtocolStore</code> that methods in our impl block in Rust will use when performing crypto operations in our WebAssembly module.</p>
+<p>Now I can provide methods (to JavaScript) on this struct using an impl block also with the <code>#[wasm_bindgen]</code> attribute<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:</p>
+<pre class="codehilite"><code class="language-Rust">#[wasm_bindgen]
+impl SecureDropSourceSession {
+    pub fn new() -&gt; Result&lt;SecureDropSourceSession, JsValue&gt; {
+        let mut csprng = OsRng;
+        let registration_id: u32 = csprng.gen();
+        let identity_key = IdentityKeyPair::generate(&amp;mut csprng);
+
+        // This struct will hold our session, identity, prekey and sender key stores.
+        InMemSignalProtocolStore::new(identity_key, registration_id)
+            .map(|store| SecureDropSourceSession {
+                store,
+                registration_id,
+            })
+            .map_err(|e| e.to_string().into())
+    }
+</code></pre>
+
+<p>The <code>Result&lt;T, JsValue&gt;</code> return type is a common pattern that <code>wasm-bindgen</code> will use to throw JavaScript exceptions when the <code>Err</code> variant is returned.</p>
+<p>Once the WebAssembly module is compiled and loaded, I can now create <code>SecureDropSourceSession</code> objects (now that I've implemented <code>SecureDropSourceSession::new</code>) from JavaScript:</p>
+<pre class="codehilite"><code class="language-JavaScript">var session = SecureDropSourceSession.new();
+</code></pre>
+
+<h3 id="building">Building</h3>
+<p><code>wasm-pack</code> builds your project along with some autogenerated helper JS to a folder called <code>pkg</code>. This is useful if you use a bundler like Webpack since you can simply add the path to your WebAssembly package to your dependencies. This is also useful if you want to publish your WebAssembly package to <code>npm</code>. By publishing to <code>npm</code>, folks using the package will not need the Rust toolchain installed since you'll be publishing the built Wasm artifact.</p>
+<p>You can also <a href="https://github.com/freedomofpress/securedrop-e2e#development">go the route of not using a bundler</a>, which you can read about in more detail <a href="https://rustwasm.github.io/docs/wasm-bindgen/examples/without-a-bundler.html">here</a>.</p>
+<h1 id="useful-crates-useful">Useful crates {#useful}</h1>
+<p>Other useful crates to know of are <code>js_sys</code> and <code>web_sys</code>:</p>
+<p><code>js_sys</code> lets you call JavaScript functions from your Rust code, such as <a href="https://docs.rs/js-sys/0.3.46/js_sys/fn.escape.html"><code>escape()</code></a>.</p>
+<p><code>web_sys</code> provides Web APIs (through JavaScript). For example, you can manipulate the DOM or get access to the <a href="https://docs.rs/web-sys/0.3.46/web_sys/struct.Window.html#impl-62">WebCrypto API</a>.</p>
+<p>For debugging, there's <a href="https://github.com/rustwasm/console_error_panic_hook"><code>console_error_panic_hook</code></a>, which lets you <a href="https://github.com/freedomofpress/securedrop-e2e/blob/main/securedrop-source/src/lib.rs#L40">add a panic hook</a> that passes panics through to the JavaScript console:</p>
+<pre class="codehilite"><code class="language-rust">panic::set_hook(Box::new(console_error_panic_hook::hook));
+</code></pre>
+
+<h1 id="referencecs-refs">Referencecs {#refs}</h1>
+<p>This post was a very brief overview. There are great tutorials out there on Rust and WebAssembly, and the main references I found useful while learning enough to implement my project are here:</p>
+<ul>
+<li><a href="https://rustwasm.github.io/docs/book/">Rust and WebAssembly book</a> - an introduction to using Rust and WebAssembly together wherein you implement the Game of Life in the browser</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm">MDN's intro to <code>wasm-bindgen</code> and <code>wasm-pack</code></a></li>
+<li><a href="https://www.amazon.com/Programming-WebAssembly-Rust-Development-Applications/dp/1680506366">Programming WebAssembly with Rust</a> - a short read covering both WebAssembly in the browser as well as WASI (if you want to run WebAssembly independent of web browsers)</li>
+<li><a href="https://rustwasm.github.io/docs/wasm-bindgen/">the <code>wasm-bindgen</code> book</a> - This is a nice reference text with the details of using <code>wasm-bindgen</code>.</li>
+</ul>
+<p>Happy hacking!</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>See the <a href="https://github.com/WebAssembly/interface-types/blob/master/proposals/interface-types/Explainer.md">Interface Types explainer</a>.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Random number generation is using the <a href="https://github.com/rust-random/getrandom/blob/master/src/wasm-bindgen.rs#L93">WebCrypto API's getRandomValues() method</a> under the hood via the <code>rand</code> and <code>getrandom</code> crates.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                    </div>
+                </article>
+            
+            </div>
+        </main>
+
+        <!-- Back to top -->
+        <div id="back-to-top" class="back-to-top">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon arrow-up">
+                    <path
+                        d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z" />
+                </svg></a>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer" class="footer">
+            <div class="footer-inner">
+                <div class="site-info">© 2025 Jennifer Helsby</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MathJax -->
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    load: ['[tex]/mhchem']
+                },
+                tex: {
+                    inlineMath: { '[+]': [['$', '$']] },
+                    tags: 'ams',
+                    packages: { '[+]': ['mhchem'] }
+                }
+            };
+            (function () {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+
+    <!-- Medium Zoom -->
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+    <script>
+        let imgNodes = document.querySelectorAll('div.post-body img');
+        imgNodes = Array.from(imgNodes).filter(node => node.parentNode.tagName !== "A");
+
+        mediumZoom(imgNodes, {
+            background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+        })
+    </script>
+
+    <!-- Instant Page -->
+    <script src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js" type="module" defer></script>
+</body>
+
+</html>

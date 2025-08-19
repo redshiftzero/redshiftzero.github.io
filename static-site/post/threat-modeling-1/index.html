@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>threat-modeling-1 | redshiftzero</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/meme.min.0c24096f9051894f1547a4f579eebdb58f9b546189c9b7bfe789edf9d4be9a9a.css" />
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js" defer></script>
+    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Comfortaa:wght@700&display=swap"
+        media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Comfortaa:wght@700&display=swap" />
+    </noscript>
+
+    <!-- Meta tags -->
+    <meta name="author" content="" />
+    <meta name="description" content="threat-modeling-1" />
+
+    <!-- Icons and manifest -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="redshiftzero" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="redshiftzero" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="/icons/mstile-150x150.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- RSS feeds -->
+    <link rel="alternate" type="application/atom+xml" href="https://www.redshiftzero.com/atom.xml"
+        title="redshiftzero" />
+    <link rel="alternate" type="application/rss+xml" href="https://www.redshiftzero.com/rss.xml" title="redshiftzero" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.redshiftzero.com/post/threat-modeling-1/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="threat-modeling-1 | redshiftzero" />
+    <meta property="og:description" content="threat-modeling-1" />
+    <meta property="og:url" content="https://www.redshiftzero.com/post/threat-modeling-1/" />
+    <meta property="og:site_name" content="redshiftzero" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:image" content="https://www.redshiftzero.com/icons/apple-touch-icon.png" />
+    <meta property="og:type" content="article" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@redshiftzero" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "datePublished": "2025-08-17T23:04:43.425585",
+        "dateModified": "2025-08-17T23:04:43.425585",
+        "url": "https://www.redshiftzero.com/post/threat-modeling-1/",
+        "description": "threat-modeling-1",
+        "image": "https://www.redshiftzero.com/icons/apple-touch-icon.png",
+        "author": {
+            "@type": "Person",
+            "url": "https://www.redshiftzero.com/"
+        },
+        "license": "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)",
+        "name": "threat-modeling-1 | redshiftzero"
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-wrapper">
+                <div class="header-inner single">
+                    <div class="site-brand">
+                        <a href="/" class="brand">redshiftzero</a>
+                    </div>
+
+                    <nav class="nav">
+                        <ul class="menu" id="menu">
+                            <li class="menu-item"><a href="/categories/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" class="icon th">
+                                        <path
+                                            d="M149.333 56v80c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24h101.333c13.255 0 24 10.745 24 24zm181.334 240v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm32-240v80c0 13.255 10.745 24 24 24H488c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24zm-32 80V56c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm-205.334 56H24c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24zM0 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zm386.667-56H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zm0 160H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zM181.333 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24z" />
+                                    </svg><span class="menu-item-name">Categories</span></a></li>
+                            <li class="menu-item"><a href="/tags/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 640 512" class="icon tags">
+                                        <path
+                                            d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z" />
+                                    </svg><span class="menu-item-name">Tags</span></a></li>
+                            <li class="menu-item"><a href="/about/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 496 512" class="icon user-circle">
+                                        <path
+                                            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z" />
+                                    </svg><span class="menu-item-name">About</span></a></li>
+                            <li class="menu-item">
+                                <a id="theme-switcher" href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" class="icon theme-icon-light">
+                                        <path
+                                            d="M193.2 104.5l48.8-97.5a18 18 0 0128 0l48.8 97.5 103.4 -34.5a18 18 0 0119.8 19.8l-34.5 103.4l97.5 48.8a18 18 0 010 28l-97.5 48.8 34.5 103.4a18 18 0 01-19.8 19.8l-103.4-34.5-48.8 97.5a18 18 0 01-28 0l-48.8-97.5l-103.4 34.5a18 18 0 01-19.8-19.8l34.5-103.4-97.5-48.8a18 18 0 010-28l97.5-48.8-34.5-103.4a18 18 0 0119.8-19.8zM256 128a128 128 0 10.01 0M256 160a96 96 0 10.01 0" />
+                                    </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        class="icon theme-icon-dark">
+                                        <path
+                                            d="M27 412a256 256 0 10154-407a11.5 11.5 0 00-5 20a201.5 201.5 0 01-134 374a11.5 11.5 0 00-15 13" />
+                                    </svg></a>
+                            </li>
+                            <li class="menu-item search-item">
+                                <form id="search" class="search" role="search">
+                                    <label for="search-input"><svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 512 512" class="icon search-icon">
+                                            <path
+                                                d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" />
+                                        </svg></label>
+                                    <input type="search" id="search-input" class="search-input">
+                                </form>
+                                <template id="search-result" hidden>
+                                    <article class="content post">
+                                        <h2 class="post-title"><a class="summary-title-link"></a></h2>
+                                        <summary class="summary"></summary>
+                                        <div class="read-more-container">
+                                            <a class="read-more-link">Read More »</a>
+                                        </div>
+                                    </article>
+                                </template>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+            <label for="nav-toggle" class="nav-toggle"></label>
+            <label for="nav-toggle" class="nav-curtain"></label>
+        </header>
+
+        <!-- Main content -->
+        <main class="main single" id="main">
+            <div class="main-inner">
+                
+                <article class="content post h-entry">
+                    <h1 class="post-title p-name">threat-modeling-1</h1>
+
+                    <div class="post-meta">
+                        <time datetime="2025-08-17T23:04:43.425585" class="post-meta-item published dt-published">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon">
+                                <path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/>
+                            </svg>&nbsp;2025.08.17
+                        </time>
+                    </div>
+
+                    <div class="post-body e-content">
+                        <p>+++
+date = "2020-11-10"
+title = "Continuous threat modeling, Part 1: Tooling wish list"
+slug = "continuous-threat-modeling"
+categories = [ "Post", "threat modeling"]
+tags = [ "security", "threat modeling" ]
++++</p>
+<h1 id="motivation">Motivation</h1>
+<p>When performing software-centric threat-modeling on an application[^1], one typically:</p>
+<ol>
+<li>generates at least one Data Flow Diagram (DFD) or other diagrams that model the software,</li>
+<li>enumerates threats using the diagram(s) as an aid, and then</li>
+<li>determines which mitigations should be applied.</li>
+</ol>
+<p>Automated tools can potentially aid the threat modeler in each of these stages. When the design of a system is modified, the threat modeling exercise may be performed again, resulting in needing to pass through the above steps again. Even if a design remains static, the threats and mitigations should still be evaluated periodically as the threat landscape may evolve, e.g. if attacker capabilities or motivations change. This means that tools or processes that can aid the threat modeler perform these tasks on a continuous basis can be of great value.</p>
+<h1 id="tooling-to-aid-these-steps">Tooling to aid these steps</h1>
+<p>When going about the above steps, several questions immediately come up, some of which have existing solutions in the ecosystem, and some of which do not.</p>
+<h3 id="how-to-generate-and-store-the-diagrams">How to generate and store the diagrams?</h3>
+<p>For an initial iteration, taking a picture of a sketch or whiteboard drawing can be sufficient. On an continuous basis having the DFD elements and data flows stored in a version-controllable format like XML (as <a href="http://draw.io/">draw.io</a> does), YAML (as <a href="https://github.com/Threagile/threagile">threagile</a> or <a href="https://github.com/freedomofpress/threat-modeling">threat-modeling</a> does) or directly as code (as <a href="https://github.com/izar/pytm">pytm</a> does) is ideal. All of these tools enable one to generate the data flow diagrams from the version controlled DFD data.</p>
+<p>Some tools like <a href="https://owasp.org/www-project-threat-dragon/">OWASP Threat Dragon</a>, <a href="https://docs.microsoft.com/en-us/azure/security/develop/threat-modeling-tool">Microsoft's TMT</a> and draw.io also provide a GUI to aid in this step.</p>
+<h3 id="how-to-enumerate-and-store-threats">How to enumerate and store threats?</h3>
+<p>Some of the above mentioned tools provide assistance for the threat enumeration process, using an existing methodology like STRIDE-per-element (in the case of Microsoft TMT and Threat Dragon), although these can only be used as an aid and need to be critically evaluated by the threat modeler to determine their relevance, and to add other potentially relevant threats. The threat modeling may also use existing attack libraries (like <a href="https://capec.mitre.org/">MITRE CAPEC</a>) to aid in threat enumeration.</p>
+<p>In terms of storing the threats once enumerated, a first-order approach is to use an existing ticketing system (e.g. a private GitHub repository) or a spreadsheet to store enumerated threats.</p>
+<p>The advantage of a ticketing system is that it's easy to crosslink with mitigations or individual development tickets being implemented. The downside is that it's not easy (as it is with a spreadsheet) to e.g. sort all threats by risk score, which you might do in order to determine which are the most important threats on which to focus your engineering effort.</p>
+<p>The downside of the spreadsheet approach is that it's a bit awkward to perform deeper analysis on, as well as follow one-to-many relationships. But, the spreadsheet has the advantage of being something that one can export as CSV and store in version control (although not in the most readable format, but one could then load the CSV in e.g. <a href="https://pandas.pydata.org/">pandas</a> if one wants to perform further analysis).</p>
+<p>Some tools like <a href="https://github.com/Threagile/threagile">threagile</a>, <a href="https://github.com/freedomofpress/threat-modeling">threat-modeling</a>, and <a href="https://github.com/izar/pytm">pytm</a> store the enumerated threats in YAML, JSON, and in the case of pytm, a SQL dump. These all enable easy analysis using other tools as well as for YAML and JSON human-readable storage in version control.</p>
+<h3 id="how-to-determine-which-mitigations-to-apply">How to determine which mitigations to apply?</h3>
+<p>Once threats have been enumerated, next we need to decide how to make decisions about them. If we can mitigate all threats, then great. However, we might be unable to completely mitigate all threats, so we need to decide how to allocate the engineering effort we have in a rational manner to manage the risk. There are not a lot of tools that aid in this dimension (see the next section on Simulation-like question answering).</p>
+<p><em>Edit 11/12/2020</em>: Another important aspect here is how best to store the mitigations - and their mapping to threats. It is highly useful to track which mitigations map to which threats such that developers can clearly see the purpose of the mitigation, and to enable one to evaluate the impact of removing a given security control (e.g. if debates arise on their importance due to maintenance burden or user impact). In <a href="https://github.com/freedomofpress/threat-modeling">threat-modeling</a>, the approach is to store the mitigations also in YAML, similar to the threats, with references to the threat IDs they apply to, to enable this sort of analysis[^2].</p>
+<h1 id="ideas">Ideas</h1>
+<p>Next, here are some directions that I think would be useful to explore further.</p>
+<h3 id="integration-in-cicd-pipelines">Integration in CI/CD pipelines</h3>
+<p>The <a href="https://github.com/threatspec/threatspec">threatspec folks</a> suggest integrating their tool (which is quite cool and involves adding annotations directly in the application code) as part of a CI/CD pipeline performing report or DFD generation.</p>
+<p>One could also imagine deeper integration in CI/CD pipelines. For example, by parsing the DFD, threats, and mitigations data, in CI one could flag issues like:</p>
+<ul>
+<li>Dataflow has no threats enumerated for it (i.e. threats are missing)</li>
+<li>Threats have no status (i.e. a decision needs to be made to accept, transfer, mitigate, etc.)</li>
+</ul>
+<p>Or inconsistencies in the DFD data itself to guide system modelers, e.g.:</p>
+<ul>
+<li>No trust boundaries present (there should be at least one trust boundary)</li>
+<li>Process element lacks entry or exit dataflow (there should be an entry and an exit)</li>
+</ul>
+<p>This is <a href="https://github.com/freedomofpress/threat-modeling#linter">explored</a> in the <a href="https://github.com/freedomofpress/threat-modeling">threat-modeling</a> tool (<a href="https://github.com/freedomofpress/threat-modeling/issues/52">ticket</a>).</p>
+<h3 id="simulation-like-question-answering">Simulation-like question answering</h3>
+<p>As a system designer we often ask questions like (see ticket <a href="https://github.com/freedomofpress/threat-modeling/issues/49">here</a>):</p>
+<ul>
+<li>What happens if I remove mitigation X? How much does total risk increase?</li>
+<li>I only have time to implement one complex mitigation, is it rational to implement mitigation X or mitigation Y?</li>
+</ul>
+<p>A tool that can aid in answering these questions (in a lightweight fashion), e.g. by recomputing the total risk score when a mitigation is removed or added, could be very helpful in decision-making. Of course a pre-requisite here is the accuracy of the risk scores - if they are very uncertain, that may need to be factored into the analysis (e.g. as is done in <a href="https://www.fairinstitute.org/">FAIR (Factor Analysis of Information Risk) risk framework</a>).</p>
+<p>The only tool I'm aware of in this direction is <a href="https://distrinet.cs.kuleuven.be/software/sparta/#">the SPARTA tool</a> from KU Leuven which allows one to both rank risks as well as answer some simulation-type questions using an approach based on the FAIR risk framework.</p>
+<h3 id="attack-tree-or-attack-graph-generation">Attack tree (or attack graph) generation</h3>
+<p>While the exercise of generating attack trees manually is a useful one for system designers (as is threat enumeration), one could also imagine at least partially automating the generation of attack trees.</p>
+<p>When an attacker is able to successfully realize a given threat as an attack, other threats become accessible, e.g. once one is able to get code execution in a VM, they can next attempt to exploit a bug in the hypervisor. One could annotate threats with these child-parent relationships to indicate which threats become accessible once the given threat is realized, and from that derive attack trees. This is the approach taken <a href="https://github.com/freedomofpress/threat-modeling/blob/main/threat_modeling/threats.py#L185-L213">here</a> in the <a href="https://github.com/freedomofpress/threat-modeling">threat-modeling</a> tool[^3].</p>
+<h1 id="fin">Fin</h1>
+<p>If you have thoughts on this or know of tools or approaches (especially if FLOSS 😇) that address the above concerns, feel free to drop me a note on <a href="https://twitter.com/redshiftzero">Twitter</a> or by <a href="mailto:jen@redshiftzero.com">email</a>.</p>
+<p>[^1]: A lot has already been written on the benefits of doing threat modeling so I'm not going to espouse the benefits here.
+[^2]: Armed with this mitigations data, one could do a "resilience" sort of test here, where one could simulate the impact of the failure of a given countermeasure: pick a given countermeasure, disable it, what is the impact of disabling this mitigation? If it's significant, then this shows an area where one should focus additional effort to provide defense in depth.
+[^3]: One could also imagine various ways of removing the parent-child threat annotation requirement, e.g. perhaps one could have the system designer specify the likely entry-point threats on the attack surface of the system. At this point provided there is a mapping of threats to DFD elements, the rest of the process could be automated: the entry-point threats are root nodes, and then one follows the dataflows to grow the rest of the attack tree, adding a child node in the attack tree for every threat associated with the destination node.</p>
+                    </div>
+                </article>
+            
+            </div>
+        </main>
+
+        <!-- Back to top -->
+        <div id="back-to-top" class="back-to-top">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon arrow-up">
+                    <path
+                        d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z" />
+                </svg></a>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer" class="footer">
+            <div class="footer-inner">
+                <div class="site-info">©&nbsp;1969–2025&nbsp;<svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512" class="icon footer-icon">
+                        <path
+                            d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
+                    </svg></div>
+                <div class="powered-by">Static site generated from Hugo</div>
+                <div class="site-copyright"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en"
+                        target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></div>
+
+                <ul class="socials">
+                    <li class="socials-item">
+                        <a href="/rss.xml" target="_blank" rel="external noopener" title="RSS"><svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon social-icon">
+                                <path
+                                    d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z" />
+                            </svg></a>
+                    </li>
+                    <li class="socials-item">
+                        <a href="mailto:jen@relicveil.com" target="_blank" rel="external noopener" title="Email"><svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon social-icon">
+                                <path
+                                    d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z" />
+                            </svg></a>
+                    </li>
+                    <li class="socials-item">
+                        <a href="https://github.com/redshiftzero" target="_blank" rel="external noopener"
+                            title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                class="icon social-icon">
+                                <path
+                                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                            </svg></a>
+                    </li>
+                    <li class="socials-item">
+                        <a href="https://twitter.com/redshiftzero" target="_blank" rel="external noopener"
+                            title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                class="icon social-icon">
+                                <path
+                                    d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z" />
+                            </svg></a>
+                    </li>
+                    <li class="socials-item">
+                        <a href="https://t.me/redshiftzero" target="_blank" rel="external noopener"
+                            title="Telegram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"
+                                class="icon social-icon">
+                                <path
+                                    d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm121.8 169.9l-40.7 191.8c-3 13.6-11.1 16.9-22.4 10.5l-62-45.7-29.9 28.8c-3.3 3.3-6.1 6.1-12.5 6.1l4.4-63.1 114.9-103.8c5-4.4-1.1-6.9-7.7-2.5l-142 89.4-61.2-19.1c-13.3-4.2-13.6-13.3 2.8-19.7l239.1-92.2c11.1-4 20.8 2.7 17.2 19.5z" />
+                            </svg></a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MathJax -->
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    load: ['[tex]/mhchem']
+                },
+                tex: {
+                    inlineMath: { '[+]': [['$', '$']] },
+                    tags: 'ams',
+                    packages: { '[+]': ['mhchem'] }
+                }
+            };
+            (function () {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+
+    <!-- Medium Zoom -->
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+    <script>
+        let imgNodes = document.querySelectorAll('div.post-body img');
+        imgNodes = Array.from(imgNodes).filter(node => node.parentNode.tagName !== "A");
+
+        mediumZoom(imgNodes, {
+            background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+        })
+    </script>
+
+    <!-- Instant Page -->
+    <script src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js" type="module" defer></script>
+</body>
+
+</html>

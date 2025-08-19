@@ -3,33 +3,48 @@ title = "About"
 date = "2018-02-09"
 +++
 
-Hello, I'm redshiftzero. I'm an [independent researcher](https://relicveil.com) working on privacy and security projects. Previously I've worked at Penumbra Labs as a founding engineer working on the cryptography stack, and at Freedom of the Press Foundation as the lead developer of the SecureDrop project and then a principal research engineer. Prior to that I was a postdoc researcher at the [Center for Data Science and Public Policy](http://www.datasciencepublicpolicy.org/) (now at Carnegie Mellon). I completed my Ph.D. in Astrophysics in 2015 at the University of Chicago's Kavli Institute of Cosmological Physics.
+Hello, I'm redshiftzero. I'm an engineer, researcher and cypherpunk. I'm currently the CTO at [Freedom of the Press Foundation](https://freedom.press), where I oversee the organization’s engineering teams.
 
-[Google Scholar](https://scholar.google.com/citations?user=OEcsdaQAAAAJ&hl=en)
+I sometimes do [consulting](https://relicveil.com), most recently for clients including [Lockdown Systems](https://lockdown.systems) (which I'm now a member of) on Cyd, [Radiant Commons](https://radiantcommons.com/) on their protocol guides, and [Lita Foundation](https://www.lita.foundation/) on their zkVM Valida.
 
-[Twitter](https://twitter.com/redshiftzero)
+Some places I am on the internet:
 
-[GitHub](https://github.com/redshiftzero)
+* [Google Scholar](https://scholar.google.com/citations?user=OEcsdaQAAAAJ&hl=en)
+* [Bluesky](https://bsky.app/profile/did:plc:tqlhmvwgbojznaimjb76g5ec)
+* [Twitter](https://twitter.com/redshiftzero) - I'm not active here but here it is!
+* [GitHub](https://github.com/redshiftzero)
+* [Youtube](https://youtube.com/redshiftzer0) - see some of my talks [here](https://www.youtube.com/playlist?list=PLjngPlKikRFJHo2BBxLG-l0VC-cSlr7K8)
 
-[Youtube](https://youtube.com/redshiftzer0)
+Previous affiliations:
+
+* I was a founding engineer working on the cryptography stack at [Penumbra Labs](https://penumbra.zone), a privacy-preserving decentralized exchange and L1 in the Cosmos ecosystem.
+* I was the lead developer of the [SecureDrop whistleblower platform](https://securedrop.org).
+* I was a cofounder and board member of [Lucy Parsons Labs](https://lucyparsonslabs.com), a transparency non-profit based in Chicago.
+* I was a core contributor to the [Tor Project](https://torproject.org), a non-profit that creates the Tor anonymity network and Tor Browser.
+* I was an advisory board member of [Distributed Denial of Secrets](https://ddosecrets.com/), a non-profit that archives and publishes hacked and leaked data in the public interest.
+* I was a postdoc researcher at the [Center for Data Science and Public Policy](http://www.datasciencepublicpolicy.org/) (now at Carnegie Mellon).
+* I completed my Ph.D. in Astrophysics in 2015 at the University of Chicago's Kavli Institute of Cosmological Physics.
 
 ## Previous Projects
 
-### Cryptography
+### Cryptography/Privacy
 
 * [decaf377](https://github.com/penumbra-zone/decaf377): An elliptic-curve library in Rust - a prime-order group designed for use in SNARKs over BLS12-377. Work done while at Penumbra Labs.
-* [poseidon377](https://github.com/penumbra-zone/poseidon377): a suite of Rust crates for the Poseidon1 and Poseidon2 hash functions. Work done while at Penumbra Labs.
+* [poseidon377](https://github.com/penumbra-zone/poseidon377): a suite of Rust crates for the Poseidon hash function. Work done while at Penumbra Labs.
+* [SecureDrop](https://github.com/freedomofpress/securedrop): A tool for news organizations to communicate with sources. The full list of organizations using SecureDrop can be seen in the directory [here](https://securedrop.org/directory/).
+* [Cyd](https://cyd.social): A tool to download your data from X, back it up, delete it from the platform, and migrate it to Bluesky.
+
+###  Civic Technology
+
+* [ICE Detention Map](https://watchice.org): An open-source dashboard and map showing information about ICE detention facilities.
+* [OpenOversight](https://github.com/lucyparsons/OpenOversight/): A tool for police oversight [in use](https://openoversight.com/browse) on the Burlington VT, Chicago, Oakland, Berkeley, and UC Berkeley Police Departments, as well as in [Baltimore](https://bpdwatch.com). Media: [Citylab](https://www.citylab.com/equity/2016/10/crowdsourcing-police-accountability/504650/), [Chicagoist](http://chicagoist.com/2016/10/26/from_new_oversight_agencies_to.php), [Washington Times](https://www.washingtontimes.com/news/2016/oct/20/openoversight-helps-public-identify-chicago-police/)
+* City of Cincinnati building code prediction (during 2015 Data Science for Social Good): [blog](https://dssg.uchicago.edu/project/proactive-blight-reduction-and-neighborhood-revitalization/) [GitHub repository](https://github.com/dssg/cincinnati2015-public). Media: [Wired/Backchannel](https://www.wired.com/2015/09/how-a-fiddler-and-an-astrophysicist-brought-predictive-analytics-to-cincinnati/)
+* Data-Driven Early Intervention System for police departments: [GitHub repository](https://github.com/dssg/police-eis). Now developed by [CMU](http://www.datasciencepublicpolicy.org/) and commercialized by [Benchmark Analytics](https://www.benchmarkanalytics.com/). Media: [Mother Jones](https://www.motherjones.com/politics/2016/07/data-prediction-police-misconduct-shootings/), [FiveThirtyEight](https://fivethirtyeight.com/features/we-now-have-algorithms-to-predict-police-misconduct/), [NPR](https://www.npr.org/sections/alltechconsidered/2016/07/19/486499835/can-big-data-help-head-off-police-misconduct), [wsoctv](https://www.wsoctv.com/news/local/charlotte-mecklenburg-police-using-technology-to-analyze-officers/719415686)
 
 ### Astrophysics
 
 * [cosmocalc.rs](https://github.com/RustAstro/cosmocalc.rs): A library for computing cosmological distances in Rust.
 * [cosmowebapp](https://github.com/redshiftzero/cosmowebapp): A d3.js interactive visualization of cosmological (matter and CMB) power spectra. Joint with [Eric Baxter (Hawaii IfA)](https://ebaxter.github.io/).
-
-###  Civic technology
-* [SecureDrop](https://github.com/freedomofpress/securedrop): A tool for news organizations to communicate with sources. The full list of organizations using SecureDrop can be seen in the directory [here](https://securedrop.org/directory/).
-* [OpenOversight](https://github.com/lucyparsons/OpenOversight/): A tool for police oversight [in use](https://openoversight.com/browse) on the Burlington VT, Chicago, Oakland, Berkeley, and UC Berkeley Police Departments, as well as in [Baltimore](https://bpdwatch.com).
-* City of Cincinnati building code prediction (during 2015 Data Science for Social Good): [blog](https://dssg.uchicago.edu/project/proactive-blight-reduction-and-neighborhood-revitalization/) [GitHub repository](https://github.com/dssg/cincinnati2015-public).
-* Data-Driven Early Intervention System for police departments: [GitHub repository](https://github.com/dssg/police-eis). Now developed by [CMU](http://www.datasciencepublicpolicy.org/) and commercialized by [Benchmark Analytics](https://www.benchmarkanalytics.com/).
 
 ## Papers
 
@@ -68,21 +83,6 @@ Hello, I'm redshiftzero. I'm an [independent researcher](https://relicveil.com) 
 [GEANT4 Simulation of a Cosmic Ray Muon Tomography System with Micro-Pattern Gas Detectors for the Detection of High-Z Materials](https://arxiv.org/abs/0811.0187)
 *Marcus Hohlmann, Patrick Ford, Kondo Gnanvo,* **Jennifer Helsby** *, David Pena, Richard Hoch, Debasis Mitra*, IEEE Transactions on Nuclear Science, 2009.
 
-## Media
-
-* Coverage of City of Cincinnati building code violation prediction: [Wired/Backchannel](https://www.wired.com/2015/09/how-a-fiddler-and-an-astrophysicist-brought-predictive-analytics-to-cincinnati/)
-* Coverage of predictive EIS: [Mother Jones](https://www.motherjones.com/politics/2016/07/data-prediction-police-misconduct-shootings/), [FiveThirtyEight](https://fivethirtyeight.com/features/we-now-have-algorithms-to-predict-police-misconduct/),
-[NPR](https://www.npr.org/sections/alltechconsidered/2016/07/19/486499835/can-big-data-help-head-off-police-misconduct), [wsoctv](https://www.wsoctv.com/news/local/charlotte-mecklenburg-police-using-technology-to-analyze-officers/719415686)
-* Coverage of Lucy Parsons Labs' OpenOversight: [Citylab](https://www.citylab.com/equity/2016/10/crowdsourcing-police-accountability/504650/), [Chicagoist](http://chicagoist.com/2016/10/26/from_new_oversight_agencies_to.php), [Washington Times](https://www.washingtontimes.com/news/2016/oct/20/openoversight-helps-public-identify-chicago-police/)
-
 ## Teaching
 
 **University of Chicago**, PPHA 30530: Computation for Public Policy, Winter 2016. Graduate-level introductory data analysis course (Python, SQL) aimed at public policy students.
-
-## Talks
-
-A subset of my talks, some others are on [Speakerdeck](https://speakerdeck.com/redshiftzero) and [Youtube](https://www.youtube.com/playlist?list=PLjngPlKikRFJHo2BBxLG-l0VC-cSlr7K8).
-
-[Next-Generation SecureDrop: Protecting Journalists from Malware](https://www.usenix.org/conference/enigma2020/program), USENIX Enigma 2020. [Video](https://www.youtube.com/watch?v=Z7BkdhO8P2I&list=PLjngPlKikRFJHo2BBxLG-l0VC-cSlr7K8&index=1).
-
-[Early Warning/Intervention Systems](https://academicworks.cuny.edu/cgi/viewcontent.cgi?article=1056&context=jj_pubs), National Association for Civilian Oversight of Law Enforcement (NACOLE) Symposium 2016 [Video](https://www.youtube.com/watch?v=PiIiIwBUj3U&list=PLjngPlKikRFJHo2BBxLG-l0VC-cSlr7K8&index=6).

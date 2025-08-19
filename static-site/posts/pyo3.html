@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>Creating Python extensions in Rust using PyO3 | redshiftzero</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/modern.css" />
+
+    <!-- JavaScript -->
+    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" />
+    </noscript>
+
+    <!-- Meta tags -->
+    <meta name="author" content="" />
+    <meta name="description" content="Creating Python extensions in Rust using PyO3" />
+
+    <!-- Icons and manifest -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="redshiftzero" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="redshiftzero" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="/icons/mstile-150x150.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- RSS feeds -->
+    <link rel="alternate" type="application/atom+xml" href="https://www.redshiftzero.com/atom.xml"
+        title="redshiftzero" />
+    <link rel="alternate" type="application/rss+xml" href="https://www.redshiftzero.com/rss.xml" title="redshiftzero" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.redshiftzero.com/post/pyo3/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Creating Python extensions in Rust using PyO3 | redshiftzero" />
+    <meta property="og:description" content="Creating Python extensions in Rust using PyO3" />
+    <meta property="og:url" content="https://www.redshiftzero.com/post/pyo3/" />
+    <meta property="og:site_name" content="redshiftzero" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:image" content="https://www.redshiftzero.com/icons/apple-touch-icon.png" />
+    <meta property="og:type" content="article" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@redshiftzero" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "datePublished": "2020-12-06T00:00:00",
+        "dateModified": "2020-12-06T00:00:00",
+        "url": "https://www.redshiftzero.com/post/pyo3/",
+        "description": "Creating Python extensions in Rust using PyO3",
+        "image": "https://www.redshiftzero.com/icons/apple-touch-icon.png",
+        "author": {
+            "@type": "Person",
+            "url": "https://www.redshiftzero.com/"
+        },
+        "license": "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)",
+        "name": "Creating Python extensions in Rust using PyO3 | redshiftzero"
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-wrapper">
+                <div class="header-inner single">
+                    <div class="site-brand">
+                        <a href="/" class="brand">redshiftzero</a>
+                    </div>
+
+                    <nav class="nav">
+                        <ul class="menu" id="menu">
+
+                            <li class="menu-item"><a href="/archive/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" class="icon archive">
+                                        <path
+                                            d="M32 32C14.3 32 0 46.3 0 64s14.3 32 32 32h32v32H32C14.3 128 0 142.3 0 160s14.3 32 32 32h32v32H32C14.3 224 0 238.3 0 256s14.3 32 32 32h32v32H32C14.3 320 0 334.3 0 352s14.3 32 32 32h32v32H32C14.3 416 0 430.3 0 448s14.3 32 32 32h448c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32V96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM96 96h320v320H96V96z" />
+                                    </svg><span class="menu-item-name">Archive</span></a></li>
+                            <li class="menu-item"><a href="/about/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 496 512" class="icon user-circle">
+                                        <path
+                                            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z" />
+                                    </svg><span class="menu-item-name">About</span></a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+            <label for="nav-toggle" class="nav-toggle"></label>
+            <label for="nav-toggle" class="nav-curtain"></label>
+        </header>
+
+        <!-- Main content -->
+        <main class="main single" id="main">
+            <div class="main-inner">
+                
+                <article class="content post h-entry">
+                    <h1 class="post-title p-name">Creating Python extensions in Rust using PyO3</h1>
+
+                    <div class="post-meta">
+                        <time datetime="2020-12-06T00:00:00" class="post-meta-item published dt-published">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon">
+                                <path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/>
+                            </svg> 2020.12.06
+                        </time>
+                    </div>
+
+                    <div class="post-body e-content">
+                        <p>This post describes how I approached writing a Python extension in Rust. The post covers:</p>
+<ul>
+<li><a href="{{&lt; relref &quot;#why&quot; &gt;}}">why one would even want to do this 🙃</a></li>
+<li><a href="{{&lt; relref &quot;#approaches&quot; &gt;}}">the approaches for calling Rust code from Python</a></li>
+<li><a href="{{&lt; relref &quot;#pyo3&quot; &gt;}}">an overview of how to create a Python module in Rust using PyO3</a></li>
+<li><a href="{{&lt; relref &quot;#tricky&quot; &gt;}}">some tricky parts, e.g. inheritance</a></li>
+<li><a href="{{&lt; relref &quot;#building&quot; &gt;}}">building and distributing wheels</a></li>
+</ul>
+<p>Let's get started.</p>
+<h1 id="first-why-do-this-at-all-why">First, why do this at all? {#why}</h1>
+<p>There are two main reasons:</p>
+<ol>
+<li>To use Rust libraries that already exist, e.g. cryptography libraries.</li>
+<li>To do computationally intensive work that will be too slow in Python. Other approaches if this is the main motivation are using a C extension (e.g. as <a href="https://github.com/numpy/numpy">numpy</a> does) or using projects like Cython or numba.</li>
+</ol>
+<p>For my use case, I had the first reason, I wanted to prototype something using a Rust crate that implemented a cryptographic protocol.</p>
+<h1 id="approaches-approaches">Approaches {#approaches}</h1>
+<p>There are multiple approaches for calling compiled Rust code from Python, including <a href="https://docs.python.org/3/library/ctypes.html"><code>ctypes</code></a>, <code>cffi</code> and <code>PyO3</code>. Here we'll cover the two most popular: <code>cffi</code> (considered easier to use than <code>ctypes</code>) and <code>PyO3</code>.</p>
+<h3 id="cffi">cffi</h3>
+<p>You can use <code>extern</code> keyword to allow other languages to call Rust functions.</p>
+<p>For example this <code>add</code> function is marked as a public external function using the <code>pub extern</code> keywords. The <a href="https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html#calling-rust-functions-from-other-languages"><code>#[no_mangle]</code> attribute</a> just tells the compiler to preserve the readable function name.</p>
+<pre class="codehilite"><code class="language-rust">#[no_mangle]
+pub extern fn add(n: i32, m: i32) -&gt; i32 {
+    n + m
+}
+</code></pre>
+
+<p>One you compile the above, one can then use Python's <a href="https://cffi.readthedocs.io/en/latest/"><code>cffi</code></a> library to call the <code>add</code> function. First one must build the library using the <a href="https://doc.rust-lang.org/reference/linkage.html"><code>cdylib</code> crate type</a> to produce a dynamic library.</p>
+<p>Then, one can load this dynamic library and call the external Rust functions:</p>
+<pre class="codehilite"><code class="language-py">ffi = cffi.FFI()
+ffi.cdef(&quot;&quot;&quot;
+    int add(int, int);
+&quot;&quot;&quot;)
+adder = ffi.dlopen(location)
+
+assert adder.add(2, 2) == 4
+</code></pre>
+
+<p>You can see this example in full on GitHub <a href="https://github.com/redshiftzero/rust-python-examples#cffi">here</a>. Read more about Rust FFI <a href="https://doc.rust-lang.org/nomicon/ffi.html">here</a> and if you do take the FFI path, you might want to check out the <a href="https://github.com/getsentry/milksnake">milksnake</a> project for building and distributing wheels.</p>
+<h3 id="pyo3">PyO3</h3>
+<p>PyO3 is a very cool project that allows one to define a Python module entirely in Rust. The above example in PyO3 would be:</p>
+<pre class="codehilite"><code class="language-rust">#[pyfunction]
+pub fn add(n: i32, m: i32) -&gt; i32 {
+    n + m
+}
+</code></pre>
+
+<p>And to define the actual Python module:</p>
+<pre class="codehilite"><code class="language-rust">#[pymodule]
+pub fn adder(py: Python, module: &amp;PyModule) -&gt; PyResult&lt;()&gt; {
+    module.add_wrapped(wrap_pyfunction!(add))?;
+    Ok(())
+}
+</code></pre>
+
+<p>This means that now from the Python interpreter we can just do:</p>
+<pre class="codehilite"><code class="language-py">&gt;&gt;&gt; import adder
+&gt;&gt;&gt; adder.add(2, 3)
+5
+</code></pre>
+
+<p>As we can see, the PyO3 approach is very straightforward. You simply add attributes to structs and functions in Rust to indicate that they should be exposed to Python, and then you write a Rust function to indicate what the top-level functions and classes are for that module.</p>
+<p>There are also similarly easy-to-use build tools (via <code>setuptools-rust</code> and <code>maturin</code>) to handle the packaging and build process. You can see this example packaged using <code>setuptools-rust</code> on GitHub <a href="https://github.com/redshiftzero/rust-python-examples#pyo3_basic">here</a>.</p>
+<p>In the rest of this post, I'll explain more about using PyO3.</p>
+<h2 id="creating-python-modules-with-pyo3-pyo3">Creating Python Modules with PyO3 {#pyo3}</h2>
+<p>The most important attributes to know are:</p>
+<ul>
+<li><code>#[pyclass]</code>: to expose a Rust struct as a Python class</li>
+<li><code>#[pyfunction]</code>: to expose a Rust function as a Python function</li>
+<li><code>#[pymethods]</code>: to expose the methods defined in an <code>impl</code> block of a struct with the <code>#[pyclass]</code> attribute as methods on the corresponding Python class</li>
+<li><code>#[pymodule]</code>: to expose a collection of structs or functions as a Python module</li>
+</ul>
+<p>Using these attributes, PyO3 macros will do all the FFI work for you.</p>
+<p>Functions and methods exposed to Python must have return values that are either native Rust types (that can be converted to <code>PyObject</code> via the <a href="https://docs.rs/pyo3/0.12.4/pyo3/conversion/trait.ToPyObject.html"><code>ToPyObject</code> trait</a>) or Python object types (e.g. <code>PyDict</code> not <code>dict</code>). See the list of conversions <a href="https://pyo3.rs/master/conversions/tables.html#mapping-of-rust-types-to-python-types">here</a>.</p>
+<p>Functions that can fail should return <code>PyResult</code>, which is a type alias for <code>Result&lt;T, PyErr&gt;</code>. If the Err variant is returned, an exception will be raised on the Python side. Note that you can also create <a href="https://pyo3.rs/master/exception.html">custom exception types</a>.</p>
+<h3 id="classes-and-methods">Classes and methods</h3>
+<p>Let's create an example class, using <code>#[pyclass]</code> and <code>#[pymethods]</code>:</p>
+<pre class="codehilite"><code class="language-rust">#[pyclass]
+pub struct Animal {
+    #[pyo3(get)]
+    name: String,
+    #[pyo3(get)]
+    age: u8,
+    hours_since_last_fed: u8,
+}
+
+#[pymethods]
+impl Animal {
+    #[new]
+    fn new(name: String, age: u8, hours_since_last_fed: u8) -&gt; Self {
+        Animal{ name, age, hours_since_last_fed }
+    }
+
+    fn feed(&amp;mut self) {
+        self.hours_since_last_fed = 0;
+    }
+}
+</code></pre>
+
+<p>The <code>#[new]</code> attribute is used for your object constructor and initialization logic in Python (equivalent of Python <code>__new__()</code>).</p>
+<p>In Python, you'd call <code>doris = Animal('Doris', 2, 0)</code> to use this.</p>
+<p>The <code>#[pyo3(get)]</code> attribute lets one read <code>doris.name</code> as member attributes. If you want to set attributes also, you can use <code>#[pyo3(get, set)]</code> (which could replace the <code>Animal::feed()</code> method if we wanted to).</p>
+<p>We can add this class to a new module as follows:</p>
+<pre class="codehilite"><code class="language-rust">#[pymodule]
+pub fn adder(py: Python, module: &amp;PyModule) -&gt; PyResult&lt;()&gt; {
+    module.add_class::&lt;Animal&gt;()?;
+    Ok(())
+}
+</code></pre>
+
+<h2 id="some-trickier-parts-of-pyo3-tricky">Some trickier parts of PyO3 {#tricky}</h2>
+<p>The above parts can cover simple projects. Two more advanced topics we'll cover are inheritance, and magic methods.</p>
+<h3 id="inheritance">Inheritance</h3>
+<p>What if we want to make a subclasses, say, a <code>Lion</code>, that inherits from <code>Animal</code>? Here's how we do it:</p>
+<pre class="codehilite"><code class="language-rust">#[pyclass(subclass)]
+pub struct Animal {
+    #[pyo3(get)]
+    name: String,
+    #[pyo3(get)]
+    age: u8,
+    hours_since_last_fed: u8,
+}
+
+#[pymethods]
+impl Animal {
+    #[new]
+    fn new(name: String, age: u8, hours_since_last_fed: u8) -&gt; Self {
+        Animal{ name, age, hours_since_last_fed }
+    }
+
+    fn feed(&amp;mut self) {
+        self.hours_since_last_fed = 0;
+    }
+}
+
+#[pyclass(extends=Animal)]
+pub struct Lion {
+    #[pyo3(get)]
+    favorite_meat: String,
+}
+
+#[pymethods]
+impl Lion {
+    #[new]
+    fn new(name: String, age: u8, hours_since_last_fed: u8, favorite_meat: String) -&gt; PyResult&lt;(Self, Animal)&gt; {
+        Ok((Lion{ favorite_meat }, Animal{ name, age, hours_since_last_fed }))
+    }
+
+    fn roar(&amp;self) -&gt; String {
+        &quot;ROAR!!!!&quot;.to_string()
+    }
+}
+</code></pre>
+
+<p>The <code>#[pyclass]</code> annotations indicate the parent (<code>#[pyclass(subclass)]</code>) and child (<code>#[pyclass(extends=Parent)]</code>) classes. The tuple syntax in the return value of the child is a little "trick" intended for ergonomics: you return <code>PyResult&lt;(Child, Parent)&gt;</code> or <code>(Child, Parent)</code>. PyO3 will then run <code>Into&lt;PyClassInitializer&gt;</code> on the child, where <a href="https://docs.rs/pyo3/0.12.4/pyo3/pyclass_init/struct.PyClassInitializer.html">PyClassInitializer</a> is PyO3's pyclass initializer.</p>
+<h3 id="magic-methods">Magic methods</h3>
+<p>One might be surprised to find that implementing magic methods doesn't work in a <code>#[pymethods]</code> impl block. It turns out that you can implement Python "magic" methods like <code>__repr__</code> and <code>__richcmp__</code> using the <code>PyObjectProtocol</code> trait and the <code>#[pyproto]</code> attribute in a separate <code>impl</code> block. For example, to add a nice string representation for <code>Animal</code>:</p>
+<pre class="codehilite"><code class="language-rust">#[pyproto]
+impl PyObjectProtocol for Animal {
+    fn __str__(&amp;self) -&gt; PyResult&lt;String&gt; {
+        Ok(String::from(format!(
+            &quot;Animal: {}&quot;,
+            self.name,
+        )))
+    }
+}
+</code></pre>
+
+<p>See some additional examples <a href="https://github.com/freedomofpress/signal-protocol/blob/0c9c5d76e1876fa2be311430943ca8a3e3ae1f19/src/fingerprint.rs#L52-L61">here</a> and <a href="https://github.com/freedomofpress/signal-protocol/blob/0c9c5d76e1876fa2be311430943ca8a3e3ae1f19/src/curve.rs#L124-L133">here</a>.</p>
+<h2 id="distributing-wheels-building">Distributing wheels {#building}</h2>
+<p>We want to build and distribute wheels that do not require the rust toolchain to be installed on target systems. Fortunately, with <code>setuptools-rust</code> and <code>maturin</code>, that's pretty simple. For <code>setuptools-rust</code> our <code>setup.py</code> for the <code>zoo</code> example would be:</p>
+<pre class="codehilite"><code class="language-py">import sys
+from setuptools import setup
+from setuptools_rust import Binding, RustExtension
+
+setup(
+    name=&quot;zoo&quot;,
+    version=&quot;0.0.1&quot;,
+    classifiers=[
+        &quot;License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)&quot;,
+        &quot;Development Status :: 3 - Alpha&quot;,
+        &quot;Intended Audience :: Developers&quot;,
+        &quot;Programming Language :: Python&quot;,
+        &quot;Programming Language :: Rust&quot;,
+    ],
+    packages=[&quot;zoo&quot;],
+    rust_extensions=[RustExtension(&quot;zoo.zoo&quot;, &quot;Cargo.toml&quot;, binding=Binding.PyO3)],
+    setup_requires=[&quot;setuptools-rust&gt;=0.10.1&quot;, &quot;wheel&quot;],
+    zip_safe=False,  # Rust extensions are not zip safe
+)
+</code></pre>
+
+<p>See the full project <a href="https://github.com/redshiftzero/rust-python-examples#pyo3_inherit">here</a>.</p>
+<p>Locally, if we're on macOS, to build macOS wheels:</p>
+<pre class="codehilite"><code>python3 setup.py sdist bdist_wheel
+</code></pre>
+
+<p>To build manylinux wheels we can follow <a href="https://github.com/PyO3/setuptools-rust#binary-wheels-on-linux">the procedure described in the setuptools-rust project</a>. First we fetch the Python Packaging Authority manylinux image:</p>
+<pre class="codehilite"><code>docker pull quay.io/pypa/manylinux2014_x86_64
+</code></pre>
+
+<p>Then using the default <code>build-wheels.sh</code> script provided by <code>setuptools-rust</code>:</p>
+<pre class="codehilite"><code>docker run --rm -v `pwd`:/io quay.io/pypa/manylinux2014_x86_64 /io/build-wheels.sh
+</code></pre>
+
+<p>This leaves us with built wheels in <code>dist/</code> ready for upload to PyPI. And we should just upload the manylinux wheels built by the script as PyPI does not support wheels with platform tags like <code>linux_x86_64</code> (these are also produced by the above wheel build command but can be discarded).</p>
+<h1 id="fin">Fin</h1>
+<p>I hope you're convinced that writing Rust extensions with PyO3 is approachable. To read more check out the <a href="https://pyo3.rs/">PyO3 guide</a>. If you want to see a larger example, you can check out the library I wrote using PyO3 <a href="https://github.com/freedomofpress/signal-protocol">here</a> and install in Python 3.7+, via <code>pip install signal-protocol</code> 😊 .</p>
+                    </div>
+                </article>
+            
+            </div>
+        </main>
+
+        <!-- Back to top -->
+        <div id="back-to-top" class="back-to-top">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon arrow-up">
+                    <path
+                        d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z" />
+                </svg></a>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer" class="footer">
+            <div class="footer-inner">
+                <div class="site-info">© 2025 Jennifer Helsby</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MathJax -->
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    load: ['[tex]/mhchem']
+                },
+                tex: {
+                    inlineMath: { '[+]': [['$', '$']] },
+                    tags: 'ams',
+                    packages: { '[+]': ['mhchem'] }
+                }
+            };
+            (function () {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+
+    <!-- Medium Zoom -->
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+    <script>
+        let imgNodes = document.querySelectorAll('div.post-body img');
+        imgNodes = Array.from(imgNodes).filter(node => node.parentNode.tagName !== "A");
+
+        mediumZoom(imgNodes, {
+            background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+        })
+    </script>
+
+    <!-- Instant Page -->
+    <script src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js" type="module" defer></script>
+</body>
+
+</html>
