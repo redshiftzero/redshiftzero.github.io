@@ -14,9 +14,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
 
-    <!-- JavaScript -->
-    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
@@ -136,7 +133,7 @@
                     <div class="post-body e-content">
                         <p>Shielded blockchains like Penumbra provide privacy through the use of zero-knowledge proofs (ZKPs): actions that change the public chain state can be verified <em>without</em> providing the underlying private data. </p>
 <p><em>Note: I wrote this blog for the Penumbra Labs site. Below is an abbreviated version. You can see the original post <a href="https://penumbra.zone/blog/zkproofs-intro/">here</a>.</em></p>
-<h3 id="transparent-proofs">Transparent "Proofs"</h3>
+<h3 id="transparent-proofs"><a class="toclink" href="#transparent-proofs">Transparent "Proofs"</a></h3>
 <p><a href="https://penumbra.zone/blog/how-were-building-penumbra/">Our plan</a> for implementing Penumbra has been to use an approach which allows quick iterations on the design of the system without spending significant effort each iteration to update zero-knowledge circuits. To ensure that the design of the system was kept compatible with zero-knowledge proofs, each action had a “transparent proof”, for example for spending notes:</p>
 <pre class="codehilite"><code class="language-Rust">/// Transparent proof for spending existing notes.
 ///
@@ -178,7 +175,7 @@ impl SpendProof {
 </code></pre>
 
 <p>This <code>SpendProof</code> struct trivially stored the witnesses in cleartext. The prover created this struct, and sent it to the node, where a verification method was called using the public inputs provided in the transaction. The verification method did all the integrity checks the real proof would: verifying the Merkle path, checking the prover had an opening of the public commitment, and so on. This did <em>not</em> provide privacy, but it let us rapidly prototype the system while refining the protocol design, with assurance that when our requirements became stable, we could fill in the proofs.</p>
-<h3 id="zero-knowledge">Zero-Knowledge</h3>
+<h3 id="zero-knowledge"><a class="toclink" href="#zero-knowledge">Zero-Knowledge</a></h3>
 <p>As we approach mainnet and the system functionality becomes stable, we began migrating from transparent proofs to zero-knowledge proofs starting with <a href="https://github.com/penumbra-zone/penumbra/releases/tag/046-lysithea">testnet 46, codenamed Lysithea</a>, released on February 27th, 2023. Now that Penumbra’s multi-asset shielded pool is stable, that release migrated outputs (actions that create new notes) and spends (actions that consume existing notes) to use zero-knowledge proofs. Interaction with Penumbra’s DEX, governance, and staking systems will follow. </p>
 <p>One of Penumbra’s design goals is to create a usable privacy system. That means fast proving times: at mainnet we’re aiming for proving times below one second on end-user devices. We can do this by performing the proving for all actions concurrently and by using Groth16. For Penumbra’s initial ZKPs, we use the pairing-friendly BLS12-377 proving curve and the <a href="https://github.com/arkworks-rs/groth16">Arkworks implementation of the Groth16 proving system</a>. It has excellent out-of-the-box performance even before optimization: on an M1 macbook, transactions with three actions (one spend, two outputs) typically take under 1.3s to generate. We also get the benefits of very small proof size and using a mature system that has been in production for years.</p>
 <p>A disadvantage of Groth16 is that it requires a circuit-specific setup, meaning each time we change our proof statements, we need to re-run a decentralized setup procedure to generate new parameters for the prover and verifier. The requirement for this process is there is at least one honest participant in the setup, thus motivating a large setup process involving many participants. Stay tuned for more details on the setup procedure and how you can participate!</p>
@@ -233,7 +230,7 @@ impl SpendProof {
 </code></pre>
 
 <p>Our ZK proofs are now just three group elements in size. The prover uses provided proving parameters (type <code>ProvingKey&lt;Bls12_377&gt;</code>), which we distribute via a <code>penumbra-proof-params</code> crate, to create the proof using their private witnesses and public inputs. The verifier uses the corresponding verifying key (type <code>PreparedVerifyingKey&lt;Bls12_377&gt;</code>) in order to verify the proofs on the node using the public inputs provided in the transaction. </p>
-<h3 id="circuit-programming">Circuit Programming</h3>
+<h3 id="circuit-programming"><a class="toclink" href="#circuit-programming">Circuit Programming</a></h3>
 <p>To generate the circuit for each action, we first need to represent the statements we want to prove - for example that the prover knows an opening of a specific public commitment - in a way that our proving system can understand. For Groth16 proofs, this means representing all statements to be proved in-circuit as a rank-1 constraint system (R1CS). We need to be able to write down elliptic curve operations, hash function evaluations and so on, as a number of constraint equations that are simple linear combinations of field element variables.</p>
 <p>Several of our dependencies now have this R1CS functionality: <a href="https://github.com/penumbra-zone/decaf377"><code>decaf377</code></a>, <a href="https://github.com/penumbra-zone/poseidon377"><code>poseidon377</code></a>, and <a href="https://github.com/penumbra-zone/penumbra/tree/main/tct/src"><code>penumbra-tct</code></a> all have an optional <code>r1cs</code> feature, while <code>penumbra-crypto</code> has R1CS functionality inline next to each type that needs to be represented in-circuit. This lets us do elliptic curve operations, SNARK-friendly hashing, and all other operations in-circuit. For example, here is the type that represents in-circuit which path a node in our <a href="https://penumbra.zone/blog/tiered-commitment-tree">tiered commitment tree</a> can take:</p>
 <pre class="codehilite"><code class="language-Rust">/// Represents the different paths a quadtree node can take.

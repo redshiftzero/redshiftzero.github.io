@@ -14,9 +14,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
 
-    <!-- JavaScript -->
-    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
@@ -135,7 +132,7 @@
 
                     <div class="post-body e-content">
                         <p>How many people do you need in a room before there is a 50% chance that least two of them share the same birthday? It's only 23, though unless you have heard about this paradox before, you might expect it to be much larger. This is the well-known birthday paradox: it's called a paradox only because collisions happen much faster than one naively expects. Collisions here means an event where two or more observed values are equal. This paradox is important in cryptography as it's relevant for many topics like cryptographic hash functions, which are designed to be collision-resistant one-way functions.</p>
-<h3 id="the-probability-of-collision">The probability of collision</h3>
+<h3 id="the-probability-of-collision"><a class="toclink" href="#the-probability-of-collision">The probability of collision</a></h3>
 <p>Let's see why this is true by first deriving analytically the probability that <em>no</em> collision occurs for a generic case where there are $m$ possible values, and we observe $n$ of them. The birthday paradox above is a special case where $m=365$ and $n=23$. We want to know: what is the probability that we don't see any collisions after $n$ observations?</p>
 <p>We first note that the first observation, $o_1$, trivially occurs with probability 1: $P(o_1) = 1$.</p>
 <p>Next we compute the probability that the second observation does not match the first, there are now $m-1$ possible options out of $m$: </p>
@@ -150,7 +147,7 @@ the first $n-1$ observations:</p>
 <p>What is the probability that a collision <em>does</em> occur? Well, we know that the probability that a collision occurs is the complement of the probability that no collision occurs, i.e.:</p>
 <p>$ P(\mbox{Collision}) = 1 - P(\mbox{No collision}) = 1 - \prod_{i=1}^{n-1} 1 - \frac{i}{m}$</p>
 <p>That is the probability for any $n$ and $m$ that a collision occurs due to the birthday paradox ✨</p>
-<h3 id="collision-probability-as-a-function-of-n">Collision probability as a function of $n$</h3>
+<h3 id="collision-probability-as-a-function-of-n"><a class="toclink" href="#collision-probability-as-a-function-of-n">Collision probability as a function of $n$</a></h3>
 <p>Armed with the above analytic expression, we can write a simple function that computes the probability of collision for any $n$ and $m$:</p>
 <pre class="codehilite"><code class="language-python">def prob_of_collision(n: int=23, m: int=365) -&gt; int:
     probability_of_no_collision = 1
@@ -160,10 +157,10 @@ the first $n-1$ observations:</p>
 </code></pre>
 
 <p>Let's now use this function to make a few plots showing how the probability changes as a function of $n$. </p>
-<h4 id="birthday-case-m365">Birthday case: m=365</h4>
+<h4 id="birthday-case-m365"><a class="toclink" href="#birthday-case-m365">Birthday case: m=365</a></h4>
 <p><img alt="Collision probability for m=365" src="/img/birthday_attack_m_365.png" /></p>
 <p>We can see that the probability reaches $50\%$ right around $n=23$, thus recovering what we stated in the introduction.</p>
-<h4 id="larger-case-m100000">Larger case: m=100000</h4>
+<h4 id="larger-case-m100000"><a class="toclink" href="#larger-case-m100000">Larger case: m=100000</a></h4>
 <p><img alt="Collision probability for m=365" src="/img/birthday_attack_m_100000.png" /></p>
 <p>For larger numbers, we see that collisions happen <em>very</em> fast: in a space of 100000 possible values, we reach $50\%$ probability after less than 400 observations. This should underscore the importance of considering birthday attacks especially in the case even where the space of possible values is very large. We can see empirically from these couple of cases that the number of observations $n$ you need to get a probability of collision of 0.5 is approximately $\sqrt{m}$. You can prove that to yourself analytically by taking the equation we derived above for the probability of collision, setting the left hand side equal to 0.5, and rearranging to see the relationship between $n$ and $m$.</p>
                     </div>

@@ -14,9 +14,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
 
-    <!-- JavaScript -->
-    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
@@ -162,11 +159,11 @@ True
 </code></pre>
 
 <p>We did not retrieve items in FIFO order for jobs of equal priority: <code>'Another job'</code> was fetched prior to <code>'My first job'</code> even though it was added afterwards. Why does this happen?</p>
-<h2 id="using-a-min-heap-for-queuepriorityqueue">Using a min-heap for <code>queue.PriorityQueue</code></h2>
+<h2 id="using-a-min-heap-for-queuepriorityqueue"><a class="toclink" href="#using-a-min-heap-for-queuepriorityqueue">Using a min-heap for <code>queue.PriorityQueue</code></a></h2>
 <p>The short version is that we grabbed <code>'Another job'</code> first, because <code>'Another job' &lt; 'My first job'</code> alphabetically.</p>
 <p>The longer version is that under the hood, <code>queue.PriorityQueue</code> is implemented using <code>heapq</code>, Python's heap implementation. Every job is an element in a min-heap. A min-heap is a complete binary tree that satisfies the min-heap propety: the value of each node is greater than or equal to the value of its parent. The root element will be the node with the minimum value. So to get the next job we want to run, we just <a href="https://github.com/python/cpython/blob/b2b4a51f7463a0392456f7772f33223e57fa4ccc/Lib/heapq.py#L139">grab the element at the top of the min-heap</a>, which due to the min-heap property, we know will be the job with the minimum priority value - which remember from above corresponds to the <em>higher</em> priority.</p>
 <p>But where is this comparison done: <code>'Another job' &lt; 'My first job'</code>? During heap operations, elements are compared with one another (and swapped if needed). In Python, this is done using <a href="https://github.com/python/cpython/blob/b2b4a51f7463a0392456f7772f33223e57fa4ccc/Lib/heapq.py#L264">the rich comparison operator <code>__lt__</code></a>. <code>'Another job'</code> will bubble to the top of the heap since <code>'Another job' &lt; 'My first job'</code>.</p>
-<h2 id="how-we-can-solve-this">How we can solve this</h2>
+<h2 id="how-we-can-solve-this"><a class="toclink" href="#how-we-can-solve-this">How we can solve this</a></h2>
 <p>Here's an approach I used for Python 3.5 (the version of Python I was writing for when I looked into using <a href="https://github.com/freedomofpress/securedrop-client/blob/master/securedrop_client/api_jobs/base.py#L24">this functionality</a>). For the application I was working on, I needed to retrieve items based on priority, and for items of equal priority, I needed to retrieve items in FIFO order.</p>
 <p>One simple approach if you hit this problem is following <a href="https://docs.python.org/3/library/heapq.html#priority-queue-implementation-notes">a suggestion in the <code>heapq</code> documentation</a>: "store entries as 3-element list including the priority, an entry count, and the task", where the entry count is a tie-breaker for jobs of equal priority. Let's see that demonstrated:</p>
 <pre class="codehilite"><code class="language-py">&gt;&gt;&gt; q.put((1, 1, 'My next job'))

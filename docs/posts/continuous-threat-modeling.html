@@ -14,9 +14,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
 
-    <!-- JavaScript -->
-    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
@@ -134,7 +131,7 @@
                     </div>
 
                     <div class="post-body e-content">
-                        <h1 id="motivation">Motivation</h1>
+                        <h1 id="motivation"><a class="toclink" href="#motivation">Motivation</a></h1>
 <p>When performing software-centric threat-modeling on an application<a href="A lot has already been written on the benefits of doing threat modeling so I'm not going to espouse the benefits here.">^1</a>, one typically:</p>
 <ol>
 <li>generates at least one Data Flow Diagram (DFD) or other diagrams that model the software,</li>
@@ -142,23 +139,23 @@
 <li>determines which mitigations should be applied.</li>
 </ol>
 <p>Automated tools can potentially aid the threat modeler in each of these stages. When the design of a system is modified, the threat modeling exercise may be performed again, resulting in needing to pass through the above steps again. Even if a design remains static, the threats and mitigations should still be evaluated periodically as the threat landscape may evolve, e.g. if attacker capabilities or motivations change. This means that tools or processes that can aid the threat modeler perform these tasks on a continuous basis can be of great value.</p>
-<h1 id="tooling-to-aid-these-steps">Tooling to aid these steps</h1>
+<h1 id="tooling-to-aid-these-steps"><a class="toclink" href="#tooling-to-aid-these-steps">Tooling to aid these steps</a></h1>
 <p>When going about the above steps, several questions immediately come up, some of which have existing solutions in the ecosystem, and some of which do not.</p>
-<h3 id="how-to-generate-and-store-the-diagrams">How to generate and store the diagrams?</h3>
+<h3 id="how-to-generate-and-store-the-diagrams"><a class="toclink" href="#how-to-generate-and-store-the-diagrams">How to generate and store the diagrams?</a></h3>
 <p>For an initial iteration, taking a picture of a sketch or whiteboard drawing can be sufficient. On an continuous basis having the DFD elements and data flows stored in a version-controllable format like XML (as <a href="http://draw.io/">draw.io</a> does), YAML (as <a href="https://github.com/Threagile/threagile">threagile</a> or <a href="https://github.com/freedomofpress/threat-modeling">threat-modeling</a> does) or directly as code (as <a href="https://github.com/izar/pytm">pytm</a> does) is ideal. All of these tools enable one to generate the data flow diagrams from the version controlled DFD data.</p>
 <p>Some tools like <a href="https://owasp.org/www-project-threat-dragon/">OWASP Threat Dragon</a>, <a href="https://docs.microsoft.com/en-us/azure/security/develop/threat-modeling-tool">Microsoft's TMT</a> and draw.io also provide a GUI to aid in this step.</p>
-<h3 id="how-to-enumerate-and-store-threats">How to enumerate and store threats?</h3>
+<h3 id="how-to-enumerate-and-store-threats"><a class="toclink" href="#how-to-enumerate-and-store-threats">How to enumerate and store threats?</a></h3>
 <p>Some of the above mentioned tools provide assistance for the threat enumeration process, using an existing methodology like STRIDE-per-element (in the case of Microsoft TMT and Threat Dragon), although these can only be used as an aid and need to be critically evaluated by the threat modeler to determine their relevance, and to add other potentially relevant threats. The threat modeling may also use existing attack libraries (like <a href="https://capec.mitre.org/">MITRE CAPEC</a>) to aid in threat enumeration.</p>
 <p>In terms of storing the threats once enumerated, a first-order approach is to use an existing ticketing system (e.g. a private GitHub repository) or a spreadsheet to store enumerated threats.</p>
 <p>The advantage of a ticketing system is that it's easy to crosslink with mitigations or individual development tickets being implemented. The downside is that it's not easy (as it is with a spreadsheet) to e.g. sort all threats by risk score, which you might do in order to determine which are the most important threats on which to focus your engineering effort.</p>
 <p>The downside of the spreadsheet approach is that it's a bit awkward to perform deeper analysis on, as well as follow one-to-many relationships. But, the spreadsheet has the advantage of being something that one can export as CSV and store in version control (although not in the most readable format, but one could then load the CSV in e.g. <a href="https://pandas.pydata.org/">pandas</a> if one wants to perform further analysis).</p>
 <p>Some tools like <a href="https://github.com/Threagile/threagile">threagile</a>, <a href="https://github.com/freedomofpress/threat-modeling">threat-modeling</a>, and <a href="https://github.com/izar/pytm">pytm</a> store the enumerated threats in YAML, JSON, and in the case of pytm, a SQL dump. These all enable easy analysis using other tools as well as for YAML and JSON human-readable storage in version control.</p>
-<h3 id="how-to-determine-which-mitigations-to-apply">How to determine which mitigations to apply?</h3>
+<h3 id="how-to-determine-which-mitigations-to-apply"><a class="toclink" href="#how-to-determine-which-mitigations-to-apply">How to determine which mitigations to apply?</a></h3>
 <p>Once threats have been enumerated, next we need to decide how to make decisions about them. If we can mitigate all threats, then great. However, we might be unable to completely mitigate all threats, so we need to decide how to allocate the engineering effort we have in a rational manner to manage the risk. There are not a lot of tools that aid in this dimension (see the next section on Simulation-like question answering).</p>
 <p><em>Edit 11/12/2020</em>: Another important aspect here is how best to store the mitigations - and their mapping to threats. It is highly useful to track which mitigations map to which threats such that developers can clearly see the purpose of the mitigation, and to enable one to evaluate the impact of removing a given security control (e.g. if debates arise on their importance due to maintenance burden or user impact). In <a href="https://github.com/freedomofpress/threat-modeling">threat-modeling</a>, the approach is to store the mitigations also in YAML, similar to the threats, with references to the threat IDs they apply to, to enable this sort of analysis<a href="Armed with this mitigations data, one could do a "resilience" sort of test here, where one could simulate the impact of the failure of a given countermeasure: pick a given countermeasure, disable it, what is the impact of disabling this mitigation? If it's significant, then this shows an area where one should focus additional effort to provide defense in depth.">^2</a>.</p>
-<h1 id="ideas">Ideas</h1>
+<h1 id="ideas"><a class="toclink" href="#ideas">Ideas</a></h1>
 <p>Next, here are some directions that I think would be useful to explore further.</p>
-<h3 id="integration-in-cicd-pipelines">Integration in CI/CD pipelines</h3>
+<h3 id="integration-in-cicd-pipelines"><a class="toclink" href="#integration-in-cicd-pipelines">Integration in CI/CD pipelines</a></h3>
 <p>The <a href="https://github.com/threatspec/threatspec">threatspec folks</a> suggest integrating their tool (which is quite cool and involves adding annotations directly in the application code) as part of a CI/CD pipeline performing report or DFD generation.</p>
 <p>One could also imagine deeper integration in CI/CD pipelines. For example, by parsing the DFD, threats, and mitigations data, in CI one could flag issues like:</p>
 <ul>
@@ -171,7 +168,7 @@
 <li>Process element lacks entry or exit dataflow (there should be an entry and an exit)</li>
 </ul>
 <p>This is <a href="https://github.com/freedomofpress/threat-modeling#linter">explored</a> in the <a href="https://github.com/freedomofpress/threat-modeling">threat-modeling</a> tool (<a href="https://github.com/freedomofpress/threat-modeling/issues/52">ticket</a>).</p>
-<h3 id="simulation-like-question-answering">Simulation-like question answering</h3>
+<h3 id="simulation-like-question-answering"><a class="toclink" href="#simulation-like-question-answering">Simulation-like question answering</a></h3>
 <p>As a system designer we often ask questions like (see ticket <a href="https://github.com/freedomofpress/threat-modeling/issues/49">here</a>):</p>
 <ul>
 <li>What happens if I remove mitigation X? How much does total risk increase?</li>
@@ -179,10 +176,10 @@
 </ul>
 <p>A tool that can aid in answering these questions (in a lightweight fashion), e.g. by recomputing the total risk score when a mitigation is removed or added, could be very helpful in decision-making. Of course a pre-requisite here is the accuracy of the risk scores - if they are very uncertain, that may need to be factored into the analysis (e.g. as is done in <a href="https://www.fairinstitute.org/">FAIR (Factor Analysis of Information Risk) risk framework</a>).</p>
 <p>The only tool I'm aware of in this direction is <a href="https://distrinet.cs.kuleuven.be/software/sparta/#">the SPARTA tool</a> from KU Leuven which allows one to both rank risks as well as answer some simulation-type questions using an approach based on the FAIR risk framework.</p>
-<h3 id="attack-tree-or-attack-graph-generation">Attack tree (or attack graph) generation</h3>
+<h3 id="attack-tree-or-attack-graph-generation"><a class="toclink" href="#attack-tree-or-attack-graph-generation">Attack tree (or attack graph) generation</a></h3>
 <p>While the exercise of generating attack trees manually is a useful one for system designers (as is threat enumeration), one could also imagine at least partially automating the generation of attack trees.</p>
 <p>When an attacker is able to successfully realize a given threat as an attack, other threats become accessible, e.g. once one is able to get code execution in a VM, they can next attempt to exploit a bug in the hypervisor. One could annotate threats with these child-parent relationships to indicate which threats become accessible once the given threat is realized, and from that derive attack trees. This is the approach taken <a href="https://github.com/freedomofpress/threat-modeling/blob/main/threat_modeling/threats.py#L185-L213">here</a> in the <a href="https://github.com/freedomofpress/threat-modeling">threat-modeling</a> tool<a href="One could also imagine various ways of removing the parent-child threat annotation requirement, e.g. perhaps one could have the system designer specify the likely entry-point threats on the attack surface of the system. At this point provided there is a mapping of threats to DFD elements, the rest of the process could be automated: the entry-point threats are root nodes, and then one follows the dataflows to grow the rest of the attack tree, adding a child node in the attack tree for every threat associated with the destination node.">^3</a>.</p>
-<h1 id="fin">Fin</h1>
+<h1 id="fin"><a class="toclink" href="#fin">Fin</a></h1>
 <p>If you have thoughts on this or know of tools or approaches (especially if FLOSS 😇) that address the above concerns, feel free to drop me a note on <a href="https://twitter.com/redshiftzero">Twitter</a> or by <a href="mailto:jen@redshiftzero.com">email</a>.</p>
                     </div>
                 </article>

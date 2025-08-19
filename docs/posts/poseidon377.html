@@ -14,9 +14,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
 
-    <!-- JavaScript -->
-    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
@@ -136,7 +133,7 @@
                     <div class="post-body e-content">
                         <p>Penumbra is building a shielded, cross-chain network for private transactions, staking, swaps, and marketmaking. We use zero-knowledge proofs (ZKP) to provide privacy. One crucial component for efficient ZKPs is a hash function that is efficient in the circuit context. In this blog post we provide an overview of the hash function Poseidon, introduce Poseidon377 - our instantiation of the Poseidon ZKP-friendly hash for the Penumbra system - and two of its dependent crates which are generic over Arkworks prime fields: <a href="https://crates.io/crates/poseidon-permutation"><code>poseidon-permutation</code></a>, which provides an independent implementation of the Poseidon permutation, and <a href="https://crates.io/crates/poseidon-paramgen"><code>poseidon-paramgen</code></a>, which provides a <a href="https://research.nccgroup.com/2022/09/12/public-report-penumbra-labs-decaf377-implementation-and-poseidon-parameter-selection-review/">fully audited</a> (by NCC Group in Summer 2022) and independent implementation of Poseidon parameter generation.</p>
 <p><em>Note: I wrote this blog for the Penumbra Labs site. You can see the original post <a href="https://penumbra.zone/blog/poseidon377">here</a>.</em></p>
-<h3 id="snark-friendly-hashes">SNARK-friendly hashes</h3>
+<h3 id="snark-friendly-hashes"><a class="toclink" href="#snark-friendly-hashes">SNARK-friendly hashes</a></h3>
 <p>Penumbra ensures that state transitions are valid while protecting privacy using ZKPs, specifically ZK-SNARKs (Zero-Knowledge Succinct Non-Interactive ARgument of Knowledge). One of the challenges building ZK-SNARKs is the inefficiency of traditional hash algorithms like the SHA2 family, which are designed to use many bitwise operations. This makes them fast when executing on a CPU, but prohibitively slow in the context of a SNARK circuit, where bitwise operations are very expensive, as each bit must be represented by a single constraint.</p>
 <p>For the Penumbra protocol, we need to hash in-circuit in many places. For example, we want to prove that:
 * A <a href="https://protocol.penumbra.zone/main/protocol/value_commitments.html">balance commitment</a>, which is used to check the value balance of a Penumbra transaction, was computed correctly,
@@ -144,7 +141,7 @@
 * A <a href="https://protocol.penumbra.zone/main/concepts/notes_nullifiers_trees.html">nullifier</a> was derived correctly, which are used to prevent double-spends,
 * A note was previously included in <a href="https://penumbra.zone/blog/tiered-commitment-tree">Penumbra’s (Merkle) tiered commitment tree</a>, which ensures only existing notes can be spent.</p>
 <p>Poseidon, <a href="https://eprint.iacr.org/2019/458.pdf">first introduced by Lorenzo Grassi, Dmitry Khovratovich, Christian Rechberger, Arnab Roy, and Markus Schofnegger</a>, is a cryptographic hash function that is efficient in the context of a SNARK circuit using R1CS arithmetization, due to the fact it operates natively over field elements.</p>
-<h3 id="how-poseidon-works">How Poseidon works</h3>
+<h3 id="how-poseidon-works"><a class="toclink" href="#how-poseidon-works">How Poseidon works</a></h3>
 <p>Poseidon uses a <a href="https://link.springer.com/chapter/10.1007/978-3-540-78967-3_11">sponge construction</a>, wherein the internal state is populated from some input elements, often described as the elements being “absorbed” by the sponge. A fixed-length internal permutation is applied to that internal state. Output elements are then extracted — or “squeezed”—  from the internal state. </p>
 <p>The inner Poseidon permutation is a substitution-permutation network, similar to AES, except instead of operating over an internal state in the form of a matrix of bytes, it operates over an internal state of a vector of field elements in some specified prime field. The permutation consists of rounds, where each round has the following steps:</p>
 <ul>
@@ -153,7 +150,7 @@
 <li><strong>MixLayer</strong>: where a matrix is multiplied with the internal state.</li>
 </ul>
 <p>The total number of rounds we denote by <code>R</code>. There are two types of round in the Poseidon construction, partial and full. We denote the number of partial and full rounds by <code>R_P​</code> and <code>R_F</code>​ respectively.</p>
-<h3 id="partial-vs-full-rounds">Partial vs Full Rounds</h3>
+<h3 id="partial-vs-full-rounds"><a class="toclink" href="#partial-vs-full-rounds">Partial vs Full Rounds</a></h3>
 <p>In a full round in the <strong>SubWords</strong> layer, the S-box is applied to each element of the internal state, as shown in the diagram below:</p>
 <pre class="codehilite"><code class="language-plaintext">  ┌───────────────────────────────────────────────────────────┐
   │                                                           │
@@ -197,10 +194,10 @@
 </code></pre>
 
 <p>We apply half the full rounds (<code>R_f​=R_F​/2</code>) first, then we apply the <code>R_P​</code> partial rounds, then the rest of the <code>R_f​</code> full rounds. This approach - wherein the middle layer consists of partial rounds, and is sandwiched by full rounds - is called the <a href="https://eprint.iacr.org/2020/179">HADES design strategy</a> in the literature.</p>
-<h3 id="poseidon377-our-poseidon-implementation">Poseidon377, our poseidon implementation</h3>
+<h3 id="poseidon377-our-poseidon-implementation"><a class="toclink" href="#poseidon377-our-poseidon-implementation">Poseidon377, our poseidon implementation</a></h3>
 <p><a href="https://github.com/penumbra-zone/poseidon377/"><code>poseidon377</code></a> is our instantiation of Poseidon over the <a href="https://github.com/penumbra-zone/decaf377/">decaf377</a> group. It is a thin wrapper exposing only the <a href="https://rustdoc.penumbra.zone/main/poseidon377/index.html">fixed-width hash functions</a> we need for the Penumbra protocol. The bulk of the interesting logic is in two dependent general-purpose Rust crates: <code>poseidon-permutation</code>, and <code>poseidon-paramgen</code>.</p>
 <p>Crate <a href="https://rustdoc.penumbra.zone/main/poseidon_permutation/index.html"><code>poseidon-permutation</code></a> is an optimized implementation of the Poseidon permutation. The optimized Poseidon permutation uses sparse matrices in the partial layers to reduce the number of multiplications that need to be performed, resulting in <a href="https://github.com/penumbra-zone/poseidon377/pull/21">significant speedups</a>: the number of multiplications in the partial layers goes from quadratic in the size of the internal state to linear. This is especially important for instantiations of Poseidon with a large width or a large number of partial rounds. </p>
-<h3 id="parameter-generation">Parameter Generation</h3>
+<h3 id="parameter-generation"><a class="toclink" href="#parameter-generation">Parameter Generation</a></h3>
 <p>For an instantiation of Poseidon, the parameters we need to generate consist of:
 * S-box: choosing the exponent <code>α</code> for the S-box in <strong>SubWords</strong> step where <code>S(x)=x^α</code>,
 * Round numbers: the numbers of partial and full rounds, i.e. <code>R_P</code> and <code>R_F</code>,
@@ -211,7 +208,7 @@
 <p>The Poseidon paper provides sample implementations of both the Poseidon permutation as well as parameter generation. There is a Python script called <code>calc_round_numbers.py</code> which provides secure choices for the round numbers given the security level <code>M</code>, the width of the hash function <code>t</code>, as well as the choice of S-box to use. There is also a Sage script, which generates the round numbers, constants, and Maximum Distance Separable (MDS) matrix, given the security level <code>M</code>, the width of the hash function <code>t</code>, as well as the choice of S-box.</p>
 <p>Since the publication of the Poseidon paper, others have edited these scripts for their own projects, resulting in a number of implementations being in use derived from these initial scripts. Of particular note is <a href="https://github.com/filecoin-project/neptune">Filecoin, who have an implementation of Poseidon and parameter generation in Rust</a>. As an independent check, we elected to implement Poseidon parameter generation in Rust from the original paper using the Arkworks family of crates which we use throughout Penumbra’s cryptography libraries.</p>
 <p>Our <a href="https://rustdoc.penumbra.zone/main/poseidon_paramgen/index.html"><code>poseidon-paramgen</code></a> crate is the result: an independent implementation of Poseidon parameter generation that generates parameters based on the desired security level in bits, the desired width of the hash function, and the prime modulus of the field. We checked each step as described in the paper, and additionally automated the S-box parameter selection step. It also includes logic to generate code containing the parameters in Rust <a href="https://github.com/penumbra-zone/poseidon377/blob/main/poseidon377/build.rs">at build time</a>, which we use for <code>poseidon377</code>. We describe in further detail the process of generating each parameter in our documentation <a href="https://protocol.penumbra.zone/main/crypto/poseidon/paramgen.html">here</a>.</p>
-<h3 id="audit-results">Audit Results</h3>
+<h3 id="audit-results"><a class="toclink" href="#audit-results">Audit Results</a></h3>
 <p>NCC Group performed an audit of the parameter generation code in Summer 2022. No vulnerabilities were found. The detailed public report can be found <a href="https://research.nccgroup.com/2022/09/12/public-report-penumbra-labs-decaf377-implementation-and-poseidon-parameter-selection-review/">here</a>. A huge thanks to NCC Group for their many helpful suggestions throughout the audit process!</p>
                     </div>
                 </article>

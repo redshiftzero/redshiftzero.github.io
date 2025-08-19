@@ -14,9 +14,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
 
-    <!-- JavaScript -->
-    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
@@ -138,7 +135,7 @@
 These cosmological parameters include quantities like &Omega;<sub>m</sub> and &Omega;<sub>&Lambda;</sub>,
 which describe the matter and <a href="https://en.wikipedia.org/wiki/Dark_energy">dark energy</a> content of the universe respectively.</p>
 <p>Two key observables that constrain these parameters are the <strong>matter power spectrum</strong> and the <strong>angular power spectrum of the Cosmic Microwave Background</strong> (CMB) radiation. Let's briefly go over what each of these observables describes.</p>
-<h2 id="matter-power-spectrum">Matter Power Spectrum</h2>
+<h2 id="matter-power-spectrum"><a class="toclink" href="#matter-power-spectrum">Matter Power Spectrum</a></h2>
 <p><img alt="Matter power spectrum" src="/img/p_k.png" /></p>
 <p>The matter power spectrum - <em>P(k)</em> - describes the large scale structure of the universe - it tells us
 on which scales matter is distributed. <em>P(k)</em> is a function of <em>wavenumber</em> <em>k</em> which <em>k</em> corresponds
@@ -146,14 +143,14 @@ to inverse scale - so <em>increasing</em> wavenumber means <em>decreasing</em> s
 <p>For example, using <a href="https://redshiftzero.github.io/cosmowebapp/">the visualization</a>, we can see that by increasing the matter content of the universe, we
 increase the power at large wavenumber, which corresponds to smaller scales.
 This occurs due to enhanced structure formation as a result of the additional matter content.</p>
-<h2 id="cmb-angular-power-spectrum">CMB Angular Power Spectrum</h2>
+<h2 id="cmb-angular-power-spectrum"><a class="toclink" href="#cmb-angular-power-spectrum">CMB Angular Power Spectrum</a></h2>
 <p><img alt="CMB" src="/img/cmb.png" /></p>
 <p>The Cosmic Microwave Background (CMB) radiation was produced only ~100,000 years after the Big Bang, and gives us information about the universe at these early times. One observable from this radiation is the CMB angular power spectrum, which describes anisotropies in the temperature of the CMB radiation as a function of <em>angular scale</em>. Since this temperature anisotropy is defined over a sphere, the temperature anisotropy is separated out into angular scales using a multipole expansion (to read how this multipole expansion is done in detail, check out <a href="http://www.helsinki.fi/~hkurkisu/cpt/Cosmo12.pdf">these notes (PDF)</a>). The spectrum <em>C<sub>ℓ</sub></em> (plotted as <em>ℓ(ℓ+1)C<sub>ℓ</sub></em>) is a function of multipole <em>ℓ</em>, so <em><em>increasing</em></em> multipole corresponds to <em>decreasing</em> angular scales.</p>
-<h2 id="visualizing-power-spectra">Visualizing Power Spectra</h2>
+<h2 id="visualizing-power-spectra"><a class="toclink" href="#visualizing-power-spectra">Visualizing Power Spectra</a></h2>
 <p><em>Note: This visualization was created in collaboration with <a href="https://ebaxter.github.io/">Eric Baxter</a>, astrophysics postdoc at UPenn.</em></p>
 <p>To visualize how these power spectra change as a function of cosmological parameters,
 we used <code>d3.js</code>, a popular JavaScript library for creating interactive visualizations.</p>
-<h2 id="launch-the-visualization-here"><center><a href="https://redshiftzero.github.io/cosmowebapp/">Launch the visualization here!</a></center></h2>
+<h2 id="launch-the-visualization-here"><a class="toclink" href="#launch-the-visualization-here"><center><a href="https://redshiftzero.github.io/cosmowebapp/">Launch the visualization here!</a></center></a></h2>
 <p>As the user moves a given slider, the spectra are updated by linearly interpolating between the nearest pre-computed spectra.
 To create the pre-computed spectra, we used <a href="https://camb.info/">CAMB</a>, a software package for computing power spectra based on input cosmological parameters to generate power and CMB spectra around a fiducial value. We selected a fiducial model from the <a href="https://arxiv.org/pdf/1502.01589.pdf">2015 results from the Planck Collaboration (PDF)</a>. The universe was kept spatially flat (i.e. &Omega;<sub>m</sub> + &Omega;<sub>&Lambda;</sub> = 1) both because it is a well established constraint and to reduce the amount of data that we needed to generate with CAMB.</p>
 <p>If you'd like to check out the code, it's available <a href="https://github.com/redshiftzero/cosmowebapp">here on GitHub</a>. If you'd like to learn more about the effect of cosmological parameters on the power spectra, check out <a href="http://background.uchicago.edu/~whu/intermediate/intermediate.html">this tutorial</a>.</p>

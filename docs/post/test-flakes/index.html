@@ -14,9 +14,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
 
-    <!-- JavaScript -->
-    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
@@ -136,7 +133,7 @@
                     <div class="post-body e-content">
                         <p>Test flakes are tests that occasionally fail due to a variety of potential reasons including network instability (for tests making network calls that are not mocked) and other non-deterministic behavior. Test flakes are problematic as they reduce confidence in the results of test runs: they condition developers that the test suite cannot be relied on, and as such can result in legitimate bugs being ignored due to <a href="https://en.wikipedia.org/wiki/Alarm_fatigue">alert fatigue</a>.</p>
 <p>This post contains some strategies for identifying and handling flaky tests in Python. </p>
-<h3 id="identify-track-and-fix">Identify, track, and fix</h3>
+<h3 id="identify-track-and-fix"><a class="toclink" href="#identify-track-and-fix">Identify, track, and fix</a></h3>
 <p>One strategy is once a flake is identified to treat them like any other bug:</p>
 <ol>
 <li>File an issue to track it such that there is awareness of the flakey test.</li>
@@ -149,7 +146,7 @@
 </code></pre>
 
 <p>You can do this on your main branch to reproduce the flake (adjusting the <code>count</code> as needed based on the failure rate of the test), and then run again once you have applied a fix to verify that it indeed resolves the issue.</p>
-<h3 id="automatically-re-run-flaky-tests">Automatically re-run flaky tests</h3>
+<h3 id="automatically-re-run-flaky-tests"><a class="toclink" href="#automatically-re-run-flaky-tests">Automatically re-run flaky tests</a></h3>
 <p>Alternatively, a quick fix if you don't want to take the time to address the underlying issues in the test suite is a pytest plugin called <a href="https://github.com/box/flaky"><code>flaky</code></a> (<code>pip install flaky</code>). One can use this to re-run individual flaky tests or classes of flaky tests up to a configurable number of times, e.g.:</p>
 <pre class="codehilite"><code class="language-python">@flaky(max_runs=10)
 def test_my_flaky_behavior():
@@ -158,7 +155,7 @@ def test_my_flaky_behavior():
     assert expected_result == actual_result
 </code></pre>
 
-<h3 id="flaky-test-dashboard">Flaky test dashboard</h3>
+<h3 id="flaky-test-dashboard"><a class="toclink" href="#flaky-test-dashboard">Flaky test dashboard</a></h3>
 <p>If you use a CI provider like Circle CI, you can see which tests are the most flaky (and use that to prioritize fixes) if you export test metadata:</p>
 <pre class="codehilite"><code class="language-shell">pytest --junitxml=~/project/test-results/junit.xml
 </code></pre>

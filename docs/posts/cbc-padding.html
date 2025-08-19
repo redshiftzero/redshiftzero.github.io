@@ -14,9 +14,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
 
-    <!-- JavaScript -->
-    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
@@ -135,7 +132,7 @@
 
                     <div class="post-body e-content">
                         <p>The CBC padding oracle attack demonstrates how what might initially seem like a small issue can balloon into a devastating attack that can result in total reconstruction of the plaintext by the attacker. It's also one of the harder challenges in <a href="https://cryptopals.com/sets/3/challenges/17">Set 3 of Cryptopals</a>.</p>
-<h2 id="the-problem">The problem</h2>
+<h2 id="the-problem"><a class="toclink" href="#the-problem">The problem</a></h2>
 <p>It goes like this: an attacker has access to an oracle that will take a ciphertext (i.e. what we need to decrypt) and return a boolean indicating whether or not the padding was valid. My padding oracle function looked like this:</p>
 <pre class="codehilite"><code class="language-python">def cbc_padding_oracle(key: bytes, ciphertext: bytes, iv: bytes) -&gt; bool:
     try:
@@ -150,7 +147,7 @@
 <p><img alt="One byte of valid padding" src="/img/one_byte_of_padding.png" /></p>
 <p>and our oracle will tell us that. This means that we learn something about the plaintext.</p>
 <p>From this fact alone, we can decrypt the ciphertext.</p>
-<h2 id="how-it-works">How it works</h2>
+<h2 id="how-it-works"><a class="toclink" href="#how-it-works">How it works</a></h2>
 <p>Looking at how CBC decryption works, we can figure out how to use this fact to get the plaintext:</p>
 <p><img alt="CBC Decryption" src="/img/cbc_decrypt.png" /></p>
 <p>Well, we don't know the IV so let's ignore that. We do have all the ciphertext blocks. And we can learn if the final N bytes of any given plaintext are valid via our oracle.</p>
@@ -165,14 +162,14 @@
 <p>Meaning that we learned about the final byte of the block cipher decryption output which we can reuse now with $c_{n-1}$ and $c_n$ to get the real final byte of plaintext:</p>
 <p>$p_n[15] = c_{n-1}[15] \oplus \mbox{decrypt}(c_n, k)[15]$</p>
 <p>That's the first byte reconstructed.</p>
-<h2 id="lets-go">Let's go</h2>
+<h2 id="lets-go"><a class="toclink" href="#lets-go">Let's go</a></h2>
 <p>Starting at the rightmost block, we can move right to left decrypting each plaintext byte.</p>
 <p>For bytes that <em>aren't</em> the final byte in the block, we can use what we learned so far in the block to compute what the valid padding bytes would be for the bytes right of the target byte. For example, for the second-to-last byte, we are looking for padding that validates to:</p>
 <p><img alt="Two bytes of valid padding" src="/img/two_byte_of_padding.png" /></p>
 <p>We can compute the final byte of our test ciphertext such that it will equal our desired padding byte value <code>02</code>:</p>
 <p>$t[15] = \mbox{decrypt}(c_n, k)[15] \oplus 02$</p>
 <p>So as we decrypt each block we just need to keep track of the output of the block cipher prior to the xor so we can compute this.</p>
-<h2 id="one-gotcha">One gotcha</h2>
+<h2 id="one-gotcha"><a class="toclink" href="#one-gotcha">One gotcha</a></h2>
 <p>I got the above working pretty quickly, but realized my attack was not working reliably. Occasionally, I guessed the wrong answer early on in the plaintext reconstruction. Debugging I discovered the following case when reconstructing the first byte:</p>
 <p><img alt="Degenerate ciphertexts" src="/img/degenerate_ciphertexts.png" /></p>
 <p>There can be multiple "correct" answers for a given byte, i.e. there can be multiple ciphertexts that will have valid padding. Here in the example we have two valid ciphertexts when computing the last byte in the ciphertext: one with <code>01</code> in the final byte position (what we're looking for) and one where the second-to-last byte is <code>02</code> and produces a valid padding result (not what we're looking for).</p>

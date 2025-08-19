@@ -14,9 +14,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
 
-    <!-- JavaScript -->
-    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
@@ -135,7 +132,7 @@
 
                     <div class="post-body e-content">
                         <p>Next in the series, I investigate how groups and multi-device support are handled. If you have thoughts on this or notice any errors, feel free to drop me a note on <a href="https://twitter.com/redshiftzero">Twitter</a> or by <a href="mailto:jen@redshiftzero.com">email</a>.</p>
-<h1 id="groups">Groups</h1>
+<h1 id="groups"><a class="toclink" href="#groups">Groups</a></h1>
 <p>Signal allows <a href="https://signal.org/blog/private-groups/">private groups</a> where the server doesn't have access to the group metadata, including the list of members in each group. Servers cannot even distinguish group from direct messages.</p>
 <p>Let's say a group contains two users, Alice👧🏼 and Bob👦🏽, and a third user Jen🧙 wants to send the group a message. Alice👧🏼 adds Jen🧙 to the group, and then Jen🧙 can send the group a message by sending messages individually to each user in the group: she encrypts her message $M$ to each group participant separately, encrypting using the next message key she has for Alice👧🏼 and Bob👦🏽. One caveat is that she uses separate ratchet state than her direct chats with Alice👧🏼 and Bob👦🏽.</p>
 <p>Group management messages are regular Signal (i.e. e2e encrypted) messages that only clients can decrypt and act on. The advantage of this approach is that the server stores nothing about groups, although the server can of course infer group participants through observing the timing and metadata of messages, but we'll put that aside for now.</p>
@@ -146,7 +143,7 @@
 </ol>
 <p>Similarly for other group information update tasks, any group participant can send a group management message adding (but not deleting) new users or updating the group information. This means that since users must remove <em>themselves</em> from groups using a leave message, if a group wants to remove a given user and the user does not leave, effectively users must create a new group without the participant they want to remove.</p>
 <p>The group system is under active development, see the preview version of the group management using anonymous credentials described <a href="https://signal.org/blog/signal-private-group-system/">here</a>. Note also that Whatsapp appears to handle groups differently from the Signal application.</p>
-<h1 id="multi-device">Multi-device</h1>
+<h1 id="multi-device"><a class="toclink" href="#multi-device">Multi-device</a></h1>
 <p><em>The full description is covered in <a href="https://signal.org/docs/specifications/sesame/">this specification</a>.</em></p>
 <p>For multi-device support, the main concepts we need to know about are:</p>
 <ul>

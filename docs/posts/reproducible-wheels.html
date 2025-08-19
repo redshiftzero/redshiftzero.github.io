@@ -14,9 +14,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
 
-    <!-- JavaScript -->
-    <script src="/js/meme.min.238001acc8d107d31839007c618ccd38c64210ddf0869d445de90497fdbe5861.js"></script>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
@@ -138,7 +135,7 @@
 <p>One hiccup we've encountered in SecureDrop development is that not all Python wheels can be built reproducibly. We ship multiple (Python) projects in debian packages, with Python dependencies included in those packages as wheels. In order for our debian packages to be reproducible, we need that wheel build process to also be reproducible. That wheel process <em>is</em> reproducible (as of <a href="https://wheel.readthedocs.io/en/latest/news.html">pip wheel 0.27.0</a> - see <a href="https://github.com/pypa/wheel/issues/143">relevant issue</a>) if you set <code>SOURCE_DATE_EPOCH</code> to be a constant value. However, there are still <a href="https://github.com/pypa/wheel/issues/248">sources</a> of <a href="https://github.com/pypa/pip/issues/6505">nondeterminism</a> for some projects.</p>
 <p>For our purposes, this has resulted in our building the wheels (once), saving those wheels on a pip mirror, and then using those wheels at debian package build time. A few times, we've asked "wait, which wheels can't be reproducibly built again?". So I made a little tracker on <a href="https://reproduciblewheels.com/">https://reproduciblewheels.com/</a> for convenience.</p>
 <p>EDIT: As of August 19, 2020, passing a static <code>--build</code> directory to the <code>pip wheel</code> command below means that all currently tracked wheels are reproducible 🎉.</p>
-<h2 id="how-it-works">How it works</h2>
+<h2 id="how-it-works"><a class="toclink" href="#how-it-works">How it works</a></h2>
 <p>I first selected the 100 most popular packages on PyPI in the past year plus any dependencies that are on FPF's <a href="https://pypi.securedrop.org/simple/">pip mirror</a><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
 <p>Then, I have a little <a href="https://github.com/redshiftzero/reproduciblewheels/blob/main/check.py#L112-L161">function</a> that builds the wheel twice and then compares the SHA256 hash to determine if they are the same. The build command is:</p>
 <pre class="codehilite"><code class="language-bash">python3 -m pip wheel &lt;project_name&gt; --no-binary :all: --no-cache-dir

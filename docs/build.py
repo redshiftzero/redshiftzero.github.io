@@ -166,9 +166,16 @@ class StaticSiteBuilder:
             'markdown.extensions.codehilite',
             'markdown.extensions.toc',
             'markdown.extensions.footnotes',
-            'markdown.extensions.def_list'
+            'markdown.extensions.def_list',
+            'markdown.extensions.attr_list'
             # Removed nl2br to prevent weird line breaks
-        ])
+        ], extension_configs={
+            'markdown.extensions.toc': {
+                'anchorlink': True,
+                'permalink': False,
+                'title': 'Permalink to this section'
+            }
+        })
 
         # Clean up the content - remove any remaining frontmatter artifacts
         content = post.content.strip()

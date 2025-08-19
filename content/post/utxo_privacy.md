@@ -76,7 +76,7 @@ has a certain value associated with it. Each inputs unlocks the value in that
 UTXO by presenting a signature $\sigma$ that can be verified using the public key of the
 recipient $r$ in the UTXO.
 
-## Integrity{#integrity-properties-bitcoin}
+## Integrity
 
 Now, let's think back to our desired system properties. We already know Bitcoin doesn't
 provide privacy, but what about the integrity properties we enumerated above?
@@ -116,7 +116,7 @@ We want to ensure that a passive observer cannot learn anything about the value,
 
 We'll do that by simply encrypting all those fields. There are some details to work out, but we'll stick with the naive idea of encrypting all the data in the transaction.
 
-## Integrity{#integrity-properties-private}
+## Integrity
 
 How does this impact the integrity properties we enumerated above?
 
