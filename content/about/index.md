@@ -19,10 +19,11 @@ Previous affiliations:
 
 * I was a founding engineer working on the cryptography stack at [Penumbra Labs](https://penumbra.zone), a privacy-preserving decentralized exchange and L1 in the Cosmos ecosystem.
 * I was the lead developer of the [SecureDrop whistleblower platform](https://securedrop.org).
-* I was a cofounder and board member of [Lucy Parsons Labs](https://lucyparsonslabs.com), a transparency non-profit based in Chicago.
+* I was a cofounder, CTO and board member of [Lucy Parsons Labs](https://lucyparsonslabs.com), a transparency non-profit based in Chicago.
 * I was a core contributor to the [Tor Project](https://torproject.org), a non-profit that creates the Tor anonymity network and Tor Browser.
 * I was an advisory board member of [Distributed Denial of Secrets](https://ddosecrets.com/), a non-profit that archives and publishes hacked and leaked data in the public interest.
-* I was a postdoc researcher at the [Center for Data Science and Public Policy](http://www.datasciencepublicpolicy.org/) (now at Carnegie Mellon).
+* I was a [Ford-Mozilla Open Web Fellow](https://www.fordfoundation.org/news-and-stories/stories/announcing-the-2016-ford-mozilla-open-web-fellows/).
+* I was a postdoctoral researcher at the [Center for Data Science and Public Policy](http://www.datasciencepublicpolicy.org/) (now at Carnegie Mellon).
 * I completed my Ph.D. in Astrophysics in 2015 at the University of Chicago's Kavli Institute of Cosmological Physics.
 
 ## Previous Projects
@@ -37,7 +38,8 @@ Previous affiliations:
 ###  Civic Technology
 
 * [ICE Detention Map](https://watchice.org): An open-source dashboard and map showing information about ICE detention facilities.
-* [OpenOversight](https://github.com/lucyparsons/OpenOversight/): A tool for police oversight [in use](https://openoversight.com/browse) on the Burlington VT, Chicago, Oakland, Berkeley, and UC Berkeley Police Departments, as well as in [Baltimore](https://bpdwatch.com). Media: [Citylab](https://www.citylab.com/equity/2016/10/crowdsourcing-police-accountability/504650/), [Chicagoist](http://chicagoist.com/2016/10/26/from_new_oversight_agencies_to.php), [Washington Times](https://www.washingtontimes.com/news/2016/oct/20/openoversight-helps-public-identify-chicago-police/)
+* [OpenOversight](https://github.com/lucyparsons/OpenOversight/): A tool for police oversight [in use](https://openoversight.com/browse) on the Burlington VT, Chicago, Oakland, Berkeley, and UC Berkeley Police Departments, as well as in [Baltimore](https://bpdwatch.com). Media: [Citylab](https://www.citylab.com/equity/2016/10/crowdsourcing-police-accountability/504650/), [Chicagoist](http://chicagoist.com/2016/10/26/from_new_oversight_agencies_to.php), [Washington Times](https://www.washingtontimes.com/news/2016/oct/20/openoversight-helps-public-identify-chicago-police/). Work done while at [Lucy Parsons Labs](https://lucyparsonslabs.com).
+* [Police Surveillance Primer](https://redshiftzero.com/policesurveillance/): An overview of police surveillance tools used in Chicago. Work done while at [Lucy Parsons Labs](https://lucyparsonslabs.com).
 * City of Cincinnati building code prediction (during 2015 Data Science for Social Good): [blog](https://dssg.uchicago.edu/project/proactive-blight-reduction-and-neighborhood-revitalization/) [GitHub repository](https://github.com/dssg/cincinnati2015-public). Media: [Wired/Backchannel](https://www.wired.com/2015/09/how-a-fiddler-and-an-astrophysicist-brought-predictive-analytics-to-cincinnati/)
 * Data-Driven Early Intervention System for police departments: [GitHub repository](https://github.com/dssg/police-eis). Now developed by [CMU](http://www.datasciencepublicpolicy.org/) and commercialized by [Benchmark Analytics](https://www.benchmarkanalytics.com/). Media: [Mother Jones](https://www.motherjones.com/politics/2016/07/data-prediction-police-misconduct-shootings/), [FiveThirtyEight](https://fivethirtyeight.com/features/we-now-have-algorithms-to-predict-police-misconduct/), [NPR](https://www.npr.org/sections/alltechconsidered/2016/07/19/486499835/can-big-data-help-head-off-police-misconduct), [wsoctv](https://www.wsoctv.com/news/local/charlotte-mecklenburg-police-using-technology-to-analyze-officers/719415686)
 
