@@ -34,6 +34,8 @@ Previous affiliations:
 * [poseidon377](https://github.com/penumbra-zone/poseidon377): a suite of Rust crates for the Poseidon hash function. Work done while at Penumbra Labs.
 * [SecureDrop](https://github.com/freedomofpress/securedrop): A tool for news organizations to communicate with sources. The full list of organizations using SecureDrop can be seen in the directory [here](https://securedrop.org/directory/).
 * [Cyd](https://cyd.social): A tool to download your data from X, back it up, delete it from the platform, and migrate it to Bluesky.
+* [signal-protocol](github.com/freedomofpress/signal-protocol) and [signal-groups](http://github.com/freedomofpress/signal-groups), Rust extensions built using PyO3
+* [threat-modeling](http://github.com/freedomofpress/threat-modeling), an experimental threat modeling library for tracking data flows, threats, and mitigations
 
 ###  Civic Technology
 
