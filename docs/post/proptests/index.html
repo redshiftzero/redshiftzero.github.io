@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>Property-based Testing | redshiftzero</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/modern.css" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" />
+    </noscript>
+
+    <!-- Meta tags -->
+    <meta name="author" content="" />
+    <meta name="description" content="Property-based Testing" />
+
+    <!-- Icons and manifest -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="redshiftzero" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="redshiftzero" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="/icons/mstile-150x150.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- RSS feeds -->
+    <link rel="alternate" type="application/atom+xml" href="https://www.redshiftzero.com/atom.xml"
+        title="redshiftzero" />
+    <link rel="alternate" type="application/rss+xml" href="https://www.redshiftzero.com/rss.xml" title="redshiftzero" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.redshiftzero.com/post/proptests/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Property-based Testing | redshiftzero" />
+    <meta property="og:description" content="Property-based Testing" />
+    <meta property="og:url" content="https://www.redshiftzero.com/post/proptests/" />
+    <meta property="og:site_name" content="redshiftzero" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:image" content="https://www.redshiftzero.com/icons/apple-touch-icon.png" />
+    <meta property="og:type" content="article" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@redshiftzero" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "datePublished": "2025-11-08T00:00:00",
+        "dateModified": "2025-11-08T00:00:00",
+        "url": "https://www.redshiftzero.com/post/proptests/",
+        "description": "Property-based Testing",
+        "image": "https://www.redshiftzero.com/icons/apple-touch-icon.png",
+        "author": {
+            "@type": "Person",
+            "url": "https://www.redshiftzero.com/"
+        },
+        "license": "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)",
+        "name": "Property-based Testing | redshiftzero"
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-wrapper">
+                <div class="header-inner single">
+                    <div class="site-brand">
+                        <a href="/" class="brand">redshiftzero</a>
+                    </div>
+
+                    <nav class="nav">
+                        <ul class="menu" id="menu">
+
+                            <li class="menu-item"><a href="/archive/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" class="icon archive">
+                                        <path
+                                            d="M32 32C14.3 32 0 46.3 0 64s14.3 32 32 32h32v32H32C14.3 128 0 142.3 0 160s14.3 32 32 32h32v32H32C14.3 224 0 238.3 0 256s14.3 32 32 32h32v32H32C14.3 320 0 334.3 0 352s14.3 32 32 32h32v32H32C14.3 416 0 430.3 0 448s14.3 32 32 32h448c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32V96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM96 96h320v320H96V96z" />
+                                    </svg><span class="menu-item-name">Archive</span></a></li>
+                            <li class="menu-item"><a href="/about/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 496 512" class="icon user-circle">
+                                        <path
+                                            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z" />
+                                    </svg><span class="menu-item-name">About</span></a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+            <label for="nav-toggle" class="nav-toggle"></label>
+            <label for="nav-toggle" class="nav-curtain"></label>
+        </header>
+
+        <!-- Main content -->
+        <main class="main single" id="main">
+            <div class="main-inner">
+                
+                <article class="content post h-entry">
+                    <h1 class="post-title p-name">Property-based Testing</h1>
+
+                    <div class="post-meta">
+                        <time datetime="2025-11-08T00:00:00" class="post-meta-item published dt-published">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon">
+                                <path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/>
+                            </svg> 2025.11.08
+                        </time>
+                    </div>
+
+                    <div class="post-body e-content">
+                        <p>When we write tests to check the correctness of our code, we're used to thinking of examples: base cases, boundary conditions, edge cases, and so on. We enumerate these examples, and write example-based unit tests that check given a specific example input, we get an expected output.</p>
+<p>For example, if we're testing a function that reverses a list, we might write tests like:</p>
+<pre class="codehilite"><code class="language-py">def test_reverse_empty():
+    assert reverse([]) == []
+
+def test_reverse_single():
+    assert reverse([1]) == [1]
+
+def test_reverse_multiple():
+    assert reverse([1, 2, 3]) == [3, 2, 1]
+</code></pre>
+
+<p>This approach is fine, but has several problems. First, it's laborious: we need to manually generate these examples, and write tests for each one. Second, what happens if we don't think of some examples we really should be covering - we'll never write that test, and any related bugs will not be found. What about lists with duplicate elements? What about lists with negative numbers? What about very long lists? The combinatorial explosion of possible inputs makes it impractical to test them all manually.</p>
+<p>This is where property-based testing can help us.</p>
+<h1 id="what-is-property-based-testing"><a class="toclink" href="#what-is-property-based-testing">What is Property-based testing?</a></h1>
+<p>Property-based testing allows us to write down the <strong>properties</strong> that our code should always satisfy, rather than enumerating specific examples. A property is a statement that should be true for all valid inputs.</p>
+<p>If we want to test a sorting function, we can identify several properties it should satisfy:</p>
+<ul>
+<li>The output array should always have the same elements as the input (just reordered)</li>
+<li>The output array should be in non-decreasing order</li>
+<li>Applying sort twice should give the same result as sorting once (idempotency)</li>
+<li>The length of the output should match the length of the input</li>
+</ul>
+<p>Property-based tests let you write down these properties, and then the framework will:</p>
+<ol>
+<li>Generate random inputs according to a strategy</li>
+<li>Execute the code under test with those inputs</li>
+<li>Verify that the property holds</li>
+<li>Search for counterexamples - inputs where the property fails</li>
+<li>Shrink failing examples to find the minimal case that reproduces the bug</li>
+</ol>
+<p>By focusing on properties rather than examples, we can test a much larger space of inputs automatically, often catching bugs that manual example-based tests would miss. </p>
+<h1 id="property-based-testing-with-python"><a class="toclink" href="#property-based-testing-with-python">Property-Based Testing with Python</a></h1>
+<p>Hypothesis is a Python library for property-based testing that is based on QuickCheck from Haskell.  </p>
+<p>First, we should install Hypothesis following the documentation. In a virtual environment:</p>
+<pre class="codehilite"><code>pip install hypothesis
+</code></pre>
+
+<h2 id="how-hypothesis-works"><a class="toclink" href="#how-hypothesis-works">How Hypothesis Works</a></h2>
+<p>When you write a property-based test with Hypothesis, the <code>@given</code> decorator takes a <strong>strategy</strong> that describes what kind of data to generate. Strategies are composable - you can build complex data types from simple ones. You can write your own strategies for your own custom data types. </p>
+<p>By default, Hypothesis then runs your test function 100 times (configurable), each time with a different randomly generated input. If an assertion fails, Hypothesis will try to find a simpler input that also fails, a process called <strong>shrinking</strong>.</p>
+<p>Also, Hypothesis maintains a database of previously found failing examples, so it can replay them in future test runs to ensure regressions don't reoccur.</p>
+<p>Here's a simple example:</p>
+<pre class="codehilite"><code class="language-py">from hypothesis import given
+from hypothesis import strategies as st
+
+@given(st.lists(st.integers()))
+def test_sort_preserves_length(xs):
+    sorted_xs = sorted(xs)
+    assert len(xs) == len(sorted_xs)
+</code></pre>
+
+<p>In this example, <code>st.lists(st.integers())</code> is a strategy that generates random lists of integers. Hypothesis will generate many such lists (empty lists, single-element lists, large lists, lists with negative numbers, etc.) and verify that sorting doesn't change the length.</p>
+<h2 id="strategies"><a class="toclink" href="#strategies">Strategies</a></h2>
+<p>Strategies define what data Hypothesis should generate. Hypothesis provides many built-in strategies, for example we just saw <code>st.integers()</code> which generates integers combined with <code>st.lists()</code> which generates lists. </p>
+<p>There are also combination strategies, e.g. <code>st.one_of(...)</code> lets us randomly choose from one of several strategies.</p>
+<p>You can also constrain strategies, for example <code>st.integers(min_value=0, max_value=100)</code> generates integers in the specified range.</p>
+<h1 id="shrinking"><a class="toclink" href="#shrinking">Shrinking</a></h1>
+<p>When Hypothesis finds a failure, it doesn't just report the first failing input it encountered. Instead, it performs <strong>shrinking</strong> - it tries to find the simplest example that still violates the property. This makes debugging much easier.</p>
+<p>For example, if your test fails on a list with 1000 elements <code>[1, 2, 3, ..., 1000]</code>, Hypothesis might shrink it down to just <code>[1, 2, 3]</code> or even <code>[1, 0]</code> if that's what actually triggers the bug. The shrinking process tries various techniques:</p>
+<ul>
+<li>Removing elements from collections</li>
+<li>Making numbers smaller</li>
+<li>Simplifying strings</li>
+<li>Trying edge cases like empty collections, zero, or negative numbers</li>
+</ul>
+<p>This gives you a minimal reproducible example that's much easier to understand and debug than a large, complex input. </p>
+<h1 id="more-examples"><a class="toclink" href="#more-examples">More Examples</a></h1>
+<p>Here are a few more cases where property-based testing can be helpful.</p>
+<h2 id="round-trip-testing"><a class="toclink" href="#round-trip-testing">Round-Trip Testing</a></h2>
+<p>One common pattern is testing that operations are inverses of each other. For example, encoding and decoding should round-trip:</p>
+<pre class="codehilite"><code class="language-py">@given(st.text())
+def test_encode_decode_roundtrip(text):
+    encoded = base64.b64encode(text.encode()).decode()
+    decoded = base64.b64decode(encoded).decode()
+    assert decoded == text
+</code></pre>
+
+<p>Or for serialization/deserialization:</p>
+<pre class="codehilite"><code class="language-py">import json
+
+@given(st.dictionaries(st.text(), st.one_of(st.integers(), st.text(), st.booleans())))
+def test_json_roundtrip(data):
+    serialized = json.dumps(data)
+    deserialized = json.loads(serialized)
+    assert deserialized == data
+</code></pre>
+
+<h2 id="invariants"><a class="toclink" href="#invariants">Invariants</a></h2>
+<p>Properties that should always be true, regardless of input:</p>
+<pre class="codehilite"><code class="language-py">@given(st.lists(st.integers()))
+def test_sort_is_ordered(xs):
+    sorted_xs = sorted(xs)
+    for i in range(len(sorted_xs) - 1):
+        assert sorted_xs[i] &lt;= sorted_xs[i + 1]
+
+@given(st.lists(st.integers()))
+def test_sort_preserves_elements(xs):
+    sorted_xs = sorted(xs)
+    assert set(xs) == set(sorted_xs)
+    assert len(xs) == len(sorted_xs)
+</code></pre>
+
+<h1 id="tips-and-best-practices"><a class="toclink" href="#tips-and-best-practices">Tips and Best Practices</a></h1>
+<h2 id="configuration"><a class="toclink" href="#configuration">Configuration</a></h2>
+<p>You can configure how Hypothesis runs your tests:</p>
+<pre class="codehilite"><code class="language-py">from hypothesis import settings, given
+from hypothesis import strategies as st
+
+@settings(max_examples=200, deadline=500)  # Run 200 examples, allow 500ms per test
+@given(st.lists(st.integers()))
+def test_blah(xs):
+    pass
+</code></pre>
+
+<p>Common settings:</p>
+<ul>
+<li><code>max_examples</code>: How many examples to try (default: 100)</li>
+<li><code>deadline</code>: Maximum time per test in milliseconds</li>
+<li><code>seed</code>: Random seed for reproducible test runs</li>
+</ul>
+<p>For example, for reproducible test runs you can set the random seed like this:</p>
+<pre class="codehilite"><code class="language-py">@settings(seed=42)
+@given(st.lists(st.integers()))
+def test_deterministic(xs):
+    pass
+</code></pre>
+
+<h2 id="using-assume-for-conditional-tests"><a class="toclink" href="#using-assume-for-conditional-tests">Using <code>assume()</code> for Conditional Tests</a></h2>
+<p>Sometimes you want to skip certain inputs that aren't relevant to the property you're testing:</p>
+<pre class="codehilite"><code class="language-py">from hypothesis import assume
+
+@given(st.integers(), st.integers())
+def test_division(a, b):
+    assume(b != 0)  # Skip test cases where b is 0
+    result = a / b
+    assert isinstance(result, (int, float))
+</code></pre>
+
+<p><code>assume()</code> tells Hypothesis to skip this example and try another one.</p>
+<h1 id="summary"><a class="toclink" href="#summary">Summary</a></h1>
+<p>Property-based testing helps you find bugs you didn't know to look for, think more rigorously about your code and the properties it should maintain, document that behavior as an executable specification, and catch and record regressions.</p>
+<p>Check out the <a href="https://hypothesis.readthedocs.io/">Hypothesis documentation</a> for more.</p>
+                    </div>
+                </article>
+            
+            </div>
+        </main>
+
+        <!-- Back to top -->
+        <div id="back-to-top" class="back-to-top">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon arrow-up">
+                    <path
+                        d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z" />
+                </svg></a>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer" class="footer">
+            <div class="footer-inner">
+                <div class="site-info">© 2025 Jennifer Helsby</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MathJax -->
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    load: ['[tex]/mhchem']
+                },
+                tex: {
+                    inlineMath: { '[+]': [['$', '$']] },
+                    tags: 'ams',
+                    packages: { '[+]': ['mhchem'] }
+                }
+            };
+            (function () {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+
+    <!-- Medium Zoom -->
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+    <script>
+        let imgNodes = document.querySelectorAll('div.post-body img');
+        imgNodes = Array.from(imgNodes).filter(node => node.parentNode.tagName !== "A");
+
+        mediumZoom(imgNodes, {
+            background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+        })
+    </script>
+
+    <!-- Instant Page -->
+    <script src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js" type="module" defer></script>
+</body>
+
+</html>
