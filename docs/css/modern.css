@@ -45,16 +45,7 @@
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-bg: #111827;
-        --color-text: #f9fafb;
-        --color-text-muted: #9ca3af;
-        --color-border: #374151;
-        --color-border-light: #1f2937;
-    }
-}
+/* Dark mode support removed - light mode only */
 
 /* Base styles */
 * {
@@ -64,6 +55,7 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    color-scheme: light;
 }
 
 body {

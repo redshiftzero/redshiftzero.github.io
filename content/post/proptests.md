@@ -1,5 +1,5 @@
 +++
-title = "Property-based Testing"
+title = "Property-Based Testing"
 date = "2025-11-08"
 slug = "proptests"
 categories = [ "testing", "Python" ]
