@@ -94,29 +94,41 @@ class StaticSiteBuilder:
                 post_metadata = {}
                 for line in frontmatter_text.strip().split('\n'):
                     line = line.strip()
+                    # Handle both = and : as separators (TOML supports both)
                     if '=' in line:
                         key, value = line.split('=', 1)
-                        key = key.strip()
-                        value = value.strip().strip('"').strip("'")
+                    elif ':' in line:
+                        key, value = line.split(':', 1)
+                    else:
+                        continue
+                    key = key.strip()
+                    value = value.strip().strip('"').strip("'")
 
-                                                # Handle arrays
-                        if value.startswith('[') and value.endswith(']'):
-                            value = [item.strip().strip('"').strip("'") for item in value[1:-1].split(',')]
+                    # Handle boolean values
+                    if isinstance(value, str):
+                        if value.lower() == 'true':
+                            value = True
+                        elif value.lower() == 'false':
+                            value = False
 
-                        # Handle date conversion
-                        if key == 'date':
+                    # Handle arrays
+                    if isinstance(value, str) and value.startswith('[') and value.endswith(']'):
+                        value = [item.strip().strip('"').strip("'") for item in value[1:-1].split(',')]
+
+                    # Handle date conversion
+                    if key == 'date':
+                        try:
+                            # Try to import dateutil, fallback to basic parsing if not available
                             try:
-                                # Try to import dateutil, fallback to basic parsing if not available
-                                try:
-                                    from dateutil import parser
-                                    value = parser.parse(value).replace(tzinfo=None)
-                                except ImportError:
-                                    # Fallback to basic datetime parsing
-                                    value = datetime.strptime(value, "%Y-%m-%d")
-                            except:
-                                value = datetime.now()
+                                from dateutil import parser
+                                value = parser.parse(value).replace(tzinfo=None)
+                            except ImportError:
+                                # Fallback to basic datetime parsing
+                                value = datetime.strptime(value, "%Y-%m-%d")
+                        except:
+                            value = datetime.now()
 
-                        post_metadata[key] = value
+                    post_metadata[key] = value
 
                 # Create a post object similar to frontmatter
                 class Post:
@@ -134,6 +146,12 @@ class StaticSiteBuilder:
         else:
             # Use standard frontmatter library for YAML/TOML
             post = frontmatter.loads(file_content)
+
+        # Check if post is a draft - skip if it is
+        draft = post.get('draft', False)
+        if draft:
+            print(f"  Skipping draft: {md_file.name}")
+            return
 
                 # Extract metadata
         title = post.get('title', md_file.stem)
