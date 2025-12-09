@@ -25,6 +25,9 @@ class StaticSiteBuilder:
         # Copy static assets
         self.copy_assets()
 
+        # Generate Pygments CSS if available
+        self.generate_pygments_css()
+
         # Convert posts
         self.convert_posts()
 
@@ -61,6 +64,28 @@ class StaticSiteBuilder:
                         shutil.rmtree(dst_path)
                     shutil.copytree(src_path, dst_path)
                 print(f"  Copied {src} -> {dst}")
+
+    def generate_pygments_css(self):
+        """Generate Pygments CSS for syntax highlighting"""
+        try:
+            from pygments.formatters import HtmlFormatter
+            from pygments.styles import get_style_by_name
+            
+            # Use a light theme that matches the site
+            formatter = HtmlFormatter(style='default', noclasses=False, cssclass='highlight')
+            css = formatter.get_style_defs('.highlight')
+            
+            # Save to css directory
+            css_dir = self.output_dir / "css"
+            css_dir.mkdir(exist_ok=True)
+            css_path = css_dir / "pygments.css"
+            
+            with open(css_path, 'w', encoding='utf-8') as f:
+                f.write(css)
+            print("  Generated Pygments CSS")
+        except ImportError:
+            print("  Warning: Pygments not installed, syntax highlighting disabled")
+            print("  Install with: pip install pygments")
 
     def convert_posts(self):
         """Convert Markdown posts to HTML"""
@@ -192,6 +217,11 @@ class StaticSiteBuilder:
                 'anchorlink': True,
                 'permalink': False,
                 'title': 'Permalink to this section'
+            },
+            'markdown.extensions.codehilite': {
+                'use_pygments': True,
+                'css_class': 'highlight',
+                'linenums': False
             }
         })
 

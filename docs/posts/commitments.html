@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -186,11 +187,11 @@ hiding.</p>
 <p>One handy feature about Pedersen commitments is that they are <em>homomorphically
 additive</em>. This means when we add the commitments, we get the commitment of the sum of the values we committed to: all without knowing the secret values.</p>
 <p>Let's show this. Given two commitments <code>com_1 = Commit(v_1, r_1)</code> and <code>com_2 = Commit(v_2, r_2)</code>:</p>
-<pre class="codehilite"><code>com_1 + com_2
-= [v_1]G + [r_1]H + [v_2]G + [r_2]H
-= [v_1 + v_2]G + [r_1 + r_2]H 
-= Commit(v_1 + v_2, r_1 + r_2)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">com_1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">com_2</span>
+<span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">v_1</span><span class="o">]</span><span class="n">G</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="n">r_1</span><span class="o">]</span><span class="n">H</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="n">v_2</span><span class="o">]</span><span class="n">G</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="n">r_2</span><span class="o">]</span><span class="n">H</span>
+<span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">v_1 + v_2</span><span class="o">]</span><span class="n">G</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="n">r_1 + r_2</span><span class="o">]</span><span class="n">H</span><span class="w"> </span>
+<span class="o">=</span><span class="w"> </span><span class="k">Commit</span><span class="p">(</span><span class="n">v_1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v_2</span><span class="p">,</span><span class="w"> </span><span class="n">r_1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r_2</span><span class="p">)</span>
+</code></pre></div>
 
 <p>We end up with the commitment to the sum of the input secret values.</p>
                     </div>

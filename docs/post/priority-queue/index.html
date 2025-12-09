@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -133,30 +134,30 @@
                     <div class="post-body e-content">
                         <p>A queue retrives items in FIFO (first in, first out) order. A priority queue retrieves item based on <em>priority</em>, higher priority items come first. Well, what happens if you submit items that have equal priorities? It depends on how the priority queue was implemented. Read on for how this is handled in the Python standard library's  <code>queue.PriorityQueue</code>.</p>
 <p>Let's see <code>queue.PriorityQueue</code> in action in a simple case:</p>
-<pre class="codehilite"><code class="language-py">&gt;&gt;&gt; from queue import PriorityQueue
-&gt;&gt;&gt; q = PriorityQueue()
-&gt;&gt;&gt; q.put((1, 'A'))
-&gt;&gt;&gt; q.put((2, 'B'))
-&gt;&gt;&gt; q.put((3, 'C'))
-&gt;&gt;&gt; q.get()
-(1, 'A')
-&gt;&gt;&gt; q.get()
-(2, 'B')
-&gt;&gt;&gt; q.get()
-(3, 'C')
-&gt;&gt;&gt; q.empty()
-True
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">queue</span><span class="w"> </span><span class="kn">import</span> <span class="n">PriorityQueue</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="n">PriorityQueue</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span>
+<span class="kc">True</span>
+</code></pre></div>
 
 <p>As we can see, we've put <code>(priority_number, data)</code> into the queue, and retrieved them using the <code>get()</code> method. We see that lower numbers correspond to higher priorities. </p>
 <p>Let's now add some jobs with equal priorities and retrieve them:</p>
-<pre class="codehilite"><code class="language-py">&gt;&gt;&gt; q.put((1, 'My first job'))
-&gt;&gt;&gt; q.put((1, 'Another job'))
-&gt;&gt;&gt; q.get()
-(1, 'Another job')
-&gt;&gt;&gt; q.get()
-(1, 'My first job')
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;My first job&#39;</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Another job&#39;</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Another job&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;My first job&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 <p>We did not retrieve items in FIFO order for jobs of equal priority: <code>'Another job'</code> was fetched prior to <code>'My first job'</code> even though it was added afterwards. Why does this happen?</p>
 <h2 id="using-a-min-heap-for-queuepriorityqueue"><a class="toclink" href="#using-a-min-heap-for-queuepriorityqueue">Using a min-heap for <code>queue.PriorityQueue</code></a></h2>
@@ -166,62 +167,62 @@ True
 <h2 id="how-we-can-solve-this"><a class="toclink" href="#how-we-can-solve-this">How we can solve this</a></h2>
 <p>Here's an approach I used for Python 3.5 (the version of Python I was writing for when I looked into using <a href="https://github.com/freedomofpress/securedrop-client/blob/master/securedrop_client/api_jobs/base.py#L24">this functionality</a>). For the application I was working on, I needed to retrieve items based on priority, and for items of equal priority, I needed to retrieve items in FIFO order.</p>
 <p>One simple approach if you hit this problem is following <a href="https://docs.python.org/3/library/heapq.html#priority-queue-implementation-notes">a suggestion in the <code>heapq</code> documentation</a>: "store entries as 3-element list including the priority, an entry count, and the task", where the entry count is a tie-breaker for jobs of equal priority. Let's see that demonstrated:</p>
-<pre class="codehilite"><code class="language-py">&gt;&gt;&gt; q.put((1, 1, 'My next job'))
-&gt;&gt;&gt; q.put((1, 2, 'Another job'))
-&gt;&gt;&gt; q.get()
-(1, 1, 'My next job')
-&gt;&gt;&gt; q.get()
-(1, 2, 'Another job')
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;My next job&#39;</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Another job&#39;</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;My next job&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Another job&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 <p>In my situation, I was working in a codebase that had already a mediator interface to submit jobs (to <code>queue.PriorityQueue</code>), and job objects themselves were separate objects (i.e. not simple strings in the real applicatoin). I ended up making jobs sortable using the following superclass that implemented the <code>__lt__</code> rich comparison method:</p>
-<pre class="codehilite"><code class="language-py">from typing import TypeVar
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeVar</span>
 
-QueueJobType = TypeVar('QueueJobType', bound='QueueJob')
+<span class="n">QueueJobType</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;QueueJobType&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;QueueJob&#39;</span><span class="p">)</span>
 
 
-class QueueJob():
-    def __init__(self, order_number: int, task: str) -&gt; None:
-        self.order_number = order_number
-        self.task = task
+<span class="k">class</span><span class="w"> </span><span class="nc">QueueJob</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order_number</span> <span class="o">=</span> <span class="n">order_number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span>
 
-    def __lt__(self, other: QueueJobType) -&gt; bool:
-        '''
-        We need to use the order_number key to break ties to ensure
-        that objects are retrieved in FIFO order.
-        '''
-        return self.order_number &lt; other.order_number
+    <span class="k">def</span><span class="w"> </span><span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">QueueJobType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        We need to use the order_number key to break ties to ensure</span>
+<span class="sd">        that objects are retrieved in FIFO order.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_number</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">order_number</span>
 
-    def __repr__(self) -&gt; str:
-        return self.task
-</code></pre>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span>
+</code></pre></div>
 
 <p>When I submitted jobs, I'd do so using an interface like this (application simplified for demonstration purposes, more context is <a href="https://github.com/freedomofpress/securedrop-client/blob/master/securedrop_client/queue.py">here</a>) that would set the <code>order_number</code> such that it would be monotonically increasing:</p>
-<pre class="codehilite"><code class="language-py">import itertools
-import queue
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">queue</span>
 
 
-class App():
-    def __init__(self):
-        self.order_number = itertools.count()
-        self.queue = queue.PriorityQueue()
+<span class="k">class</span><span class="w"> </span><span class="nc">App</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order_number</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">PriorityQueue</span><span class="p">()</span>
 
-    def add_task(self, priority: int, task: str):
-        current_order_number = next(self.order_number)
-        task = QueueJob(current_order_number, task)
-        self.queue.put((priority, task))
-</code></pre>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">current_order_number</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order_number</span><span class="p">)</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">QueueJob</span><span class="p">(</span><span class="n">current_order_number</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="n">priority</span><span class="p">,</span> <span class="n">task</span><span class="p">))</span>
+</code></pre></div>
 
 <p>Let's see if jobs with equal priorities are retrieved in FIFO order:</p>
-<pre class="codehilite"><code class="language-py">&gt;&gt;&gt; from stuff import App
-&gt;&gt;&gt; app = App()
-&gt;&gt;&gt; app.add_task(1, 'My first job')
-&gt;&gt;&gt; app.add_task(1, 'Another job')
-&gt;&gt;&gt; app.queue.get()
-(1, My first job)
-&gt;&gt;&gt; app.queue.get()
-(1, Another job)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">stuff</span><span class="w"> </span><span class="kn">import</span> <span class="n">App</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">app</span> <span class="o">=</span> <span class="n">App</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;My first job&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Another job&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">My</span> <span class="n">first</span> <span class="n">job</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">app</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Another</span> <span class="n">job</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Jobs with equal priorities are retrieved in FIFO order, which is what we wanted.</p>
                     </div>

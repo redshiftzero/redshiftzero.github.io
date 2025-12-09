@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -134,13 +135,13 @@
                         <p>The CBC padding oracle attack demonstrates how what might initially seem like a small issue can balloon into a devastating attack that can result in total reconstruction of the plaintext by the attacker. It's also one of the harder challenges in <a href="https://cryptopals.com/sets/3/challenges/17">Set 3 of Cryptopals</a>.</p>
 <h2 id="the-problem"><a class="toclink" href="#the-problem">The problem</a></h2>
 <p>It goes like this: an attacker has access to an oracle that will take a ciphertext (i.e. what we need to decrypt) and return a boolean indicating whether or not the padding was valid. My padding oracle function looked like this:</p>
-<pre class="codehilite"><code class="language-python">def cbc_padding_oracle(key: bytes, ciphertext: bytes, iv: bytes) -&gt; bool:
-    try:
-        aes_cbc_decrypt(key, ciphertext, iv, remove_padding=True)
-        return True
-    except BadPaddingValidation:
-        return False
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">cbc_padding_oracle</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">iv</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">aes_cbc_decrypt</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">remove_padding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">BadPaddingValidation</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div>
 
 <p>where <code>BadPaddingValidation</code> was a custom exception indicating that - you guessed it - the padding was invalid.</p>
 <p>The following (16-byte) block has valid padding:</p>
@@ -174,15 +175,15 @@
 <p><img alt="Degenerate ciphertexts" src="/img/degenerate_ciphertexts.png" /></p>
 <p>There can be multiple "correct" answers for a given byte, i.e. there can be multiple ciphertexts that will have valid padding. Here in the example we have two valid ciphertexts when computing the last byte in the ciphertext: one with <code>01</code> in the final byte position (what we're looking for) and one where the second-to-last byte is <code>02</code> and produces a valid padding result (not what we're looking for).</p>
 <p>To handle this case, before settling on a given byte, I'd first modify the byte <em>before</em> the target byte and check if the padding was still valid:</p>
-<pre class="codehilite"><code class="language-python">byte_num_to_edit = self.block_size + byte_num - 2
-degeneracy_ciphertext = flip_nth_bit(
-    full_test_ciphertext, byte_num_to_edit - self.block_size
-)
-if cbc_padding_oracle(self.key, degeneracy_ciphertext, self.iv):
-    pass
-else:
-    continue
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">byte_num_to_edit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span> <span class="o">+</span> <span class="n">byte_num</span> <span class="o">-</span> <span class="mi">2</span>
+<span class="n">degeneracy_ciphertext</span> <span class="o">=</span> <span class="n">flip_nth_bit</span><span class="p">(</span>
+    <span class="n">full_test_ciphertext</span><span class="p">,</span> <span class="n">byte_num_to_edit</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">block_size</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">cbc_padding_oracle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">degeneracy_ciphertext</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="p">):</span>
+    <span class="k">pass</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">continue</span>
+</code></pre></div>
 
 <p>This enabled me to distinguish between the two above cases, and ensure that there was only a single, correct answer for each byte. </p>
 <p>My solution is <a href="https://github.com/redshiftzero/cryptopals/commit/28ea3ebe1febafeac712af65fbfce141b8740e49">here</a>.</p>

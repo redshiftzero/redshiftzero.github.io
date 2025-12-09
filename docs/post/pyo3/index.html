@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -152,45 +153,45 @@
 <h3 id="cffi"><a class="toclink" href="#cffi">cffi</a></h3>
 <p>You can use <code>extern</code> keyword to allow other languages to call Rust functions.</p>
 <p>For example this <code>add</code> function is marked as a public external function using the <code>pub extern</code> keywords. The <a href="https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html#calling-rust-functions-from-other-languages"><code>#[no_mangle]</code> attribute</a> just tells the compiler to preserve the readable function name.</p>
-<pre class="codehilite"><code class="language-rust">#[no_mangle]
-pub extern fn add(n: i32, m: i32) -&gt; i32 {
-    n + m
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">#[no_mangle]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">extern</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>One you compile the above, one can then use Python's <a href="https://cffi.readthedocs.io/en/latest/"><code>cffi</code></a> library to call the <code>add</code> function. First one must build the library using the <a href="https://doc.rust-lang.org/reference/linkage.html"><code>cdylib</code> crate type</a> to produce a dynamic library.</p>
 <p>Then, one can load this dynamic library and call the external Rust functions:</p>
-<pre class="codehilite"><code class="language-py">ffi = cffi.FFI()
-ffi.cdef(&quot;&quot;&quot;
-    int add(int, int);
-&quot;&quot;&quot;)
-adder = ffi.dlopen(location)
+<div class="highlight"><pre><span></span><code><span class="n">ffi</span> <span class="o">=</span> <span class="n">cffi</span><span class="o">.</span><span class="n">FFI</span><span class="p">()</span>
+<span class="n">ffi</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    int add(int, int);</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="n">adder</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">dlopen</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>
 
-assert adder.add(2, 2) == 4
-</code></pre>
+<span class="k">assert</span> <span class="n">adder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span>
+</code></pre></div>
 
 <p>You can see this example in full on GitHub <a href="https://github.com/redshiftzero/rust-python-examples#cffi">here</a>. Read more about Rust FFI <a href="https://doc.rust-lang.org/nomicon/ffi.html">here</a> and if you do take the FFI path, you might want to check out the <a href="https://github.com/getsentry/milksnake">milksnake</a> project for building and distributing wheels.</p>
 <h3 id="pyo3_1"><a class="toclink" href="#pyo3_1">PyO3</a></h3>
 <p>PyO3 is a very cool project that allows one to define a Python module entirely in Rust. The above example in PyO3 would be:</p>
-<pre class="codehilite"><code class="language-rust">#[pyfunction]
-pub fn add(n: i32, m: i32) -&gt; i32 {
-    n + m
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">#[pyfunction]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>And to define the actual Python module:</p>
-<pre class="codehilite"><code class="language-rust">#[pymodule]
-pub fn adder(py: Python, module: &amp;PyModule) -&gt; PyResult&lt;()&gt; {
-    module.add_wrapped(wrap_pyfunction!(add))?;
-    Ok(())
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">#[pymodule]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">adder</span><span class="p">(</span><span class="n">py</span><span class="p">:</span><span class="w"> </span><span class="nc">Python</span><span class="p">,</span><span class="w"> </span><span class="n">module</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">PyModule</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">PyResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">module</span><span class="p">.</span><span class="n">add_wrapped</span><span class="p">(</span><span class="n">wrap_pyfunction</span><span class="o">!</span><span class="p">(</span><span class="n">add</span><span class="p">))</span><span class="o">?</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>This means that now from the Python interpreter we can just do:</p>
-<pre class="codehilite"><code class="language-py">&gt;&gt;&gt; import adder
-&gt;&gt;&gt; adder.add(2, 3)
-5
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">adder</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">adder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="mi">5</span>
+</code></pre></div>
 
 <p>As we can see, the PyO3 approach is very straightforward. You simply add attributes to structs and functions in Rust to indicate that they should be exposed to Python, and then you write a Rust function to indicate what the top-level functions and classes are for that module.</p>
 <p>There are also similarly easy-to-use build tools (via <code>setuptools-rust</code> and <code>maturin</code>) to handle the packaging and build process. You can see this example packaged using <code>setuptools-rust</code> on GitHub <a href="https://github.com/redshiftzero/rust-python-examples#pyo3_basic">here</a>.</p>
@@ -208,133 +209,133 @@ pub fn adder(py: Python, module: &amp;PyModule) -&gt; PyResult&lt;()&gt; {
 <p>Functions that can fail should return <code>PyResult</code>, which is a type alias for <code>Result&lt;T, PyErr&gt;</code>. If the Err variant is returned, an exception will be raised on the Python side. Note that you can also create <a href="https://pyo3.rs/master/exception.html">custom exception types</a>.</p>
 <h3 id="classes-and-methods"><a class="toclink" href="#classes-and-methods">Classes and methods</a></h3>
 <p>Let's create an example class, using <code>#[pyclass]</code> and <code>#[pymethods]</code>:</p>
-<pre class="codehilite"><code class="language-rust">#[pyclass]
-pub struct Animal {
-    #[pyo3(get)]
-    name: String,
-    #[pyo3(get)]
-    age: u8,
-    hours_since_last_fed: u8,
-}
+<div class="highlight"><pre><span></span><code><span class="cp">#[pyclass]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cp">#[pyo3(get)]</span>
+<span class="w">    </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span>
+<span class="w">    </span><span class="cp">#[pyo3(get)]</span>
+<span class="w">    </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="kt">u8</span><span class="p">,</span>
+<span class="w">    </span><span class="n">hours_since_last_fed</span><span class="p">:</span><span class="w"> </span><span class="kt">u8</span><span class="p">,</span>
+<span class="p">}</span>
 
-#[pymethods]
-impl Animal {
-    #[new]
-    fn new(name: String, age: u8, hours_since_last_fed: u8) -&gt; Self {
-        Animal{ name, age, hours_since_last_fed }
-    }
+<span class="cp">#[pymethods]</span>
+<span class="k">impl</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cp">#[new]</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">new</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="kt">u8</span><span class="p">,</span><span class="w"> </span><span class="n">hours_since_last_fed</span><span class="p">:</span><span class="w"> </span><span class="kt">u8</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">Self</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Animal</span><span class="p">{</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">hours_since_last_fed</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    fn feed(&amp;mut self) {
-        self.hours_since_last_fed = 0;
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">feed</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">hours_since_last_fed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>The <code>#[new]</code> attribute is used for your object constructor and initialization logic in Python (equivalent of Python <code>__new__()</code>).</p>
 <p>In Python, you'd call <code>doris = Animal('Doris', 2, 0)</code> to use this.</p>
 <p>The <code>#[pyo3(get)]</code> attribute lets one read <code>doris.name</code> as member attributes. If you want to set attributes also, you can use <code>#[pyo3(get, set)]</code> (which could replace the <code>Animal::feed()</code> method if we wanted to).</p>
 <p>We can add this class to a new module as follows:</p>
-<pre class="codehilite"><code class="language-rust">#[pymodule]
-pub fn adder(py: Python, module: &amp;PyModule) -&gt; PyResult&lt;()&gt; {
-    module.add_class::&lt;Animal&gt;()?;
-    Ok(())
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">#[pymodule]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">adder</span><span class="p">(</span><span class="n">py</span><span class="p">:</span><span class="w"> </span><span class="nc">Python</span><span class="p">,</span><span class="w"> </span><span class="n">module</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">PyModule</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">PyResult</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">module</span><span class="p">.</span><span class="n">add_class</span><span class="p">::</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">&gt;</span><span class="p">()</span><span class="o">?</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <h2 id="tricky"><a class="toclink" href="#tricky">Some trickier parts of PyO3</a></h2>
 <p>The above parts can cover simple projects. Two more advanced topics we'll cover are inheritance, and magic methods.</p>
 <h3 id="inheritance"><a class="toclink" href="#inheritance">Inheritance</a></h3>
 <p>What if we want to make a subclasses, say, a <code>Lion</code>, that inherits from <code>Animal</code>? Here's how we do it:</p>
-<pre class="codehilite"><code class="language-rust">#[pyclass(subclass)]
-pub struct Animal {
-    #[pyo3(get)]
-    name: String,
-    #[pyo3(get)]
-    age: u8,
-    hours_since_last_fed: u8,
-}
+<div class="highlight"><pre><span></span><code><span class="cp">#[pyclass(subclass)]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cp">#[pyo3(get)]</span>
+<span class="w">    </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span>
+<span class="w">    </span><span class="cp">#[pyo3(get)]</span>
+<span class="w">    </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="kt">u8</span><span class="p">,</span>
+<span class="w">    </span><span class="n">hours_since_last_fed</span><span class="p">:</span><span class="w"> </span><span class="kt">u8</span><span class="p">,</span>
+<span class="p">}</span>
 
-#[pymethods]
-impl Animal {
-    #[new]
-    fn new(name: String, age: u8, hours_since_last_fed: u8) -&gt; Self {
-        Animal{ name, age, hours_since_last_fed }
-    }
+<span class="cp">#[pymethods]</span>
+<span class="k">impl</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cp">#[new]</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">new</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="kt">u8</span><span class="p">,</span><span class="w"> </span><span class="n">hours_since_last_fed</span><span class="p">:</span><span class="w"> </span><span class="kt">u8</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">Self</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Animal</span><span class="p">{</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">hours_since_last_fed</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    fn feed(&amp;mut self) {
-        self.hours_since_last_fed = 0;
-    }
-}
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">feed</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">hours_since_last_fed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-#[pyclass(extends=Animal)]
-pub struct Lion {
-    #[pyo3(get)]
-    favorite_meat: String,
-}
+<span class="cp">#[pyclass(extends=Animal)]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Lion</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cp">#[pyo3(get)]</span>
+<span class="w">    </span><span class="n">favorite_meat</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span>
+<span class="p">}</span>
 
-#[pymethods]
-impl Lion {
-    #[new]
-    fn new(name: String, age: u8, hours_since_last_fed: u8, favorite_meat: String) -&gt; PyResult&lt;(Self, Animal)&gt; {
-        Ok((Lion{ favorite_meat }, Animal{ name, age, hours_since_last_fed }))
-    }
+<span class="cp">#[pymethods]</span>
+<span class="k">impl</span><span class="w"> </span><span class="n">Lion</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cp">#[new]</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">new</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="kt">u8</span><span class="p">,</span><span class="w"> </span><span class="n">hours_since_last_fed</span><span class="p">:</span><span class="w"> </span><span class="kt">u8</span><span class="p">,</span><span class="w"> </span><span class="n">favorite_meat</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">PyResult</span><span class="o">&lt;</span><span class="p">(</span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">Animal</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">((</span><span class="n">Lion</span><span class="p">{</span><span class="w"> </span><span class="n">favorite_meat</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">Animal</span><span class="p">{</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">hours_since_last_fed</span><span class="w"> </span><span class="p">}))</span>
+<span class="w">    </span><span class="p">}</span>
 
-    fn roar(&amp;self) -&gt; String {
-        &quot;ROAR!!!!&quot;.to_string()
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">roar</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;ROAR!!!!&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>The <code>#[pyclass]</code> annotations indicate the parent (<code>#[pyclass(subclass)]</code>) and child (<code>#[pyclass(extends=Parent)]</code>) classes. The tuple syntax in the return value of the child is a little "trick" intended for ergonomics: you return <code>PyResult&lt;(Child, Parent)&gt;</code> or <code>(Child, Parent)</code>. PyO3 will then run <code>Into&lt;PyClassInitializer&gt;</code> on the child, where <a href="https://docs.rs/pyo3/0.12.4/pyo3/pyclass_init/struct.PyClassInitializer.html">PyClassInitializer</a> is PyO3's pyclass initializer.</p>
 <h3 id="magic-methods"><a class="toclink" href="#magic-methods">Magic methods</a></h3>
 <p>One might be surprised to find that implementing magic methods doesn't work in a <code>#[pymethods]</code> impl block. It turns out that you can implement Python "magic" methods like <code>__repr__</code> and <code>__richcmp__</code> using the <code>PyObjectProtocol</code> trait and the <code>#[pyproto]</code> attribute in a separate <code>impl</code> block. For example, to add a nice string representation for <code>Animal</code>:</p>
-<pre class="codehilite"><code class="language-rust">#[pyproto]
-impl PyObjectProtocol for Animal {
-    fn __str__(&amp;self) -&gt; PyResult&lt;String&gt; {
-        Ok(String::from(format!(
-            &quot;Animal: {}&quot;,
-            self.name,
-        )))
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">#[pyproto]</span>
+<span class="k">impl</span><span class="w"> </span><span class="n">PyObjectProtocol</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">__str__</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">PyResult</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">Ok</span><span class="p">(</span><span class="nb">String</span><span class="p">::</span><span class="n">from</span><span class="p">(</span><span class="fm">format!</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;Animal: {}&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+<span class="w">        </span><span class="p">)))</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>See some additional examples <a href="https://github.com/freedomofpress/signal-protocol/blob/0c9c5d76e1876fa2be311430943ca8a3e3ae1f19/src/fingerprint.rs#L52-L61">here</a> and <a href="https://github.com/freedomofpress/signal-protocol/blob/0c9c5d76e1876fa2be311430943ca8a3e3ae1f19/src/curve.rs#L124-L133">here</a>.</p>
 <h2 id="building"><a class="toclink" href="#building">Distributing wheels</a></h2>
 <p>We want to build and distribute wheels that do not require the rust toolchain to be installed on target systems. Fortunately, with <code>setuptools-rust</code> and <code>maturin</code>, that's pretty simple. For <code>setuptools-rust</code> our <code>setup.py</code> for the <code>zoo</code> example would be:</p>
-<pre class="codehilite"><code class="language-py">import sys
-from setuptools import setup
-from setuptools_rust import Binding, RustExtension
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">setuptools</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">setuptools_rust</span><span class="w"> </span><span class="kn">import</span> <span class="n">Binding</span><span class="p">,</span> <span class="n">RustExtension</span>
 
-setup(
-    name=&quot;zoo&quot;,
-    version=&quot;0.0.1&quot;,
-    classifiers=[
-        &quot;License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)&quot;,
-        &quot;Development Status :: 3 - Alpha&quot;,
-        &quot;Intended Audience :: Developers&quot;,
-        &quot;Programming Language :: Python&quot;,
-        &quot;Programming Language :: Rust&quot;,
-    ],
-    packages=[&quot;zoo&quot;],
-    rust_extensions=[RustExtension(&quot;zoo.zoo&quot;, &quot;Cargo.toml&quot;, binding=Binding.PyO3)],
-    setup_requires=[&quot;setuptools-rust&gt;=0.10.1&quot;, &quot;wheel&quot;],
-    zip_safe=False,  # Rust extensions are not zip safe
-)
-</code></pre>
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;zoo&quot;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
+    <span class="n">classifiers</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Development Status :: 3 - Alpha&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Intended Audience :: Developers&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Programming Language :: Python&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Programming Language :: Rust&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;zoo&quot;</span><span class="p">],</span>
+    <span class="n">rust_extensions</span><span class="o">=</span><span class="p">[</span><span class="n">RustExtension</span><span class="p">(</span><span class="s2">&quot;zoo.zoo&quot;</span><span class="p">,</span> <span class="s2">&quot;Cargo.toml&quot;</span><span class="p">,</span> <span class="n">binding</span><span class="o">=</span><span class="n">Binding</span><span class="o">.</span><span class="n">PyO3</span><span class="p">)],</span>
+    <span class="n">setup_requires</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;setuptools-rust&gt;=0.10.1&quot;</span><span class="p">,</span> <span class="s2">&quot;wheel&quot;</span><span class="p">],</span>
+    <span class="n">zip_safe</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Rust extensions are not zip safe</span>
+<span class="p">)</span>
+</code></pre></div>
 
 <p>See the full project <a href="https://github.com/redshiftzero/rust-python-examples#pyo3_inherit">here</a>.</p>
 <p>Locally, if we're on macOS, to build macOS wheels:</p>
-<pre class="codehilite"><code>python3 setup.py sdist bdist_wheel
-</code></pre>
+<div class="highlight"><pre><span></span><code>python3 setup.py sdist bdist_wheel
+</code></pre></div>
 
 <p>To build manylinux wheels we can follow <a href="https://github.com/PyO3/setuptools-rust#binary-wheels-on-linux">the procedure described in the setuptools-rust project</a>. First we fetch the Python Packaging Authority manylinux image:</p>
-<pre class="codehilite"><code>docker pull quay.io/pypa/manylinux2014_x86_64
-</code></pre>
+<div class="highlight"><pre><span></span><code>docker pull quay.io/pypa/manylinux2014_x86_64
+</code></pre></div>
 
 <p>Then using the default <code>build-wheels.sh</code> script provided by <code>setuptools-rust</code>:</p>
-<pre class="codehilite"><code>docker run --rm -v `pwd`:/io quay.io/pypa/manylinux2014_x86_64 /io/build-wheels.sh
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">--</span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="n n-Quoted">`pwd`</span><span class="o">:/</span><span class="k">io</span><span class="w"> </span><span class="n">quay</span><span class="p">.</span><span class="k">io</span><span class="o">/</span><span class="n">pypa</span><span class="o">/</span><span class="n">manylinux2014_x86_64</span><span class="w"> </span><span class="o">/</span><span class="k">io</span><span class="o">/</span><span class="n">build</span><span class="o">-</span><span class="n">wheels</span><span class="p">.</span><span class="n">sh</span>
+</code></pre></div>
 
 <p>This leaves us with built wheels in <code>dist/</code> ready for upload to PyPI. And we should just upload the manylinux wheels built by the script as PyPI does not support wheels with platform tags like <code>linux_x86_64</code> (these are also produced by the above wheel build command but can be discarded).</p>
 <h1 id="fin"><a class="toclink" href="#fin">Fin</a></h1>

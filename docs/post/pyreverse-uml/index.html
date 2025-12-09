@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -134,13 +135,13 @@
                         <p>Recently I wanted to generate UML (Unified Modeling Language) diagrams of the structure of an existing codebase for the purpose of having an architecture discussion.</p>
 <p>I was wondering if there was a tool to generate UML diagrams in Python to save me some manual work.</p>
 <p>Enter <a href="https://pypi.org/project/pyreverse/"><code>pyreverse</code></a>: it comes installed with <code>pylint</code> which is a very common development dependency in Python. <code>pyreverse</code> enables you to point to the code you want UML diagrams of, here in my example I was generating a diagram of a project called <a href="https://github.com/freedomofpress/securedrop-export"><code>securedrop-export</code></a>:</p>
-<pre class="codehilite"><code class="language-bash">pyreverse securedrop_export/
-</code></pre>
+<div class="highlight"><pre><span></span><code>pyreverse<span class="w"> </span>securedrop_export/
+</code></pre></div>
 
 <p>This produces in the same directory a graphviz file called <code>classes.dot</code>.</p>
 <p>Then, provided you have graphviz (which provides the <code>dot</code> command) installed:</p>
-<pre class="codehilite"><code class="language-bash">dot -Tpng classes.dot -o securedrop_export.png
-</code></pre>
+<div class="highlight"><pre><span></span><code>dot<span class="w"> </span>-Tpng<span class="w"> </span>classes.dot<span class="w"> </span>-o<span class="w"> </span>securedrop_export.png
+</code></pre></div>
 
 <p>Which produces the following:</p>
 <p><img alt="securedrop-export" src="/img/securedrop_export.png" /></p>

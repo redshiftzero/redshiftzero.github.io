@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -149,12 +150,12 @@ the first $n-1$ observations:</p>
 <p>That is the probability for any $n$ and $m$ that a collision occurs due to the birthday paradox ✨</p>
 <h3 id="collision-probability-as-a-function-of-n"><a class="toclink" href="#collision-probability-as-a-function-of-n">Collision probability as a function of $n$</a></h3>
 <p>Armed with the above analytic expression, we can write a simple function that computes the probability of collision for any $n$ and $m$:</p>
-<pre class="codehilite"><code class="language-python">def prob_of_collision(n: int=23, m: int=365) -&gt; int:
-    probability_of_no_collision = 1
-    for i in range(1, n - 1):
-        probability_of_no_collision *= 1 - i/m
-    return 1 - probability_of_no_collision
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">prob_of_collision</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">365</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">probability_of_no_collision</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">probability_of_no_collision</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="o">/</span><span class="n">m</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">probability_of_no_collision</span>
+</code></pre></div>
 
 <p>Let's now use this function to make a few plots showing how the probability changes as a function of $n$. </p>
 <h4 id="birthday-case-m365"><a class="toclink" href="#birthday-case-m365">Birthday case: m=365</a></h4>

@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -142,31 +143,31 @@
 </ol>
 <p>A common problem is to skip step 2, and instead take a guess why the flake is happening, and then modify the behavior. To prevent unnecessary implementation/review time, it's worth resisting this urge and to at least try to understand the behavior prior to making changes. If it proves particularly troublesome to identify, <em>then</em> it may be reasonable to make some experimental fixes.</p>
 <p>One strategy to identify the underlying problem is to use a plugin like <code>pytest-repeat</code> (<code>pip install pytest-repeat</code>) to run a <em>single</em> test a large number of times: </p>
-<pre class="codehilite"><code class="language-bash">pytest --count 100 tests/test_app.py::test_my_flaky_behavior
-</code></pre>
+<div class="highlight"><pre><span></span><code>pytest<span class="w"> </span>--count<span class="w"> </span><span class="m">100</span><span class="w"> </span>tests/test_app.py::test_my_flaky_behavior
+</code></pre></div>
 
 <p>You can do this on your main branch to reproduce the flake (adjusting the <code>count</code> as needed based on the failure rate of the test), and then run again once you have applied a fix to verify that it indeed resolves the issue.</p>
 <h3 id="automatically-re-run-flaky-tests"><a class="toclink" href="#automatically-re-run-flaky-tests">Automatically re-run flaky tests</a></h3>
 <p>Alternatively, a quick fix if you don't want to take the time to address the underlying issues in the test suite is a pytest plugin called <a href="https://github.com/box/flaky"><code>flaky</code></a> (<code>pip install flaky</code>). One can use this to re-run individual flaky tests or classes of flaky tests up to a configurable number of times, e.g.:</p>
-<pre class="codehilite"><code class="language-python">@flaky(max_runs=10)
-def test_my_flaky_behavior():
-    expected_result = 'result'
-    actual_result = my_function('arg1', 'arg2')
-    assert expected_result == actual_result
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nd">@flaky</span><span class="p">(</span><span class="n">max_runs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_my_flaky_behavior</span><span class="p">():</span>
+    <span class="n">expected_result</span> <span class="o">=</span> <span class="s1">&#39;result&#39;</span>
+    <span class="n">actual_result</span> <span class="o">=</span> <span class="n">my_function</span><span class="p">(</span><span class="s1">&#39;arg1&#39;</span><span class="p">,</span> <span class="s1">&#39;arg2&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">expected_result</span> <span class="o">==</span> <span class="n">actual_result</span>
+</code></pre></div>
 
 <h3 id="flaky-test-dashboard"><a class="toclink" href="#flaky-test-dashboard">Flaky test dashboard</a></h3>
 <p>If you use a CI provider like Circle CI, you can see which tests are the most flaky (and use that to prioritize fixes) if you export test metadata:</p>
-<pre class="codehilite"><code class="language-shell">pytest --junitxml=~/project/test-results/junit.xml
-</code></pre>
+<div class="highlight"><pre><span></span><code>pytest<span class="w"> </span>--junitxml<span class="o">=</span>~/project/test-results/junit.xml
+</code></pre></div>
 
 <p>And then export them to Circle CI using their <code>store_test_results</code> and <code>store_artifacts</code> steps:</p>
-<pre class="codehilite"><code class="language-yaml">- store_test_results:
-    path: ~/project/test-results
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">store_test_results</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/project/test-results</span>
 
-- store_artifacts:
-    path: ~/project/test-results
-</code></pre>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">store_artifacts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/project/test-results</span>
+</code></pre></div>
 
 <p>These tests results, as CI jobs fail due to flakes, will populate a dashboard at https://circleci.com/build-insights which will contain the most often failed tests, along with other useful information like the longest running failed tests.</p>
                     </div>

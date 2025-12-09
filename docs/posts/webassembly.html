@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -150,36 +151,36 @@
 </ul>
 <h1 id="wasmbindgen"><a class="toclink" href="#wasmbindgen"><code>wasm-bindgen</code> and <code>wasm-pack</code></a></h1>
 <p><code>wasm-bindgen</code> is a handy tool wherein you can simply add the <code>#[wasm_bindgen]</code> attribute to structs and impl blocks to indicate that they should be exposed to JavaScript. For example, <code>SecureDropSourceSession</code> below is a Rust struct I wanted to make available as a JavaScript class:</p>
-<pre class="codehilite"><code class="language-Rust">#[wasm_bindgen]
-pub struct SecureDropSourceSession {
-    store: InMemSignalProtocolStore,
-    pub registration_id: u32,
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">#[wasm_bindgen]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">SecureDropSourceSession</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">store</span><span class="p">:</span><span class="w"> </span><span class="nc">InMemSignalProtocolStore</span><span class="p">,</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">registration_id</span><span class="p">:</span><span class="w"> </span><span class="kt">u32</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>It encapsulates a private member <code>InMemSignalProtocolStore</code> that methods in our impl block in Rust will use when performing crypto operations in our WebAssembly module.</p>
 <p>Now I can provide methods (to JavaScript) on this struct using an impl block also with the <code>#[wasm_bindgen]</code> attribute<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">1</a></sup>:</p>
-<pre class="codehilite"><code class="language-Rust">#[wasm_bindgen]
-impl SecureDropSourceSession {
-    pub fn new() -&gt; Result&lt;SecureDropSourceSession, JsValue&gt; {
-        let mut csprng = OsRng;
-        let registration_id: u32 = csprng.gen();
-        let identity_key = IdentityKeyPair::generate(&amp;mut csprng);
+<div class="highlight"><pre><span></span><code><span class="cp">#[wasm_bindgen]</span>
+<span class="k">impl</span><span class="w"> </span><span class="n">SecureDropSourceSession</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">new</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Result</span><span class="o">&lt;</span><span class="n">SecureDropSourceSession</span><span class="p">,</span><span class="w"> </span><span class="n">JsValue</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">csprng</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OsRng</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">registration_id</span><span class="p">:</span><span class="w"> </span><span class="kt">u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">csprng</span><span class="p">.</span><span class="n">gen</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">identity_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IdentityKeyPair</span><span class="p">::</span><span class="n">generate</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">csprng</span><span class="p">);</span>
 
-        // This struct will hold our session, identity, prekey and sender key stores.
-        InMemSignalProtocolStore::new(identity_key, registration_id)
-            .map(|store| SecureDropSourceSession {
-                store,
-                registration_id,
-            })
-            .map_err(|e| e.to_string().into())
-    }
-</code></pre>
+<span class="w">        </span><span class="c1">// This struct will hold our session, identity, prekey and sender key stores.</span>
+<span class="w">        </span><span class="n">InMemSignalProtocolStore</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">identity_key</span><span class="p">,</span><span class="w"> </span><span class="n">registration_id</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">store</span><span class="o">|</span><span class="w"> </span><span class="n">SecureDropSourceSession</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">store</span><span class="p">,</span>
+<span class="w">                </span><span class="n">registration_id</span><span class="p">,</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">            </span><span class="p">.</span><span class="n">map_err</span><span class="p">(</span><span class="o">|</span><span class="n">e</span><span class="o">|</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">to_string</span><span class="p">().</span><span class="n">into</span><span class="p">())</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 
 <p>The <code>Result&lt;T, JsValue&gt;</code> return type is a common pattern that <code>wasm-bindgen</code> will use to throw JavaScript exceptions when the <code>Err</code> variant is returned.</p>
 <p>Once the WebAssembly module is compiled and loaded, I can now create <code>SecureDropSourceSession</code> objects (now that I've implemented <code>SecureDropSourceSession::new</code>) from JavaScript:</p>
-<pre class="codehilite"><code class="language-JavaScript">var session = SecureDropSourceSession.new();
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">SecureDropSourceSession</span><span class="p">.</span><span class="ow">new</span><span class="p">();</span>
+</code></pre></div>
 
 <h3 id="building"><a class="toclink" href="#building">Building</a></h3>
 <p><code>wasm-pack</code> builds your project along with some autogenerated helper JS to a folder called <code>pkg</code>. This is useful if you use a bundler like Webpack since you can simply add the path to your WebAssembly package to your dependencies. This is also useful if you want to publish your WebAssembly package to <code>npm</code>. By publishing to <code>npm</code>, folks using the package will not need the Rust toolchain installed since you'll be publishing the built Wasm artifact.</p>
@@ -189,8 +190,8 @@ impl SecureDropSourceSession {
 <p><code>js_sys</code> lets you call JavaScript functions from your Rust code, such as <a href="https://docs.rs/js-sys/0.3.46/js_sys/fn.escape.html"><code>escape()</code></a>.</p>
 <p><code>web_sys</code> provides Web APIs (through JavaScript). For example, you can manipulate the DOM or get access to the <a href="https://docs.rs/web-sys/0.3.46/web_sys/struct.Window.html#impl-62">WebCrypto API</a>.</p>
 <p>For debugging, there's <a href="https://github.com/rustwasm/console_error_panic_hook"><code>console_error_panic_hook</code></a>, which lets you <a href="https://github.com/freedomofpress/securedrop-e2e/blob/main/securedrop-source/src/lib.rs#L40">add a panic hook</a> that passes panics through to the JavaScript console:</p>
-<pre class="codehilite"><code class="language-rust">panic::set_hook(Box::new(console_error_panic_hook::hook));
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">panic</span><span class="p">::</span><span class="n">set_hook</span><span class="p">(</span><span class="nb">Box</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">console_error_panic_hook</span><span class="p">::</span><span class="n">hook</span><span class="p">));</span>
+</code></pre></div>
 
 <h1 id="refs"><a class="toclink" href="#refs">Referencecs</a></h1>
 <p>This post was a very brief overview. There are great tutorials out there on Rust and WebAssembly, and the main references I found useful while learning enough to implement my project are here:</p>

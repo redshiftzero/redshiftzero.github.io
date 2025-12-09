@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -152,7 +153,7 @@
 <p>The total number of rounds we denote by <code>R</code>. There are two types of round in the Poseidon construction, partial and full. We denote the number of partial and full rounds by <code>R_P​</code> and <code>R_F</code>​ respectively.</p>
 <h3 id="partial-vs-full-rounds"><a class="toclink" href="#partial-vs-full-rounds">Partial vs Full Rounds</a></h3>
 <p>In a full round in the <strong>SubWords</strong> layer, the S-box is applied to each element of the internal state, as shown in the diagram below:</p>
-<pre class="codehilite"><code class="language-plaintext">  ┌───────────────────────────────────────────────────────────┐
+<div class="highlight"><pre><span></span><code>  ┌───────────────────────────────────────────────────────────┐
   │                                                           │
   │                     AddRoundConstants                     │
   │                                                           │
@@ -169,10 +170,10 @@
   └────────────┬──────────┬──────────┬──────────┬─────────────┘
                │          │          │          │              
                ▼          ▼          ▼          ▼              
-</code></pre>
+</code></pre></div>
 
 <p>In a partial round in the <strong>SubWords</strong> layer, we apply the S-box only to one element of the internal state, as shown in the diagram below:</p>
-<pre class="codehilite"><code>               │          │          │          │              
+<div class="highlight"><pre><span></span><code>               │          │          │          │              
                │          │          │          │              
   ┌────────────▼──────────▼──────────▼──────────▼─────────────┐
   │                                                           │
@@ -191,7 +192,7 @@
   └────────────┬──────────┬──────────┬──────────┬─────────────┘
                │          │          │          │              
                ▼          ▼          ▼          ▼              
-</code></pre>
+</code></pre></div>
 
 <p>We apply half the full rounds (<code>R_f​=R_F​/2</code>) first, then we apply the <code>R_P​</code> partial rounds, then the rest of the <code>R_f​</code> full rounds. This approach - wherein the middle layer consists of partial rounds, and is sandwiched by full rounds - is called the <a href="https://eprint.iacr.org/2020/179">HADES design strategy</a> in the literature.</p>
 <h3 id="poseidon377-our-poseidon-implementation"><a class="toclink" href="#poseidon377-our-poseidon-implementation">Poseidon377, our poseidon implementation</a></h3>

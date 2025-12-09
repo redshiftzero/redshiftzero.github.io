@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -133,48 +134,48 @@
                     <div class="post-body e-content">
                         <p>When testing codepaths that generate images, one might want to ensure that the generated image is what is expected. <a href="https://matplotlib.org">Matplotlib</a> has a nice decorator <a href="https://matplotlib.org/devel/testing.html#writing-an-image-comparison-test"><code>@image_comparison</code></a> that can be applied for this purpose, but looking at <a href="https://github.com/matplotlib/matplotlib/blob/f653879c6317b191849c49511282cfff949ad336/lib/matplotlib/testing/decorators.py#L165">the implementation</a>, it's pretty tied to the <code>matplotlib</code> <code>Figure</code> object. I wanted something generic to use with PNGs. </p>
 <p>I ended up writing a pytest fixture that would compare the image generated during the test with a baseline image (in <code>tests/baseline_images</code> as in the matplotlib implementatino). Here are the contents of <code>conftest.py</code>, which contain the fixture and its related image similarity assert:</p>
-<pre class="codehilite"><code class="language-py">import os
-import pytest
-import numpy as np
-from PIL import Image
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
 
 
-def assert_images_equal(image_1: str, image_2: str):
-    img1 = Image.open(image_1)
-    img2 = Image.open(image_2)
+<span class="k">def</span><span class="w"> </span><span class="nf">assert_images_equal</span><span class="p">(</span><span class="n">image_1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">image_2</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">img1</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_1</span><span class="p">)</span>
+    <span class="n">img2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_2</span><span class="p">)</span>
 
-    # Convert to same mode and size for comparison
-    img2 = img2.convert(img1.mode)
-    img2 = img2.resize(img1.size)
+    <span class="c1"># Convert to same mode and size for comparison</span>
+    <span class="n">img2</span> <span class="o">=</span> <span class="n">img2</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">img1</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+    <span class="n">img2</span> <span class="o">=</span> <span class="n">img2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">img1</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
 
-    sum_sq_diff = np.sum((np.asarray(img1).astype('float') - np.asarray(img2).astype('float'))**2)
+    <span class="n">sum_sq_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-    if sum_sq_diff == 0:
-        # Images are exactly the same
-        pass
-    else:
-        normalized_sum_sq_diff = sum_sq_diff / np.sqrt(sum_sq_diff)
-        assert normalized_sum_sq_diff &lt; 0.001
+    <span class="k">if</span> <span class="n">sum_sq_diff</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Images are exactly the same</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">normalized_sum_sq_diff</span> <span class="o">=</span> <span class="n">sum_sq_diff</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sum_sq_diff</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">normalized_sum_sq_diff</span> <span class="o">&lt;</span> <span class="mf">0.001</span>
 
 
-@pytest.fixture
-def image_similarity(request, tmpdir):
-    testname = request.node.name
-    filename = &quot;{}.png&quot;.format(testname)
-    generated_file = os.path.join(str(tmpdir), &quot;{}.png&quot;.format(testname))
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">image_similarity</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">tmpdir</span><span class="p">):</span>
+    <span class="n">testname</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.png&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">testname</span><span class="p">)</span>
+    <span class="n">generated_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">),</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.png&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">testname</span><span class="p">))</span>
 
-    yield {'filename': generated_file}
+    <span class="k">yield</span> <span class="p">{</span><span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">generated_file</span><span class="p">}</span>
 
-    assert_images_equal(&quot;tests/baseline_images/{}.png&quot;.format(testname), generated_file)
-</code></pre>
+    <span class="n">assert_images_equal</span><span class="p">(</span><span class="s2">&quot;tests/baseline_images/</span><span class="si">{}</span><span class="s2">.png&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">testname</span><span class="p">),</span> <span class="n">generated_file</span><span class="p">)</span>
+</code></pre></div>
 
 <p>The assert rescales the images to be the same size, as well as the same mode, and then computes the sum of the squared differences as an image similarity metric.</p>
 <p>You can use the above fixture in a test via:</p>
-<pre class="codehilite"><code class="language-py">def test_example(image_similarity):
-    # test logic goes here and should generate an image in the
-    # path given by image_similarity['filename']
-    pass
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">test_example</span><span class="p">(</span><span class="n">image_similarity</span><span class="p">):</span>
+    <span class="c1"># test logic goes here and should generate an image in the</span>
+    <span class="c1"># path given by image_similarity[&#39;filename&#39;]</span>
+    <span class="k">pass</span>
+</code></pre></div>
 
 <p>When you add a new test, you need to add the expected image to <code>tests/baseline_images/&lt;testname&gt;.png</code>.</p>
                     </div>

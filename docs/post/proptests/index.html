@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -133,15 +134,15 @@
                     <div class="post-body e-content">
                         <p>When we write tests to check the correctness of our code, we're used to thinking of examples: base cases, boundary conditions, edge cases, and so on. We enumerate these examples, and write example-based unit tests that check given a specific example input, we get an expected output.</p>
 <p>For example, if we're testing a function that reverses a list, we might write tests like:</p>
-<pre class="codehilite"><code class="language-py">def test_reverse_empty():
-    assert reverse([]) == []
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">test_reverse_empty</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">reverse</span><span class="p">([])</span> <span class="o">==</span> <span class="p">[]</span>
 
-def test_reverse_single():
-    assert reverse([1]) == [1]
+<span class="k">def</span><span class="w"> </span><span class="nf">test_reverse_single</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">reverse</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-def test_reverse_multiple():
-    assert reverse([1, 2, 3]) == [3, 2, 1]
-</code></pre>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_reverse_multiple</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">reverse</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
 
 <p>This approach is fine, but has several problems. First, it's laborious: we need to manually generate these examples, and write tests for each one. Second, what happens if we don't think of some examples we really should be covering - we'll never write that test, and any related bugs will not be found. What about lists with duplicate elements? What about lists with negative numbers? What about very long lists? The combinatorial explosion of possible inputs makes it impractical to test them all manually.</p>
 <p>This is where property-based testing can help us.</p>
@@ -166,22 +167,22 @@ def test_reverse_multiple():
 <h1 id="property-based-testing-with-python"><a class="toclink" href="#property-based-testing-with-python">Property-Based Testing with Python</a></h1>
 <p>Hypothesis is a Python library for property-based testing that is based on QuickCheck from Haskell.  </p>
 <p>First, we should install Hypothesis following the documentation. In a virtual environment:</p>
-<pre class="codehilite"><code>pip install hypothesis
-</code></pre>
+<div class="highlight"><pre><span></span><code>pip install hypothesis
+</code></pre></div>
 
 <h2 id="how-hypothesis-works"><a class="toclink" href="#how-hypothesis-works">How Hypothesis Works</a></h2>
 <p>When you write a property-based test with Hypothesis, the <code>@given</code> decorator takes a <strong>strategy</strong> that describes what kind of data to generate. Strategies are composable - you can build complex data types from simple ones. You can write your own strategies for your own custom data types. </p>
 <p>By default, Hypothesis then runs your test function 100 times (configurable), each time with a different randomly generated input. If an assertion fails, Hypothesis will try to find a simpler input that also fails, a process called <strong>shrinking</strong>.</p>
 <p>Also, Hypothesis maintains a database of previously found failing examples, so it can replay them in future test runs to ensure regressions don't reoccur.</p>
 <p>Here's a simple example:</p>
-<pre class="codehilite"><code class="language-py">from hypothesis import given
-from hypothesis import strategies as st
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">hypothesis</span><span class="w"> </span><span class="kn">import</span> <span class="n">given</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hypothesis</span><span class="w"> </span><span class="kn">import</span> <span class="n">strategies</span> <span class="k">as</span> <span class="n">st</span>
 
-@given(st.lists(st.integers()))
-def test_sort_preserves_length(xs):
-    sorted_xs = sorted(xs)
-    assert len(xs) == len(sorted_xs)
-</code></pre>
+<span class="nd">@given</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">lists</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">integers</span><span class="p">()))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_sort_preserves_length</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+    <span class="n">sorted_xs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">sorted_xs</span><span class="p">)</span>
+</code></pre></div>
 
 <p>In this example, <code>st.lists(st.integers())</code> is a strategy that generates random lists of integers. Hypothesis will generate many such lists (empty lists, single-element lists, large lists, lists with negative numbers, etc.) and verify that sorting doesn't change the length.</p>
 <h2 id="strategies"><a class="toclink" href="#strategies">Strategies</a></h2>
@@ -202,49 +203,49 @@ def test_sort_preserves_length(xs):
 <p>Here are a few more cases where property-based testing can be helpful.</p>
 <h2 id="round-trip-testing"><a class="toclink" href="#round-trip-testing">Round-Trip Testing</a></h2>
 <p>One common pattern is testing that operations are inverses of each other. For example, encoding and decoding should round-trip:</p>
-<pre class="codehilite"><code class="language-py">@given(st.text())
-def test_encode_decode_roundtrip(text):
-    encoded = base64.b64encode(text.encode()).decode()
-    decoded = base64.b64decode(encoded).decode()
-    assert decoded == text
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nd">@given</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_encode_decode_roundtrip</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">encoded</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">decoded</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">decoded</span> <span class="o">==</span> <span class="n">text</span>
+</code></pre></div>
 
 <p>Or for serialization/deserialization:</p>
-<pre class="codehilite"><code class="language-py">import json
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
-@given(st.dictionaries(st.text(), st.one_of(st.integers(), st.text(), st.booleans())))
-def test_json_roundtrip(data):
-    serialized = json.dumps(data)
-    deserialized = json.loads(serialized)
-    assert deserialized == data
-</code></pre>
+<span class="nd">@given</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">dictionaries</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span> <span class="n">st</span><span class="o">.</span><span class="n">one_of</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">integers</span><span class="p">(),</span> <span class="n">st</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span> <span class="n">st</span><span class="o">.</span><span class="n">booleans</span><span class="p">())))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_json_roundtrip</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">serialized</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">deserialized</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">serialized</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">deserialized</span> <span class="o">==</span> <span class="n">data</span>
+</code></pre></div>
 
 <h2 id="invariants"><a class="toclink" href="#invariants">Invariants</a></h2>
 <p>Properties that should always be true, regardless of input:</p>
-<pre class="codehilite"><code class="language-py">@given(st.lists(st.integers()))
-def test_sort_is_ordered(xs):
-    sorted_xs = sorted(xs)
-    for i in range(len(sorted_xs) - 1):
-        assert sorted_xs[i] &lt;= sorted_xs[i + 1]
+<div class="highlight"><pre><span></span><code><span class="nd">@given</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">lists</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">integers</span><span class="p">()))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_sort_is_ordered</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+    <span class="n">sorted_xs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sorted_xs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">sorted_xs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">sorted_xs</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
 
-@given(st.lists(st.integers()))
-def test_sort_preserves_elements(xs):
-    sorted_xs = sorted(xs)
-    assert set(xs) == set(sorted_xs)
-    assert len(xs) == len(sorted_xs)
-</code></pre>
+<span class="nd">@given</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">lists</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">integers</span><span class="p">()))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_sort_preserves_elements</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+    <span class="n">sorted_xs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">sorted_xs</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">sorted_xs</span><span class="p">)</span>
+</code></pre></div>
 
 <h1 id="tips-and-best-practices"><a class="toclink" href="#tips-and-best-practices">Tips and Best Practices</a></h1>
 <h2 id="configuration"><a class="toclink" href="#configuration">Configuration</a></h2>
 <p>You can configure how Hypothesis runs your tests:</p>
-<pre class="codehilite"><code class="language-py">from hypothesis import settings, given
-from hypothesis import strategies as st
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">hypothesis</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span><span class="p">,</span> <span class="n">given</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hypothesis</span><span class="w"> </span><span class="kn">import</span> <span class="n">strategies</span> <span class="k">as</span> <span class="n">st</span>
 
-@settings(max_examples=200, deadline=500)  # Run 200 examples, allow 500ms per test
-@given(st.lists(st.integers()))
-def test_blah(xs):
-    pass
-</code></pre>
+<span class="nd">@settings</span><span class="p">(</span><span class="n">max_examples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">deadline</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>  <span class="c1"># Run 200 examples, allow 500ms per test</span>
+<span class="nd">@given</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">lists</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">integers</span><span class="p">()))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_blah</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+    <span class="k">pass</span>
+</code></pre></div>
 
 <p>Common settings:</p>
 <ul>
@@ -253,22 +254,22 @@ def test_blah(xs):
 <li><code>seed</code>: Random seed for reproducible test runs</li>
 </ul>
 <p>For example, for reproducible test runs you can set the random seed like this:</p>
-<pre class="codehilite"><code class="language-py">@settings(seed=42)
-@given(st.lists(st.integers()))
-def test_deterministic(xs):
-    pass
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nd">@settings</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nd">@given</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">lists</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">integers</span><span class="p">()))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_deterministic</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+    <span class="k">pass</span>
+</code></pre></div>
 
 <h2 id="using-assume-for-conditional-tests"><a class="toclink" href="#using-assume-for-conditional-tests">Using <code>assume()</code> for Conditional Tests</a></h2>
 <p>Sometimes you want to skip certain inputs that aren't relevant to the property you're testing:</p>
-<pre class="codehilite"><code class="language-py">from hypothesis import assume
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">hypothesis</span><span class="w"> </span><span class="kn">import</span> <span class="n">assume</span>
 
-@given(st.integers(), st.integers())
-def test_division(a, b):
-    assume(b != 0)  # Skip test cases where b is 0
-    result = a / b
-    assert isinstance(result, (int, float))
-</code></pre>
+<span class="nd">@given</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">integers</span><span class="p">(),</span> <span class="n">st</span><span class="o">.</span><span class="n">integers</span><span class="p">())</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_division</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">assume</span><span class="p">(</span><span class="n">b</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Skip test cases where b is 0</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>
+</code></pre></div>
 
 <p><code>assume()</code> tells Hypothesis to skip this example and try another one.</p>
 <h1 id="summary"><a class="toclink" href="#summary">Summary</a></h1>

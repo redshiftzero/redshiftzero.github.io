@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -151,65 +152,65 @@
 <p>Very common annotations are <code>requires</code> (pre-condition) and <code>ensures</code> (post-conditions) in hax. </p>
 <h2 id="length-constraints"><a class="toclink" href="#length-constraints">Length Constraints</a></h2>
 <p>The simplest examples would be simple length constraints. In <code>encaps1</code> in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/incremental_mlkem768.rs#L46">incremental_mlkem768.rs</a> we see an example:</p>
-<pre class="codehilite"><code class="language-rust">/// Encapsulate with header to get initial ciphertext.
-#[hax_lib::requires(hdr.len() == 64)]
-#[hax_lib::ensures(|(ct1,es,ss)| ct1.len() == 960 &amp;&amp; es.len() == 2080 &amp;&amp; ss.len() == 32)]
-pub fn encaps1&lt;R: Rng + CryptoRng&gt;(
-    hdr: &amp;Header,
-    rng: &amp;mut R,
-) -&gt; (Ciphertext1, EncapsulationState, Secret) {
-    [...]
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="sd">/// Encapsulate with header to get initial ciphertext.</span>
+<span class="cp">#[hax_lib::requires(hdr.len() == 64)]</span>
+<span class="cp">#[hax_lib::ensures(|(ct1,es,ss)| ct1.len() == 960 &amp;&amp; es.len() == 2080 &amp;&amp; ss.len() == 32)]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">encaps1</span><span class="o">&lt;</span><span class="n">R</span><span class="p">:</span><span class="w"> </span><span class="nc">Rng</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">CryptoRng</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="n">hdr</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Header</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rng</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">R</span><span class="p">,</span>
+<span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">Ciphertext1</span><span class="p">,</span><span class="w"> </span><span class="n">EncapsulationState</span><span class="p">,</span><span class="w"> </span><span class="n">Secret</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">[</span><span class="o">..</span><span class="p">.]</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>In the first <code>requires</code> annotation, we see a pre-condition establishing that the length of the provided encapsulation key header is 64 bytes. This is a property that <em>callers</em> must guarantee when calling the function:</p>
-<pre class="codehilite"><code class="language-rust">#[hax_lib::requires(hdr.len() == 64)]
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">#[hax_lib::requires(hdr.len() == 64)]</span>
+</code></pre></div>
 
 <p>The post-condition <code>ensures</code> annotation, where we can see that we can combine constraints with <code>&amp;&amp;</code> to constrain the lengths of the first ciphertext, the encapsulation key, and the shared secret:</p>
-<pre class="codehilite"><code class="language-rust">#[hax_lib::ensures(|(ct1,es,ss)| ct1.len() == 960 &amp;&amp; es.len() == 2080 &amp;&amp; ss.len() == 32)]
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">#[hax_lib::ensures(|(ct1,es,ss)| ct1.len() == 960 &amp;&amp; es.len() == 2080 &amp;&amp; ss.len() == 32)]</span>
+</code></pre></div>
 
 <p>The <code>ensures</code> annotation is a property that the annotated <em>function</em> must guarantee. The verifier proves that this property always holds when the function returns successfully. If the property cannot be proven, the verification fails.</p>
 <h2 id="assume-macro"><a class="toclink" href="#assume-macro"><code>assume!</code> Macro</a></h2>
 <p>If we look further into the function body of <code>encaps1</code>, we see the use of the <code>assume!</code> macro:</p>
-<pre class="codehilite"><code class="language-rust">/// Encapsulate with header to get initial ciphertext.
-#[hax_lib::requires(hdr.len() == 64)]
-#[hax_lib::ensures(|(ct1,es,ss)| ct1.len() == 960 &amp;&amp; es.len() == 2080 &amp;&amp; ss.len() == 32)]
-pub fn encaps1&lt;R: Rng + CryptoRng&gt;(
-    hdr: &amp;Header,
-    rng: &amp;mut R,
-) -&gt; (Ciphertext1, EncapsulationState, Secret) {
-    let mut randomness = [0u8; libcrux_ml_kem::SHARED_SECRET_SIZE];
-    rng.fill_bytes(&amp;mut randomness);
-    let mut state = vec![0u8; incremental::encaps_state_len()];
-    let mut ss = vec![0u8; libcrux_ml_kem::SHARED_SECRET_SIZE];
-    let ct1 = incremental::encapsulate1(hdr.as_slice(), randomness, &amp;mut state, &amp;mut ss);
-    hax_lib::assume!(ct1.is_ok());
-    hax_lib::assume!(state.len() == 2080 &amp;&amp; ss.len() == 32);
-    (
-        ct1.expect(&quot;should only fail based on sizes, all sizes should be correct&quot;)
-            .value
-            .to_vec(),
-        state,
-        ss,
-    )
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="sd">/// Encapsulate with header to get initial ciphertext.</span>
+<span class="cp">#[hax_lib::requires(hdr.len() == 64)]</span>
+<span class="cp">#[hax_lib::ensures(|(ct1,es,ss)| ct1.len() == 960 &amp;&amp; es.len() == 2080 &amp;&amp; ss.len() == 32)]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">encaps1</span><span class="o">&lt;</span><span class="n">R</span><span class="p">:</span><span class="w"> </span><span class="nc">Rng</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">CryptoRng</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="n">hdr</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Header</span><span class="p">,</span>
+<span class="w">    </span><span class="n">rng</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">R</span><span class="p">,</span>
+<span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">Ciphertext1</span><span class="p">,</span><span class="w"> </span><span class="n">EncapsulationState</span><span class="p">,</span><span class="w"> </span><span class="n">Secret</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">randomness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="k">u8</span><span class="p">;</span><span class="w"> </span><span class="n">libcrux_ml_kem</span><span class="p">::</span><span class="n">SHARED_SECRET_SIZE</span><span class="p">];</span>
+<span class="w">    </span><span class="n">rng</span><span class="p">.</span><span class="n">fill_bytes</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">randomness</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mi">0</span><span class="k">u8</span><span class="p">;</span><span class="w"> </span><span class="n">incremental</span><span class="p">::</span><span class="n">encaps_state_len</span><span class="p">()];</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">ss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mi">0</span><span class="k">u8</span><span class="p">;</span><span class="w"> </span><span class="n">libcrux_ml_kem</span><span class="p">::</span><span class="n">SHARED_SECRET_SIZE</span><span class="p">];</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">ct1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">incremental</span><span class="p">::</span><span class="n">encapsulate1</span><span class="p">(</span><span class="n">hdr</span><span class="p">.</span><span class="n">as_slice</span><span class="p">(),</span><span class="w"> </span><span class="n">randomness</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">ss</span><span class="p">);</span>
+<span class="w">    </span><span class="n">hax_lib</span><span class="p">::</span><span class="n">assume</span><span class="o">!</span><span class="p">(</span><span class="n">ct1</span><span class="p">.</span><span class="n">is_ok</span><span class="p">());</span>
+<span class="w">    </span><span class="n">hax_lib</span><span class="p">::</span><span class="n">assume</span><span class="o">!</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2080</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ss</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">32</span><span class="p">);</span>
+<span class="w">    </span><span class="p">(</span>
+<span class="w">        </span><span class="n">ct1</span><span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;should only fail based on sizes, all sizes should be correct&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">value</span>
+<span class="w">            </span><span class="p">.</span><span class="n">to_vec</span><span class="p">(),</span>
+<span class="w">        </span><span class="n">state</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ss</span><span class="p">,</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>In this case, they use the <code>assume!</code> macro to tell the verifier facts that might be hard to prove directly. Specifically, in this case they assume the state length is 2080 bytes and the shared secret length is 32 bytes. This is useful when making assumptions about dependencies: here, the function calls into the <code>libcrux</code> family of crates (most of which are verified), so the assumptions are likely based on properties guaranteed by those verified dependencies.</p>
 <h2 id="method-contracts"><a class="toclink" href="#method-contracts">Method Contracts</a></h2>
 <p>A more interesting example of a pre-condition can be found in <code>ChainEpochDirection::next_key(&amp;mut self)</code> in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/chain.rs#L221">chain.rs</a>:</p>
-<pre class="codehilite"><code class="language-Rust">#[hax_lib::attributes]
-impl ChainEpochDirection {
-    // [...]
+<div class="highlight"><pre><span></span><code><span class="cp">#[hax_lib::attributes]</span>
+<span class="k">impl</span><span class="w"> </span><span class="n">ChainEpochDirection</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// [...]</span>
 
-    #[hax_lib::requires(self.next.len() &gt; 0 &amp;&amp; self.ctr &lt; u32::MAX)]
-    fn next_key(&amp;mut self) -&gt; (u32, Vec&lt;u8&gt;) {
-        let (idx, key) = Self::next_key_internal(&amp;mut self.next, &amp;mut self.ctr);
-        (idx, key.to_vec())
-    }
-</code></pre>
+<span class="w">    </span><span class="cp">#[hax_lib::requires(self.next.len() &gt; 0 &amp;&amp; self.ctr &lt; u32::MAX)]</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">next_key</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="kt">u32</span><span class="p">,</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">u8</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">idx</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">Self</span><span class="p">::</span><span class="n">next_key_internal</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">next</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">ctr</span><span class="p">);</span>
+<span class="w">        </span><span class="p">(</span><span class="n">idx</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">.</span><span class="n">to_vec</span><span class="p">())</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 
 <p>Here they check that whenever <code>ChainEpochDirection::next_key</code> is called:</p>
 <ol>
@@ -219,94 +220,94 @@ impl ChainEpochDirection {
 <p>This pattern of preventing overflows appears in multiple places throughout the codebase (<a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/chain.rs#L139">e.g. another example</a>). </p>
 <h1 id="refinements"><a class="toclink" href="#refinements">Refinements</a></h1>
 <p>The <code>refines</code> attribute is used to specify properties that must be true of struct fields. In this struct definition of <code>HeaderSent</code> in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/v1/unchunked/send_ek.rs#L44">chain.rs</a>:</p>
-<pre class="codehilite"><code class="language-Rust">#[cfg_attr(test, derive(Clone))]
-#[hax_lib::attributes]
-pub struct HeaderSent {
-    pub epoch: Epoch,
-    auth: authenticator::Authenticator,
-    #[hax_lib::refine(ek.len() == 1152)]
-    ek: incremental_mlkem768::EncapsulationKey,
-    #[hax_lib::refine(dk.len() == 2400)]
-    dk: incremental_mlkem768::DecapsulationKey,
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">#[cfg_attr(test, derive(Clone))]</span>
+<span class="cp">#[hax_lib::attributes]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">HeaderSent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">epoch</span><span class="p">:</span><span class="w"> </span><span class="nc">Epoch</span><span class="p">,</span>
+<span class="w">    </span><span class="n">auth</span><span class="p">:</span><span class="w"> </span><span class="nc">authenticator</span><span class="p">::</span><span class="n">Authenticator</span><span class="p">,</span>
+<span class="w">    </span><span class="cp">#[hax_lib::refine(ek.len() == 1152)]</span>
+<span class="w">    </span><span class="n">ek</span><span class="p">:</span><span class="w"> </span><span class="nc">incremental_mlkem768</span><span class="p">::</span><span class="n">EncapsulationKey</span><span class="p">,</span>
+<span class="w">    </span><span class="cp">#[hax_lib::refine(dk.len() == 2400)]</span>
+<span class="w">    </span><span class="n">dk</span><span class="p">:</span><span class="w"> </span><span class="nc">incremental_mlkem768</span><span class="p">::</span><span class="n">DecapsulationKey</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>They ensure that when this struct is used in the codebase, the decapsulation and encapsulation keys will be of the expected length.</p>
 <h1 id="loops"><a class="toclink" href="#loops">Loops</a></h1>
 <p>For and while loops get special annotations to prove properties about each loop iteration, and to prove that they terminate. </p>
 <p>The <code>loop_invariant!</code> annotation specifies what must be true at the start of each loop iteration. In this example in <code>PolyConst&lt;N&gt;::lagrange_interpolate_pt</code> in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/encoding/polynomial.rs#L361">polynomial.rs</a>:</p>
-<pre class="codehilite"><code class="language-Rust">    /// Create the Lagrange poly for `pts[i]` in `pts`, which computes
-    /// f(pts[i].x) == pts[i].y, and f(pts[*].x) == 0 for all other points.
-    #[hax_lib::requires(i &lt; N &amp;&amp; pts.len() &gt;= N &amp;&amp; N &gt; 0)]
-    const fn lagrange_interpolate_pt(pts: &amp;[Pt], i: usize) -&gt; Self {
-        let pi = &amp;pts[i];
-        let mut p = Self {
-            coefficients: [GF16::ZERO; N],
-        };
-        p.coefficients[0] = GF16::ONE;
-        let mut denominator = GF16::ONE;
-        {
-            // const for loop
-            let mut j: usize = 0;
-            while j &lt; N {
-                hax_lib::loop_invariant!(j &lt;= N);
-                hax_lib::loop_decreases!(N - j);
-                let pj = &amp;pts[j];
-                j += 1;
-                if pi.x.value == pj.x.value {
-                    continue;
-                }
-                // p.coefficients[N - 1].value == 0
-                p = p.mult_xdiff(pj.x);
-                denominator = denominator.const_mul(&amp;pi.x.const_sub(&amp;pj.x));
-            }
-        }
-        // mul_assign(pi.y / denominator)
-        p.mult(pi.y.const_div(&amp;denominator))
-    }
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="sd">/// Create the Lagrange poly for `pts[i]` in `pts`, which computes</span>
+<span class="w">    </span><span class="sd">/// f(pts[i].x) == pts[i].y, and f(pts[*].x) == 0 for all other points.</span>
+<span class="w">    </span><span class="cp">#[hax_lib::requires(i &lt; N &amp;&amp; pts.len() &gt;= N &amp;&amp; N &gt; 0)]</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">lagrange_interpolate_pt</span><span class="p">(</span><span class="n">pts</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="p">[</span><span class="n">Pt</span><span class="p">],</span><span class="w"> </span><span class="n">i</span><span class="p">:</span><span class="w"> </span><span class="kt">usize</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">Self</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pts</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">Self</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">coefficients</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">GF16</span><span class="p">::</span><span class="n">ZERO</span><span class="p">;</span><span class="w"> </span><span class="n">N</span><span class="p">],</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="n">p</span><span class="p">.</span><span class="n">coefficients</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GF16</span><span class="p">::</span><span class="n">ONE</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">denominator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GF16</span><span class="p">::</span><span class="n">ONE</span><span class="p">;</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// const for loop</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">j</span><span class="p">:</span><span class="w"> </span><span class="kt">usize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">hax_lib</span><span class="p">::</span><span class="n">loop_invariant</span><span class="o">!</span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
+<span class="w">                </span><span class="n">hax_lib</span><span class="p">::</span><span class="n">loop_decreases</span><span class="o">!</span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">j</span><span class="p">);</span>
+<span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="n">pj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pts</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+<span class="w">                </span><span class="n">j</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">pi</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pj</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="c1">// p.coefficients[N - 1].value == 0</span>
+<span class="w">                </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">mult_xdiff</span><span class="p">(</span><span class="n">pj</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
+<span class="w">                </span><span class="n">denominator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">denominator</span><span class="p">.</span><span class="n">const_mul</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="n">const_sub</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pj</span><span class="p">.</span><span class="n">x</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// mul_assign(pi.y / denominator)</span>
+<span class="w">        </span><span class="n">p</span><span class="p">.</span><span class="n">mult</span><span class="p">(</span><span class="n">pi</span><span class="p">.</span><span class="n">y</span><span class="p">.</span><span class="n">const_div</span><span class="p">(</span><span class="o">&amp;</span><span class="n">denominator</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 
 <p>The <code>loop_decreases!</code> annotation specifies a value that decreases with each loop iteration, which proves that the loop terminates. In the example above, the while loop runs while <code>j &lt; N</code>, and <code>loop_decreases!(N - j)</code> shows that <code>N - j</code> decreases each iteration (since <code>j</code> increases), ensuring the loop will eventually exit.</p>
 <h1 id="verification-control"><a class="toclink" href="#verification-control">Verification Control</a></h1>
 <h2 id="opaque"><a class="toclink" href="#opaque">Opaque</a></h2>
 <p>There are a few methods/functions annotated with <code>opaque</code> to denote that the verifier should just treat this function as an opaque black box, i.e. it won't extract the function body at all, but it will still respect pre/post conditions. For example, in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/chain.rs#L145"><code>KeyHistory::gc</code></a>:</p>
-<pre class="codehilite"><code class="language-rust">    #[hax_lib::opaque] // ordering of slices needed
-    fn gc(&amp;mut self, current_key: u32, params: &amp;pqrpb::ChainParams) {
-        [...]
-    }
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="cp">#[hax_lib::opaque]</span><span class="w"> </span><span class="c1">// ordering of slices needed</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">gc</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">current_key</span><span class="p">:</span><span class="w"> </span><span class="kt">u32</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">pqrpb</span><span class="p">::</span><span class="n">ChainParams</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">[</span><span class="o">..</span><span class="p">.]</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 
 <p>From the comment it's clear why this is done: the function uses a language feature that hax doesn't support, so the verifier treats it as an opaque black box.</p>
 <h2 id="verification-status"><a class="toclink" href="#verification-status">Verification Status</a></h2>
 <p>If opaque is overkill, you can set the verification status to "lax" like in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/encoding/gf.rs#L199"><code>KeyHistory::gc</code></a></p>
-<pre class="codehilite"><code class="language-Rust">#[inline]
-#[hax_lib::fstar::verification_status(lax)] // proving absence of overflow in loop condition is tricky
-pub fn parallel_mult(a: GF16, into: &amp;mut [GF16]) {
-    let mut i = 0;
-    while i + 2 &lt;= into.len() {
-        hax_lib::loop_decreases!(into.len() - i);
-        (into[i].value, into[i + 1].value) = mul2_u16(a.value, into[i].value, into[i + 1].value);
-        i += 2;
-    }
-    if i &lt; into.len() {
-        into[i] *= a;
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">#[inline]</span>
+<span class="cp">#[hax_lib::fstar::verification_status(lax)]</span><span class="w"> </span><span class="c1">// proving absence of overflow in loop condition is tricky</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">parallel_mult</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nc">GF16</span><span class="p">,</span><span class="w"> </span><span class="n">into</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="p">[</span><span class="n">GF16</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">into</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">hax_lib</span><span class="p">::</span><span class="n">loop_decreases</span><span class="o">!</span><span class="p">(</span><span class="n">into</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">(</span><span class="n">into</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">into</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">].</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mul2_u16</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">into</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">into</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">].</span><span class="n">value</span><span class="p">);</span>
+<span class="w">        </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">into</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">into</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>The <code>verification_status(lax)</code> annotation provides a nice incremental way to start using hax on an existing codebase, allowing you to mark functions for later verification while still getting some guarantees.</p>
 <h1 id="fstar"><a class="toclink" href="#fstar">FStar</a></h1>
 <p>You can also inject FStar statements directly or customize the options through which the proofs are generated, with <code>hax_lib::fstar!</code> or <code>#[hax_lib::fstar::options(...)]</code> respectively.</p>
 <p>For example they use <code>fstar::options</code> to set the F* "fuel" parameter manually in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/encoding/gf.rs#L372"><code>KeyHistory::gc</code></a>: </p>
-<pre class="codehilite"><code class="language-Rust">    #[hax_lib::fstar::options(&quot;--fuel 2&quot;)]
-    #[hax_lib::ensures(|result| fstar!(r#&quot;
-        let open Spec.GF16 in
-        to_bv result == 
-        poly_mul (to_bv a) (to_bv b)&quot;#))]
-    const fn poly_mul(a: u16, b: u16) -&gt; u32 {
-        // [...]
-    }
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="cp">#[hax_lib::fstar::options(</span><span class="s">&quot;--fuel 2&quot;</span><span class="cp">)]</span>
+<span class="w">    </span><span class="cp">#[hax_lib::ensures(|result| fstar!(r#</span><span class="s">&quot;</span>
+<span class="s">        let open Spec.GF16 in</span>
+<span class="s">        to_bv result == </span>
+<span class="s">        poly_mul (to_bv a) (to_bv b)&quot;</span><span class="cp">#))]</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">poly_mul</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="kt">u16</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="kt">u16</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">u32</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// [...]</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 
 <p>Looking at the <a href="https://fstar-lang.org/tutorial/book/under_the_hood/uth_smt.html#recursive-functions-and-fuel">F* docs</a>, the fuel parameter relates to proof extraction for recursive functions, controlling how many recursive steps the verifier will unroll. </p>
 <h1 id="summary"><a class="toclink" href="#summary">Summary</a></h1>

@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -135,44 +136,44 @@
 <p><em>Note: I wrote this blog for the Penumbra Labs site. Below is an abbreviated version. You can see the original post <a href="https://penumbra.zone/blog/zkproofs-intro/">here</a>.</em></p>
 <h3 id="transparent-proofs"><a class="toclink" href="#transparent-proofs">Transparent "Proofs"</a></h3>
 <p><a href="https://penumbra.zone/blog/how-were-building-penumbra/">Our plan</a> for implementing Penumbra has been to use an approach which allows quick iterations on the design of the system without spending significant effort each iteration to update zero-knowledge circuits. To ensure that the design of the system was kept compatible with zero-knowledge proofs, each action had a “transparent proof”, for example for spending notes:</p>
-<pre class="codehilite"><code class="language-Rust">/// Transparent proof for spending existing notes.
-///
-/// This structure keeps track of the auxiliary (private) inputs.
-#[derive(Clone, Debug)]
-pub struct SpendProof {
-   // Inclusion proof for the note commitment.
-   pub state_commitment_proof: tct::Proof,
-   // The note being spent.
-   pub note: Note,
-   // The blinding factor used for generating the value commitment.
-   pub v_blinding: Fr,
-   // The randomizer used for generating the randomized spend auth key.
-   pub spend_auth_randomizer: Fr,
-   // The spend authorization key.
-   pub ak: VerificationKey&lt;SpendAuth&gt;,
-   // The nullifier deriving key.
-   pub nk: keys::NullifierKey,
-}
+<div class="highlight"><pre><span></span><code><span class="sd">/// Transparent proof for spending existing notes.</span>
+<span class="sd">///</span>
+<span class="sd">/// This structure keeps track of the auxiliary (private) inputs.</span>
+<span class="cp">#[derive(Clone, Debug)]</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">SpendProof</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="c1">// Inclusion proof for the note commitment.</span>
+<span class="w">   </span><span class="k">pub</span><span class="w"> </span><span class="n">state_commitment_proof</span><span class="p">:</span><span class="w"> </span><span class="nc">tct</span><span class="p">::</span><span class="n">Proof</span><span class="p">,</span>
+<span class="w">   </span><span class="c1">// The note being spent.</span>
+<span class="w">   </span><span class="k">pub</span><span class="w"> </span><span class="n">note</span><span class="p">:</span><span class="w"> </span><span class="nc">Note</span><span class="p">,</span>
+<span class="w">   </span><span class="c1">// The blinding factor used for generating the value commitment.</span>
+<span class="w">   </span><span class="k">pub</span><span class="w"> </span><span class="n">v_blinding</span><span class="p">:</span><span class="w"> </span><span class="nc">Fr</span><span class="p">,</span>
+<span class="w">   </span><span class="c1">// The randomizer used for generating the randomized spend auth key.</span>
+<span class="w">   </span><span class="k">pub</span><span class="w"> </span><span class="n">spend_auth_randomizer</span><span class="p">:</span><span class="w"> </span><span class="nc">Fr</span><span class="p">,</span>
+<span class="w">   </span><span class="c1">// The spend authorization key.</span>
+<span class="w">   </span><span class="k">pub</span><span class="w"> </span><span class="n">ak</span><span class="p">:</span><span class="w"> </span><span class="nc">VerificationKey</span><span class="o">&lt;</span><span class="n">SpendAuth</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">   </span><span class="c1">// The nullifier deriving key.</span>
+<span class="w">   </span><span class="k">pub</span><span class="w"> </span><span class="n">nk</span><span class="p">:</span><span class="w"> </span><span class="nc">keys</span><span class="p">::</span><span class="n">NullifierKey</span><span class="p">,</span>
+<span class="p">}</span>
 
 
-impl SpendProof {
-   /// Called to verify the proof using the provided public inputs.
-   ///
-   /// The public inputs are:
-   /// * the merkle root of the state commitment tree,
-   /// * value commitment of the note to be spent,
-   /// * nullifier of the note to be spent,
-   /// * the randomized verification spend key,
-   pub fn verify(
-       &amp;self,
-       anchor: tct::Root,
-       balance_commitment: balance::Commitment,
-       nullifier: Nullifier,
-       rk: VerificationKey&lt;SpendAuth&gt;,
-   ) -&gt; anyhow::Result&lt;()&gt; {
-      // ...
-}
-</code></pre>
+<span class="k">impl</span><span class="w"> </span><span class="n">SpendProof</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="sd">/// Called to verify the proof using the provided public inputs.</span>
+<span class="w">   </span><span class="sd">///</span>
+<span class="w">   </span><span class="sd">/// The public inputs are:</span>
+<span class="w">   </span><span class="sd">/// * the merkle root of the state commitment tree,</span>
+<span class="w">   </span><span class="sd">/// * value commitment of the note to be spent,</span>
+<span class="w">   </span><span class="sd">/// * nullifier of the note to be spent,</span>
+<span class="w">   </span><span class="sd">/// * the randomized verification spend key,</span>
+<span class="w">   </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span>
+<span class="w">       </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span>
+<span class="w">       </span><span class="n">anchor</span><span class="p">:</span><span class="w"> </span><span class="nc">tct</span><span class="p">::</span><span class="n">Root</span><span class="p">,</span>
+<span class="w">       </span><span class="n">balance_commitment</span><span class="p">:</span><span class="w"> </span><span class="nc">balance</span><span class="p">::</span><span class="n">Commitment</span><span class="p">,</span>
+<span class="w">       </span><span class="n">nullifier</span><span class="p">:</span><span class="w"> </span><span class="nc">Nullifier</span><span class="p">,</span>
+<span class="w">       </span><span class="n">rk</span><span class="p">:</span><span class="w"> </span><span class="nc">VerificationKey</span><span class="o">&lt;</span><span class="n">SpendAuth</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">   </span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">anyhow</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>This <code>SpendProof</code> struct trivially stored the witnesses in cleartext. The prover created this struct, and sent it to the node, where a verification method was called using the public inputs provided in the transaction. The verification method did all the integrity checks the real proof would: verifying the Merkle path, checking the prover had an opening of the public commitment, and so on. This did <em>not</em> provide privacy, but it let us rapidly prototype the system while refining the protocol design, with assurance that when our requirements became stable, we could fill in the proofs.</p>
 <h3 id="zero-knowledge"><a class="toclink" href="#zero-knowledge">Zero-Knowledge</a></h3>
@@ -180,73 +181,73 @@ impl SpendProof {
 <p>One of Penumbra’s design goals is to create a usable privacy system. That means fast proving times: at mainnet we’re aiming for proving times below one second on end-user devices. We can do this by performing the proving for all actions concurrently and by using Groth16. For Penumbra’s initial ZKPs, we use the pairing-friendly BLS12-377 proving curve and the <a href="https://github.com/arkworks-rs/groth16">Arkworks implementation of the Groth16 proving system</a>. It has excellent out-of-the-box performance even before optimization: on an M1 macbook, transactions with three actions (one spend, two outputs) typically take under 1.3s to generate. We also get the benefits of very small proof size and using a mature system that has been in production for years.</p>
 <p>A disadvantage of Groth16 is that it requires a circuit-specific setup, meaning each time we change our proof statements, we need to re-run a decentralized setup procedure to generate new parameters for the prover and verifier. The requirement for this process is there is at least one honest participant in the setup, thus motivating a large setup process involving many participants. Stay tuned for more details on the setup procedure and how you can participate!</p>
 <p>Our Spend proof from above now looks like this:</p>
-<pre class="codehilite"><code class="language-Rust">pub struct SpendProof(Proof&lt;Bls12_377&gt;);
+<div class="highlight"><pre><span></span><code><span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">SpendProof</span><span class="p">(</span><span class="n">Proof</span><span class="o">&lt;</span><span class="n">Bls12_377</span><span class="o">&gt;</span><span class="p">);</span>
 
 
-impl SpendProof {
-   pub fn prove&lt;R: CryptoRng + Rng&gt;(
-       rng: &amp;mut R,
-       pk: &amp;ProvingKey&lt;Bls12_377&gt;,
-       state_commitment_proof: tct::Proof,
-       note: Note,
-       v_blinding: Fr,
-       spend_auth_randomizer: Fr,
-       ak: VerificationKey&lt;SpendAuth&gt;,
-       nk: NullifierKey,
-       anchor: tct::Root,
-       balance_commitment: balance::Commitment,
-       nullifier: Nullifier,
-       rk: VerificationKey&lt;SpendAuth&gt;,
-   ) -&gt; anyhow::Result&lt;Self&gt; {
-       let circuit = SpendCircuit {
-           state_commitment_proof,
-           note,
-           v_blinding,
-           spend_auth_randomizer,
-           ak,
-           nk,
-           anchor,
-           balance_commitment,
-           nullifier,
-           rk,
-       };
-       let proof = Groth16::prove(pk, circuit, rng).map_err(|err| anyhow::anyhow!(err))?;
-       Ok(Self(proof))
-   }
+<span class="k">impl</span><span class="w"> </span><span class="n">SpendProof</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">prove</span><span class="o">&lt;</span><span class="n">R</span><span class="p">:</span><span class="w"> </span><span class="nc">CryptoRng</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Rng</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">       </span><span class="n">rng</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">R</span><span class="p">,</span>
+<span class="w">       </span><span class="n">pk</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">ProvingKey</span><span class="o">&lt;</span><span class="n">Bls12_377</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">state_commitment_proof</span><span class="p">:</span><span class="w"> </span><span class="nc">tct</span><span class="p">::</span><span class="n">Proof</span><span class="p">,</span>
+<span class="w">       </span><span class="n">note</span><span class="p">:</span><span class="w"> </span><span class="nc">Note</span><span class="p">,</span>
+<span class="w">       </span><span class="n">v_blinding</span><span class="p">:</span><span class="w"> </span><span class="nc">Fr</span><span class="p">,</span>
+<span class="w">       </span><span class="n">spend_auth_randomizer</span><span class="p">:</span><span class="w"> </span><span class="nc">Fr</span><span class="p">,</span>
+<span class="w">       </span><span class="n">ak</span><span class="p">:</span><span class="w"> </span><span class="nc">VerificationKey</span><span class="o">&lt;</span><span class="n">SpendAuth</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">nk</span><span class="p">:</span><span class="w"> </span><span class="nc">NullifierKey</span><span class="p">,</span>
+<span class="w">       </span><span class="n">anchor</span><span class="p">:</span><span class="w"> </span><span class="nc">tct</span><span class="p">::</span><span class="n">Root</span><span class="p">,</span>
+<span class="w">       </span><span class="n">balance_commitment</span><span class="p">:</span><span class="w"> </span><span class="nc">balance</span><span class="p">::</span><span class="n">Commitment</span><span class="p">,</span>
+<span class="w">       </span><span class="n">nullifier</span><span class="p">:</span><span class="w"> </span><span class="nc">Nullifier</span><span class="p">,</span>
+<span class="w">       </span><span class="n">rk</span><span class="p">:</span><span class="w"> </span><span class="nc">VerificationKey</span><span class="o">&lt;</span><span class="n">SpendAuth</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">   </span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">anyhow</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="bp">Self</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="kd">let</span><span class="w"> </span><span class="n">circuit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SpendCircuit</span><span class="w"> </span><span class="p">{</span>
+<span class="w">           </span><span class="n">state_commitment_proof</span><span class="p">,</span>
+<span class="w">           </span><span class="n">note</span><span class="p">,</span>
+<span class="w">           </span><span class="n">v_blinding</span><span class="p">,</span>
+<span class="w">           </span><span class="n">spend_auth_randomizer</span><span class="p">,</span>
+<span class="w">           </span><span class="n">ak</span><span class="p">,</span>
+<span class="w">           </span><span class="n">nk</span><span class="p">,</span>
+<span class="w">           </span><span class="n">anchor</span><span class="p">,</span>
+<span class="w">           </span><span class="n">balance_commitment</span><span class="p">,</span>
+<span class="w">           </span><span class="n">nullifier</span><span class="p">,</span>
+<span class="w">           </span><span class="n">rk</span><span class="p">,</span>
+<span class="w">       </span><span class="p">};</span>
+<span class="w">       </span><span class="kd">let</span><span class="w"> </span><span class="n">proof</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Groth16</span><span class="p">::</span><span class="n">prove</span><span class="p">(</span><span class="n">pk</span><span class="p">,</span><span class="w"> </span><span class="n">circuit</span><span class="p">,</span><span class="w"> </span><span class="n">rng</span><span class="p">).</span><span class="n">map_err</span><span class="p">(</span><span class="o">|</span><span class="n">err</span><span class="o">|</span><span class="w"> </span><span class="n">anyhow</span><span class="p">::</span><span class="n">anyhow</span><span class="o">!</span><span class="p">(</span><span class="n">err</span><span class="p">))</span><span class="o">?</span><span class="p">;</span>
+<span class="w">       </span><span class="nb">Ok</span><span class="p">(</span><span class="bp">Self</span><span class="p">(</span><span class="n">proof</span><span class="p">))</span>
+<span class="w">   </span><span class="p">}</span>
 
 
-   /// Called to verify the proof using the provided public inputs.
-   pub fn verify(
-       &amp;self,
-       vk: &amp;PreparedVerifyingKey&lt;Bls12_377&gt;,
-       anchor: tct::Root,
-       balance_commitment: balance::Commitment,
-       nullifier: Nullifier,
-       rk: VerificationKey&lt;SpendAuth&gt;,
-   ) -&gt; anyhow::Result&lt;()&gt; {
-      // ...
-   }
-}
-</code></pre>
+<span class="w">   </span><span class="sd">/// Called to verify the proof using the provided public inputs.</span>
+<span class="w">   </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span>
+<span class="w">       </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span>
+<span class="w">       </span><span class="n">vk</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">PreparedVerifyingKey</span><span class="o">&lt;</span><span class="n">Bls12_377</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">anchor</span><span class="p">:</span><span class="w"> </span><span class="nc">tct</span><span class="p">::</span><span class="n">Root</span><span class="p">,</span>
+<span class="w">       </span><span class="n">balance_commitment</span><span class="p">:</span><span class="w"> </span><span class="nc">balance</span><span class="p">::</span><span class="n">Commitment</span><span class="p">,</span>
+<span class="w">       </span><span class="n">nullifier</span><span class="p">:</span><span class="w"> </span><span class="nc">Nullifier</span><span class="p">,</span>
+<span class="w">       </span><span class="n">rk</span><span class="p">:</span><span class="w"> </span><span class="nc">VerificationKey</span><span class="o">&lt;</span><span class="n">SpendAuth</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">   </span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">anyhow</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// ...</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>Our ZK proofs are now just three group elements in size. The prover uses provided proving parameters (type <code>ProvingKey&lt;Bls12_377&gt;</code>), which we distribute via a <code>penumbra-proof-params</code> crate, to create the proof using their private witnesses and public inputs. The verifier uses the corresponding verifying key (type <code>PreparedVerifyingKey&lt;Bls12_377&gt;</code>) in order to verify the proofs on the node using the public inputs provided in the transaction. </p>
 <h3 id="circuit-programming"><a class="toclink" href="#circuit-programming">Circuit Programming</a></h3>
 <p>To generate the circuit for each action, we first need to represent the statements we want to prove - for example that the prover knows an opening of a specific public commitment - in a way that our proving system can understand. For Groth16 proofs, this means representing all statements to be proved in-circuit as a rank-1 constraint system (R1CS). We need to be able to write down elliptic curve operations, hash function evaluations and so on, as a number of constraint equations that are simple linear combinations of field element variables.</p>
 <p>Several of our dependencies now have this R1CS functionality: <a href="https://github.com/penumbra-zone/decaf377"><code>decaf377</code></a>, <a href="https://github.com/penumbra-zone/poseidon377"><code>poseidon377</code></a>, and <a href="https://github.com/penumbra-zone/penumbra/tree/main/tct/src"><code>penumbra-tct</code></a> all have an optional <code>r1cs</code> feature, while <code>penumbra-crypto</code> has R1CS functionality inline next to each type that needs to be represented in-circuit. This lets us do elliptic curve operations, SNARK-friendly hashing, and all other operations in-circuit. For example, here is the type that represents in-circuit which path a node in our <a href="https://penumbra.zone/blog/tiered-commitment-tree">tiered commitment tree</a> can take:</p>
-<pre class="codehilite"><code class="language-Rust">/// Represents the different paths a quadtree node can take.
-///
-/// A bundle of boolean R1CS constraints representing the path.
-pub struct WhichWayVar {
-    /// The node is the leftmost (0th) child.
-    pub is_leftmost: Boolean&lt;Fq&gt;,
-    /// The node is the left (1st) child.
-    pub is_left: Boolean&lt;Fq&gt;,
-    /// The node is the right (2nd) child.
-    pub is_right: Boolean&lt;Fq&gt;,
-    /// The node is the rightmost (3rd) child.
-    pub is_rightmost: Boolean&lt;Fq&gt;,
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="sd">/// Represents the different paths a quadtree node can take.</span>
+<span class="sd">///</span>
+<span class="sd">/// A bundle of boolean R1CS constraints representing the path.</span>
+<span class="k">pub</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">WhichWayVar</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="sd">/// The node is the leftmost (0th) child.</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">is_leftmost</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="o">&lt;</span><span class="n">Fq</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">    </span><span class="sd">/// The node is the left (1st) child.</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">is_left</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="o">&lt;</span><span class="n">Fq</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">    </span><span class="sd">/// The node is the right (2nd) child.</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">is_right</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="o">&lt;</span><span class="n">Fq</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">    </span><span class="sd">/// The node is the rightmost (3rd) child.</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">is_rightmost</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="o">&lt;</span><span class="n">Fq</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>We can see in-circuit the path of the node at a given height is represented by four boolean constraints. The <code>Fq</code> type here just represents the type of the field elements used by the proving system.</p>
 <p>These R1CS types are used during constraint synthesis. We write Rust code to define types that define bundles of constraints. We then use those types along with the Arkworks <code>ConstraintSystem&lt;Fq&gt;</code>, which internally keeps track of all the R1CS constraints we build up by:
@@ -254,29 +255,29 @@ pub struct WhichWayVar {
 * defining constants, or 
 * performing an operation on defined variables or constants.  </p>
 <p>An upstream Arkworks trait called <code>ConstraintSynthesizer</code> is implemented for each of our circuit/actions. Here’s part of the implementation for our Spend circuit:</p>
-<pre class="codehilite"><code class="language-Rust">impl ConstraintSynthesizer&lt;Fq&gt; for SpendCircuit {
-  fn generate_constraints(self, cs: ConstraintSystemRef&lt;Fq&gt;) -&gt; ark_relations::r1cs::Result&lt;()&gt; {
-    // Witnesses
-    let note_var = note::NoteVar::new_witness(cs.clone(), || Ok(self.note.clone()))?;
-    …
-    let v_blinding_vars = UInt8::new_witness_vec(cs.clone(), self.v_blinding.to_bytes())?;
+<div class="highlight"><pre><span></span><code><span class="k">impl</span><span class="w"> </span><span class="n">ConstraintSynthesizer</span><span class="o">&lt;</span><span class="n">Fq</span><span class="o">&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">SpendCircuit</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">fn</span><span class="w"> </span><span class="nf">generate_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">cs</span><span class="p">:</span><span class="w"> </span><span class="nc">ConstraintSystemRef</span><span class="o">&lt;</span><span class="n">Fq</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">ark_relations</span><span class="p">::</span><span class="n">r1cs</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Witnesses</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">note_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">note</span><span class="p">::</span><span class="n">NoteVar</span><span class="p">::</span><span class="n">new_witness</span><span class="p">(</span><span class="n">cs</span><span class="p">.</span><span class="n">clone</span><span class="p">(),</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">note</span><span class="p">.</span><span class="n">clone</span><span class="p">()))</span><span class="o">?</span><span class="p">;</span>
+<span class="w">    </span><span class="err">…</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">v_blinding_vars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UInt8</span><span class="p">::</span><span class="n">new_witness_vec</span><span class="p">(</span><span class="n">cs</span><span class="p">.</span><span class="n">clone</span><span class="p">(),</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">v_blinding</span><span class="p">.</span><span class="n">to_bytes</span><span class="p">())</span><span class="o">?</span><span class="p">;</span>
 
-    // Public inputs
-    let claimed_balance_commitment_var =
-    BalanceCommitmentVar::new_input(cs.clone(), || Ok(self.balance_commitment))?;
-      …
+<span class="w">    </span><span class="c1">// Public inputs</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">claimed_balance_commitment_var</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">BalanceCommitmentVar</span><span class="p">::</span><span class="n">new_input</span><span class="p">(</span><span class="n">cs</span><span class="p">.</span><span class="n">clone</span><span class="p">(),</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">balance_commitment</span><span class="p">))</span><span class="o">?</span><span class="p">;</span>
+<span class="w">      </span><span class="err">…</span>
 
-    // Check integrity of balance commitment.
-    let balance_commitment = note_var.value().commit(v_blinding_vars)?;
-    balance_commitment
-    .enforce_equal(&amp;claimed_balance_commitment_var)?;
+<span class="w">    </span><span class="c1">// Check integrity of balance commitment.</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">balance_commitment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">note_var</span><span class="p">.</span><span class="n">value</span><span class="p">().</span><span class="n">commit</span><span class="p">(</span><span class="n">v_blinding_vars</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+<span class="w">    </span><span class="n">balance_commitment</span>
+<span class="w">    </span><span class="p">.</span><span class="n">enforce_equal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">claimed_balance_commitment_var</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
 
-    // ...
+<span class="w">    </span><span class="c1">// ...</span>
 
-    Ok(())
-  }
-}
-</code></pre>
+<span class="w">    </span><span class="nb">Ok</span><span class="p">(())</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>In our abridged and slightly simplified constraint synthesis example here, we can see that we first witness a <code>NoteVar</code>, providing a reference to the underlying constraint system. This allocates a variable in-circuit, adding constraints as we go. </p>
 <p>Next, we define a public balance commitment, which represents a commitment to the value balance of this action. The public balance commitment we call <code>claimed_balance_commitment_var</code> as it represents the public value of the balance commitment: the verifier needs to certify that the balance commitment was computed correctly, using private variables it does not have access to on the <code>NoteVar</code>. The prover adds constraints to demonstrate that by calling <code>commit</code> on the value of the <code>NoteVar</code>, and adding constraints that the output of the <code>commit</code> method must be equal to the corresponding public input. </p>

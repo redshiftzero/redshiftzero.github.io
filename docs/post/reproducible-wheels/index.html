@@ -13,6 +13,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/modern.css" />
+    <link rel="stylesheet" href="/css/pygments.css" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -138,8 +139,8 @@
 <h2 id="how-it-works"><a class="toclink" href="#how-it-works">How it works</a></h2>
 <p>I first selected the 100 most popular packages on PyPI in the past year plus any dependencies that are on FPF's <a href="https://pypi.securedrop.org/simple/">pip mirror</a><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
 <p>Then, I have a little <a href="https://github.com/redshiftzero/reproduciblewheels/blob/main/check.py#L112-L161">function</a> that builds the wheel twice and then compares the SHA256 hash to determine if they are the same. The build command is:</p>
-<pre class="codehilite"><code class="language-bash">python3 -m pip wheel &lt;project_name&gt; --no-binary :all: --no-cache-dir
-</code></pre>
+<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>wheel<span class="w"> </span>&lt;project_name&gt;<span class="w"> </span>--no-binary<span class="w"> </span>:all:<span class="w"> </span>--no-cache-dir
+</code></pre></div>
 
 <p>Here <code>--no-binary :all:</code> is used to ensure that I download the source tarball and <code>--no-cache-dir</code> is used so that I don't inadvertently use a cached built artifact.</p>
 <p>A <a href="https://github.com/redshiftzero-bot">friendly bot</a> is running the above build function nightly for every monitored project, saving the results as <a href="https://github.com/redshiftzero/reproduciblewheels/blob/main/site_data.json">JSON</a>, and then <a href="https://github.com/redshiftzero/reproduciblewheels/blob/main/check.py#L87-L109">updating the static HTML</a>, which is deployed when it's committed to the <code>main</code> branch via GitHub pages. That's it!</p>
