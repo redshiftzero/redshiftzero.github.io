@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>Investigating Hax Annotations in the Signal SparsePostQuantumRatchet Crate | redshiftzero</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/modern.css" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" />
+    </noscript>
+
+    <!-- Meta tags -->
+    <meta name="author" content="" />
+    <meta name="description" content="Investigating Hax Annotations in the Signal SparsePostQuantumRatchet Crate" />
+
+    <!-- Icons and manifest -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="redshiftzero" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="redshiftzero" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="/icons/mstile-150x150.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- RSS feeds -->
+    <link rel="alternate" type="application/atom+xml" href="https://www.redshiftzero.com/atom.xml"
+        title="redshiftzero" />
+    <link rel="alternate" type="application/rss+xml" href="https://www.redshiftzero.com/rss.xml" title="redshiftzero" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.redshiftzero.com/post/spqr_hax/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Investigating Hax Annotations in the Signal SparsePostQuantumRatchet Crate | redshiftzero" />
+    <meta property="og:description" content="Investigating Hax Annotations in the Signal SparsePostQuantumRatchet Crate" />
+    <meta property="og:url" content="https://www.redshiftzero.com/post/spqr_hax/" />
+    <meta property="og:site_name" content="redshiftzero" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:image" content="https://www.redshiftzero.com/icons/apple-touch-icon.png" />
+    <meta property="og:type" content="article" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@redshiftzero" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "datePublished": "2025-12-08T00:00:00",
+        "dateModified": "2025-12-08T00:00:00",
+        "url": "https://www.redshiftzero.com/post/spqr_hax/",
+        "description": "Investigating Hax Annotations in the Signal SparsePostQuantumRatchet Crate",
+        "image": "https://www.redshiftzero.com/icons/apple-touch-icon.png",
+        "author": {
+            "@type": "Person",
+            "url": "https://www.redshiftzero.com/"
+        },
+        "license": "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)",
+        "name": "Investigating Hax Annotations in the Signal SparsePostQuantumRatchet Crate | redshiftzero"
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-wrapper">
+                <div class="header-inner single">
+                    <div class="site-brand">
+                        <a href="/" class="brand">redshiftzero</a>
+                    </div>
+
+                    <nav class="nav">
+                        <ul class="menu" id="menu">
+
+                            <li class="menu-item"><a href="/archive/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" class="icon archive">
+                                        <path
+                                            d="M32 32C14.3 32 0 46.3 0 64s14.3 32 32 32h32v32H32C14.3 128 0 142.3 0 160s14.3 32 32 32h32v32H32C14.3 224 0 238.3 0 256s14.3 32 32 32h32v32H32C14.3 320 0 334.3 0 352s14.3 32 32 32h32v32H32C14.3 416 0 430.3 0 448s14.3 32 32 32h448c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32v-32h32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-32V96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM96 96h320v320H96V96z" />
+                                    </svg><span class="menu-item-name">Archive</span></a></li>
+                            <li class="menu-item"><a href="/about/"><svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 496 512" class="icon user-circle">
+                                        <path
+                                            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z" />
+                                    </svg><span class="menu-item-name">About</span></a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+            <label for="nav-toggle" class="nav-toggle"></label>
+            <label for="nav-toggle" class="nav-curtain"></label>
+        </header>
+
+        <!-- Main content -->
+        <main class="main single" id="main">
+            <div class="main-inner">
+                
+                <article class="content post h-entry">
+                    <h1 class="post-title p-name">Investigating Hax Annotations in the Signal SparsePostQuantumRatchet Crate</h1>
+
+                    <div class="post-meta">
+                        <time datetime="2025-12-08T00:00:00" class="post-meta-item published dt-published">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon">
+                                <path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/>
+                            </svg> 2025.12.08
+                        </time>
+                    </div>
+
+                    <div class="post-body e-content">
+                        <p>In the Signal <code>SparsePostQuantumRatchet</code> (SPQR) <a href="https://signal.org/blog/spqr/">announcement blog post</a>, they mention that they did formal verification from the beginning of their implementation effort, first by modeling protocol candidates in ProVerif, and then by using hax annotations to extract F* models and prove them in CI:</p>
+<blockquote>
+<p>Once the F<em> models are extracted, we prove that core parts of our highly optimized implementation are correct, that function pre-conditions and post-conditions cannot be violated, and that the entire crate is panic free. That last one is a big deal. It is great for usability, of course, because nobody wants their app to crash. But it also matters for correctness. We aggressively add assertions about things we believe must be true when the protocol is running correctly - and we crash the app if they are false. With hax and F</em>, we prove that those assertions will never fail.</p>
+</blockquote>
+<p>Pretty cool. What does this continuous formal verification look like in practice? Let's look at the SPQR source code to find out. </p>
+<p><em>Note: I did this looking at commit hash <a href="https://github.com/signalapp/SparsePostQuantumRatchet/commit/46e387458d438b81a3485e26bf6bb44595e52073"><code>46e387458d438b81a3485e26bf6bb44595e52073</code></a>.</em></p>
+<h1 id="hax"><a class="toclink" href="#hax">Hax</a></h1>
+<p><a href="https://hax.cryspen.com">Hax</a> is an interesting tool for extracting formal models from Rust code. You write Rust code as normal, and link the implementation directly with a formal verification tool. It's a cargo subcommand, with several supported backends. </p>
+<p>Signal uses the F* backend for SPQR in their CI. Their <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/.github/workflows/hax.yml">CI target</a> for the hax part of their verification pipeline:</p>
+<ol>
+<li>Deletes the committed F* models</li>
+<li>Re-extracts F* models based on the hax annotations in the Rust code</li>
+<li>Checks that all the proofs verify</li>
+</ol>
+<p>This ensures that the extracted models stay in sync with the code. If all verifies, then you know that the annotated properties are satisfied, and you know that the checked code never panics.</p>
+<p>Next, what are the hax annotations? We'll see a <code>#[hax_lib::attributes]</code> thrown on every impl block/struct that uses hax annotations, but other than that there are a variety of annotations - let's first take a look at proving pre- and post-conditions.</p>
+<h1 id="pre-and-post-conditions"><a class="toclink" href="#pre-and-post-conditions">Pre- and Post-Conditions</a></h1>
+<p>Very common annotations are <code>requires</code> (pre-condition) and <code>ensures</code> (post-conditions) in hax. </p>
+<h2 id="length-constraints"><a class="toclink" href="#length-constraints">Length Constraints</a></h2>
+<p>The simplest examples would be simple length constraints. In <code>encaps1</code> in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/incremental_mlkem768.rs#L46">incremental_mlkem768.rs</a> we see an example:</p>
+<pre class="codehilite"><code class="language-rust">/// Encapsulate with header to get initial ciphertext.
+#[hax_lib::requires(hdr.len() == 64)]
+#[hax_lib::ensures(|(ct1,es,ss)| ct1.len() == 960 &amp;&amp; es.len() == 2080 &amp;&amp; ss.len() == 32)]
+pub fn encaps1&lt;R: Rng + CryptoRng&gt;(
+    hdr: &amp;Header,
+    rng: &amp;mut R,
+) -&gt; (Ciphertext1, EncapsulationState, Secret) {
+    [...]
+}
+</code></pre>
+
+<p>In the first <code>requires</code> annotation, we see a pre-condition establishing that the length of the provided encapsulation key header is 64 bytes. This is a property that <em>callers</em> must guarantee when calling the function:</p>
+<pre class="codehilite"><code class="language-rust">#[hax_lib::requires(hdr.len() == 64)]
+</code></pre>
+
+<p>The post-condition <code>ensures</code> annotation, where we can see that we can combine constraints with <code>&amp;&amp;</code> to constrain the lengths of the first ciphertext, the encapsulation key, and the shared secret:</p>
+<pre class="codehilite"><code class="language-rust">#[hax_lib::ensures(|(ct1,es,ss)| ct1.len() == 960 &amp;&amp; es.len() == 2080 &amp;&amp; ss.len() == 32)]
+</code></pre>
+
+<p>The <code>ensures</code> annotation is a property that the annotated <em>function</em> must guarantee. The verifier proves that this property always holds when the function returns successfully. If the property cannot be proven, the verification fails.</p>
+<h2 id="assume-macro"><a class="toclink" href="#assume-macro"><code>assume!</code> Macro</a></h2>
+<p>If we look further into the function body of <code>encaps1</code>, we see the use of the <code>assume!</code> macro:</p>
+<pre class="codehilite"><code class="language-rust">/// Encapsulate with header to get initial ciphertext.
+#[hax_lib::requires(hdr.len() == 64)]
+#[hax_lib::ensures(|(ct1,es,ss)| ct1.len() == 960 &amp;&amp; es.len() == 2080 &amp;&amp; ss.len() == 32)]
+pub fn encaps1&lt;R: Rng + CryptoRng&gt;(
+    hdr: &amp;Header,
+    rng: &amp;mut R,
+) -&gt; (Ciphertext1, EncapsulationState, Secret) {
+    let mut randomness = [0u8; libcrux_ml_kem::SHARED_SECRET_SIZE];
+    rng.fill_bytes(&amp;mut randomness);
+    let mut state = vec![0u8; incremental::encaps_state_len()];
+    let mut ss = vec![0u8; libcrux_ml_kem::SHARED_SECRET_SIZE];
+    let ct1 = incremental::encapsulate1(hdr.as_slice(), randomness, &amp;mut state, &amp;mut ss);
+    hax_lib::assume!(ct1.is_ok());
+    hax_lib::assume!(state.len() == 2080 &amp;&amp; ss.len() == 32);
+    (
+        ct1.expect(&quot;should only fail based on sizes, all sizes should be correct&quot;)
+            .value
+            .to_vec(),
+        state,
+        ss,
+    )
+}
+</code></pre>
+
+<p>In this case, they use the <code>assume!</code> macro to tell the verifier facts that might be hard to prove directly. Specifically, in this case they assume the state length is 2080 bytes and the shared secret length is 32 bytes. This is useful when making assumptions about dependencies: here, the function calls into the <code>libcrux</code> family of crates (most of which are verified), so the assumptions are likely based on properties guaranteed by those verified dependencies.</p>
+<h2 id="method-contracts"><a class="toclink" href="#method-contracts">Method Contracts</a></h2>
+<p>A more interesting example of a pre-condition can be found in <code>ChainEpochDirection::next_key(&amp;mut self)</code> in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/chain.rs#L221">chain.rs</a>:</p>
+<pre class="codehilite"><code class="language-Rust">#[hax_lib::attributes]
+impl ChainEpochDirection {
+    // [...]
+
+    #[hax_lib::requires(self.next.len() &gt; 0 &amp;&amp; self.ctr &lt; u32::MAX)]
+    fn next_key(&amp;mut self) -&gt; (u32, Vec&lt;u8&gt;) {
+        let (idx, key) = Self::next_key_internal(&amp;mut self.next, &amp;mut self.ctr);
+        (idx, key.to_vec())
+    }
+</code></pre>
+
+<p>Here they check that whenever <code>ChainEpochDirection::next_key</code> is called:</p>
+<ol>
+<li>there is indeed a next key, and</li>
+<li>the internal counter will not overflow.</li>
+</ol>
+<p>This pattern of preventing overflows appears in multiple places throughout the codebase (<a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/chain.rs#L139">e.g. another example</a>). </p>
+<h1 id="refinements"><a class="toclink" href="#refinements">Refinements</a></h1>
+<p>The <code>refines</code> attribute is used to specify properties that must be true of struct fields. In this struct definition of <code>HeaderSent</code> in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/v1/unchunked/send_ek.rs#L44">chain.rs</a>:</p>
+<pre class="codehilite"><code class="language-Rust">#[cfg_attr(test, derive(Clone))]
+#[hax_lib::attributes]
+pub struct HeaderSent {
+    pub epoch: Epoch,
+    auth: authenticator::Authenticator,
+    #[hax_lib::refine(ek.len() == 1152)]
+    ek: incremental_mlkem768::EncapsulationKey,
+    #[hax_lib::refine(dk.len() == 2400)]
+    dk: incremental_mlkem768::DecapsulationKey,
+}
+</code></pre>
+
+<p>They ensure that when this struct is used in the codebase, the decapsulation and encapsulation keys will be of the expected length.</p>
+<h1 id="loops"><a class="toclink" href="#loops">Loops</a></h1>
+<p>For and while loops get special annotations to prove properties about each loop iteration, and to prove that they terminate. </p>
+<p>The <code>loop_invariant!</code> annotation specifies what must be true at the start of each loop iteration. In this example in <code>PolyConst&lt;N&gt;::lagrange_interpolate_pt</code> in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/encoding/polynomial.rs#L361">polynomial.rs</a>:</p>
+<pre class="codehilite"><code class="language-Rust">    /// Create the Lagrange poly for `pts[i]` in `pts`, which computes
+    /// f(pts[i].x) == pts[i].y, and f(pts[*].x) == 0 for all other points.
+    #[hax_lib::requires(i &lt; N &amp;&amp; pts.len() &gt;= N &amp;&amp; N &gt; 0)]
+    const fn lagrange_interpolate_pt(pts: &amp;[Pt], i: usize) -&gt; Self {
+        let pi = &amp;pts[i];
+        let mut p = Self {
+            coefficients: [GF16::ZERO; N],
+        };
+        p.coefficients[0] = GF16::ONE;
+        let mut denominator = GF16::ONE;
+        {
+            // const for loop
+            let mut j: usize = 0;
+            while j &lt; N {
+                hax_lib::loop_invariant!(j &lt;= N);
+                hax_lib::loop_decreases!(N - j);
+                let pj = &amp;pts[j];
+                j += 1;
+                if pi.x.value == pj.x.value {
+                    continue;
+                }
+                // p.coefficients[N - 1].value == 0
+                p = p.mult_xdiff(pj.x);
+                denominator = denominator.const_mul(&amp;pi.x.const_sub(&amp;pj.x));
+            }
+        }
+        // mul_assign(pi.y / denominator)
+        p.mult(pi.y.const_div(&amp;denominator))
+    }
+</code></pre>
+
+<p>The <code>loop_decreases!</code> annotation specifies a value that decreases with each loop iteration, which proves that the loop terminates. In the example above, the while loop runs while <code>j &lt; N</code>, and <code>loop_decreases!(N - j)</code> shows that <code>N - j</code> decreases each iteration (since <code>j</code> increases), ensuring the loop will eventually exit.</p>
+<h1 id="verification-control"><a class="toclink" href="#verification-control">Verification Control</a></h1>
+<h2 id="opaque"><a class="toclink" href="#opaque">Opaque</a></h2>
+<p>There are a few methods/functions annotated with <code>opaque</code> to denote that the verifier should just treat this function as an opaque black box, i.e. it won't extract the function body at all, but it will still respect pre/post conditions. For example, in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/chain.rs#L145"><code>KeyHistory::gc</code></a>:</p>
+<pre class="codehilite"><code class="language-rust">    #[hax_lib::opaque] // ordering of slices needed
+    fn gc(&amp;mut self, current_key: u32, params: &amp;pqrpb::ChainParams) {
+        [...]
+    }
+</code></pre>
+
+<p>From the comment it's clear why this is done: the function uses a language feature that hax doesn't support, so the verifier treats it as an opaque black box.</p>
+<h2 id="verification-status"><a class="toclink" href="#verification-status">Verification Status</a></h2>
+<p>If opaque is overkill, you can set the verification status to "lax" like in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/encoding/gf.rs#L199"><code>KeyHistory::gc</code></a></p>
+<pre class="codehilite"><code class="language-Rust">#[inline]
+#[hax_lib::fstar::verification_status(lax)] // proving absence of overflow in loop condition is tricky
+pub fn parallel_mult(a: GF16, into: &amp;mut [GF16]) {
+    let mut i = 0;
+    while i + 2 &lt;= into.len() {
+        hax_lib::loop_decreases!(into.len() - i);
+        (into[i].value, into[i + 1].value) = mul2_u16(a.value, into[i].value, into[i + 1].value);
+        i += 2;
+    }
+    if i &lt; into.len() {
+        into[i] *= a;
+    }
+}
+</code></pre>
+
+<p>The <code>verification_status(lax)</code> annotation provides a nice incremental way to start using hax on an existing codebase, allowing you to mark functions for later verification while still getting some guarantees.</p>
+<h1 id="fstar"><a class="toclink" href="#fstar">FStar</a></h1>
+<p>You can also inject FStar statements directly or customize the options through which the proofs are generated, with <code>hax_lib::fstar!</code> or <code>#[hax_lib::fstar::options(...)]</code> respectively.</p>
+<p>For example they use <code>fstar::options</code> to set the F* "fuel" parameter manually in <a href="https://github.com/signalapp/SparsePostQuantumRatchet/blob/46e387458d438b81a3485e26bf6bb44595e52073/src/encoding/gf.rs#L372"><code>KeyHistory::gc</code></a>: </p>
+<pre class="codehilite"><code class="language-Rust">    #[hax_lib::fstar::options(&quot;--fuel 2&quot;)]
+    #[hax_lib::ensures(|result| fstar!(r#&quot;
+        let open Spec.GF16 in
+        to_bv result == 
+        poly_mul (to_bv a) (to_bv b)&quot;#))]
+    const fn poly_mul(a: u16, b: u16) -&gt; u32 {
+        // [...]
+    }
+</code></pre>
+
+<p>Looking at the <a href="https://fstar-lang.org/tutorial/book/under_the_hood/uth_smt.html#recursive-functions-and-fuel">F* docs</a>, the fuel parameter relates to proof extraction for recursive functions, controlling how many recursive steps the verifier will unroll. </p>
+<h1 id="summary"><a class="toclink" href="#summary">Summary</a></h1>
+<p>This post explored how Signal uses hax annotations to formally verify their SPQR implementation in CI. Some of the most common annotations are:</p>
+<ul>
+<li>
+<p><em>Pre- and post-conditions</em>: <code>requires</code> and <code>ensures</code> specify what callers must guarantee and what functions must provide. These are used frequently in the codebase for length constraints and overflow prevention.</p>
+</li>
+<li>
+<p><em>Refinements</em>: <code>refine</code> attach invariants directly to struct fields, ensuring properties like key lengths are maintained throughout the code.</p>
+</li>
+<li>
+<p><em>Loop annotations</em>: <code>loop_invariant!</code> and <code>loop_decreases!</code> prove loop properties on each iteration and that the loop terminates.</p>
+</li>
+<li>
+<p><em>Verification control</em>: <code>opaque</code> and <code>verification_status</code> provide escape hatches for code that's difficult to verify, allowing incremental adoption of formal verification.</p>
+</li>
+<li>
+<p><em>F* integration</em>: <code>fstar!</code> and <code>fstar::options</code> enables direct interaction with the F* verifier for complex proofs.</p>
+</li>
+</ul>
+<p>The result is a codebase where important properties are proven correct and panics are impossible. This is a powerful approach to building high assurance software that seems way easier to approach than a lot of formal verification tools.</p>
+                    </div>
+                </article>
+            
+            </div>
+        </main>
+
+        <!-- Back to top -->
+        <div id="back-to-top" class="back-to-top">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon arrow-up">
+                    <path
+                        d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z" />
+                </svg></a>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer" class="footer">
+            <div class="footer-inner">
+                <div class="site-info">© 2025 Jennifer Helsby</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MathJax -->
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    load: ['[tex]/mhchem']
+                },
+                tex: {
+                    inlineMath: { '[+]': [['$', '$']] },
+                    tags: 'ams',
+                    packages: { '[+]': ['mhchem'] }
+                }
+            };
+            (function () {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+
+    <!-- Medium Zoom -->
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+    <script>
+        let imgNodes = document.querySelectorAll('div.post-body img');
+        imgNodes = Array.from(imgNodes).filter(node => node.parentNode.tagName !== "A");
+
+        mediumZoom(imgNodes, {
+            background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+        })
+    </script>
+
+    <!-- Instant Page -->
+    <script src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js" type="module" defer></script>
+</body>
+
+</html>
