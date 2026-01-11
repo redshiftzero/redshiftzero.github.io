@@ -26,7 +26,7 @@ Alice👧🏼 and Bob👦🏽 will generate several elliptic curve key pairs usi
 For Alice👧🏼, she has the following public keys:
 
 * long-term identity public key $IK_A$
-* emphemeral public key $EK_A$
+* ephemeral public key $EK_A$
 
 Bob👦🏽, who recall is offline, has published the following public keys to the server:
 
@@ -45,11 +45,11 @@ These items are found in a [PreKeyBundle](https://github.com/signalapp/libsignal
 Next, four Diffie-Hellman (DH) shared secrets are derived using:
 
 1. Alice👧🏼's long term identity key $IK_A$ and Bob👦🏽's signed pre-key $SPK_B$.
-2. Alice👧🏼's emphemeral key $EK_A$ and Bob👦🏽's long term identity key $IK_B$.
-3. Alice👧🏼's emphemeral key $EK_A$ and Bob👦🏽's signed pre-key $SPK_B$.
-4. Alice👧🏼's emphemeral key $EK_A$ and Bob👦🏽's one-time public prekeys $OPK^{1}\_{B}$.
+2. Alice👧🏼's ephemeral key $EK_A$ and Bob👦🏽's long term identity key $IK_B$.
+3. Alice👧🏼's ephemeral key $EK_A$ and Bob👦🏽's signed pre-key $SPK_B$.
+4. Alice👧🏼's ephemeral key $EK_A$ and Bob👦🏽's one-time public prekeys $OPK^{1}\_{B}$.
 
-Since the private key material for DH secrets 3-4 above will be deleted after use, these provide *forward secrecy*. This also means that in the future if an attacker collecting ciphertexts is able to compromise Alice👧🏼's long-term identity key, the attacker cannot recover all four DH shared secrets since the ephmeral key material is long gone, thus they are unable to decrypt the ciphertexts encrypted using secrets derived from these DH secrets. By using the long-term identity keys - which can be verified using manual verification of safety numbers - in steps 1-2, these steps mutually authenticate Bob👦🏽 and Alice👧🏼.
+Since the private key material for DH secrets 3-4 above will be deleted after use, these provide *forward secrecy*. This also means that in the future if an attacker collecting ciphertexts is able to compromise Alice👧🏼's long-term identity key, the attacker cannot recover all four DH shared secrets since the ephemeral key material is long gone, thus they are unable to decrypt the ciphertexts encrypted using secrets derived from these DH secrets. By using the long-term identity keys - which can be verified using manual verification of safety numbers - in steps 1-2, these steps mutually authenticate Bob👦🏽 and Alice👧🏼.
 
 Next, DH outputs 1-3 (and 4 if available) are concatenated and used as an input for HKDF, an HMAC-based Key Derivation Function (KDF). A KDF does what it sounds like: takes some input and produces cryptographically strong key material. HKDF is defined in [RFC 5869](https://www.ietf.org/rfc/rfc5869.txt). In our protocol, the output of HKDF is a shared key $SK$! These three (and sometimes four) DH key exchanges give the protocol its name.
 
@@ -87,7 +87,7 @@ The DH ratchet is the process by which chain keys in the symmetric ratchet are u
 
 Each party has a ratchet key pair, which is a public-private Diffie-Hellman key pair.
 
-We observed in the X3DH protocol that in the first message Alice👧🏼 sent, she included the public part of her emphemeral key $EK_A$ such that bob could derive the same shared secret $SK$.
+We observed in the X3DH protocol that in the first message Alice👧🏼 sent, she included the public part of her ephemeral key $EK_A$ such that bob could derive the same shared secret $SK$.
 
 In subsequent messages, Alice👧🏼 (and Bob👦🏽) can advertise new public keys (new "ratchet" public keys), which when Bob👦🏽 (and Alice👧🏼) receives he can use to construct new DH ratchet shared secrets using the local corresponding ratchet private key. Alice👧🏼 and Bob👦🏽 take turns ratcheting the DH secrets forward. Senders must include the sender ratchet key in each Signal message.
 
